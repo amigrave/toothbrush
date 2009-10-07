@@ -1,0 +1,3 @@
+keycode 49 = Menu
+
+// Uses 'xmodmap -pk' to print the list, 'xev' to found the keycode, and 'xmodmap -e "keycode the-code-you-found = XFAudioWhatever"'

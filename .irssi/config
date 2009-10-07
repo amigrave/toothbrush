@@ -60,6 +60,7 @@ chatnets = {
   SILC = { type = "SILC"; };
   Ubuntu = { type = "IRC"; };
   FreeNET = { type = "IRC"; };
+  freenode = { type = "IRC"; };
 };
 
 channels = (

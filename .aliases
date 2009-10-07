@@ -1,0 +1,42 @@
+# vim:filetype=sh syntax=sh:
+alias ps1='PS1=\\$\ '
+alias ps1c='. ~/.bashrc'
+alias rd='rmdir'
+
+alias md='mkdir'
+#alias vim='vim -X -p '
+alias vim='vim -p '
+alias u="cd .."
+alias b="cd .."
+alias m="cd /"
+alias ll="ls -lA --color=yes | less -r -E -X"
+alias l="ls -lAh --color=yes "
+alias d="ls --color=yes "
+alias v="less"
+alias mc='command mc -c --printwd=/tmp/mc-$USER/dir; cd "`cat /tmp/mc-$USER/dir`"; rm -f "/tmp/mc-$USER/dir"; :'
+alias mcc='LANG=C mc'
+alias vir='clamscan -r *'
+
+alias sc='screen -R -a -U'
+
+alias memo="e ~/local/docs/memos/memo.txt"
+alias memotel="e ~/local/docs/memos/memotel.txt"
+alias memomusic="e ~/local/docs/memos/memomusic.txt"
+
+alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
+alias py='links /usr/share/doc/python2.4/html/index.html'
+alias ph='links ~/local/docs/coding/lang_php/php_manual_en.html'
+alias ss="ssh -o 'ProtocolKeepAlives 30' -C "
+alias low='for i in *; do mv "$i" "$(echo $i | tr "[A-Z]" "[a-z]" )"; done'
+
+#alias fs="fluidsynth ~/megav25/MEGA25.SF2"
+
+alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
+alias btdl="btdownloadcurses --max_upload_rate 3"
+
+# emu
+alias dbox="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox.conf ."
+alias dboxcd="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox_cd.conf ."
+alias msx="mess msx -cart1 \`iselect -a *\`"
+
+alias qu="exit"

@@ -1,0 +1,7 @@
+[user]
+	name = Fabien Meghazi
+	email = agr@amigrave.com
+[color]
+	diff = false
+	status = false
+	branch = auto

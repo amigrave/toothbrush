@@ -1,0 +1,320 @@
+# /etc/DIR_COLORS $HOME/.dir_colors
+
+#COLOR {tty|all|none}
+COLOR tty
+#OPTIONS -F show '/', -T 0 don't trust tab
+OPTIONS -F -T 0
+EIGHTBIT 1
+
+TERM linux
+TERM console
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM xterm
+TERM xterm-color
+TERM vt100
+TERM rxvt
+TERM screen
+
+
+# ATTRIBUTE STRINGS:
+# ------------------
+#
+# 00 = none
+# 01 = bold
+# 04 = underscore
+# 05 = blink
+# 07 = reverse
+# 08 = concealed
+#
+# COLOR STRINGS:
+# --------------
+#
+# COLOR  TEXT BACKGROUND
+#
+# black        30 40
+# red          31 41
+# green        32 42
+# yellow/brown 33 43
+# blue         34 44
+# magenta      35 45
+# cyan         36 46
+# white/gray   37 47
+#
+# Note that the color init strings are a semi-colon delimited series of
+# color codes.  For example, to specify a bright yellow text on blue
+# background the string 01;33;44 would be used.
+#
+# The following entries define the color specifications based upon the
+# file type.
+#
+NORMAL    00       # global default
+FILE      00       # normal file
+DIR       01;34    # directory
+LINK      01;36    # symbolic link
+ORPHAN    01;05;31 # orphaned symbolic link - points to non-existent file
+MISSING   01;05;31 # orphaned symbolic link - points to non-existent file
+FIFO      40;33    # pipe
+SOCK      01;35    # socket
+BLK       40;33;01 # block device driver
+CHR       40;33;01 # character device driver
+EXEC      01;31    # file with executable attribute set
+
+# These entries allow colorization based upon the file extension.  These may
+# either be in the form '.ext' (such as '.gz' or '.tar') or '*ext' (such
+# as '*~' used with emacs backups).  Note that using the asterisk allows you
+# to specify extensions that are not necessarily preceeded by a period.
+
+# Executables
+.cmd  01;37;41
+.exe  01;37;41
+.EXE  01;37;41
+.com  01;37;41
+.COM  01;37;41
+.btm  01;37;41
+.bat  01;37;41
+.BAT  01;37;41
+
+# Backups
+*#    01;30
+*~    01;30
+.tmp  01;30
+.TMP  01;30
+.bak  01;30
+.BAK  01;30
+
+# source code
+.c    32
+.C    32
+.cpp  32
+.CPP  32
+.c++  32
+.cc   32
+.cs   32
+.CC   32
+.h    32
+.H    32
+.pl   32
+.pm   32
+.py   32
+.rb   32
+.asp  32
+.aspx 32
+.js   32
+.sh   32
+.cgi  32
+.fcgi 32
+.java 32
+.vim  32
+.mf   32
+.tex  32
+.asm  32
+.ASM  32
+.pas  32
+.PAS  32
+.php  32
+.PHP  32
+.php3 32
+
+# Text Files
+.txt  01;33;42
+.TXT  01;33;42
+.srt  01;33;42
+.msg  01;33;42
+.lst  01;33;42
+.LST  01;33;42
+.inf  01;33;42
+.INF  01;33;42
+.doc  01;33;42
+.DOC  01;33;42
+.nfo  01;33;42
+.NFO  01;33;42
+.faq  01;33;42
+.FAQ  01;33;42
+.1st  01;33;42
+.1ST  01;33;42
+.wri  01;33;42
+.WRI  01;33;42
+.moi  01;33;42
+.MOI  01;33;42
+.diz  01;33;42
+.info 01;33;42
+.xml  01;33;42
+.text 01;33;42
+.DIZ  01;33;42
+.diz  01;33;42
+.ANS  01;33;42
+.ans  01;33;42
+
+.html 01;37;42
+.htm  01;37;42
+.HTM  01;37;42
+.css  01;37;43
+.CSS  01;37;43
+*ME   33
+
+.bbs  01;37
+.BBS  01;37
+.log  01;37
+.LOG  01;37
+*log  01;37
+.err  01;37
+
+# archives or compressed (magenta)
+.tb2  00;35
+.tar  00;35
+.tgz  00;35
+.arj  00;35
+.taz  00;35
+.lzh  00;35
+.LZH  00;35
+.lzx  00;35
+.LZX  00;35
+.lha  00;35
+.LHA  00;35
+.zip  00;35
+.ZIP  00;35
+.7z   00;35
+.7Z   00;35
+.z    00;35
+.Z    00;35
+.bz2  00;35
+.BZ2  00;35
+.gz   00;35
+.GZ   00;35
+.rar  00;35
+.RAR  00;35
+.R0*  00;35
+.r0*  00;35
+.R1*  00;35
+.r1*  00;35
+.A0*  00;35
+.a0*  00;35
+.UC2  00;35
+.uc2  00;35
+.SQZ  00;35
+.sqz  00;35
+.ICE  00;35
+.ice  00;35
+.PAK  00;35
+.pak  00;35
+.ZOO  00;35
+.zoo  00;35
+.ARJ  00;35
+.arj  00;35
+.ace  00;35
+.ACE  00;35
+
+# emulation
+.adz  00;35
+.adf  00;36
+.rom  00;36
+
+
+# Images -- Pictures (white on blue)
+.dvi  01;37;44
+.ps   01;37;44
+.png  01;37;44
+.eps  01;37;44
+.jpg  01;37;44
+.JPG  01;37;44
+.jpeg 01;37;44
+.gif  01;37;44
+.GIF  01;37;44
+.bmp  01;37;44
+.BMP  01;37;44
+.xbm  01;37;44
+.ppm  01;37;44
+.xpm  01;37;44
+.tif  01;37;44
+.TIF  01;37;44
+.iff  01;37;44
+.IFF  01;37;44
+.tga  01;37;44
+.TGA  01;37;44
+.pcx  01;37;44
+.PCX  01;37;44
+.pic  01;37;44
+.PIC  01;37;44
+
+.psd  00;37;44
+.PSD  00;37;44
+
+.MAX  00;32;44
+.max  00;32;44
+.PRJ  00;32;44
+.prj  00;32;44
+.3DS  00;32;44
+.3ds  00;32;44
+.blend  00;32;44
+
+.svg  00;32;44
+
+# Sound Files
+.mod  01;34;47
+.MOD  01;34;47
+.s3m  01;34;47
+.S3M  01;34;47
+.stm  01;34;47
+.STM  01;34;47
+.xm   01;34;47
+.XM   01;34;47
+.it   01;34;47
+.IT   01;34;47
+.au   01;34;47
+.AU   01;34;47
+.wav  01;34;47
+.WAV  01;34;47
+.voc  01;34;47
+.VOC  01;34;47
+
+.mpc  00;35;47
+.mp3  00;35;47
+.MP3  00;35;47
+.ogg  00;35;47
+.OGG  00;35;47
+.flac 00;35;47
+
+# Movie - Animation Files
+.flv  01;35;44
+.mpg  01;35;44
+.MPG  01;35;44
+.mpeg 01;35;44
+.avi  01;35;44
+.AVI  01;35;44
+.FLI  01;35;44
+.fli  01;35;44
+.FLA  01;35;44
+.fla  01;35;44
+.MOV  01;35;44
+.mov  01;35;44
+.SMK  01;35;44
+.smk  01;35;44
+.ogm  01;35;44
+.OGM  01;35;44
+.mkv  01;35;44
+.MKV  01;35;44
+.wmv  01;35;44
+.WMV  01;35;44
+.rm   01;35;44
+.asf  01;35;44
+
+# config
+*conf 01;33
+*rc   01;33
+*cfg  01;33
+.rc   01;33
+.ini  01;33
+.INI  01;33
+.sys  01;33
+.SYS  01;33
+
+
