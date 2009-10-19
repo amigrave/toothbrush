@@ -1,3 +1,44 @@
+xrenoise.use_xcursors:	1
+xrenoise.display:	:0.0
+xrenoise.display_resource:	0x00,0x00,0x1E,0x8C,0x3C,0x87,0x69,0x90
+xrenoise.executable_path:	/home/amigrave/local/bin/Renoise_2_0_0_Demo/renoise
+URxvt.tabbed.tabbar-fg:	7
+URxvt.tabbed.tabbar-bg:	4
+URxvt.tabbed.tab-fg:	7
+URxvt.tabbed.tab-bg:	1
+URxvt.color12:	#5454FF
+URxvt.color4:	#1717B2
+URxvt.boldFont:	-misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
+URxvt.color6:	#17B2B2
+URxvt.color10:	#54FF54
+URxvt.color15:	white
+URxvt.scrollColor:	#aaaaaa
+URxvt.perl-ext:	default,tabbed,-searchable-scrollback,-readline
+URxvt.color2:	#17B217
+URxvt.color13:	#FF54FF
+URxvt.color11:	#FFFF54
+URxvt.background:	black
+URxvt.color7:	#B2B2B2
+URxvt.color3:	#B26717
+URxvt.termName:	rxvt
+URxvt.color0:	#000000
+URxvt.saveLines:	1000
+URxvt.color1:	#B21717
+URxvt.color8:	#686868
+URxvt.cursorBlink:	true
+URxvt.color5:	#B217B2
+URxvt.font:	-misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
+URxvt.color14:	#54FFFF
+URxvt.scrollBar_right:	true
+URxvt.foreground:	#b2b2b2
+URxvt.color9:	#FF5454
+*Paned.Text.translations:	#override\n\
+ Shift<Btn4Down>,<Btn4Up>: scroll-one-line-down()\n\
+ Shift<Btn5Down>,<Btn5Up>: scroll-one-line-up()\n\
+ Ctrl<Btn4Down>,<Btn4Up>: previous-page()\n\
+ Ctrl<Btn5Down>,<Btn5Up>: next-page()\n\
+ None<Btn4Down>,<Btn4Up>:scroll-one-line-down()scroll-one-line-down()scroll-one-line-down()scroll-one-line-down()scroll-one-line-down()\n\
+ None<Btn5Down>,<Btn5Up>:scroll-one-line-up()scroll-one-line-up()scroll-one-line-up()scroll-one-line-up()scroll-one-line-up()\n
 XTerm.vt100.Scrollbar.translations:	#override\n\
  <Btn5Down>: StartScroll(Forward)\n\
  <Btn4Down>: StartScroll(Backward)\n
@@ -8,50 +49,3 @@ XTerm.vt100.translations:	#override\n\
  Ctrl<Btn5Down>,<Btn5Up>:scroll-forw(1,page)\n\
  <Btn4Down>,<Btn4Up>:scroll-back(1,halfpage)\n\
  <Btn5Down>,<Btn5Up>:scroll-forw(1,halfpage)\n
-*Paned.Text.translations:	#override\n\
- Shift<Btn4Down>,<Btn4Up>: scroll-one-line-down()\n\
- Shift<Btn5Down>,<Btn5Up>: scroll-one-line-up()\n\
- Ctrl<Btn4Down>,<Btn4Up>: previous-page()\n\
- Ctrl<Btn5Down>,<Btn5Up>: next-page()\n\
- None<Btn4Down>,<Btn4Up>:scroll-one-line-down()scroll-one-line-down()scroll-one-line-down()scroll-one-line-down()scroll-one-line-down()\n\
- None<Btn5Down>,<Btn5Up>:scroll-one-line-up()scroll-one-line-up()scroll-one-line-up()scroll-one-line-up()scroll-one-line-up()\n
-
-!------------------------------------------------------------------------
-!Rxvt
-!------------------------------------------------------------------------
-URxvt.tabbed.tabbar-fg:	7
-URxvt.tabbed.tabbar-bg:	4
-URxvt.tabbed.tab-fg:	7
-URxvt.tabbed.tab-bg:	1
-URxvt.color3:	#B26717
-URxvt.color1:	#B21717
-URxvt.font:	-misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
-URxvt.foreground:	#b2b2b2
-URxvt.color4:	#1717B2
-URxvt.color10:	#54FF54
-URxvt.perl-ext:	default,tabbed,-searchable-scrollback,-readline
-URxvt.color11:	#FFFF54
-URxvt.termName:	rxvt
-URxvt.saveLines:	1000
-URxvt.color5:	#B217B2
-URxvt.scrollBar_right:	true
-URxvt.color12:	#5454FF
-URxvt.color6:	#17B2B2
-URxvt.scrollColor:	#aaaaaa
-URxvt.color13:	#FF54FF
-URxvt.color7:	#B2B2B2
-URxvt.color8:	#686868
-URxvt.color14:	#54FFFF
-URxvt.color9:	#FF5454
-URxvt.boldFont:	-misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
-URxvt.color15:	white
-URxvt.color2:	#17B217
-URxvt.background:	black
-URxvt.color0:	#000000
-URxvt.cursorBlink:	true
-
-!*Rxvt*meta8: false
-!*Rxvt.keysym.C-Left: \033[1;5D
-!*Rxvt.keysym.C-Right: \033[1;5C
-!*Rxvt.keysym.M-Left: \033[1;3D
-!*Rxvt.keysym.M-Right: \033[1;3C

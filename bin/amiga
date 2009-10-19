@@ -1,0 +1,202 @@
+#!/usr/bin/ruby
+
+%w(tempfile ostruct pp).each { |dep| require dep }
+
+SCRIPT_NAME = File.basename $0
+EMULATOR = "puae"
+
+class Amiga
+	def initialize(args = ARGV.clone)
+		@parse_error = ""
+		@maxlen_name = 0
+		@options = OpenStruct.new({
+			:verbose => false,
+			:files => [],
+			:config_selection => ["default"],
+			:floppies => {},
+			:hard_drives => {},
+			:command => []
+		})
+
+		@options.verbose = true if args.member? "-v"
+		@configs = get_configs
+		abort show_usage if args.empty? or args.member? "-h"
+		abort "#{SCRIPT_NAME} error: #{@parse_error}\n\n#{show_usage}" unless parse(args)
+
+		post_parse
+	end
+	def get_configs
+		cfg = {}
+		curcfg = nil
+		DATA.read.each_line do |l|
+			l = l.gsub(/#.+$/, "").strip
+			if l.empty?
+				next
+			elsif l =~ /^\[([a-z0-9]+)\] ?(.+)?$/i
+				curcfg = $~.captures[0]
+				@maxlen_name = curcfg.size if curcfg.size > @maxlen_name
+				cfg[curcfg] = {
+					:description => $~.captures[1],
+					:lines => []
+				}
+			else
+				# TODO: check for special commands eg: !depends
+				cfg[curcfg][:lines] << l
+			end
+		end
+		return cfg
+	end
+	def parse(args)
+		while a = args.shift
+			if a =~ /^-(df)?([0-3])$/
+				n = $~.captures.last
+				f = args.shift
+				puts "Will use a file for floppy disk #{n} : #{f}" if @options.verbose
+				@options.floppies["df#{n}"] = File.expand_path(f)
+			elsif a =~ /^-((dh|hd)[0-3])$/
+				hd = $~.captures[0]
+				d = args.shift
+				puts "Will use hard drive #{hd} : #{d}" if @options.verbose
+				@options.hard_drives[hd] = File.expand_path(d)
+			elsif a.start_with? "--"
+				if not @configs.keys.member? a[2..-1]
+					@parse_error = "Unknown config : #{a}"
+					return false
+				end
+				# TODO: dependencies should be managed here
+				puts "Will use the config : #{a}" if @options.verbose
+				@options.config_selection << a[2..-1]
+			elsif a.start_with? "-"
+				if not %w(-h -v).member? a
+					@parse_error = "Unknown command : #{a}"
+					return false
+				end
+			else
+				puts "Will use the file : #{a}" if @options.verbose
+				@options.files << File.expand_path(a)
+			end
+		end
+		return true
+	end
+	def post_parse
+		if @options.floppies.empty?
+			n = 0
+			@options.files.sort[0..3].each do |f|
+				@options.floppies["df#{n}"] = f
+				n += 1
+			end
+		end
+	end
+	def show_usage
+		u = <<EOF
+Usage: #{SCRIPT_NAME} [--<config>] [-<command>] <adf files>
+
+Configs:
+EOF
+		@configs.keys.sort.each do |k|
+			u += "       --#{k.ljust(@maxlen_name + 2)}#{@configs[k][:description]}\n" if @configs[k][:description]
+		end
+		u += <<EOF
+
+Commands:
+       -dfX  Use specified file as floppy disk. Eg: -df0 <file>
+       -X    Use specified file as floppy disk. Eg: -0 <file>
+       -hdX  Use specified file as hard drive.  Eg: -hd0 <dir>
+       -dhX  Use specified file as hard drive.  Eg: -dh0 <dir>
+
+Examples:
+       #{SCRIPT_NAME} --1200 -dh0 ~/amigahd/ *.adf
+       #{SCRIPT_NAME} --500 -hd0 ~/amigahd/ -0 Hybris-1.adf -1 Hybris-2.adf
+       #{SCRIPT_NAME} -df0 Hybris-1.adf -df1 Hybris-2.adf
+EOF
+		return u
+	end
+
+	def run
+		cfg = get_final_config
+		puts "GENERATED CONFIG\n\n#{cfg}\n\n" if @options.verbose
+		#ENV["SDL_VIDEO_FULLSCREEN_HEAD"] = "1"
+		file = Tempfile.new("amigafe").open
+		file.write get_final_config
+		file.close
+		`#{EMULATOR} -f #{file.path}`
+		File.unlink file.path
+	end
+	def get_final_config
+		r = []
+		@options.config_selection.each do |c|
+			r += @configs[c][:lines]
+		end
+		@options.hard_drives.keys.each do |hd|
+			path = @options.hard_drives[hd]
+			if File.directory? path
+				r << "filesystem2=rw,#{hd}:#{hd}:#{path},0"
+			else
+				r << "hardfile2=rw,:#{path},0,0,0,0,0,"
+			end
+		end
+		@options.floppies.keys.each do |fd|
+			n = fd[2].chr
+			r << "floppy#{n}type=0"
+			r << "floppy#{n}=#{@options.floppies[fd]}"
+		end
+		return r.join "\n"
+	end
+end
+
+if __FILE__ == $0
+	amiga = Amiga.new
+	amiga.run
+end
+
+__END__
+[500] Amiga 500
+cpu_model=68000
+cpu_compatible=true
+cpu_cycle_exact=true
+chipset=ecs
+chipmem_size=2
+kickstart_rom_file=$(FILE_PATH)/kickstart-1.3.rom
+
+[600] Amiga 600
+cpu_model=68000
+cpu_compatible=true
+cpu_cycle_exact=true
+chipset=ecs
+chipmem_size=2
+kickstart_rom_file=$(FILE_PATH)/kickstart-2.0.rom
+
+[1200] Amiga 1200
+cpu_model=68030
+cachesize=8192
+compfpu=true
+chipset=aga
+chipmem_size=4
+fastmem_size=8
+kickstart_rom_file=$(FILE_PATH)/kickstart-3.1.rom
+
+[hdagr] Virtual Hard Drive : AGR
+filesystem2=rw,dh0:amigrave:$(FILE_PATH)/agr,0
+#filesystem=rw,amigrave:$(FILE_PATH)/agr
+
+[hdfm] Virtual Hard Drive : Simple Filemaster
+filesystem2=rw,dh0:amigrave:$(FILE_PATH)/fm,0
+#filesystem=rw,amigrave:$(FILE_PATH)/fm
+
+[vga] VGA 640x480 mode
+gfx_width_windowed=640
+gfx_height_windowed=480
+gfx_correct_aspect=true
+show_leds=false
+#gfx_linemode=none
+
+[nosound] Disable sound
+sound_output=none
+
+[gui] Enable GUI
+use_gui=true
+gfx_fullscreen_amiga=false
+
+[default]
+use_gui=false
+#gfx_fullscreen_amiga=true
