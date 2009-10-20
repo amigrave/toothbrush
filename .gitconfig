@@ -2,6 +2,6 @@
 	name = Fabien Meghazi
 	email = agr@amigrave.com
 [color]
-	diff = false
+	diff = true
 	status = false
 	branch = auto

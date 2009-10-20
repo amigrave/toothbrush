@@ -30,7 +30,7 @@ echo "$PATH" | grep "$PADD" > /dev/null || PATH="$PADD:$PATH"
 unset PADD
 export PATH
 
-export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4"
+export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R"
 export LS_OPTIONS='--color=auto'
 export VISUAL=vim
 export EDITOR=vim

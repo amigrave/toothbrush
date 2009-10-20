@@ -3,7 +3,7 @@
 %w(tempfile ostruct pp).each { |dep| require dep }
 
 SCRIPT_NAME = File.basename $0
-EMULATOR = "puae"
+EMULATOR = "puaex"
 
 class Amiga
 	def initialize(args = ARGV.clone)
@@ -167,7 +167,8 @@ chipmem_size=2
 kickstart_rom_file=$(FILE_PATH)/kickstart-2.0.rom
 
 [1200] Amiga 1200
-cpu_model=68030
+cpu_model=68020
+fpu_model=68881
 cachesize=8192
 compfpu=true
 chipset=aga
@@ -194,7 +195,7 @@ show_leds=false
 sound_output=none
 
 [gui] Enable GUI
-use_gui=true
+use_gui=nowait
 gfx_fullscreen_amiga=false
 
 [default]
