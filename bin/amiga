@@ -3,10 +3,10 @@
 %w(tempfile ostruct pp).each { |dep| require dep }
 
 SCRIPT_NAME = File.basename $0
-EMULATOR = "puaex"
 
 class Amiga
 	def initialize(args = ARGV.clone)
+		@emulator = "puaex"
 		@parse_error = ""
 		@maxlen_name = 0
 		@options = OpenStruct.new({
@@ -67,7 +67,9 @@ class Amiga
 				puts "Will use the config : #{a}" if @options.verbose
 				@options.config_selection << a[2..-1]
 			elsif a.start_with? "-"
-				if not %w(-h -v).member? a
+				if a == "-e"
+					@emulator = "e-uae"
+				elsif not %w(-h -v).member? a
 					@parse_error = "Unknown command : #{a}"
 					return false
 				end
@@ -119,7 +121,7 @@ EOF
 		file = Tempfile.new("amigafe").open
 		file.write get_final_config
 		file.close
-		`#{EMULATOR} -f #{file.path}`
+		`#{@emulator} -f #{file.path}`
 		File.unlink file.path
 	end
 	def get_final_config
@@ -156,7 +158,8 @@ cpu_compatible=true
 cpu_cycle_exact=true
 chipset=ecs
 chipmem_size=2
-kickstart_rom_file=$(FILE_PATH)/kickstart-1.3.rom
+#kickstart_rom_file=$(FILE_PATH)/kickstart-1.3.rom
+kickstart_rom_file=/agr/softs/amiga/roms/kickstart-1.3.rom
 
 [600] Amiga 600
 cpu_model=68000
@@ -164,7 +167,8 @@ cpu_compatible=true
 cpu_cycle_exact=true
 chipset=ecs
 chipmem_size=2
-kickstart_rom_file=$(FILE_PATH)/kickstart-2.0.rom
+#kickstart_rom_file=$(FILE_PATH)/kickstart-2.0.rom
+kickstart_rom_file=/agr/softs/amiga/roms/kickstart-2.0.rom
 
 [1200] Amiga 1200
 cpu_model=68020
@@ -174,7 +178,8 @@ compfpu=true
 chipset=aga
 chipmem_size=4
 fastmem_size=8
-kickstart_rom_file=$(FILE_PATH)/kickstart-3.1.rom
+#kickstart_rom_file=$(FILE_PATH)/kickstart-3.1.rom
+kickstart_rom_file=/agr/softs/amiga/roms/kickstart-3.1.rom
 
 [hdagr] Virtual Hard Drive : AGR
 filesystem2=rw,dh0:amigrave:$(FILE_PATH)/agr,0
