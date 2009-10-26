@@ -29,16 +29,21 @@ alias ph='links ~/local/docs/coding/lang_php/php_manual_en.html'
 alias ss="ssh -o 'ProtocolKeepAlives 30' -C "
 alias lower='for i in *; do mv "$i" "$(echo $i | tr "[A-Z]" "[a-z]" )"; done'
 alias upper='for i in *; do mv "$i" "$(echo $i | tr "[a-z]" "[A-Z]" )"; done'
+alias chmodx="find . -type d -exec chmod 0755 '{}' ';'; find . -type f -exec chmod 0644 '{}' ';'"
+alias chownx="sudo chown -R amigrave:amigrave"
 
 #alias fs="fluidsynth ~/megav25/MEGA25.SF2"
 
 alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
 alias btdl="btdownloadcurses --max_upload_rate 3"
+alias vboxusb="sudo chown -R amigrave:vboxusers /proc/bus/usb"
 
 # emu
+alias sdl1="SDL_VIDEO_FULLSCREEN_HEAD=1 "
+alias db="dosbox ."
 alias dbox="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox.conf ."
 alias dboxcd="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox_cd.conf ."
 alias msx="mess msx -cart1 \`iselect -a *\`"
-alias ami='files=(*.adf); puae -G -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]}" -3 "${files[3]}"'
+alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]}" -3 "${files[3]}"'
 
 alias qu="exit"

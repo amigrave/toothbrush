@@ -1,0 +1,35 @@
+#!/usr/bin/ruby
+require "shellwords"
+require "open3"
+
+def is_installed?(prog)
+	return `which #{prog}`.strip != ""
+end
+
+def is_flac?(file)
+	# todo
+	# 66 4C 61 43 : fLaC
+	#hex = IO.popen("hexdump -c -n 10000 \"#{file}\"").readlines.join("").gsub(" ", "")
+	#p hex.count("fLaCd")
+	return false unless File.exists? file
+	(stdin, stdout, stderr) = Open3.popen3("metaflac --export-tags-to=- #{Shellwords.escape(file)}")
+	return stderr.read.strip.empty?
+end
+
+"flac,metaflac,oggenc".split(",").each do |prog|
+	abort "#{prog} not found, please install this program first" unless is_installed? prog
+end
+
+abort "Nothing to convert" if ARGV.empty?
+
+ARGV.each do |file|
+	flac_file = File.expand_path(file)
+	abort "ERROR: File not found : #{flac_file}" unless File.exists? flac_file
+	abort "ERROR: Not a flac file : #{flac_file}" unless is_flac? flac_file
+	comments = IO.popen("metaflac --export-tags-to=- #{Shellwords.escape(flac_file)}").readlines
+	ogg_file = flac_file.split(".flac")[0] + ".ogg"
+	comments_cmd = comments.collect { |line| "-c \"#{line.split("\n")[0]}\"" }.join(" ")
+	#convertIO = IO.popen("flac -d -c #{Shellwords.escape(flac_file)} | oggenc - #{comments_cmd} -o #{Shellwords.escape(ogg_file)}") { |f| f.read }
+	#puts "flac -d -c #{Shellwords.escape(flac_file)} | oggenc -q 7 -Q - #{comments_cmd} -o #{Shellwords.escape(ogg_file)}"
+	`flac -d -c #{Shellwords.escape(flac_file)} | oggenc -q 7 -Q - #{comments_cmd} -o #{Shellwords.escape(ogg_file)}`
+end
