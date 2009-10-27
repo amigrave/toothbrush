@@ -26,8 +26,26 @@
 #   Mod3 (CapsLock), Mod4, Mod5 (Scroll).
 #
 
+# Window Manager
+"wmctrl -r :ACTIVE: -b toggle,maximized_vert,maximized_horz"
+   Mod2+Mod4 + Up
+
+"wmctrl -r :ACTIVE: -b toggle,fullscreen"
+   Mod2+Mod4 + F11
+
+"wmctrl -r :ACTIVE: -b toggle,above"
+   Mod2+Mod4 + a
+
+"wmctrl -c :ACTIVE:"
+   Mod2+Mod4 + Escape
+
+# Utils
 "urxvt"
-   Mod2+Mod4 + i
+   Mod2+Mod4 + t
+
+# Music
+"urxvt -geometry 150x80 -pe -tabbed -title mpc-pms -e pms"
+   Mod2+Mod4 + p
 
 "amixer sset Master toggle > /dev/null"
    Mod2+Mod4 + BackSpace
