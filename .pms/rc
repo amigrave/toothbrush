@@ -1,0 +1,14 @@
+set topbar1.left=%time_elapsed% (-%time_remaining%) %playstate% %time%%ifcursong% (%progresspercentage%%%)%endif%
+set topbar1.center=%ifcursong%%artist%%endif%
+set topbar1.right=Vol: %volume%%%  Mode: %muteshort%%repeatshort%%randomshort%%manualshort%
+set topbar2.center=%ifcursong%==> %title% <==%else%No current song%endif%
+set topbar2.right=%ifcursong%Bitrate: %bitrate% kbps%endif%
+set topbar3.left=%listsize%
+set topbar3.center=%ifcursong%%album% (%year%)%endif%
+set topbar3.right=Q: %livequeuesize%
+
+
+set columns=artist year album disc track title length genre
+set scroll=centered
+set sort=track disc album year albumartistsort
+
