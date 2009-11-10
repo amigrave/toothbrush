@@ -10,5 +10,5 @@ set topbar3.right=Q: %livequeuesize%
 
 set columns=artist year album disc track title length genre
 set scroll=centered
-set sort=track disc album year albumartistsort
+set sort=file
 

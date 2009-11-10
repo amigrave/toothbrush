@@ -16,6 +16,7 @@ alias v="less"
 alias mc='command mc -c --printwd=/tmp/mc-$USER/dir; cd "`cat /tmp/mc-$USER/dir`"; rm -f "/tmp/mc-$USER/dir"; :'
 alias mcc='LANG=C mc'
 alias vir='clamscan -r *'
+alias py='ipython'
 
 # check for virtualization instructions
 alias virr='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
@@ -27,10 +28,12 @@ alias memo="e ~/local/docs/memos/memo.txt"
 alias memotel="e ~/local/docs/memos/memotel.txt"
 alias memomusic="e ~/local/docs/memos/memomusic.txt"
 
+# Docs
+alias pydoc='links /usr/share/doc/python2.6-doc/html/index.html'
+alias phpdoc='links ~/local/docs/coding/lang_php/php_manual_en.html'
+
 alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
 alias mpi="mp3info -x -F"
-alias py='links /usr/share/doc/python2.4/html/index.html'
-alias ph='links ~/local/docs/coding/lang_php/php_manual_en.html'
 alias ss="ssh -o 'ProtocolKeepAlives 30' -C "
 alias lower='for i in *; do mv "$i" "$(echo $i | tr "[A-Z]" "[a-z]" )"; done'
 alias upper='for i in *; do mv "$i" "$(echo $i | tr "[a-z]" "[A-Z]" )"; done'
@@ -39,6 +42,7 @@ alias chownx="sudo chown -R amigrave:amigrave"
 
 alias 7zx='for i in *.7z; do 7z x "$i"; done'
 alias zipx='for i in *.zip; do unzip "$i"; done'
+alias rarx='for i in *.rar; do rar x "$i"; done'
 
 #alias fs="fluidsynth ~/megav25/MEGA25.SF2"
 
