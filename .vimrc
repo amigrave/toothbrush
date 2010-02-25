@@ -70,6 +70,7 @@ hi String ctermfg=blue guifg=#83a1ff
 hi rubyStringDelimiter ctermfg=blue guifg=#83a1ff
 hi xmlRegion ctermfg=white guifg=white
 hi xmlAttribQWeb guifg=#f0a040 ctermfg=DarkMagenta
+hi xmlAttribQWebTrad guifg=#ffffff ctermfg=white
 hi TabLineFill ctermbg=4 cterm=none
 hi TabLine ctermbg=4 cterm=none
 hi TabLineSel ctermbg=5 ctermfg=7 cterm=bold
@@ -112,7 +113,6 @@ if has("autocmd")
 	au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray
 
 	au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
-	"au Filetype ruby syn match antonyEq "[=]" | hi antonyEq ctermfg=green
 
 	if has("unix")
 		au BufNewFile *.py set autoread | s,^,#!/usr/bin/python, | w | !chmod +x %
@@ -122,6 +122,7 @@ if has("autocmd")
 
 	" Javascript Snippets
 	autocmd BufRead,BufNewFile * inorea <buffer> jscript <c-r>=IMAP_PutTextWithMovement("<script type=\"text/javascript\">\n&lt;!--\n<++>\n--&gt;\n</script>")<cr>
+	autocmd BufRead,BufNewFile * inorea <buffer> jready <c-r>=IMAP_PutTextWithMovement("$(document).ready(function() {\n<++>\n});")<cr>
 	autocmd BufRead,BufNewFile * inorea <buffer> jsb <c-r>=IMAP_PutTextWithMovement("<++>(function(<++>) {\n<++>\n});")<cr>
 	autocmd BufRead,BufNewFile * inorea <buffer> jsq <c-r>=IMAP_PutTextWithMovement("$(\"<++>\").<++>(function(<++>) {\n<++>\n});")<cr>
 	autocmd BufRead,BufNewFile * inorea <buffer> jsfun <c-r>=IMAP_PutTextWithMovement("function <++>(<++>) {\n<++>;\nreturn <++>;\n}")<cr>
@@ -192,6 +193,14 @@ inoremap Oc <C-O>w
 
 vnoremap <Tab> >
 vnoremap <S-Tab> <LT>
+
+inoremap {<cr> {<cr>}<esc>O<Tab>
+"inoremap {{ {
+inoremap { {}<left>
+inoremap [ []<left>
+inoremap ( ()<left>
+inoremap <C-Backspace> <End>
+inoremap <S-Backspace> <Home>
 
 " For IMAP template expander
 imap <C-j> <C-]>
@@ -342,6 +351,15 @@ function! XmlQweb()
 
 	syn cluster xmlAttribHook contains=xmlAttribQWeb
 	hi link xmlAttribQWeb     xmlAttribQWeb
+
+"	syn match   xmlAttribQWebTrad
+"		\ +[-'"<]\@<!\<t-trad[-.0-9a-zA-Z0-9:_]*\>\(['">]\@!\|$\)+
+"		\ contained
+"		\ contains=xmlAttribPunct,@xmlAttribHook
+"		\ display
+
+"	syn cluster xmlAttribHook contains=xmlAttribQWebTrad,xmlAttribQWeb
+"	hi link xmlAttribQWebTrad     xmlAttribQWebTrad
 endfunction
 " }}}
 

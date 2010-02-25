@@ -32,6 +32,11 @@ alias memomusic="e ~/local/docs/memos/memomusic.txt"
 alias pydoc='links /usr/share/doc/python2.6-doc/html/index.html'
 alias phpdoc='links ~/local/docs/coding/lang_php/php_manual_en.html'
 
+alias pdf='evince'
+
+#alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=8 -dao -eject -overburn -v'
+alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
+
 alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
 alias mpi="mp3info -x -F"
 alias ss="ssh -o 'ProtocolKeepAlives 30' -C "
