@@ -84,6 +84,12 @@ hi rubyInstanceVariable ctermfg=darkgray guifg=darkgray
 hi Pmenu ctermbg=magenta ctermfg=black
 hi PmenuSel ctermbg=magenta ctermfg=white
 
+"Find a way to do this only for php files :
+hi htmlTag ctermfg=green ctermbg=black
+hi htmlTagName ctermfg=green ctermbg=black
+hi htmlEndTag ctermfg=green ctermbg=black
+hi htmlArg ctermfg=grey ctermbg=black
+
 hi DiffAdd cterm=none ctermfg=bg ctermbg=Green gui=none guifg=bg guibg=Green
 hi DiffDelete cterm=none ctermfg=bg ctermbg=Red gui=none guifg=bg guibg=Red
 hi DiffChange cterm=none ctermfg=bg ctermbg=Yellow gui=none guifg=bg guibg=Yellow
@@ -143,6 +149,7 @@ endif
 "let php_htmlInStrings = 1
 let php_sync_method=0
 let php_folding=1
+let php_asp_tags = 1
 let g:xml_syntax_folding=1
 let python_highlight_numbers = 1
 "}}}
@@ -196,6 +203,8 @@ vnoremap <S-Tab> <LT>
 
 inoremap {<cr> {<cr>}<esc>O<Tab>
 "inoremap {{ {
+inoremap %% <%%><left><left>
+inoremap %%<cr> <%<cr>%><esc>O<Tab>
 inoremap { {}<left>
 inoremap [ []<left>
 inoremap ( ()<left>
