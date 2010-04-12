@@ -84,7 +84,6 @@ hi rubyInstanceVariable ctermfg=darkgray guifg=darkgray
 hi Pmenu ctermbg=magenta ctermfg=black
 hi PmenuSel ctermbg=magenta ctermfg=white
 
-"Find a way to do this only for php files :
 hi htmlTag ctermfg=green ctermbg=black
 hi htmlTagName ctermfg=green ctermbg=black
 hi htmlEndTag ctermfg=green ctermbg=black
