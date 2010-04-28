@@ -1,5 +1,5 @@
 # Easier than remembering to always run from non-X
-#unsetenv DISPLAY
+# unsetenv DISPLAY
 # Likewise, for charset
 setenv LC_CTYPE en_US.UTF-8
 
@@ -34,6 +34,11 @@ startup_message off
 bindkey [d prev
 bindkey [c next
 bindkey [b screen
+
+# for mintty
+bindkey [1;2D prev
+bindkey [1;2C next
+bindkey [1;2B screen
 
 ## alt '-'
 ##bindkey "alt--" other

@@ -126,6 +126,7 @@ if has("autocmd")
 	endif
 
 	" Javascript Snippets
+	autocmd BufRead,BufNewFile * inorea <buffer> fun <c-r>=IMAP_PutTextWithMovement("function (<++>) {\n<++>;\n}")<cr>
 	autocmd BufRead,BufNewFile * inorea <buffer> jscript <c-r>=IMAP_PutTextWithMovement("<script type=\"text/javascript\">\n&lt;!--\n<++>\n--&gt;\n</script>")<cr>
 	autocmd BufRead,BufNewFile * inorea <buffer> jready <c-r>=IMAP_PutTextWithMovement("$(document).ready(function() {\n<++>\n});")<cr>
 	autocmd BufRead,BufNewFile * inorea <buffer> jsb <c-r>=IMAP_PutTextWithMovement("<++>(function(<++>) {\n<++>\n});")<cr>
