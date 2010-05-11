@@ -64,6 +64,7 @@ alias db="dosbox ."
 alias dbox="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox.conf ."
 alias dboxcd="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox_cd.conf ."
 alias msx="mess msx -cart1 \`iselect -a *\`"
+alias zsnes_gamepad="sudo ln -s /dev/input/js0 /dev/js0"
 alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]}" -3 "${files[3]}"'
 
 alias ubuntuwin="gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close"
