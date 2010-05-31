@@ -60,7 +60,7 @@ alias vboxusb="sudo chown -R amigrave:vboxusers /proc/bus/usb"
 
 # emu
 alias sdl1="SDL_VIDEO_FULLSCREEN_HEAD=1 "
-alias db="dosbox ."
+alias db='dosbox -c "MOUNT C . -freesize 1024" -c "c:"'
 alias dbox="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox.conf ."
 alias dboxcd="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox_cd.conf ."
 alias msx="mess msx -cart1 \`iselect -a *\`"
