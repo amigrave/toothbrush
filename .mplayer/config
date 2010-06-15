@@ -1,7 +1,7 @@
 # Write your default config options here!
 #vo=vdpau
-vo=gl
-ao=alsa
+#vo=gl
+#ao=alsa
 subfont-text-scale=4
 subfont-outline=1.2
 stop-xscreensaver="yes"

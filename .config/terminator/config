@@ -1,0 +1,33 @@
+# This is a comment
+[global_config]
+  use_system_font = False
+  font = Console 10
+  window_state = maximise
+
+[keybindings]
+  #full_screen = <Ctrl><Shift>F11
+
+[profiles]
+  [[default]]
+    allow_bold = false
+    copy_on_selection = true
+    scrollback_lines = '500' #More comment. Single quotes are valid too
+    palette = "#000000:#B21717:#17B217:#B26717:#1717B2:#B217B2:#17B2B2:#B2B2B2:#686868:#FF5454:#54FF54:#FFFF54:#5454FF:#FF54FF:#FFFFFF:#54FFFF"
+    #URxvt.color0:	#000000
+    #URxvt.color1:	#B21717
+    #URxvt.color2:	#17B217
+    #URxvt.color3:	#B26717
+    #URxvt.color4:	#1717B2
+    #URxvt.color5:	#B217B2
+    #URxvt.color6:	#17B2B2
+    #URxvt.color7:	#B2B2B2
+    #URxvt.color8:	#686868
+    #URxvt.color9:	#FF5454
+    #URxvt.color10:	#54FF54
+    #URxvt.color11:	#FFFF54
+    #URxvt.color12:	#5454FF
+    #URxvt.color13:	#FF54FF
+    #URxvt.color15:	#FFFFFF
+    #URxvt.color14:	#54FFFF
+
+
