@@ -6,6 +6,8 @@
 
 [keybindings]
   #full_screen = <Ctrl><Shift>F11
+  #next_tab = <Ctrl>Tab
+  #prev_tab = <Ctrl><Shift>Tab
 
 [profiles]
   [[default]]

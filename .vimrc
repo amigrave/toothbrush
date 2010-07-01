@@ -201,11 +201,11 @@ inoremap Oc <C-O>w
 vnoremap <Tab> >
 vnoremap <S-Tab> <LT>
 
-inoremap {<cr> {<cr>}<esc>O<Tab>
 "inoremap {{ {
 inoremap %% <%%><left><left>
 inoremap %%<cr> <%<cr>%><esc>O<Tab>
-inoremap { {}<left>
+inoremap {<cr> {<cr>}<esc>O<Tab>
+inoremap {{ {{   }}<left><left><left><left>
 inoremap [ []<left>
 inoremap ( ()<left>
 inoremap <C-Backspace> <End>
