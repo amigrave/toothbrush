@@ -8,6 +8,7 @@ alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
 alias md='mkdir'
 #alias vim='vim -X -p '
 alias vim='vim -p '
+alias gvim='gvim --remote-tab-silent'
 alias u="cd .."
 alias b="cd .."
 alias m="cd /"

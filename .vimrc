@@ -26,6 +26,7 @@ endif
 set encoding=utf8
 set fileencoding=utf8
 set fileencodings=utf-8,latin1
+:filetype plugin on
 "}}}
 
 " ################################### PLATFORM ################################## {{{
