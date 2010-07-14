@@ -1,0 +1,11 @@
+( if
+  ( and
+    ( matches (application_name) "evolution" )
+    ( matches (window_name) "^.*-.Evolution" )
+  )
+  ( begin 
+    ( pin )
+    ( skip_tasklist )
+    ( minimize )
+  )
+)
