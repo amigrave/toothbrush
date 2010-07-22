@@ -1,11 +1,12 @@
 # Write your default config options here!
 #vo=vdpau
 #vo=gl
-#vo=xv
+vo=xv
 #ao=alsa
 subfont-text-scale=4
 subfont-outline=1.2
 stop-xscreensaver="yes"
+vsync=true
 
 # http://ubuntuforums.org/archive/index.php/t-98808.html
 #==========

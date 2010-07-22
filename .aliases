@@ -12,7 +12,7 @@ alias gvim='gvim --remote-tab-silent'
 alias u="cd .."
 alias b="cd .."
 alias m="cd /"
-alias ll="ls -lA --color=yes | less -r -E -X"
+alias ll="ls -lAh --color=yes | less -r -E -X"
 alias l="ls -lAh --color=yes "
 alias d="ls --color=yes "
 alias v="less"
