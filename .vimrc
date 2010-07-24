@@ -155,6 +155,7 @@ nnoremap <silent> <F10> :bde<CR>
 inoremap <silent> <F10> <C-O>:bde<CR>
 
 nnoremap <F12> :set paste!<CR>
+inoremap <F12> <C-O>:set paste!<CR>
 
 vnoremap <Tab> >
 vnoremap <S-Tab> <LT>
