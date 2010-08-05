@@ -7,7 +7,7 @@ set all&                " reset all options to compiled in defaults
 set encoding=utf8
 set fileencoding=utf8
 set fileencodings=utf-8,latin1
-set vb t_vb=            " no visual bell
+set novb t_vb=            " no visual bell
 set noerrorbells        " do not bell on error
 set autoindent          " automatic indentation
 set shiftwidth=4        " Number of spaces to use for each step of (auto)
@@ -56,15 +56,15 @@ if has("autocmd")
 	au BufReadPost * if getline(1) =~ '^#!.*ruby' | set filetype=ruby | endif
 	au BufReadPost * if getline(1) =~ '^#!.*bash' | set filetype=sh | endif
 	au BufRead *.txt,*.rst set expandtab " tw=78
-"	au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
-"	au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
-"	au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+	au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
+	au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
+	au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 	au BufRead,BufNewFile *.aspx set syntax=cs
 "	"au BufRead,BufNewFile *.asp set ft=javascript
-"	au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.asp syn region myFold start="{" end="}" transparent fold
-"							\ | syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
+	au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.asp syn region myFold start="{" end="}" transparent fold
+							\ | syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
 "	au BufRead,BufNewFile *.js,*.asp syn clear javaScriptBraces
-"	au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
+	au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
 
 	au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
 	au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
@@ -146,6 +146,10 @@ inoremap [a <C-O>zc
 noremap <S-Up> zc
 inoremap <S-Up> <C-O>zc
 
+" Disable <S-Down>
+noremap <S-Down> <Nop>
+inoremap <S-Down> <Nop>
+
 " Taglist
 nnoremap <silent> <F6> :TlistToggle<CR><C-w>h
 inoremap <silent> <F6> <C-O>:TlistToggle<CR><C-w>h
@@ -154,8 +158,7 @@ inoremap <silent> <F6> <C-O>:TlistToggle<CR><C-w>h
 nnoremap <silent> <F10> :bde<CR>
 inoremap <silent> <F10> <C-O>:bde<CR>
 
-nnoremap <F12> :set paste!<CR>
-inoremap <F12> <C-O>:set paste!<CR>
+set pastetoggle=<F12>
 
 vnoremap <Tab> >
 vnoremap <S-Tab> <LT>

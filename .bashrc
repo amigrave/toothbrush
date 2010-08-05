@@ -34,7 +34,8 @@ export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R"
 export LS_OPTIONS='--color=auto'
 export VISUAL=vim
 export EDITOR=vim
-export BROWSER=links
+#export BROWSER=links
+export BROWSER=google-chrome
 
 # SDL Fullscreen second monitor
 # export SDL_VIDEO_FULLSCREEN_HEAD=1

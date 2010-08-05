@@ -1,4 +1,4 @@
-colorscheme molokai
+colorscheme wombat
 set guioptions-=T           " hide toolbar
 "set guioptions-=m           " Remove menu bar
 
