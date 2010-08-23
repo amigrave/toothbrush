@@ -1,24 +1,25 @@
 #!/bin/sh
 (iselect -a | sh -x) <<EOS
 # CLIENT 5.0
-cd /home/amigrave/dev/openerp/bazaar/client-5.0/bin; ./openerp-client.py &
-cd /home/amigrave/dev/openerp/bazaar/client-5.0/bin; ./openerp-client.py -s localhost -u admin &
-cd /home/amigrave/dev/openerp/bazaar/client-5.0/bin; ./openerp-client.py -s tiny.my.odoo.com -u fme &
-cd /home/amigrave/dev/openerp/bazaar/client-5.0/bin; ./openerp-client.py -s agrplus.com -u admin &
-cd /home/amigrave/dev/openerp/bazaar/client-5.0/bin; ./openerp-client.py -s cc.odoo.com -u fme &
-cd /home/amigrave/dev/openerp/bazaar/client-5.0/bin; ./openerp-client.py -s cc.test.odoo.com -u fme &
-cd /home/amigrave/dev/openerp/bazaar/client-5.0/bin; ./openerp-client.py -s cc.my.openerp.com -u fme &
+cd /home/amigrave/openerp/client/bin; ./openerp-client.py &
+cd /home/amigrave/openerp/client/bin; ./openerp-client.py -s localhost -u admin &
+cd /home/amigrave/openerp/client/bin; ./openerp-client.py -s tiny.my.odoo.com -u fme &
+cd /home/amigrave/openerp/client/bin; ./openerp-client.py -s agrplus.com -u admin &
+cd /home/amigrave/openerp/client/bin; ./openerp-client.py -s cc.odoo.com -u fme &
+cd /home/amigrave/openerp/client/bin; ./openerp-client.py -s cc.test.odoo.com -u fme &
+cd /home/amigrave/openerp/client/bin; ./openerp-client.py -s cc.my.openerp.com -u fme &
 
 # CLIENT TRUNK
-cd /home/amigrave/dev/openerp/bazaar/client-trunk/bin; ./openerp-client.py &
-cd /home/amigrave/dev/openerp/bazaar/client-trunk/bin; ./openerp-client.py -s localhost -u admin -l debug_rpc &
-cd /home/amigrave/dev/openerp/bazaar/client-trunk/bin; ./openerp-client.py -s openerp.my.odoo.com -u fme &
+cd /home/amigrave/openerp/client-trunk/bin; ./openerp-client.py &
+cd /home/amigrave/openerp/client-trunk/bin; ./openerp-client.py -s localhost -u admin -l debug_rpc &
+cd /home/amigrave/openerp/client-trunk/bin; ./openerp-client.py -s openerp.my.odoo.com -u fme &
 
 # SERVERS
-cd /home/amigrave/dev/openerp/bazaar/server-5.0/bin; ./openerp-server.py
-cd /home/amigrave/dev/openerp/bazaar/server-trunk/bin; ./openerp-server.py -c ~/.openerp_serverrc_trunk
+cd /home/amigrave/openerp/server/bin; ./openerp-server.py
+cd /home/amigrave/openerp/server/bin; ./openerp-server.py -u odms -d cc --enable-code-actions --log-level=debug
+cd /home/amigrave/openerp/server-trunk/bin; ./openerp-server.py -c ~/.openerp_serverrc_trunk
 
 # WEB
-/home/amigrave/dev/openerp/bazaar/web-5.0/openerp-web.py
-/home/amigrave/dev/openerp/bazaar/web-trunk/openobject-web.py
+/home/amigrave/openerp/web/openerp-web.py
+/home/amigrave/openerp/web-trunk/openobject-web.py
 EOS

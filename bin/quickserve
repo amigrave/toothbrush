@@ -1,0 +1,719 @@
+#!/usr/bin/env python2
+
+# Copyright (C) 2009,2010  Xyne
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# (version 2) as published by the Free Software Foundation.
+#
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+import cgi, os, os.path, socket
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from SocketServer import ThreadingMixIn
+from hashlib import md5
+from mimetypes import guess_type
+from optparse import OptionParser
+from random import randint
+from time import gmtime,strftime,time
+from urllib import quote, unquote
+
+# AUTHENTICATION SETTINGS
+# nc limit: maximum value is 0xffffffff
+# The client must re-auth after this number of requests.
+NC_LIMIT = 0xffffffff
+
+# Client must re-auth of no requests were made in the last x seconds
+OPAQUE_TIMEOUT = 3600
+
+# nonce and opaque lengths
+NONCE_LENGTH = 32
+NONCE_MAX = 2 ** (NONCE_LENGTH * 4) -1
+NONCE_FORMAT = '%0' + str(NONCE_LENGTH) + 'x'
+
+
+class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+  #pass
+  daemon_threads = True
+
+class MyHandler(BaseHTTPRequestHandler):
+  protocol_version = 'HTTP/1.1'
+  opaques = {}
+
+  def version_string(self):
+    return 'Quickserve/1.0'
+
+  def handle_html_request(self, html, is_GET):
+    content = safe_encode_utf8(html)
+    self.send_response(200)
+    self.send_header('Content-Type', 'text/html; charset=UTF-8')
+    self.send_header('Content-Length', len(content))
+    self.end_headers()
+    if is_GET:
+      self.transfer_content(content)
+
+  def transfer_content(self, content):
+    try:
+      self.wfile.write( content )
+    except:
+      pass
+
+  def get_nonce(self,opaque,nc):
+    # Purge values that have not been used for 1 hour or which have been used
+    t = time()
+    for k in self.opaques.keys():
+     if t - self.opaques[k]['time'] > OPAQUE_TIMEOUT or int(self.opaques[k]['nc'],16) > NC_LIMIT:
+       del self.opaques[k]
+    try:
+      if self.opaques[opaque]['nc'] != nc:
+        del self.opaques[opaque]
+        return ''
+      self.opaques[opaque]['nc'] = "%08x" % (int(nc,16) + 1)
+      self.opaques[opaque]['time'] = t
+      return self.opaques[opaque]['nonce']
+    except KeyError:
+      return None
+
+  def allow(self,method='GET'):
+    username = options.username
+    password = options.password
+    if username and password:
+      if 'Authorization' in self.headers and self.headers['Authorization'][:7] == 'Digest ':
+        nc = None
+        cnonce = None
+        opaque = None
+        client_response = None
+
+        for field in self.headers['Authorization'][7:].split(','):
+          field = field.strip()
+          if field[:10] == 'response="':
+            client_response = field[10:-1]
+          elif field[:8] == 'cnonce="':
+            cnonce = field[8:-1]
+          elif field[:3] == 'nc=':
+            nc = field[3:]
+          elif field[:8] == 'opaque="':
+            opaque = field[8:-1]
+
+        if client_response != None and cnonce != None and opaque != None and nc != None:
+          nonce = self.get_nonce(opaque,nc)
+          if not nonce:
+            return False
+
+          m = md5()
+          m.update(username + ':' + self.address_string() + ':' + password)
+          ha1 = m.hexdigest()
+
+          m = md5()
+          m.update(method + ':' + self.path)
+          ha2 = m.hexdigest()
+
+          m = md5()
+          m.update(ha1 + ':' + nonce + ':' + nc + ':' + cnonce + ':auth:' + ha2)
+          response = m.hexdigest()
+
+          if response == client_response:
+            return True
+      return False
+    elif not username and not password:
+      return True
+    else:
+      return False
+
+  def maybe_401(self,method='GET'):
+    if self.allow(method):
+      return False
+    else:
+      nonce = NONCE_FORMAT % randint(0,NONCE_MAX)
+      opaque = NONCE_FORMAT % randint(0,NONCE_MAX)
+      self.opaques[opaque] = {'time': time(), 'nc': '00000001', 'nonce': nonce}
+      self.send_response(401)
+      self.send_header('WWW-Authenticate', 'Digest realm="' + self.address_string() + '",qop="auth",nonce="' + nonce +'",opaque="' + opaque +'"')
+      self.send_header('Connection', 'close')
+      self.end_headers()
+      return True
+
+
+  def do_GET(self):
+    self.do_GET_or_HEAD(True)
+
+
+  def do_HEAD(self):
+    self.do_GET_or_HEAD(False)
+
+
+  def do_GET_or_HEAD(self,is_GET):
+    if self.maybe_401('GET'):
+      return
+
+    i = self.path.find('?')
+    if options.upload_dir and i > -1 and self.path[i+1:i+7] == 'upload':
+      try:
+        if self.path[i+7] == '=':
+          n = int(self.path[i+8:])
+        else:
+          n = 1
+      except (IndexError, ValueError):
+        n = 1
+      self.handle_html_request( get_upload_html(back=self.path[0:i], n=n), is_GET )
+      return
+
+    if options.filelist:
+      maybe_load_filelist(options.filelist)
+
+    global paths
+
+    self.path = unquote(self.path)
+
+    if options.infopage and self.path == options.infopage:
+      self.handle_html_request( get_info_html(), is_GET )
+      return
+
+    elif self.path == '/':
+      dirs = []
+      files = []
+      for k in paths.keys():
+        if os.path.isdir(paths[k]):
+          dirs.append(k)
+        else:
+          files.append(k)
+      html = get_page(self.path, sorted(dirs) + sorted(files) )
+      self.handle_html_request( html, is_GET )
+      return
+
+    else:
+      self.path = self.path.rstrip('/')
+      splitpath = self.path[1:].split(os.sep,1)
+      if splitpath[0] in paths:
+        if splitpath[0] == self.path[1:]:
+          fpath = paths[splitpath[0]]
+        elif len(splitpath) == 2:
+          fpath = os.path.join(paths[splitpath[0]], splitpath[1])
+        else:
+          fpath = None
+        if os.path.isfile(fpath):
+          self.transfer_file(fpath)
+          return
+        elif os.path.isdir(fpath):
+          dirs, files = get_dirs_and_files(fpath)
+          html = get_page(self.path, dirs + files)
+          self.handle_html_request( html, is_GET )
+          return
+      else:
+        self.send_response(301)
+        self.send_header('Location', '/')
+        self.send_header('Content-Type', 'text/plain; charset=UTF-8')
+        self.send_header('Content-Length', 0)
+        self.send_header('Connection', 'close')
+        self.end_headers()
+        return
+
+    self.send_response(404)
+    self.send_header('Content-Type', 'text/plain; charset=UTF-8')
+    self.send_header('Content-Length', 0)
+    self.send_header('Connection', 'close')
+    self.end_headers()
+
+
+  def do_POST(self):
+    if self.maybe_401('POST'):
+      return
+
+    if options.upload_dir:
+      form = cgi.FieldStorage(
+          fp=self.rfile,
+          headers=self.headers,
+          environ={'REQUEST_METHOD':'POST',
+                   'CONTENT_TYPE':self.headers['Content-Type'],
+                   })
+      if form.has_key('file_1'):
+        if not os.path.exists(options.upload_dir):
+          try:
+            os.makedirs(options.upload_dir)
+          except:
+            print "failed to create", options.upload_dir
+            content = safe_encode_utf8('Internal Server Error')
+            self.send_response(500)
+            self.send_header('Content-Type', 'text/plain; charset=UTF-8')
+            self.send_header('Content-Length', len(content))
+            self.send_header('Connection', 'close')
+            self.end_headers()
+            self.transfer_content( content )
+            return
+
+      i = 1
+      k = 'file_' + str(i)
+      response = ''
+      while form.has_key(k):
+        if form[k].filename:
+          try:
+            fpath = os.path.join(options.upload_dir, form[k].filename)
+            if (options.no_clobber):
+              npath = fpath
+              j = 1
+              while os.path.exists(fpath):
+                fpath = npath + '.' + str(j)
+                j += 1
+            f =  open(fpath, 'w')
+            f.write( form[k].value )
+            f.close()
+          except:
+            print "failed to save", fpath
+            continue
+        i += 1
+        k = 'file_' + str(i)
+      # this throws an error often enough to be worth catching
+      try:
+        self.send_response(301)
+        self.send_header('Location', self.path)
+        self.end_headers()
+      except:
+        pass
+
+
+    else:
+      self.send_response(403)
+      self.send_header('Connection', 'close')
+      self.end_headers()
+
+
+
+
+
+  def transfer_file(self,fpath):
+    self.send_response(200)
+    size = os.path.getsize(fpath)
+    range_start = 0
+    range_end = size
+    mimetype, encoding = guess_type(fpath)
+    if not mimetype:
+      mimetype = 'application/octet-stream'
+    self.send_header('Content-Type', mimetype)
+
+    if encoding:
+      self.send_header('Content-Encoding', encoding)
+
+    self.send_header('Accept-Ranges', 'bytes')
+
+    if 'Range' in self.headers:
+      s, e = self.headers['range'][6:].split('-', 1)
+      sl = len(s)
+      el = len(e)
+      if sl > 0:
+        range_start = int(s)
+        if el > 0:
+          range_end = int(e) + 1
+      elif el > 0:
+        ei = int(e)
+        if ei < size:
+          range_start = size - ei
+
+
+    self.send_header('Content-Range', 'bytes ' + str(range_start) + '-' + str(range_end - 1) + '/' + str(size))
+    self.send_header('Content-Length', range_end - range_start)
+    self.end_headers()
+
+    f = open(fpath, 'rb')
+    f.seek(range_start, 0)
+    step = 0x8000
+    total = 0
+    while step > 0:
+      if range_start + step > range_end:
+        step = range_end - range_start
+      try:
+        self.transfer_content( f.read(step) )
+      except:
+        break
+      total += step
+      range_start += step
+    f.close()
+
+
+def safe_encode_utf8(text):
+  try:
+    return text.encode('utf-8')
+  except UnicodeDecodeError:
+    return text
+
+
+def get_dirs_and_files(path):
+  if os.path.isdir(path):
+    paths = os.listdir(path)
+    return sorted(filter(lambda x: os.path.isdir(os.path.join(path,x)), paths)), sorted(filter(lambda x: os.path.isfile(os.path.join(path,x)), paths))
+  elif os.path.isfile(path):
+    return [], [os.path.basename(path)]
+  else:
+    return [], []
+
+
+
+def get_page(path,contents):
+  global paths
+  i = path.find('/',1)
+  if i > 0:
+    root = path[1:i]
+  else:
+    root = path[1:]
+
+  if root != '':
+    href = quote('/' + path[1:].rpartition('/')[0])
+    if href[-1] != '/':
+      href += '/'
+    backlink = '<a href="%s">[Back]</a>' % href
+  else:
+    backlink = ''
+
+  if options.upload_dir:
+    uploadlink = '<a href="%s?upload=1">[Upload]</a>' % quote(path)
+  else:
+    uploadlink = ''
+
+  filelist_html = "<table>\n      <tr><th>File</th><th>Size</th><th>Last Modified (GMT)</th></tr>\n"
+  for c in contents:
+    if root != '':
+      upath = path.replace(root, paths[root], 1) + '/' + c
+      href = path + '/' + c
+    else:
+      upath = paths[c]
+      href = '/' + c
+    href = quote(href)
+
+    if not os.path.exists(upath):
+      continue
+    stat = os.stat(upath)
+    gm_time = gmtime(stat.st_mtime)
+    str_time = strftime("%Y-%m-%d %H:%M:%S", gm_time)
+    if os.path.isdir(upath):
+      c += '/'
+      href += '/'
+      size = ''
+    else:
+      size = format_size(stat.st_size)
+
+    filelist_html += '      <tr><td class="alignl"><a href="' + href + '">' + c + '</a></td><td>' + size + '</td><td>' + str_time + "</td></tr>\n"
+  filelist_html += "    </table>"
+
+  body = '''    <h1>%(title)s%(backlink)s%(uploadlink)s</h1>
+    %(filelist)s
+''' % {'title': path, 'filelist': filelist_html, 'backlink': backlink, 'uploadlink': uploadlink}
+
+  return get_html(path + " - Quickserve", body, style='.alignl { text-align: left }')
+
+
+
+
+
+
+
+def get_upload_html(back='/', n=1):
+  if n < 1:
+    n = 1
+
+  backlink = '<a href="%s">[Back]</a>' % (back)
+  morelink = '<a href="%s?upload=%d">[More]</a>' % (back,n+1)
+
+  if n > 1:
+    fewerlink = '<a href="%s?upload=%d">[Fewer]</a>' % (back,n-1)
+  else:
+    fewerlink = ''
+
+  w = len(str(n))
+
+  def get_row(i):
+    i = str(i)
+    label = 'File'
+    if n > 1:
+      s = w - len(i) + 1
+      label += (' ' * s) + i
+    field = '<input type="file" name="file_' + i + '" size="40"/>'
+    return '<tr><th>%(label)s</th><td>%(field)s</td></tr>' % {'label': label, 'field': field}
+
+  input_rows = "\n        ".join( map(get_row, range(1,n+1)) )
+
+
+  body = '''    <h1>Upload%(backlink)s%(morelink)s%(fewerlink)s</h1>
+    <form action="%(back)s" enctype="multipart/form-data" method="post">
+      <table>
+        %(input_rows)s
+        <tr><th></th><td><input style="margin-top: 20px" type="submit" value="Upload" onclick="document.getElementById(\'uploading\').style.display=\'\';"/></td></tr>
+      </table>
+    </form>
+    <div id="uploading" style="display:none;text-align:center">Upload in progress, please wait...</div>
+''' % {'back': back, 'backlink': backlink, 'morelink': morelink, 'fewerlink': fewerlink, 'input_rows': input_rows}
+  return get_html('Upload - Quickserve', body, style='form { margin-left: 10px; font-family: monospace }')
+
+
+def get_info_html():
+  global paths
+  pid = os.getpid()
+
+  if options.address:
+    address = options.address
+  else:
+    address = 'all interfaces'
+
+  port = options.port
+
+  if options.username or options.password:
+    auth = "yes"
+  else:
+    auth = "no"
+
+  if options.upload_dir:
+    upload_dir = options.upload_dir
+  else:
+    upload_dir = "none"
+
+  serving = "\n".join(sorted(paths.values()))
+
+  body = '''    <h1>Quickserve Information</h1>
+    <table class="info_table">
+      <tr><th>address</th><td>%(address)s</td></tr>
+      <tr><th>port</th><td>%(port)d</td></tr>
+      <tr><th>pid</th><td>%(pid)d</td></tr>
+      <tr><th>require authorization</th><td>%(auth)s</td></tr>
+      <tr><th>upload directory</th><td>%(upload)s</td></tr>
+      <tr><th valign="top">serving</th><td><pre>%(serving)s</pre></td></tr>
+    </table>
+''' % {'pid': pid, 'address': address, 'port': port, 'auth': auth, 'upload': upload_dir, 'serving': serving}
+
+  style = '.info_table td { text-align: left; }'
+
+  return get_html('Quickserve Information', body, style=style)
+
+
+
+
+
+def get_html_doctype():
+  return '''<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+'''
+
+
+def get_html_head(title, tags="", style=""):
+  return '''<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,%(icon)s" />
+  <title>%(title)s</title>
+  %(tags)s
+  <style type="text/css">
+    html, body { background-color: #fff;padding: 0;margin: 0 }
+    body { font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Arial, sans-serif }
+    h1 { font-weight: normal; color: #333; margin-bottom: 0.5em; font-size: 2.5em; line-height: 1em }
+    h1 a { font-size: 0.5em; text-decoration: none; margin-left: 1em }
+    table { font-family: monospace; border-spacing:10px 4px; margin-bottom: 5em }
+    th { text-align: left; white-space: pre }
+    td { text-align: right }
+
+    #wrapper { margin: 0 auto;width: 90%% }
+
+    %(style)s
+  </style>
+</head>
+''' % {'icon': icon_png_b64, 'tags': tags, 'title': title, 'style': style}
+
+def get_html(title, body, head_tags="", style=""):
+  return get_html_doctype() + get_html_head(title, head_tags, style) + "<body>\n  <div id=\"wrapper\">\n" + body + "  </div>\n</body>\n</html>\n"
+
+
+
+
+
+
+
+# SVG icon, source of the PNG icon base64-encoded below.
+# icon_svg =
+'''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="480"
+   height="480.00009"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <g
+     transform="translate(402.63737,-254.74002)"
+     id="layer1">
+    <g
+       transform="matrix(0.89691061,0,0,0.99219468,-41.495722,5.7348142)"
+       id="g3746">
+      <path
+         d="m -400.02121,492.85212 143.52718,0 0,-239.51113 86.38433,0 0,479.02225 -229.91151,-239.51112 z"
+         id="path2818"
+         style="fill:#366994;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         d="m 129.8903,492.85211 -143.52718,0 0,239.51113 -86.38433,0 0,-479.02225 229.91151,239.51112 z"
+         id="path3744"
+         style="fill:#ffc331;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+  </g>
+</svg>
+'''
+
+icon_png_b64 = '''iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGASURB
+VDiNY/j//z8DMlZ2jl+jG179Rs0r4zEDAwMHAwMDR2OyZAu6OhhmYkAD7HzCzJxCksKcghL8MLFg
+e4HsFY2KyehqGRgYMA3ABjjZmZg9LfgmziqT8yDLAAYGBgZ+bmZufxuB+Z2Z0oZkGcDAwMAgLsQi
+EeoosKwkUlyWLAMYGBgYlKTYNWLdhZZ5mPPzkWUAAwMDg74Kp015tNg8RkZGZiZGRkYJZPzv7x+c
+hn778Y/hxbvfDC/e/WbQVOAInpQvM5NF3ia0RUjZEB5FzGwcOG0+cfXrJueCO+nIYiwPj6xO5xSS
+FOCTVgsm5HQONqZ/////f4FiwP////8KyGklsXBwi3MJS9sQMgQdMDEwMDB8eHTt05ubp6J+fnpz
+gywDGBgYGJ5f2PP43d3zUb+/fX6BTwNOAxgYGBgeHd9w/v2DS4l/f33/SpYBDAwMDPcPLNvx4dG1
+/H9/fv8lxgAWbIJ3ds2bK2PmowjjX3/w4+P3n/9+3Xv+868VmloAYBOPZZUd3JEAAAAASUVORK5C
+YII='''
+
+
+def format_size(size):
+  s = '&nbsp;B'
+  if size > 1000:
+    size /= 1000.0
+    s = 'kB'
+  if size > 1000:
+    size /= 1000.0
+    s = 'MB'
+  if size > 1000:
+    size /= 1000.0
+    s = 'GB'
+  if size > 1000:
+    size /= 1000.0
+    s = 'TB'
+  return "%.02f %s" % (size,s)
+
+
+
+def maybe_load_filelist(fpath):
+  global paths
+  try:
+    global filelist_mtime
+    mtime = os.stat(fpath).st_mtime
+    if mtime > filelist_mtime:
+      paths = get_paths( read_filelist(fpath) )
+      print "filelist modification detected"
+      print "  serving:\n    " + ("\n    ").join(sorted(paths.values()))
+      filelist_mtime = mtime
+  except OSError as (errno, strerror):
+    print "error: failed to stat %s: %s" % (fpath,strerror)
+    global keep_serving
+    keep_serving = False
+    paths = {}
+
+
+def read_filelist(fpath):
+  try:
+    f = open(fpath,'r')
+    ps = filter(lambda x: x, map(lambda x: x.rstrip('\r\n\0'), f.readlines()))
+    f.close()
+    return ps
+  except IOError as (errno, strerror):
+    print "error: failed to open %s: %s" % (fpath,strerror)
+    global keep_serving
+    keep_serving = False
+
+
+
+def get_paths(ps):
+  paths = {}
+  for p in ps:
+    p = os.path.abspath(p)
+    paths[os.path.basename(p)] = p
+  return paths
+
+
+
+def main(address='localhost', port=8080):
+  global paths
+
+  print "Starting Quickserve..."
+  if address:
+    print "  address: " + address
+  else:
+    print "  address: all interfaces"
+  print "  port: " + str(port)
+  print "  pid: " + str(os.getpid())
+  if options.infopage:
+    print "  infopage: " + options.infopage
+  if options.username or options.password:
+    print "  authentication:"
+    if options.username:
+      print "    username: " + options.username
+    if options.password:
+      print "    password: " + options.password
+  if options.upload_dir:
+    print "  upload directory: " + options.upload_dir
+  print "  serving:\n    " + ("\n    ").join(sorted(paths.values()))
+  print "Press <Ctrl-C> to exit.\n"
+
+  global keep_serving
+  keep_serving = True
+  try:
+    server = ThreadedHTTPServer((address, port), MyHandler)
+    while keep_serving:
+      server.handle_request()
+    server.shutdown()
+    print "exiting..."
+  except KeyboardInterrupt:
+    print '<Ctrl-C> pressed, exiting Quickserve...'
+    server.socket.close()
+    exit()
+  except socket.error as e:
+    print "error: " + str(e.strerror)
+
+
+
+if __name__ == '__main__':
+  myname = 'quickserve'
+  parser = OptionParser(description=myname + ' - a simple HTTP server for quickly sharing files', usage=myname + ' [options] [paths]')
+
+  parser.add_option("-b", "--bind", dest="address", default='', action="store", help='Bind the server to this address. By default the server will listen on all interfaces.')
+
+  parser.add_option("-f", "--filelist", dest="filelist", action="store", help='Serve files listed in a filelist. The list should contain a single path per line. If the list is modified while quickserve is running, it will be reloaded.')
+
+  parser.add_option("--infopage", dest="infopage", action="store", help='Specify an info page that you can visit to see information about Quickserve. The value should be a path and must include the leading "/", e.g. "/info" or "/sklfj23k42jf/supersecret_info". This page will not be linked directly by any other page on the server, but if this path coincides with another path on the server, it will take precedence. This option is affected by the Firefox bug.')
+
+  parser.add_option("--no-clobber", dest="no_clobber", action="store_true", help='Prevent uploaded files from clobbering existing files by appending an incrementing number to the filename.')
+
+  parser.add_option("-p", "--port", dest="port", default=8080, type="int", action="store", help='Set the server port (default: 8080)')
+
+  parser.add_option("--password", dest="password", action="store", help='Set authentication password.')
+
+  parser.add_option("-u", "--username", dest="username", action="store", help='Set authentication username.')
+
+  parser.add_option("--upload", dest="upload_dir", action="store", help='Enable file uploads and save them in the specified directory.')
+
+  (options, args) = parser.parse_args()
+
+  if not (args or options.filelist or options.upload_dir):
+    parser.print_help()
+    exit(1)
+
+  if options.upload_dir:
+    options.upload_dir = os.path.abspath( options.upload_dir )
+
+  global paths, username, password
+  username = options.username
+  password = options.password
+  if options.filelist:
+    options.filelist = options.filelist
+    global filelist_mtime
+    try:
+      filelist_mtime = os.stat(options.filelist).st_mtime
+    except OSError as (errno, strerror):
+      print "error: failed to stat %s: %s" % (options.filelist,strerror)
+      exit(1)
+    ps = read_filelist(options.filelist)
+  else:
+    ps = args
+  paths = get_paths(ps)
+  main(options.address, options.port)

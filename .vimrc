@@ -169,7 +169,7 @@ inoremap %%<cr> <%<cr>%><esc>O<Tab>
 inoremap {<cr> {<cr>}<esc>O<Tab>
 inoremap {{ {{   }}<left><left><left><left>
 inoremap [ []<left>
-inoremap ( ()<left>
+"inoremap ( ()<left>
 
 map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") ."> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 "" }}}
