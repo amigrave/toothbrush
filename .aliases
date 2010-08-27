@@ -9,6 +9,7 @@ alias md='mkdir'
 #alias vim='vim -X -p '
 alias vim='vim -p '
 alias gvim='gvim --remote-tab-silent'
+alias g256='export TERM=gnome-256color'
 alias u="cd .."
 alias b="cd .."
 alias m="cd /"

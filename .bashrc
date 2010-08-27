@@ -30,6 +30,13 @@ echo "$PATH" | grep "$PADD" > /dev/null || PATH="$PADD:$PATH"
 unset PADD
 export PATH
 
+export TERM=xterm-256color
+#export TERM=gnome-256color
+#export TERM=xterm-256color
+#if [ "$TERM" == "xterm" ]; then
+#    # No it isn't, it's gnome-terminal
+#    export TERM=xterm-256color
+#fi
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R"
 export LS_OPTIONS='--color=auto'
 export VISUAL=vim
@@ -58,3 +65,4 @@ fi
 PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]$PWD\[\033[0m\] [\[\033[35m\]\#\[\033[0m\]]\[\033[31m\]\$\[\033[0m\] '
 
 [ -f ~/.dir_colors ] && eval `dircolors -b ~/.dir_colors `
+

@@ -34,7 +34,11 @@ else
 	set list listchars=tab:~.,trail:.,extends:>,precedes:<,nbsp:_
 endif
 filetype plugin on
-colorscheme agr
+if &t_Co == 256
+	colorscheme wombat256mod
+else
+	colorscheme agr
+endif
 "}}}
 
 " ################################### PLATFORM ################################## {{{
@@ -43,9 +47,9 @@ if has("unix")
 else
 	let $VIMFILES=$HOME . "\\vim"
 endif
-if $TERM == "screen"
-	set term=rxvt
-endif
+"if $TERM == "screen"
+"	set term=rxvt
+"endif
 "}}}
 
 " ############################ AUTOCMD & FILETYPES ############################## {{{

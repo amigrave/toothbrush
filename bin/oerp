@@ -22,4 +22,8 @@ cd /home/amigrave/openerp/server-trunk/bin; ./openerp-server.py -c ~/.openerp_se
 # WEB
 /home/amigrave/openerp/web/openerp-web.py
 /home/amigrave/openerp/web-trunk/openobject-web.py
+
+# SSH
+ssh root@delta.openerp.com
+ssh root@evaluation-matrix.com # Old server that's gonna DIE !
 EOS

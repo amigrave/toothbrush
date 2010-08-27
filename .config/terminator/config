@@ -1,22 +1,17 @@
-# This is a comment
 [global_config]
-  use_system_font = False
-  font = Console 10
+  #use_system_font = False
+  #font = Console 10
   window_state = maximise
-
 [keybindings]
   #full_screen = <Ctrl><Shift>F11
-  prev_tab = <Shift>Left
-  next_tab = <Shift>Right
   new_tab = <Shift>Down
+  next_tab = <Shift>Right
+  prev_tab = <Shift>Left
   move_tab_right = <Ctrl>Right
   move_tab_left = <Ctrl>Left
-
 [profiles]
   [[default]]
-    allow_bold = false
-    copy_on_selection = true
-    scrollback_lines = "1000"
+    allow_bold = False
+    copy_on_selection = True
+    scrollback_lines = 1000
     palette = "#000000:#B21717:#17B217:#B26717:#1717B2:#B217B2:#17B2B2:#B2B2B2:#686868:#FF5454:#54FF54:#FFFF54:#5454FF:#FF54FF:#54FFFF:#FFFFFF"
-
-

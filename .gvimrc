@@ -81,6 +81,9 @@ autocmd BufNewFile,BufRead * call Highlight_remove_attr("bold")
 " Note adding ,Syntax above messes up the syntax loading
 " See :help syntax-loading for more info
 " }}}
+if has("win32")
+    autocmd BufNewFile,BufRead * call Highlight_remove_attr("italic")
+endif
 
 highlight Pmenu guibg=yellow guifg=black
 highlight PmenuSel guibg=white guifg=black
