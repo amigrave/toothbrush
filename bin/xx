@@ -1,0 +1,31 @@
+#!/bin/sh
+(iselect -a | sh -x) <<EOS
+# Internal
+xrandr --output LVDS1 --auto --output DP1 --off --output VGA1 --off --output HDMI1 --off
+
+# HDMI
+xrandr --output LVDS1 --auto --output DP1 --off --output VGA1 --off --output HDMI1 --auto --above LVDS1
+xrandr --output LVDS1 --auto --output DP1 --off --output VGA1 --off --output HDMI1 --auto --right-of LVDS1
+
+xrandr --output LVDS --off --output VGA --mode 1280x1024
+xrandr --output LVDS --off --output VGA --mode 1024x768
+
+# vgamirror
+xrandr --output LVDS --mode 1280x768 --output VGA --mode 1280x1024
+
+# vgaxine
+xrandr --output LVDS --mode 1280x768 --output VGA --mode 1280x1024 --above LVDS
+xrandr --output LVDS --mode 1280x768 --output VGA --mode 1024x768 --above LVDS
+
+# TV
+xrandr --output LVDS --off --output VGA --mode 1280x768 --rate 60
+
+# tvmirror
+xrandr --output LVDS --mode 640x480 --output VGA --mode 640x480 --rate 60 --same-as LVDS
+xrandr --output LVDS --mode 1280x768 --output VGA --mode 640x480 --rate 60 --same-as LVDS
+xrandr --output LVDS --mode 1024x768 --output VGA --mode 1024x768 --rate 60 --same-as LVDS
+
+# tvxine
+xrandr --output LVDS --mode 1280x768 --output VGA --mode 640x480 --rate 60 --above LVDS
+
+EOS
