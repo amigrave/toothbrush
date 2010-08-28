@@ -1,19 +1,78 @@
 *customization: -color
 XTerm*termName:  xterm-256color
-XTerm.vt100.Scrollbar.translations:	#override\n\
- <Btn5Down>: StartScroll(Forward)\n\
- <Btn4Down>: StartScroll(Backward)\n
-XTerm.vt100.translations:	#override\n\
- Shift<Btn4Down>,<Btn4Up>:scroll-back(1,line)\n\
- Shift<Btn5Down>,<Btn5Up>:scroll-forw(1,line)\n\
- Ctrl<Btn4Down>,<Btn4Up>:scroll-back(1,page)\n\
- Ctrl<Btn5Down>,<Btn5Up>:scroll-forw(1,page)\n\
- <Btn4Down>,<Btn4Up>:scroll-back(1,halfpage)\n\
- <Btn5Down>,<Btn5Up>:scroll-forw(1,halfpage)\n
-xrenoise.use_xcursors:	1
-xrenoise.display:	:0.0
-xrenoise.display_resource:	0x00,0x05,0xF1,0x41,0x45,0xA5,0x47,0x70
-xrenoise.executable_path:	/home/amigrave/local/bin/Renoise_2_5_1_Demo/renoise
+URxvt.termName:  rxvt-256color
+
+! to match gnome-terminal "Linux console" scheme
+! foreground/background
+URxvt*background: #000000
+URxvt*foreground: #ffffff
+! black
+!URxvt.color0  : #000000
+URxvt.color0  : #2E3436
+!URxvt.color8  : #555555
+URxvt.color8  : #555753
+! red
+!URxvt.color1  : #AA0000
+URxvt.color1  : #CC0000
+!URxvt.color9  : #FF5555
+URxvt.color9  : #EF2929
+! green
+!URxvt.color2  : #00AA00
+URxvt.color2  : #4E9A06
+!URxvt.color10 : #55FF55
+URxvt.color10 : #8AE234
+! yellow
+!URxvt.color3  : #AA5500
+URxvt.color3  : #C4A000
+!URxvt.color11 : #FFFF55
+URxvt.color11 : #FCE94F
+! blue
+!URxvt.color4  : #0000AA
+URxvt.color4  : #3465A4
+!URxvt.color12 : #5555FF
+URxvt.color12 : #729FCF
+! magenta
+!URxvt.color5  : #AA00AA
+!URxvt.color5  : #75507B
+URxvt.color5  : #995099
+!URxvt.color13 : #FF55FF
+!URxvt.color13 : #AD7FA8
+URxvt.color13 : #CC7FCC
+! cyan
+!URxvt.color6  : #00AAAA
+URxvt.color6  : #06989A
+!URxvt.color14 : #55FFFF
+URxvt.color14 : #34E2E2
+! white
+!URxvt.color7  : #AAAAAA
+URxvt.color7  : #D3D7CF
+!URxvt.color15 : #FFFFFF
+URxvt.color15 : #EEEEEC
+
+URxvt.background: black
+URxvt.foreground: #cccccc
+
+!URxvt.font: -misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
+URxvt*font: xft:Monospace:pixelsize=12
+URxvt*boldFont: xft:Monospace:bold:pixelsize=12
+!xterm*font:-bitstream-terminal-bold-r-*-*-*-140-100-100-*-*-iso8859-1
+
+URxvt*letterSpace: -1
+
+URxvt.perl-ext: default,matcher,tabbed,-searchable-scrollback,-readline
+URxvt.urlLauncher: google-chrome
+URxvt.matcher.button: 1
+
+URxvt.tabbed.tabbar-fg: 7
+URxvt.tabbed.tabbar-bg: 4
+URxvt.tabbed.tab-fg: 15
+URxvt.tabbed.tab-bg: 2
+
+URxvt.saveLines: 1000
+URxvt.scrollBar_right: true
+URxvt.scrollColor: #99AA99
+URxvt.cursorBlink:	true
+
 *Paned.Text.translations:	#override\n\
  Shift<Btn4Down>,<Btn4Up>: scroll-one-line-down()\n\
  Shift<Btn5Down>,<Btn5Up>: scroll-one-line-up()\n\
@@ -21,33 +80,3 @@ xrenoise.executable_path:	/home/amigrave/local/bin/Renoise_2_5_1_Demo/renoise
  Ctrl<Btn5Down>,<Btn5Up>: next-page()\n\
  None<Btn4Down>,<Btn4Up>:scroll-one-line-down()scroll-one-line-down()scroll-one-line-down()scroll-one-line-down()scroll-one-line-down()\n\
  None<Btn5Down>,<Btn5Up>:scroll-one-line-up()scroll-one-line-up()scroll-one-line-up()scroll-one-line-up()scroll-one-line-up()\n
-URxvt.tabbed.tabbar-fg:	7
-URxvt.tabbed.tabbar-bg:	4
-URxvt.tabbed.tab-fg:	7
-URxvt.tabbed.tab-bg:	1
-URxvt.color5:	#B217B2
-URxvt.color13:	#FF54FF
-URxvt.color10:	#54FF54
-URxvt.scrollColor:	#aaaaaa
-URxvt.saveLines:	1000
-URxvt.color1:	#B21717
-URxvt.font:	-misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
-URxvt.color9:	#FF5454
-URxvt.color15:	white
-URxvt.color4:	#1717B2
-URxvt.perl-ext:	default,tabbed,-searchable-scrollback,-readline
-URxvt.color14:	#54FFFF
-URxvt.boldFont:	-misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
-URxvt.color12:	#5454FF
-URxvt.background:	black
-URxvt.color0:	#000000
-URxvt.foreground:	#b2b2b2
-URxvt.color2:	#17B217
-URxvt.cursorBlink:	true
-URxvt.color11:	#FFFF54
-URxvt.scrollBar_right:	true
-URxvt.color6:	#17B2B2
-URxvt.color3:	#B26717
-URxvt.termName:	rxvt
-URxvt.color7:	#B2B2B2
-URxvt.color8:	#686868
