@@ -30,7 +30,7 @@ echo "$PATH" | grep "$PADD" > /dev/null || PATH="$PADD:$PATH"
 unset PADD
 export PATH
 
-export TERM=xterm-256color
+#export TERM=xterm-256color
 #export TERM=gnome-256color
 #export TERM=xterm-256color
 #if [ "$TERM" == "xterm" ]; then

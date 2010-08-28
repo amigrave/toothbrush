@@ -25,6 +25,7 @@ TERM rxvt
 TERM screen
 TERM gnome-256color
 TERM xterm-256color
+TERM rxvt-256color
 
 
 # ATTRIBUTE STRINGS:
