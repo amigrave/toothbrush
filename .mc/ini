@@ -83,7 +83,7 @@ copymove_persistent_attr=1
 select_flags=6
 editor_backup_extension=~
 skin=default
-#skin=amigrave.ini
+;skin=ovidiu.ini
 keymap=mc.keymap
 auto_save_setup_panels=1
 
@@ -91,7 +91,7 @@ filepos_max_saved_entries=1024
 
 [Layout]
 equal_split=1
-first_panel_size=96
+first_panel_size=136
 message_visible=1
 keybar_visible=1
 xterm_title=1
@@ -111,7 +111,6 @@ display_codepage=UTF-8
 source_codepage=Other_8_bit
 
 [Colors]
-#base_color=lightgray,green:normal=green,default:selected=white,gray:marked=yellow,default:markselect=yellow,gray:directory=blue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:special=lightgray,default:errors=red,default:reverse=green,default:gauge=green,default:input=white,gray:dnormal=green,gray:dfocus=brightgreen,gray:dhotnormal=cyan,gray:dhotfocus=brightcyan,gray:menu=green,default:menuhot=cyan,default:menusel=green,gray:menuhotsel=cyan,default:helpnormal=cyan,default:editnormal=green,default:editbold=blue,default:editmarked=gray,blue:stalelink=red,default
 base_color=
 xterm=
 color_terminals=
@@ -121,6 +120,8 @@ rxvt=
 xterm-256color=
 
 rxvt-256color=
+
+screen=
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print

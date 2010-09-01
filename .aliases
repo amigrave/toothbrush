@@ -1,15 +1,10 @@
 # vim:filetype=sh syntax=sh:
 alias ps1='PS1=\\$\ '
 alias ps1c='. ~/.bashrc'
-alias rd='rmdir'
 
-alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
-
-alias md='mkdir'
 #alias vim='vim -X -p '
 alias vim='vim -p '
 alias gvim='gvim --remote-tab-silent'
-alias g256='export TERM=gnome-256color'
 alias u="cd .."
 alias b="cd .."
 alias m="cd /"
@@ -19,11 +14,12 @@ alias d="ls --color=yes "
 alias v="less"
 alias mc='command mc -c --printwd=/tmp/mc-$USER/dir; cd "`cat /tmp/mc-$USER/dir`"; rm -f "/tmp/mc-$USER/dir"; :'
 alias mcc='LANG=C mc'
+alias qmv='qmv -f do'
 alias vir='clamscan -r *'
 alias py='ipython'
-
+alias by='bpython'
 # check for virtualization instructions
-alias virr='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
+alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
 
 alias sc='screen -R -a -U'
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'

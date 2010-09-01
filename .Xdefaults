@@ -6,6 +6,9 @@ URxvt.termName:  rxvt-256color
 ! foreground/background
 URxvt*background: #000000
 URxvt*foreground: #ffffff
+
+XTerm*background: #000000
+XTerm*foreground: #ffffff
 ! black
 !URxvt.color0  : #000000
 URxvt.color0  : #2E3436
