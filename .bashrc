@@ -33,16 +33,17 @@ export PATH
 #export TERM=xterm-256color
 #export TERM=gnome-256color
 #export TERM=xterm-256color
-#if [ "$TERM" == "xterm" ]; then
-#    # No it isn't, it's gnome-terminal
-#    export TERM=xterm-256color
-#fi
+if [ "$TERM" == "xterm" ]; then
+    # No it isn't, it's gnome-terminal
+    export TERM=xterm-256color
+fi
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R"
 export LS_OPTIONS='--color=auto'
 export VISUAL=vim
 export EDITOR=vim
 #export BROWSER=links
 export BROWSER=google-chrome
+export GREP_OPTIONS='--color=always'
 
 # SDL Fullscreen second monitor
 # export SDL_VIDEO_FULLSCREEN_HEAD=1

@@ -5,6 +5,9 @@ setenv LC_CTYPE en_US.UTF-8
 
 shell bash
 
+attrcolor b ".I"
+defbce "on"
+
 defhstatus "screen  (t) | $USER@H"
 hardstatus off
 
@@ -16,29 +19,36 @@ vbell off
 
 startup_message off
 
-#bindkey "&" select 1
-#bindkey "é" select 2
-#bindkey "\"" select 3
-#bindkey "'" select 4
-#bindkey "(" select 5
-#bindkey "§" select 6
-#bindkey "è" select 7
-#bindkey "!" select 8
-#bindkey "ç" select 9
-#bindkey "à" select 0
-#
-
-#bindkey [D prev
-#bindkey [C next
-#bindkey [B screen
-bindkey [d prev
-bindkey [c next
-bindkey [b screen
+bindkey ^[^[[D prev
+bindkey ^[^[[C next
+bindkey ^[^[[B screen
+bindkey ^[^[[A focus
 
 # for mintty
 bindkey [1;2D prev
 bindkey [1;2C next
 bindkey [1;2B screen
+bindkey [1;2A focus
+
+bindkey ^[& select 0
+bindkey ^[é select 1
+bindkey ^[\" select 2
+bindkey ^[\' select 3
+bindkey ^[( select 4
+bindkey ^[§ select 5
+bindkey ^[è select 6
+bindkey ^[! select 7
+bindkey ^[ç select 8
+bindkey ^[à select 9
+
+bindkey ^[^[[21~ remove # Alt-F10
+bindkey ^[^[[23~ eval split focus screen # Alt-F11
+bindkey ^[^[[24~ eval "split -v" focus screen # Alt-F12
+bindkey ^[[23$ resize -1 # Shift F11
+bindkey ^[[24$ resize +1 # Shift F12
+
+bindkey ^[^[[29~ eval "title 'Vim'" "split -v" "resize +30" "exec vim ." focus screen "title 'Work shell'" split focus screen "title 'Python'" "exec ipython" focus # Alt-square
+
 
 ## alt '-'
 ##bindkey "alt--" other

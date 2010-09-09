@@ -118,6 +118,9 @@ inoremap <C-Right> <C-O>w
 noremap Oc w
 inoremap Oc <C-O>w
 
+" Editing
+vmap <C-R> "_dP
+
 " Tab navigation like firefox
 nmap <C-S-tab> :tabprevious<CR>
 nmap <C-tab> :tabnext<CR>
@@ -172,8 +175,9 @@ inoremap %% <%%><left><left>
 inoremap %%<cr> <%<cr>%><esc>O<Tab>
 inoremap {<cr> {<cr>}<esc>O<Tab>
 inoremap {{ {{   }}<left><left><left><left>
-inoremap [ []<left>
+"inoremap [ []<left>
 "inoremap ( ()<left>
+
 
 map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") ."> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 "" }}}

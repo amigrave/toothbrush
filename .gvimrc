@@ -6,7 +6,8 @@ set guioptions-=T           " hide toolbar
 "set guifont=MiscFixed\ 8
 "set guifont=-misc-fixed-medium-r-normal--10-100-75-75-c-60-iso8859-1
 "set guifont=Bitstream\ Vera\ Sans\ Mono/11/-1/5/50/0/0/0/0/0
-set guifont=console
+"set guifont=console
+set guifont=Monospace\ 9
 
 if has("win32")
 	au GUIEnter * simalt ~x
@@ -77,11 +78,11 @@ function! Highlight_remove_attr(attr)
     silent! normal ggVGy
     bwipeout!
 endfunction
-autocmd BufNewFile,BufRead * call Highlight_remove_attr("bold")
 " Note adding ,Syntax above messes up the syntax loading
 " See :help syntax-loading for more info
 " }}}
 if has("win32")
+    autocmd BufNewFile,BufRead * call Highlight_remove_attr("bold")
     autocmd BufNewFile,BufRead * call Highlight_remove_attr("italic")
 endif
 

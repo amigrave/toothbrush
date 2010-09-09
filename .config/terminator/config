@@ -1,17 +1,26 @@
 [global_config]
-  #use_system_font = False
-  #font = Console 10
   window_state = maximise
 [keybindings]
-  #full_screen = <Ctrl><Shift>F11
   new_tab = <Shift>Down
-  next_tab = <Shift>Right
-  prev_tab = <Shift>Left
   move_tab_right = <Ctrl>Right
+  next_tab = <Shift>Right
   move_tab_left = <Ctrl>Left
+  prev_tab = <Shift>Left
 [profiles]
   [[default]]
-    allow_bold = False
     copy_on_selection = True
     scrollback_lines = 1000
-    palette = "#000000:#B21717:#17B217:#B26717:#1717B2:#B217B2:#17B2B2:#B2B2B2:#686868:#FF5454:#54FF54:#FFFF54:#5454FF:#FF54FF:#54FFFF:#FFFFFF"
+    font = Monospace 9
+    #palette = "#000000:#b21717:#17b217:#b26717:#1717b2:#b217b2:#17b2b2:#b2b2b2:#686868:#ff5454:#54ff54:#ffff54:#5454ff:#ff54ff:#54ffff:#ffffff"
+    palette = "#2E3436:#CC0000:#4E9A06:#C4A000:#3465A4:#995099:#06989A:#D3D7CF:#555753:#EF2929:#8AE234:#FCE94F:#729FCF:#CC7FCC:#34E2E2:#EEEEEC"
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      profile = default
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
