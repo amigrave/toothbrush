@@ -1,0 +1,189 @@
+#!/usr/bin/python
+import os, commands
+from os import system
+import curses
+
+"""
+# vim: set ft=dosini: set nonu
+[core]
+sudo apt-get install acpi alien apg arj bcrypt build-essential cabextract checkinstall clamav curl ddrescue dlocate \
+xul-ext-greasemonkey git-core hdparm hexedit htop iotop irssi iselect less lha mc mozilla-livehttpheaders ncurses-term nmap \
+openssh-server p7zip-full rar renameutils rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace \
+unp unrar unrar-free unzip vim vim-gnome whois wmctrl xbindkeys zip zoo hexedit extract autossh
+
+[dev]
+sudo apt-get install colordiff meld mercurial subversion
+
+[dev-python]
+sudo apt-get install bpython ipython pyflakes python-doc python-pip python-setuptools python-setuptools python-simplejson \
+python-yaml scons python-sphinx
+
+[dev-ruby]
+sudo apt-get install ruby ruby-dev rdoc ri irb libsqlite3-ruby libopenssl-ruby rubygems libescape-ruby libxml-ruby hpricot nokogiri \
+json wirble sqlite3-ruby sinatra libwww-mechanize-ruby
+
+[dev-node.js]
+sudo apt-get install libgnutls-dev libssl-dev libevent-dev
+
+[dev-emu]
+sudo apt-get install automake autoconf libgtk2.0-dev libsdl1.2-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev \
+libsdl-net1.2-dev libsdl-sound1.2-dev libsdl-ttf2.0-dev
+
+[dev-web]
+sudo apt-get install apache2.2-bin libapache2-mod-dnssd gmysqlcc
+
+[openerp]
+sudo apt-get install python-keyring-gnome fabric rst2pdf python-wordaxe bzr bzr-gtk
+
+[gfx]
+sudo apt-get install gimp blender inkscape optipng
+
+[compiz]
+sudo apt-get install docky compiz-fusion-plugins-extra compizconfig-settings-manager
+
+[video]
+sudo apt-get install libdvdcss mplayer-nogui w32codecs
+
+[audio]
+sudo apt-get install xmp lame audacious flac vorbis-tools nautilus-script-audio-convert id3v2
+
+[music]
+sudo apt-get install milkytracker audacity timidity fluid-soundfont-gm fluid-soundfont-gs
+
+[desktop-ubuntu]
+sudo apt-get install kid3-qt exaile pidgin qiv inkscape msttcorefonts gimp inkscape qiv mplayer mencoder transcode \
+oxygen-cursor-theme oxygen-icon-theme pidgin pidgin-hotkeys timer-applet
+
+[emu]
+sudo apt-get install dosbox e-uae e-uae hatari scummvm sdlmame vice visualboyadvance-gtk wine1.2 xdms zsnes
+
+[no-apt]
+install googlecl and google chat/video :
+http://code.google.com/p/googlecl/
+http://www.google.com/chat/video
+
+[custom]
+# git clone amigrave.com:/git/home
+# bcrypt -d .ssh/id_rsa
+# copy dotfiles for user and root
+# copy .usr.lib.urxvt.perl.tabbed
+#
+# nautilus-script-manager enable ConvertAudioFile
+"""
+
+
+
+
+
+
+
+class Install():
+	def install_console_font(self):
+		reboot = halse
+		if os.path.isfile('/etc/fonts/conf.d/70-no-bitmaps.conf'):
+			print('Enabling bitmap fonts')
+			os.unlink('/etc/fonts/conf.d/70-no-bitmaps.conf')
+			os.symlink('/etc/fonts/conf.avail/70-yes-bitmaps.conf', '/etc/fonts/conf.d/70-yes-bitmaps.conf')
+		if not os.path.isfile('/usr/share/fonts/X11/misc/console8x16.pcf.gz'):
+			pass
+			#/usr/share/fonts/X11/misc/fonts.dir
+
+	#FONT = "/hom
+	# console8x16.pcf.gz -misc-console-medium-r-normal--16-160-72-72-c-80-iso10646-1
+	# fc-cache -fv
+
+	def set_monday_as_first_day(self):
+		locale = commands.getoutput("locale | grep LC_TIME").strip().split("=")[1][1:-1].split(".")[0]
+		file = "/usr/share/i18n/locales/%s" % locale
+		f = open(file, "r+")
+		c = f.read()
+		r = c.replace("first_weekday\t1", "first_weekday\t2")
+		if c != r:
+			f.seek(0)
+			f.write(r)
+			print("Regenerating locales")
+			commands.getoutput("locale-gen")
+			print("Restarting gnome panel")
+			commands.getoutput("killall gnome-panel")
+		f.close()
+
+	def set_custom_date_format(self):
+		commands.getoutput("gconftool-2 --set /apps/panel/applets/clock_screen0/prefs/custom_format --type string 'Week#%V - %a %d %b, %H:%M'")
+		commands.getoutput("gconftool-2 --set /apps/panel/applets/clock_screen0/prefs/format --type string 'custom'")
+
+	def set_window_buttons_to_left():
+		commands.getoutput("gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close")
+
+i = Install()
+#i.set_monday_as_first_day()
+i.install_console_font()
+
+#parser = OptionParser()
+#parser.add_option("-f", "--file", dest="filename",
+#                  help="write report to FILE", metavar="FILE")
+#parser.add_option("-q", "--quiet",
+#                  action="store_false", dest="verbose", default=True,
+#                  help="don't print status messages to stdout")
+#
+#(options, args) = parser.parse_args()
+
+
+
+
+#update-alternatives --set editor /usr/bin/vim.basic
+
+#!/usr/bin/env python
+
+
+
+#def get_param(prompt_string):
+#	screen.clear()
+#	screen.border(0)
+#	screen.addstr(2, 2, prompt_string)
+#	screen.refresh()
+#	input = screen.getstr(10, 10, 60)
+#	return input
+#
+#def execute_cmd(cmd_string):
+#	system("clear")
+#	a = system(cmd_string)
+#	print ""
+#	if a == 0:
+#		print "Command executed correctly"
+#	else:
+#		print "Command terminated with error"
+#	raw_input("Press enter")
+#	print ""
+#
+#x = 0
+#
+#while x != ord('4'):
+#	screen = curses.initscr()
+#
+#	screen.clear()
+#	screen.border(0)
+#	screen.addstr(2, 2, "Please enter a number...")
+#	screen.addstr(4, 4, "1 - Add a user")
+#	screen.addstr(5, 4, "2 - Restart Apache")
+#	screen.addstr(6, 4, "3 - Show disk space")
+#	screen.addstr(7, 4, "4 - Exit")
+#	screen.refresh()
+#
+#	x = screen.getch()
+#
+#	if x == ord('1'):
+#		username = get_param("Enter the username")
+#		homedir = get_param("Enter the home directory, eg /home/nate")
+#		groups = get_param("Enter comma-separated groups, eg adm,dialout,cdrom")
+#		shell = get_param("Enter the shell, eg /bin/bash:")
+#		curses.endwin()
+#		execute_cmd("useradd -d " + homedir + " -g 1000 -G " + groups + " -m -s " + shell + " " + username)
+#	if x == ord('2'):
+#		curses.endwin()
+#		execute_cmd("df")
+#	if x == ord('3'):
+#		curses.endwin()
+#		execute_cmd("df -h")
+#
+#curses.endwin()
+

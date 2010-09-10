@@ -171,10 +171,10 @@ vnoremap <Tab> >
 vnoremap <S-Tab> <LT>
 
 "inoremap {{ {
-inoremap %% <%%><left><left>
-inoremap %%<cr> <%<cr>%><esc>O<Tab>
-inoremap {<cr> {<cr>}<esc>O<Tab>
-inoremap {{ {{   }}<left><left><left><left>
+imap %% <%%><left><left>
+imap %%<cr> <%<cr>%><esc>O<Tab>
+"inoremap {<cr> {<cr>}<esc>O<Tab>
+"inoremap {{ {{   }}<left><left><left><left>
 "inoremap [ []<left>
 "inoremap ( ()<left>
 
