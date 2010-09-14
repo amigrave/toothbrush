@@ -52,7 +52,7 @@ sudo apt-get install milkytracker audacity timidity fluid-soundfont-gm fluid-sou
 
 [desktop-ubuntu]
 sudo apt-get install kid3-qt exaile pidgin qiv inkscape msttcorefonts gimp inkscape qiv mplayer mencoder transcode \
-oxygen-cursor-theme oxygen-icon-theme pidgin pidgin-hotkeys timer-applet
+oxygen-cursor-theme oxygen-icon-theme pidgin pidgin-hotkeys timer-applet scrot
 
 [emu]
 sudo apt-get install dosbox e-uae e-uae hatari scummvm sdlmame vice visualboyadvance-gtk wine1.2 xdms zsnes
