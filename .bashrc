@@ -63,7 +63,7 @@ hostcolor="34"
 if [ "$HOSTNAME" = "agr" ] || [ "$HOSTNAME" = "dev" ] || [ "$HOSTNAME" = "mov" ]; then
 	hostcolor="31"
 fi
-PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]$PWD\[\033[0m\] [\[\033[35m\]\#\[\033[0m\]]\[\033[31m\]\$\[\033[0m\] '
+PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]\w\[\033[0m\] [\[\033[35m\]\t\[\033[0m\]]\[\033[31m\]\$\[\033[0m\] '
 
 [ -f ~/.dir_colors ] && eval `dircolors -b ~/.dir_colors `
 
