@@ -9,7 +9,7 @@ import curses
 sudo apt-get install acpi alien apg arj bcrypt build-essential cabextract checkinstall clamav curl ddrescue dlocate \
 xul-ext-greasemonkey git-core hdparm hexedit htop iotop irssi iselect less lha mc mozilla-livehttpheaders ncurses-term nmap \
 openssh-server p7zip-full rar renameutils rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace \
-unp unrar unrar-free unzip vim vim-gnome whois wmctrl xbindkeys zip zoo hexedit extract autossh
+unp unrar unrar-free unzip vim vim-gnome whois wmctrl xbindkeys zip zoo hexedit extract autossh p7zip-full
 
 [dev]
 sudo apt-get install colordiff meld mercurial subversion

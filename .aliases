@@ -13,6 +13,7 @@ alias l="ls -lAh --color=yes "
 alias d="ls --color=yes "
 alias v="less"
 alias o="xdg-open"
+alias dusage="du -sk * | sort -nr | cut -f2 | xargs -d '\n' du -sh"
 alias mc='command mc -c --printwd=/tmp/mc-$USER/dir; cd "`cat /tmp/mc-$USER/dir`"; rm -f "/tmp/mc-$USER/dir"; :'
 alias mcc='LANG=C mc'
 alias qmv='qmv -f do'
