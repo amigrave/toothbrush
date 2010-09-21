@@ -5,7 +5,7 @@ setenv LC_CTYPE en_US.UTF-8
 
 shell bash
 
-attrcolor b ".I"
+#attrcolor b ".I"
 defbce "on"
 
 defhstatus "screen  (t) | $USER@H"
