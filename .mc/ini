@@ -91,7 +91,7 @@ filepos_max_saved_entries=1024
 
 [Layout]
 equal_split=1
-first_panel_size=136
+first_panel_size=96
 message_visible=1
 keybar_visible=1
 xterm_title=1
@@ -122,6 +122,8 @@ xterm-256color=
 rxvt-256color=
 
 screen=
+
+screen-bce=
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print

@@ -25,17 +25,15 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
-PADD=~/bin:~/local/bin/:/usr/local/sbin:/usr/sbin:/sbin:/var/lib/gems/1.8/bin
+PADD=~/bin:~/local/bin/:/usr/local/sbin:/usr/sbin:/sbin
 echo "$PATH" | grep "$PADD" > /dev/null || PATH="$PADD:$PATH"
 unset PADD
 export PATH
 
-#export TERM=xterm-256color
-#export TERM=gnome-256color
-#export TERM=xterm-256color
-if [ "$TERM" == "xterm" ]; then
-    # No it isn't, it's gnome-terminal
-    export TERM=xterm-256color
+if [ "$COLORTERM" == "gnome-terminal" ]; then
+    export TERM=gnome-256color
+elif [ "$TERM" == "screen-bce" ]; then
+    export TERM=screen-256color-bce-s
 fi
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R"
 export LS_OPTIONS='--color=auto'
@@ -53,14 +51,12 @@ LANG=en_US.UTF-8
 LC_COLLATE=C
 export LC_COLLATE
 
-C=1
-[ "$UID" = "0" ] && C=44
 usercolor="33"
-if [ "$USER" = "amigrave" ]; then
+if [ "$USER" == "amigrave" ]; then
 	usercolor="35"
 fi
 hostcolor="34"
-if [ "$HOSTNAME" = "agr" ] || [ "$HOSTNAME" = "dev" ] || [ "$HOSTNAME" = "mov" ]; then
+if [ "$HOSTNAME" == "agr" ]; then
 	hostcolor="31"
 fi
 PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]\w\[\033[0m\] [\[\033[35m\]\t\[\033[0m\]]\[\033[31m\]\$\[\033[0m\] '
