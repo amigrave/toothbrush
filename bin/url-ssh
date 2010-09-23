@@ -1,2 +1,2 @@
 #!/bin/bash
-urxvt -e sh -c "ssh ${1:6}"
+urxvt --title "${1:6}" -e sh  -c "ssh ${1:6}"
