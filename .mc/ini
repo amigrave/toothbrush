@@ -111,6 +111,8 @@ base_color=
 rxvt-256color=
 color_terminals=
 
+gnome-256color=
+
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print
 Find SUID and SGID programs=find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print
