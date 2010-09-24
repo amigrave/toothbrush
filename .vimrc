@@ -55,10 +55,22 @@ endif
 " ############################ AUTOCMD & FILETYPES ############################## {{{
 if has("autocmd")
 	au BufEnter * cd %:p:h		"automatically change cwd to file's dir
-	au BufReadPost * if line("'\"") | exe "normal '\"" | endif
-	au BufReadPost * if getline(1) =~ '^#!.*python' | set filetype=python | endif
-	au BufReadPost * if getline(1) =~ '^#!.*ruby' | set filetype=ruby | endif
-	au BufReadPost * if getline(1) =~ '^#!.*bash' | set filetype=sh | endif
+	au BufEnter *
+		\ if line("'\"") | exe "normal '\"" | endif |
+		\ if match( getline(1) , '^\#!') == 0 |
+			\ execute("let b:interpreter = getline(1)[2:]") |
+			\ if getline(1) =~ '^#!.*python' | set filetype=python | endif |
+			\ if getline(1) =~ '^#!.*ruby' | set filetype=ruby | endif |
+			\ if getline(1) =~ '^#!.*bash' | set filetype=sh | endif |
+			\ if getline(1) =~ '^<DOCTYPE' | set filetype=html | endif |
+		\endif
+
+	fun! CallInterpreter()
+		if exists("b:interpreter")
+			exec ("!".b:interpreter." %")
+		endif
+	endfun
+
 	au BufRead *.txt,*.rst set expandtab " tw=78
 	au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
 	au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
@@ -144,22 +156,23 @@ nnoremap <silent> <S-F3> :bn<CR>
 inoremap <silent> <S-F3> <C-O>:bn<CR>
 
 " Folding
-nnoremap <silent> <F4> zi
-inoremap <silent> <F4> <C-O>zi
+nnoremap <silent> <F4> zc
+inoremap <silent> <F4> <C-O>zc
 nnoremap <silent> <F5> zm
 inoremap <silent> <F5> <C-O>zm
-noremap [a zc
-inoremap [a <C-O>zc
-noremap <S-Up> zc
-inoremap <S-Up> <C-O>zc
+nnoremap <silent> <F6> zi
+inoremap <silent> <F6> <C-O>zi
 
 " Disable <S-Down>
 noremap <S-Down> <Nop>
 inoremap <S-Down> <Nop>
 
 " Taglist
-nnoremap <silent> <F6> :TlistToggle<CR><C-w>h
-inoremap <silent> <F6> <C-O>:TlistToggle<CR><C-w>h
+nnoremap <silent> <F7> :TlistToggle<CR><C-w>h
+inoremap <silent> <F7> <C-O>:TlistToggle<CR><C-w>h
+
+nnoremap <silent> <F8> :w<CR>:call CallInterpreter()<CR>
+inoremap <silent> <F8> <C-O>:w<CR><C-O>:call CallInterpreter()<CR>
 
 " Quit
 nnoremap <silent> <F10> :bde<CR>
@@ -171,8 +184,8 @@ vnoremap <Tab> >
 vnoremap <S-Tab> <LT>
 
 "inoremap {{ {
-imap %% <%%><left><left>
-imap %%<cr> <%<cr>%><esc>O<Tab>
+"imap %% <%%><left><left>
+"imap %%<cr> <%<cr>%><esc>O<Tab>
 "inoremap {<cr> {<cr>}<esc>O<Tab>
 "inoremap {{ {{   }}<left><left><left><left>
 "inoremap [ []<left>
