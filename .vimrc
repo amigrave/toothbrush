@@ -54,9 +54,9 @@ endif
 
 " ############################ AUTOCMD & FILETYPES ############################## {{{
 if has("autocmd")
+	"\ if line("'\"") | exe "normal '\"" | endif |
 	au BufEnter * cd %:p:h		"automatically change cwd to file's dir
 	au BufEnter *
-		\ if line("'\"") | exe "normal '\"" | endif |
 		\ if match( getline(1) , '^\#!') == 0 |
 			\ execute("let b:interpreter = getline(1)[2:]") |
 			\ if getline(1) =~ '^#!.*python' | set filetype=python | endif |
@@ -156,12 +156,14 @@ nnoremap <silent> <S-F3> :bn<CR>
 inoremap <silent> <S-F3> <C-O>:bn<CR>
 
 " Folding
-nnoremap <silent> <F4> zc
-inoremap <silent> <F4> <C-O>zc
+nnoremap <silent> <S-Up> zc
+inoremap <silent> <S-Up> <C-O>zc
+noremap [a zc
+inoremap [a <C-O>zc
+nnoremap <silent> <F4> zi
+inoremap <silent> <F4> <C-O>zi
 nnoremap <silent> <F5> zm
 inoremap <silent> <F5> <C-O>zm
-nnoremap <silent> <F6> zi
-inoremap <silent> <F6> <C-O>zi
 
 " Disable <S-Down>
 noremap <S-Down> <Nop>

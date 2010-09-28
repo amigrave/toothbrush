@@ -19,10 +19,9 @@ vbell off
 
 startup_message off
 
-bindkey ^[^[[D prev
-bindkey ^[^[[C next
-bindkey ^[^[[B screen
-bindkey ^[^[[A focus
+bindkey ^[[d prev
+bindkey ^[[c next
+bindkey ^[[b screen
 
 # for mintty
 bindkey [1;2D prev

@@ -11,7 +11,6 @@ alias m="cd /"
 alias ll="ls -lAh --color=yes | less -r -E -X"
 alias l="ls -lAh --color=yes "
 alias d="ls --color=yes "
-alias v="less"
 alias o="xdg-open"
 alias dusage="du -sk * | sort -nr | cut -f2 | xargs -d '\n' du -sh"
 alias mc='command mc -c --printwd=/tmp/mc-$USER/dir; cd "`cat /tmp/mc-$USER/dir`"; rm -f "/tmp/mc-$USER/dir"; :'
@@ -23,9 +22,13 @@ alias by='bpython'
 # check for virtualization instructions
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
 alias termkey='tput smkx; cat; tput rmkx'
+alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 
-alias sc='screen -R -a -U'
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
+alias s='screen -RdU'
+function assh() {
+	autossh -x "$@" 'screen -RdU'
+}
 
 alias memo="e ~/local/docs/memos/memo.txt"
 alias memotel="e ~/local/docs/memos/memotel.txt"

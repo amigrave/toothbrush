@@ -1,5 +1,5 @@
 #!/bin/bash
-num=`ps aux | grep "/usr/bin/urxvt" | wc -l`
+num=`ps aux | grep "/usr/bin/urxvt" | grep -v grep | wc -l`
 /usr/bin/urxvt -icon ~/.agr/icons/terminal${num}.png "$@"
 
 #urxvtc "$@"
