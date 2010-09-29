@@ -1,0 +1,15 @@
+#!/bin/bash
+set -x
+cd /tmp
+apt-get source rxvt-unicode
+cd rxvt-unicode*
+patch -p1 < doc/urxvt-*-256color.patch
+sed "s/--with-term=rxvt-unicode/--with-term=rxvt-256color --enable-xterm-colors=256/" debian/rules > debian/rules2
+cp debian/rules2 debian/rules
+rm debian/rules2
+curl -s http://amigrave.com/upload/posts/urxvt/urxvt-font-width-fix.patch | patch -p1
+sudo apt-get -y build-dep rxvt-unicode
+dpkg-buildpackage -us -uc -rfakeroot
+cd ..
+sudo dpkg -i rxvt-unicode_*.deb
+sudo aptitude markauto $(apt-cache showsrc rxvt-unicode | grep Build-Depends: | sed -e 's/Build-Depends:\|,\|([^)]*)//g')
