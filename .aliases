@@ -4,7 +4,6 @@ alias ps1c='. ~/.bashrc'
 
 #alias vim='vim -X -p '
 alias vim='vim -p '
-alias gvim='gvim --remote-tab-silent'
 alias u="cd .."
 alias b="cd .."
 alias m="cd /"
@@ -26,9 +25,6 @@ alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
 alias s='screen -RdU'
-function assh() {
-	autossh -x "$@" 'screen -RdU'
-}
 
 alias memo="e ~/local/docs/memos/memo.txt"
 alias memotel="e ~/local/docs/memos/memotel.txt"
@@ -76,3 +72,14 @@ alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]
 alias ubuntuwin="gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close"
 
 alias qu="exit"
+
+# FUNCTIONS
+function diffresolver() {
+	kdiff3 -L1 Base -L2 Other -LMine --auto -o $1 -- $1.BASE $1.OTHER $1.THIS
+}
+function assh() {
+	autossh -x $* 'screen -RdU'
+}
+function gvim() {
+	/usr/bin/gvim --remote-tab-silent $*; wmctrl -a GVIM
+}

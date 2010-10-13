@@ -50,6 +50,12 @@ endif
 "if $TERM == "screen"
 "	set term=rxvt
 "endif
+if &term =~ "screen\\|rxvt"
+	:silent !echo -ne "\033]12;red\007"
+	let &t_SI = "\033]12;orange\007"
+	let &t_EI = "\033]12;red\007"
+	autocmd VimLeave * :!echo -ne "\033]12;gray\007"
+endif
 "}}}
 
 " ############################ AUTOCMD & FILETYPES ############################## {{{
@@ -76,6 +82,7 @@ if has("autocmd")
 	au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
 	au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 	au BufRead,BufNewFile *.aspx set syntax=cs
+	au BufRead,BufNewFile *.mako set ft=html
 "	"au BufRead,BufNewFile *.asp set ft=javascript
 	au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.asp syn region myFold start="{" end="}" transparent fold
 							\ | syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
@@ -193,6 +200,22 @@ vnoremap <S-Tab> <LT>
 "inoremap [ []<left>
 "inoremap ( ()<left>
 
+" lhs comments
+map ,# :s/^/#/<CR>:nohl<CR>
+map ,/ :s/^/\/\//<CR>:nohl<CR>
+map ,> :s/^/> /<CR>:nohl<CR>
+map ," :s/^/\"/<CR>:nohl<CR>
+map ,% :s/^/%/<CR>:nohl<CR>
+map ,! :s/^/!/<CR>:nohl<CR>
+map ,; :s/^/;/<CR>:nohl<CR>
+map ,- :s/^/--/<CR>:nohl<CR>
+map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:nohl<CR>
+
+" wrapping comments
+map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>:nohl<CR>
+map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:nohl<CR>
+map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>:nohl<CR>
+map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:nohl<CR>
 
 map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") ."> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 "" }}}
@@ -210,4 +233,3 @@ function! XmlQweb()
 	hi link xmlAttribQWeb     xmlAttribQWeb
 endfunction
 " }}}
-"" }}}

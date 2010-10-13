@@ -87,5 +87,7 @@ if has("win32")
     autocmd BufNewFile,BufRead * call Highlight_remove_attr("italic")
 endif
 
-highlight Pmenu guibg=yellow guifg=black
-highlight PmenuSel guibg=white guifg=black
+hi Pmenu guibg=yellow guifg=black
+hi PmenuSel guibg=white guifg=black
+hi Cursor guifg=white guibg=red
+hi FoldColumn guibg=black guifg=gray
