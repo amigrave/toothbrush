@@ -38,6 +38,10 @@ elif [ "$TERM" == "screen-bce" ]; then
     export TERM="screen-256color-bce-s"
 fi
 
+if [ "$OSTYPE" == "cygwin" ]; then
+    termsetcolors
+fi
+
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R"
 export LS_OPTIONS='--color=auto'
 export VISUAL=vim

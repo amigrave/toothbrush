@@ -80,17 +80,3 @@ function diffresolver() {
 function assh() {
 	autossh -x "$*" 'screen -RdU'
 }
-function gvim() {
-	GVIM="/usr/bin/gvim"
-	if [ "$OSTYPE" == "cygwin" ]; then
-		GVIM="HOME=/cygdrive/c/Documents\ and\ Settings/amigrave/ /cygdrive/c/Program\ Files/Vim/vim73/gvim.exe"
-	fi
-	if [ "$1" = "" ]; then
-		$GVIM
-	else
-		$GVIM --remote-tab-silent "$*"i
-		if [[ $OSTYPE == *linux* ]]; then
-			wmctrl -a GVIM
-		fi
-	fi
-}

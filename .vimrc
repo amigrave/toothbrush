@@ -34,7 +34,7 @@ else
 	set list listchars=tab:~.,trail:.,extends:>,precedes:<,nbsp:_
 endif
 filetype plugin on
-if &t_Co == 256 && $OSTYPE != "cygwin"
+if &t_Co == 256 && !has('win32unix')
 	colorscheme wombat256mod
 else
 	colorscheme agr

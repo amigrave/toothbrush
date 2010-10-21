@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ "$OSTYPE" == "cygwin" ]; then
+	HOME=/cygdrive/c/DOCUME~1/amigrave/ /cygdrive/c/PROGRA~1/Vim/vim73/gvim.exe --remote-tab-silent "$*" &
+else
+	GVIM="/usr/bin/gvim"
+	if [ "$1" = "" ]; then
+		$GVIM
+	else
+		$GVIM --remote-tab-silent "$*"; wmctrl -a GVIM
+	fi
+fi
