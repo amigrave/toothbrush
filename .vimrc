@@ -51,10 +51,11 @@ endif
 "	set term=rxvt
 "endif
 if &term =~ "screen\\|rxvt"
-	:silent !echo -ne "\033]12;red\007"
-	let &t_SI = "\033]12;orange\007"
-	let &t_EI = "\033]12;red\007"
-	autocmd VimLeave * :!echo -ne "\033]12;gray\007"
+"	"Set the cursor white in cmd-mode and orange in insert mode
+"	let &t_EI = "\<Esc>]12;white\x9c"
+"	let &t_SI = "\<Esc>]12;orange\x9c"
+"	"We normally start in cmd-mode
+"	silent !echo -e "\e]12;white\x9c"
 endif
 "}}}
 

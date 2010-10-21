@@ -9,7 +9,7 @@ import curses
 sudo apt-get install acpi alien apg arj bcrypt build-essential cabextract checkinstall clamav curl ddrescue dlocate \
 xul-ext-greasemonkey git-core hdparm hexedit htop iotop irssi iselect less lha mc mozilla-livehttpheaders ncurses-term nmap \
 openssh-server p7zip-full rar renameutils rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace \
-unp unrar unrar-free unzip vim vim-gnome whois wmctrl xbindkeys zip zoo hexedit extract autossh p7zip-full hexdiff
+unp unrar unrar-free unzip vim vim-gnome whois wmctrl xbindkeys zip zoo hexedit extract autossh p7zip-full hexdiff tidy
 
 [dev]
 sudo apt-get install colordiff meld mercurial subversion
@@ -45,7 +45,7 @@ sudo apt-get install docky compiz-fusion-plugins-extra compizconfig-settings-man
 sudo apt-get install libdvdcss mplayer-nogui w32codecs
 
 [audio]
-sudo apt-get install xmp lame audacious flac vorbis-tools nautilus-script-audio-convert id3v2
+sudo apt-get install xmp lame audacious flac vorbis-tools nautilus-script-audio-convert id3v2 opencubicplayer sidplay
 
 [music]
 sudo apt-get install milkytracker audacity timidity fluid-soundfont-gm fluid-soundfont-gs

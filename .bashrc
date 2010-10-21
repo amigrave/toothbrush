@@ -31,10 +31,13 @@ unset PADD
 export PATH
 
 if [ "$COLORTERM" == "gnome-terminal" ]; then
-    export TERM=gnome-256color
+    export TERM="gnome-256color"
+elif [ "$TERM" == "screen" ]; then
+    export TERM="screen-256color"
 elif [ "$TERM" == "screen-bce" ]; then
-    export TERM=screen-256color-bce-s
+    export TERM="screen-256color-bce-s"
 fi
+
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R"
 export LS_OPTIONS='--color=auto'
 export VISUAL=vim

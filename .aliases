@@ -78,8 +78,19 @@ function diffresolver() {
 	kdiff3 -L1 Base -L2 Other -LMine --auto -o $1 -- $1.BASE $1.OTHER $1.THIS
 }
 function assh() {
-	autossh -x $* 'screen -RdU'
+	autossh -x "$*" 'screen -RdU'
 }
 function gvim() {
-	/usr/bin/gvim --remote-tab-silent $*; wmctrl -a GVIM
+	GVIM="/usr/bin/gvim"
+	if [ "$OSTYPE" == "cygwin" ]; then
+		GVIM="HOME=/cygdrive/c/Documents\ and\ Settings/amigrave/ /cygdrive/c/Program\ Files/Vim/vim73/gvim.exe"
+	fi
+	if [ "$1" = "" ]; then
+		$GVIM
+	else
+		$GVIM --remote-tab-silent "$*"i
+		if [[ $OSTYPE == *linux* ]]; then
+			wmctrl -a GVIM
+		fi
+	fi
 }
