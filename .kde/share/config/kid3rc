@@ -1,0 +1,146 @@
+[Amazon]
+AdditionalTags=true
+CoverArt=true
+Server=www.amazon.com:80
+WindowHeight=-1
+WindowWidth=-1
+
+[Discogs]
+AdditionalTags=true
+CoverArt=true
+Server=www.discogs.com:80
+WindowHeight=-1
+WindowWidth=-1
+
+[FilenameFormat]
+CaseConversion=0
+FormatWhileEditing=true
+StrRepEnabled=true
+StrRepMapKeys=",*,.,/,:,?,Ä,Ö,Ü,ß,ä,é,ö,ü
+StrRepMapValues='',,,-,-,,Ae,Oe,Ue,ss,ae,e,oe,ue
+
+[Filter]
+FilterExpressions=,not (%{filepath} contains "%{artist} - %{album}/%{track} %{title}"),%{tag1} equals "",%{tag2} equals "",%{tag2} equals "ID3v2.3.0",%{tag2} equals "ID3v2.4.0",not (%1{title} equals %2{title} and %1{album} equals %2{album} and %1{artist} equals %2{artist} and %1{comment} equals %2{comment} and %1{year} equals %2{year} and %1{track} equals %2{track} and %1{genre} equals %2{genre}),%1{title} equals %2{title} and %1{album} equals %2{album} and %1{artist} equals %2{artist} and %1{comment} equals %2{comment} and %1{year} equals %2{year} and %1{track} equals %2{track} and %1{genre} equals %2{genre},%{picture} equals "",
+FilterIdx=0
+FilterNames=All,Filename Tag Mismatch,No Tag 1,No Tag 2,ID3v2.3.0 Tag,ID3v2.4.0 Tag,Tag 1 != Tag 2,Tag 1 == Tag 2,No Picture,Custom Filter
+WindowHeight=-1
+WindowWidth=-1
+
+[Freedb]
+CgiPath=/~cddb/cddb.cgi
+Server=gnudb.gnudb.org:80
+WindowHeight=-1
+WindowWidth=-1
+
+[General Options]
+BrowseCoverArtWindowHeight=-1
+BrowseCoverArtWindowWidth=-1
+Browser=xdg-open
+CommentName=COMMENT
+CustomGenres=
+DirFormatItem=0
+DirFormatText=%{artist} - %{album}
+EnableTimeDifferenceCheck=true
+EnableTotalNumberOfTracks=false
+ExportFormatHeaders=,,Track\\\\tTitle\\\\tArtist\\\\tAlbum\\\\tDate\\\\tGenre\\\\tComment\\\\tDuration\\\\tAlbum Artist\\\\tArranger\\\\tAuthor\\\\tBPM\\\\tComposer\\\\tConductor\\\\tCopyright\\\\tDisc Number\\\\tEncoded-by\\\\tGrouping\\\\tISRC\\\\tLanguage\\\\tLyricist\\\\tLyrics\\\\tMedia\\\\tOriginal Album\\\\tOriginal Artist\\\\tOriginal Date\\\\tPart\\\\tPerformer\\\\tPublisher\\\\tRemixer\\\\tSubtitle\\\\tWebsite,"Track"\\\\t"Title"\\\\t"Artist"\\\\t"Album"\\\\t"Date"\\\\t"Genre"\\\\t"Comment"\\\\t"Duration"\\\\t"Album Artist"\\\\t"Arranger"\\\\t"Author"\\\\t"BPM"\\\\t"Composer"\\\\t"Conductor"\\\\t"Copyright"\\\\t"Disc Number"\\\\t"Encoded-by"\\\\t"Grouping"\\\\t"ISRC"\\\\t"Language"\\\\t"Lyricist"\\\\t"Lyrics"\\\\t"Media"\\\\t"Original Album"\\\\t"Original Artist"\\\\t"Original Date"\\\\t"Part"\\\\t"Performer"\\\\t"Publisher"\\\\t"Remixer"\\\\t"Subtitle"\\\\t"Website",#EXTM3U,[playlist],<html>\\\\n <head>\\\\n  <title>%{artist} - %{album}</title>\\\\n </head>\\\\n <body>\\\\n  <h1>%{artist} - %{album}</h1>\\\\n  <dl>,<kover>\\\\n <title>\\\\n  <text><![CDATA[%{artist} ]]></text>\\\\n  <text><![CDATA[%{album}]]></text>\\\\n </title>\\\\n <content>,File\\\\tBitrate\\\\tVBR\\\\tDuration\\\\tSamplerate\\\\tChannels\\\\tMode\\\\tCodec,
+ExportFormatIdx=0
+ExportFormatNames=CSV unquoted,CSV quoted,CSV more unquoted,CSV more quoted,Extended M3U,Extended PLS,HTML,Kover XML,Technical Details,Custom Format
+ExportFormatTracks=%{track}\\\\t%{title}\\\\t%{artist}\\\\t%{album}\\\\t%{year}\\\\t%{genre}\\\\t%{comment}\\\\t%{duration}.00,"%{track}"\\\\t"%{title}"\\\\t"%{artist}"\\\\t"%{album}"\\\\t"%{year}"\\\\t"%{genre}"\\\\t"%{comment}"\\\\t"%{duration}.00",%{track}\\\\t%{title}\\\\t%{artist}\\\\t%{album}\\\\t%{year}\\\\t%{genre}\\\\t%{comment}\\\\t%{duration}.00\\\\t%{album artist}\\\\t%{arranger}\\\\t%{author}\\\\t%{bpm}\\\\t%{composer}\\\\t%{conductor}\\\\t%{copyright}\\\\t%{disc number}\\\\t%{encoded-by}\\\\t%{grouping}\\\\t%{isrc}\\\\t%{language}\\\\t%{lyricist}\\\\t%{lyrics}\\\\t%{media}\\\\t%{original album}\\\\t%{original artist}\\\\t%{original date}\\\\t%{part}\\\\t%{performer}\\\\t%{publisher}\\\\t%{remixer}\\\\t%{subtitle}\\\\t%{website},"%{track}"\\\\t"%{title}"\\\\t"%{artist}"\\\\t"%{album}"\\\\t"%{year}"\\\\t"%{genre}"\\\\t"%{comment}"\\\\t"%{duration}.00"\\\\t"%{album artist}"\\\\t"%{arranger}"\\\\t"%{author}"\\\\t"%{bpm}"\\\\t"%{composer}"\\\\t"%{conductor}"\\\\t"%{copyright}"\\\\t"%{disc number}"\\\\t"%{encoded-by}"\\\\t"%{grouping}"\\\\t"%{isrc}"\\\\t"%{language}"\\\\t"%{lyricist}"\\\\t"%{lyrics}"\\\\t"%{media}"\\\\t"%{original album}"\\\\t"%{original artist}"\\\\t"%{original date}"\\\\t"%{part}"\\\\t"%{performer}"\\\\t"%{publisher}"\\\\t"%{remixer}"\\\\t"%{subtitle}"\\\\t"%{website}",#EXTINF:%{seconds}\\,%{artist} - %{title}\\\\n%{filepath},File%{tracknumber}=%{filepath}\\\\nTitle%{tracknumber}=%{artist} - %{title}\\\\nLength%{tracknumber}=%{seconds},   <dt><a href="%{url}">%{track}. %{title}</a></dt>,  <text><![CDATA[%{track}. %{title}]]></text>,%{file}\\\\t%{bitrate}\\\\t%{vbr}\\\\t%{duration}\\\\t%{samplerate}\\\\t%{channels}\\\\t%{mode}\\\\t%{codec},
+ExportFormatTrailers=,,,,,NumberOfEntries=%{tracks}\\\\nVersion=2,  </dl>\\\\n </body>\\\\n</html>, </content>\\\\n</kover>,,
+ExportSourceV1=true
+ExportWindowHeight=-1
+ExportWindowWidth=-1
+FormatFromFilenameItem=0
+FormatFromFilenameItems=%{artist} (%{year}) %{album}/%{artist} - %{track}. %{title},%{artist} - %{album}/%{track}. %{title},%{artist} - [%{year}] %{album}/%{track} %{title},%{artist} - [%{year}] %{album}/%{track}. %{title},%{artist}/%{album}/%{track} %{title},%{artist}/%{album}/%{track}. %{title},%{artist}/[%{year}] %{album}/%{track} %{title},%{artist}/[%{year}] %{album}/%{track}. %{title},%{album}/%{track} - %{artist} - %{title},%{album}/%{track}. %{artist} - %{title},%{album}/%{artist} - %{track} - %{title},[%{year}] %{album}/%{track} - %{artist} - %{title},%{artist} - %{album} - %{track} - %{title},%{artist} - [%{year}] %{album} - %{track} - %{title},%{album}/%{artist} - %{track} - %{title},[%{year}] %{album}/%{artist} - %{track} - %{title},%{album}/%{artist} - %{title},%{album}/%{artist}-%{title},%{album}/(%{artist}) %{title},%{artist}-%{title}-%{album}
+FormatFromFilenameText=%{artist} (%{year}) %{album}/%{artist} - %{track}. %{title}
+FormatItem=0
+FormatItems=%{artist} (%{year}) %{album}/%{artist} - %{track}. %{title},%{artist} - %{album}/%{track}. %{title},%{artist} - [%{year}] %{album}/%{track} %{title},%{artist} - [%{year}] %{album}/%{track}. %{title},%{artist}/%{album}/%{track} %{title},%{artist}/%{album}/%{track}. %{title},%{artist}/[%{year}] %{album}/%{track} %{title},%{artist}/[%{year}] %{album}/%{track}. %{title},%{album}/%{track} - %{artist} - %{title},%{album}/%{track}. %{artist} - %{title},%{album}/%{artist} - %{track} - %{title},[%{year}] %{album}/%{track} - %{artist} - %{title},%{artist} - %{album} - %{track} - %{title},%{artist} - [%{year}] %{album} - %{track} - %{title},%{album}/%{artist} - %{track} - %{title},[%{year}] %{album}/%{artist} - %{track} - %{title},%{album}/%{artist} - %{title},%{album}/%{artist}-%{title},%{album}/(%{artist}) %{title},%{artist}-%{title}-%{album}
+FormatText2=%{artist} (%{year}) %{album}/%{artist} - %{track}. %{title}
+GenreNotNumeric=false
+HidePicture=false
+HideV1=false
+HideV2=false
+ID3v2Version=0
+ImportDestination=0
+ImportFormatHeaders=,,,,%{artist}(\\\\S[^\\\\r\\\\n/]*\\\\S)\\\\s*/\\\\s*%{album}(\\\\S[^\\\\r\\\\n]*\\\\S)[\\\\r\\\\n]+\\\\s*tracks:\\\\s+\\\\d+.*year:\\\\s*%{year}(\\\\d+)?.*genre:\\\\s*%{genre}(\\\\S[^\\\\r\\\\n]*\\\\S)?[\\\\r\\\\n],<[^>]+>%{artist}([^<\\\\s][^\\\\r\\\\n/]*\\\\S)\\\\s*/\\\\s*%{album}(\\\\S[^\\\\r\\\\n]*[^\\\\s>])<[^>]+>[\\\\r\\\\n]+\\\\s*tracks:\\\\s+\\\\d+.*year:\\\\s*%{year}(\\\\d+)?.*genre:\\\\s*%{genre}(\\\\S[^\\\\r\\\\n>]*\\\\S)?<[^>]+>[\\\\r\\\\n],,,,
+ImportFormatIdx=0
+ImportFormatNames=CSV unquoted,CSV quoted,CSV more unquoted,CSV more quoted,freedb HTML text,freedb HTML source,Title,Track Title,Track Title Time,Custom Format
+ImportFormatTracks=%{track}(\\\\d+)\\\\t%{title}([^\\\\r\\\\n\\\\t]*)\\\\t%{artist}([^\\\\r\\\\n\\\\t]*)\\\\t%{album}([^\\\\r\\\\n\\\\t]*)\\\\t%{year}(\\\\d+)\\\\t%{genre}([^\\\\r\\\\n\\\\t]*)\\\\t%{comment}([^\\\\r\\\\n\\\\t]*)\\\\t(?:\\\\d+:)?%{duration}(\\\\d+:\\\\d+),"?%{track}(\\\\d+)"?\\\\t"?%{title}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{artist}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{album}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{year}(\\\\d+)"?\\\\t"?%{genre}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{comment}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?(?:\\\\d+:)?%{duration}(\\\\d+:\\\\d+),%{track}(\\\\d+)\\\\t%{title}([^\\\\r\\\\n\\\\t]*)\\\\t%{artist}([^\\\\r\\\\n\\\\t]*)\\\\t%{album}([^\\\\r\\\\n\\\\t]*)\\\\t%{year}(\\\\d+)\\\\t%{genre}([^\\\\r\\\\n\\\\t]*)\\\\t%{comment}([^\\\\r\\\\n\\\\t]*)\\\\t(?:\\\\d+:)?%{duration}(\\\\d+:\\\\d+)(?:\\\\.\\\\d+)?\\\\t%{album artist}([^\\\\r\\\\n\\\\t]*)\\\\t%{arranger}([^\\\\r\\\\n\\\\t]*)\\\\t%{author}([^\\\\r\\\\n\\\\t]*)\\\\t%{bpm}([^\\\\r\\\\n\\\\t]*)\\\\t%{composer}([^\\\\r\\\\n\\\\t]*)\\\\t%{conductor}([^\\\\r\\\\n\\\\t]*)\\\\t%{copyright}([^\\\\r\\\\n\\\\t]*)\\\\t%{disc number}([^\\\\r\\\\n\\\\t]*)\\\\t%{encoded-by}([^\\\\r\\\\n\\\\t]*)\\\\t%{grouping}([^\\\\r\\\\n\\\\t]*)\\\\t%{isrc}([^\\\\r\\\\n\\\\t]*)\\\\t%{language}([^\\\\r\\\\n\\\\t]*)\\\\t%{lyricist}([^\\\\r\\\\n\\\\t]*)\\\\t%{lyrics}([^\\\\r\\\\n\\\\t]*)\\\\t%{media}([^\\\\r\\\\n\\\\t]*)\\\\t%{original album}([^\\\\r\\\\n\\\\t]*)\\\\t%{original artist}([^\\\\r\\\\n\\\\t]*)\\\\t%{original date}([^\\\\r\\\\n\\\\t]*)\\\\t%{part}([^\\\\r\\\\n\\\\t]*)\\\\t%{performer}([^\\\\r\\\\n\\\\t]*)\\\\t%{publisher}([^\\\\r\\\\n\\\\t]*)\\\\t%{remixer}([^\\\\r\\\\n\\\\t]*)\\\\t%{subtitle}([^\\\\r\\\\n\\\\t]*)\\\\t%{website}([^\\\\r\\\\n\\\\t]*),"?%{track}(\\\\d+)"?\\\\t"?%{title}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{artist}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{album}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{year}(\\\\d+)"?\\\\t"?%{genre}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{comment}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?(?:\\\\d+:)?%{duration}(\\\\d+:\\\\d+)(?:\\\\.\\\\d+)?"?\\\\t"?%{album artist}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{arranger}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{author}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{bpm}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{composer}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{conductor}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{copyright}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{disc number}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{encoded-by}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{grouping}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{isrc}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{language}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{lyricist}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{lyrics}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{media}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{original album}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{original artist}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{original date}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{part}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{performer}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{publisher}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{remixer}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{subtitle}([^\\\\r\\\\n\\\\t"]*)"?\\\\t"?%{website}([^\\\\r\\\\n\\\\t"]*),[\\\\r\\\\n]%{track}(\\\\d+)[\\\\.\\\\s]+%{duration}(\\\\d+:\\\\d+)\\\\s+%{title}(\\\\S[^\\\\r\\\\n]*\\\\S),<td[^>]*>\\\\s*%{track}(\\\\d+).</td><td[^>]*>\\\\s*%{duration}(\\\\d+:\\\\d+)</td><td[^>]*>(?:<[^>]+>)?%{title}([^<\\\\r\\\\n]+),\\\\s*%{title}(\\\\S[^\\\\r\\\\n]*\\\\S)\\\\s*,\\\\s*%{track}(\\\\d+)[\\\\.\\\\s]+%{title}(\\\\S[^\\\\r\\\\n]*\\\\S)\\\\s*,\\\\s*%{track}(\\\\d+)[\\\\.\\\\s]+%{title}(\\\\S[^\\\\r\\\\n]*\\\\S)\\\\s+%{duration}(\\\\d+:\\\\d+)\\\\s*,
+ImportServer=0
+ImportWindowHeight=-1
+ImportWindowWidth=-1
+MarkChanges=true
+MarkTruncations=true
+MatchPictureUrlMapKeys=http://(?:www.)?amazon.(?:com|co.uk|de|fr).*/(?:dp|ASIN|images|product|-)/([A-Z0-9]+).*,http://cdbaby.com/cd/(\\\\w)(\\\\w)(\\\\w+),http://images.google.com/.*imgurl=([^&]+)&.*,http://musicbrainz.org/misc/redirects/.*&asin=([A-Z0-9]+).*,http://rds.yahoo.com/.*%26imgurl=((?:[^%]|%(?!26))+).*,http://rds.yahoo.com/.*&imgurl=([^&]+)&.*,http://www.freecovers.net/view/(\\\\d+)/([0-9a-f]+)/.*,http://www.jamendo.com/en/album/(\\\\d+)
+MatchPictureUrlMapValues=http://images.amazon.com/images/P/\\\\1.01._SCLZZZZZZZ_.jpg,http://cdbaby.name/\\\\1/\\\\2/\\\\1\\\\2\\\\3.jpg,\\\\1,http://images.amazon.com/images/P/\\\\1.01._SCLZZZZZZZ_.jpg,http%253A%252F%252F\\\\1,http%3A%2F%2F\\\\1,http://www.freecovers.net/preview/\\\\1/\\\\2/big.jpg,http://imgjam.com/albums/\\\\1/covers/1.0.jpg
+MaxTimeDifference=3
+NameFilter2=*.aac *.Aac *.aAc *.AAc *.aaC *.AaC *.aAC *.AAC *.aif *.Aif *.aIf *.AIf *.aiF *.AiF *.aIF *.AIF *.aiff *.Aiff *.aIff *.AIff *.aiFf *.AiFf *.aIFf *.AIFf *.aifF *.AifF *.aIfF *.AIfF *.aiFF *.AiFF *.aIFF *.AIFF *.asf *.Asf *.aSf *.ASf *.asF *.AsF *.aSF *.ASF *.flac *.Flac *.fLac *.FLac *.flAc *.FlAc *.fLAc *.FLAc *.flaC *.FlaC *.fLaC *.FLaC *.flAC *.FlAC *.fLAC *.FLAC *.m4a *.M4a *.m4A *.M4A *.m4b *.M4b *.m4B *.M4B *.m4p *.M4p *.m4P *.M4P *.mp2 *.Mp2 *.mP2 *.MP2 *.mp3 *.Mp3 *.mP3 *.MP3 *.mp4 *.Mp4 *.mP4 *.MP4 *.mpc *.Mpc *.mPc *.MPc *.mpC *.MpC *.mPC *.MPC *.oga *.Oga *.oGa *.OGa *.ogA *.OgA *.oGA *.OGA *.ogg *.Ogg *.oGg *.OGg *.ogG *.OgG *.oGG *.OGG *.spx *.Spx *.sPx *.SPx *.spX *.SpX *.sPX *.SPX *.tta *.Tta *.tTa *.TTa *.ttA *.TtA *.tTA *.TTA *.wav *.Wav *.wAv *.WAv *.waV *.WaV *.wAV *.WAV *.wma *.Wma *.wMa *.WMa *.wmA *.WmA *.wMA *.WMA *.wv *.Wv *.wV *.WV
+NumberTracksDestination=0
+NumberTracksStartNumber=1
+OnlyCustomGenres=false
+PictureNameItem=0
+PictureSourceIdx=0
+PictureSourceNames=Google Images,Yahoo Images,Amazon,Amazon.co.uk,Amazon.de,Amazon.fr,MusicBrainz,Discogs,CD Universe,Coveralia,FreeCovers,CoverHunt,SlothRadio,Albumart,Yalp!,HMV,CD Baby,Jamendo,Custom Source
+PictureSourceUrls=http://images.google.com/images?q=%u{artist}%20%u{album},http://images.search.yahoo.com/search/images?ei=UTF-8&p=%u{artist}%20%u{album},http://www.amazon.com/s?search-alias=aps&field-keywords=%u{artist}+%u{album},http://www.amazon.co.uk/s?search-alias=aps&field-keywords=%u{artist}+%u{album},http://www.amazon.de/s?search-alias=aps&field-keywords=%u{artist}+%u{album},http://www.amazon.fr/s?search-alias=aps&field-keywords=%u{artist}+%u{album},http://musicbrainz.org/search/textsearch.html?query=%u{artist}+%u{album}&type=release,http://www.discogs.com/search?q=%u{artist}+%u{album},http://www.cduniverse.com/sresult.asp?HT_Search_Info=%u{artist}+%u{album},http://www.coveralia.com/mostrar.php?bus=%u{artist}%20%u{album}&bust=2,http://www.freecovers.net/search.php?search=%u{artist}+%u{album}&cat=4,http://www.coverhunt.com/search/%u{artist}+%u{album},http://www.slothradio.com/covers/?artist=%u{artist}&album=%u{album},http://www.albumart.org/index.php?srchkey=%u{artist}+%u{album}&searchindex=Music,http://search.yalp.alice.it/search/search.html?txtToSearch=%u{artist}%20%u{album},http://hmv.com/hmvweb/advancedSearch.do?searchType=2&artist=%u{artist}&title=%u{album},http://cdbaby.com/found?artist=%u{artist}&album=%u{album},http://www.jamendo.com/en/search/all/%u{artist}%20%u{album},
+PreserveTime=true
+Proxy=
+ProxyPassword=
+ProxyUserName=
+RenameDirectorySource=0
+SplitterSizes=460,899
+TextEncoding=0
+TextEncodingV1=ISO-8859-1
+UseProxy=false
+UseProxyAuthentication=false
+VSplitterSizes=493,137
+
+[Id3Format]
+CaseConversion=0
+FormatWhileEditing=true
+StrRepEnabled=false
+StrRepMapKeys=
+StrRepMapValues=
+
+[MainWindow]
+Height 1200=1201
+State=AAAA/wAAAAD9AAAAAAAABVUAAAJ8AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
+ToolBarsMovable=Disabled
+Width 1920=1921
+
+[MenuCommands]
+Command1=xmms,xmms %{files},0
+Command2=AlbumArt,albumart-qt %{directory},0
+Command3=Google Images,%{browser} http://images.google.com/images?q=%u{artist}%20%u{album},0
+Command4=Amazon,%{browser} http://www.amazon.com/s?search-alias=aps&field-keywords=%u{artist}+%u{album},0
+Command5=LyricWiki,%{browser} http://lyricwiki.org/%u{artist}:%u{title},0
+Command6=LeosLyrics,%{browser} http://www.leoslyrics.com/search.php?search=%u{artist}%20%u{title}&sartist=1&ssongtitle=1,0
+Command7=Lyrc,%{browser} http://lyrc.com.ar/en/tema1en.php?artist=%u{artist}&songname=%u{title},0
+
+[MusicBrainz]
+AdditionalTags=true
+CoverArt=true
+Server=musicbrainz.org:80
+WindowHeight=-1
+WindowWidth=-1
+
+[Playlist]
+FileNameFormat=%{artist} - %{album}
+Format=0
+InfoFormat=%{artist} - %{title}
+Location=0
+OnlySelectedFiles=false
+SortTagField=%{track.3}
+UseFileNameFormat=false
+UseFullPath=false
+UseSortTagField=false
+WriteInfo=false
+
+[Recent Files]
+File1[$e]=.
+Name1[$e]=.
+
+[TrackType]
+CgiPath=/~cddb/cddb.cgi
+Server=tracktype.org:80
+WindowHeight=-1
+WindowWidth=-1
