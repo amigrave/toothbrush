@@ -1,7 +1,7 @@
 #!/bin/bash
 num=`ps aux | grep "/usr/bin/urxvt" | grep -v grep | wc -l`
 num=`expr $num + 1`
-/usr/bin/urxvt -icon ~/.agr/icons/terminal${num}.png "$@"
+/usr/bin/urxvtc -icon ~/.agr/icons/terminal${num}.png "$@"
 
 #urxvtc "$@"
 #if [ $? -eq 2 ]; then
