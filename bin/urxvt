@@ -1,10 +1,10 @@
 #!/bin/bash
 num=`ps aux | grep "/usr/bin/urxvt" | grep -v grep | wc -l`
 num=`expr $num + 1`
-/usr/bin/urxvtc -icon ~/.agr/icons/terminal${num}.png "$@"
+cmd="/usr/bin/urxvtc -icon /home/amigrave/.agr/icons/terminal${num}.png"
 
-#urxvtc "$@"
-#if [ $? -eq 2 ]; then
-#	urxvtd -q -o -f
-#	urxvtc -icon ~/.terminal.png "$@"
-#fi
+$cmd "$@"
+if [ $? -eq 2 ]; then
+	urxvtd -q -o -f
+	$cmd "$@"
+fi
