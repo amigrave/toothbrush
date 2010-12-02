@@ -9,9 +9,9 @@ set fileencoding=utf8
 set fileencodings=utf-8,latin1
 set novb t_vb=            " no visual bell
 set noerrorbells        " do not bell on error
-set autoindent          " automatic indentation
 set shiftwidth=4        " Number of spaces to use for each step of (auto)
 set tabstop=4           " Number of spaces that a <Tab> in the file counts for
+set softtabstop=4
 set textwidth=0         " Maximum width of text that is being inserted
 set history=50          " expand command history
 set hlsearch            " Highlight previous search pattern matches.
@@ -21,18 +21,17 @@ set backspace=2         " make backspace work like most other apps
 set smartcase           " ignore case when the pattern contains lowercase letters only.
 set nobackup            " do not write a .bak file
 set nocompatible        " do not use vi compatible mode
-set noexpandtab         " do not expand tab to spaces
+"set autoindent          " automatic indentation
+set smartindent
+"set noexpandtab         " do not expand tab to spaces
+set expandtab           " expand tab to spaces
 set ruler               " Show the line and column number of the cursor position
 set number              " precede each line with its line number
 set showcmd             " Show (partial) command in the last line of the screen
 set showmode            " If in Insert, Replace or Visual mode put a message on the last line
 set viminfo='200,\"5000 nowrap
 "set list listchars=tab:~.,trail:.,extends:>,precedes:<
-if (&termencoding == "utf-8") || has("gui_running")
-	set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
-else
-	set list listchars=tab:~.,trail:.,extends:>,precedes:<,nbsp:_
-endif
+set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
 filetype plugin on
 if &t_Co == 256 && !has('win32unix')
 	colorscheme wombat256mod
@@ -78,7 +77,7 @@ if has("autocmd")
 		endif
 	endfun
 
-	au BufRead *.txt,*.rst set expandtab " tw=78
+	au BufRead *.txt,*.rst set expandtab tw=78
 	au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
 	au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
 	au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
@@ -88,7 +87,7 @@ if has("autocmd")
 	au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.asp syn region myFold start="{" end="}" transparent fold
 							\ | syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
 "	au BufRead,BufNewFile *.js,*.asp syn clear javaScriptBraces
-	au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
+"	au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
 
 	au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
 	au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
@@ -123,10 +122,14 @@ noremap <C-Down> <C-E><Down>
 inoremap <C-Down> <C-O><C-E><Down>
 noremap Ob <C-E><Down>
 inoremap Ob <C-O><C-E><Down>
+noremap [1;5B <C-E><Down>
+inoremap [1;5B <C-O><C-E><Down>
 noremap <C-Up> <C-Y><Up>
 inoremap <C-Up> <C-O><C-Y><Up>
 noremap Oa <C-Y><Up>
 inoremap Oa <C-O><C-Y><Up>
+noremap [1;5A <C-E><Up>
+inoremap [1;5A <C-O><C-E><Up>
 
 " Move by words
 noremap <C-Left> b
@@ -168,6 +171,8 @@ nnoremap <silent> <S-Up> zc
 inoremap <silent> <S-Up> <C-O>zc
 noremap [a zc
 inoremap [a <C-O>zc
+noremap [1;5B zc
+inoremap [1;5B <C-O>zc
 nnoremap <silent> <F4> zi
 inoremap <silent> <F4> <C-O>zi
 nnoremap <silent> <F5> zm

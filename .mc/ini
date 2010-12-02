@@ -106,6 +106,8 @@ ftpfs_password=anonymous@
 display_codepage=UTF-8
 source_codepage=Other_8_bit
 
+find_ignore_dirs=
+
 [Colors]
 base_color=
 rxvt-256color=
@@ -116,6 +118,8 @@ gnome-256color=
 screen-256color-bce-s=
 
 xterm=
+
+konsole-256color=
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print

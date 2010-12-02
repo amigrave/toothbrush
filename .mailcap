@@ -1,0 +1,10 @@
+application/pdf; /usr/bin/evince '%s'; test=test "$DISPLAY" != ""; description=Portable Document Format; nametemplate=%s.pdf
+application/x-pdf; /usr/bin/evince '%s'; test=test "$DISPLAY" != ""; description=Portable Document Format; nametemplate=%s.pdf
+
+image/*; qiv %s; test=test -n "$DISPLAY"
+
+text/html; google-chrome '%s'; test=test -n "$DISPLAY"
+
+video/x-msvideo; smplayer '%s'; test=test -n "$DISPLAY"
+
+audio/*; mplayer '%s'

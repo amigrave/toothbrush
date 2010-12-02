@@ -18,6 +18,7 @@ alias qmv='qmv -f do'
 alias vir='clamscan -r *'
 alias py='ipython'
 alias by='bpython'
+alias pudb='python -m pudb.run'
 # check for virtualization instructions
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
 alias termkey='tput smkx; cat; tput rmkx'
@@ -36,13 +37,14 @@ alias phpdoc='links ~/local/docs/coding/lang_php/php_manual_en.html'
 
 alias pdf='evince'
 alias web='google-chrome'
+alias say='espeak'
 
 #alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=8 -dao -eject -overburn -v'
 alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
 
 alias x="extract"
 alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
-alias mpk="kid3-qt ."
+alias mpk="kid3 ."
 alias mpi="mp3info -x -F -r a"
 alias ss="ssh -o 'ProtocolKeepAlives 30' -C "
 alias lower='for i in *; do mv "$i" "$(echo $i | tr "[A-Z]" "[a-z]" )"; done'

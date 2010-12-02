@@ -36,6 +36,8 @@ elif [ "$TERM" == "screen" ]; then
     export TERM="screen-256color"
 elif [ "$TERM" == "screen-bce" ]; then
     export TERM="screen-256color-bce-s"
+elif [ $KONSOLE_DBUS_SESSION ]; then
+    export TERM="konsole-256color"
 fi
 
 if [ "$OSTYPE" == "cygwin" ]; then

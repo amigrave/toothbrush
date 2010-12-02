@@ -28,6 +28,7 @@ TERM screen-256color-bce-s
 TERM gnome-256color
 TERM xterm-256color
 TERM rxvt-256color
+TERM konsole-256color
 
 
 # ATTRIBUTE STRINGS:

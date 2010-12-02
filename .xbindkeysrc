@@ -40,8 +40,11 @@
    Mod2+Mod4 + Escape
 
 # Utils
-"urxvt"
+"/home/amigrave/bin/urxvt"
    Mod2+Mod4 + t
+
+"/home/amigrave/bin/scs"
+   Mod2+Mod4 + c:107
 
 # Music
 #"urxvt -geometry 150x80 -pe -tabbed -title mpc-pms -e pms"
