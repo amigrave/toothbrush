@@ -71,12 +71,6 @@ if has("autocmd")
 			\ if getline(1) =~ '^<DOCTYPE' | set filetype=html | endif |
 		\endif
 
-	fun! CallInterpreter()
-		if exists("b:interpreter")
-			exec ("!".b:interpreter." %")
-		endif
-	endfun
-
 	au BufRead *.txt,*.rst set expandtab tw=78
 	au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
 	au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
@@ -186,8 +180,8 @@ inoremap <S-Down> <Nop>
 nnoremap <silent> <F7> :TlistToggle<CR><C-w>h
 inoremap <silent> <F7> <C-O>:TlistToggle<CR><C-w>h
 
-nnoremap <silent> <F8> :w<CR>:call CallInterpreter()<CR>
-inoremap <silent> <F8> <C-O>:w<CR><C-O>:call CallInterpreter()<CR>
+" F8 & Shift-F8 mapped in pydebug addon
+
 
 " Quit
 nnoremap <silent> <F10> :bde<CR>
@@ -238,4 +232,51 @@ function! XmlQweb()
 	syn cluster xmlAttribHook contains=xmlAttribQWeb
 	hi link xmlAttribQWeb     xmlAttribQWeb
 endfunction
+" }}}
+" Python Debug {{{
+" Author: Nick Anderson <nick at anders0n.net>
+" Website: http://www.cmdln.org
+" Adapted from sonteks post on Vim as Python IDE
+" http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
+
+python << EOF
+import vim
+def SetBreakpoint():
+    import re
+    nLine = int( vim.eval( 'line(".")'))
+
+    strLine = vim.current.line
+    strWhite = re.search( '^(\s*)', strLine).group(1)
+
+    vim.current.buffer.append(
+       "%(space)sfrom ipdb import set_trace;set_trace() %(mark)s Breakpoint %(mark)s" %
+         {'space':strWhite, 'mark': '#' * 30}, nLine - 1)
+
+vim.command( 'map <f8> :py SetBreakpoint()<cr>')
+
+def RemoveBreakpoints():
+    import re
+
+    nCurrentLine = int( vim.eval( 'line(".")'))
+
+    nLines = []
+    nLine = 1
+    for strLine in vim.current.buffer:
+        if strLine.lstrip()[:38] == 'from ipdb import set_trace;set_trace()':
+            nLines.append( nLine)
+            print nLine
+        nLine += 1
+
+    nLines.reverse()
+
+    for nLine in nLines:
+        vim.command( 'normal %dG' % nLine)
+        vim.command( 'normal dd')
+        if nLine < nCurrentLine:
+            nCurrentLine -= 1
+
+    vim.command( 'normal %dG' % nCurrentLine)
+
+vim.command( 'map <s-f8> :py RemoveBreakpoints()<cr>')
+EOF
 " }}}

@@ -2,6 +2,8 @@
 alias ps1='PS1=\\$\ '
 alias ps1c='. ~/.bashrc'
 
+alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
+
 #alias vim='vim -X -p '
 alias vim='vim -p '
 alias u="cd .."
@@ -72,6 +74,7 @@ alias zsnes_gamepad="sudo ln -s /dev/input/js0 /dev/js0"
 alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]}" -3 "${files[3]}"'
 
 alias ubuntuwin="gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close"
+alias tsys="tail -f /var/log/dmesg /var/log/messages"
 
 alias qu="exit"
 

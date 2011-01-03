@@ -9,10 +9,10 @@ import curses
 sudo apt-get install acpi alien apg pwgen arj bcrypt build-essential cabextract checkinstall clamav curl ddrescue dlocate \
 git-core hdparm hexedit htop iotop irssi iselect less lha mc ncurses-term nmap openssh-server p7zip-full rar renameutils \
 rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-free unzip vim whois wmctrl xbindkeys zip \
-zoo extract autossh hexdiff tidy ctags apt-file aptitude
+zoo extract autossh hexdiff tidy ctags apt-file aptitude ack-grep
 
 [dev]
-sudo apt-get install colordiff mercurial subversion
+sudo apt-get install colordiff mercurial subversion kdiff3
 
 [dev-python]
 sudo apt-get install bpython ipython pyflakes python-doc python-pip python-setuptools python-setuptools python-simplejson \
@@ -46,7 +46,7 @@ sudo apt-get install docky compiz-fusion-plugins-extra compizconfig-settings-man
 sudo apt-get install libdvdcss mplayer mencoder transcode w32codecs
 
 [audio]
-sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer sidplay goattracker
+sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer sidplay goattracker mpg321
 
 [music]
 sudo apt-get install milkytracker audacity timidity fluid-soundfont-gm fluid-soundfont-gs

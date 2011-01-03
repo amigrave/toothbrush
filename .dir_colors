@@ -24,6 +24,7 @@ TERM vt100
 TERM rxvt
 TERM screen
 TERM screen-bce
+TERM screen-256color
 TERM screen-256color-bce-s
 TERM gnome-256color
 TERM xterm-256color

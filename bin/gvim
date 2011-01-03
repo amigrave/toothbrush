@@ -6,6 +6,6 @@ else
 	if [ "$1" = "" ]; then
 		$GVIM
 	else
-		$GVIM --remote-tab-silent "$*"; wmctrl -a GVIM
+		$GVIM --remote-tab-silent $*; wmctrl -a GVIM
 	fi
 fi

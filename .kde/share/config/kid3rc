@@ -17,7 +17,7 @@ CaseConversion=0
 FormatWhileEditing=true
 StrRepEnabled=true
 StrRepMapKeys=",*,.,/,:,?,Ä,Ö,Ü,ß,ä,é,ö,ü
-StrRepMapValues='',,,-,-,,Ae,Oe,Ue,ss,ae,e,oe,ue
+StrRepMapValues='',,,-,-,,Ae,Oe,Ue,ss,a,e,o,u
 
 [Filter]
 FilterExpressions=,not (%{filepath} contains "%{artist} - %{album}/%{track} %{title}"),%{tag1} equals "",%{tag2} equals "",%{tag2} equals "ID3v2.3.0",%{tag2} equals "ID3v2.4.0",not (%1{title} equals %2{title} and %1{album} equals %2{album} and %1{artist} equals %2{artist} and %1{comment} equals %2{comment} and %1{year} equals %2{year} and %1{track} equals %2{track} and %1{genre} equals %2{genre}),%1{title} equals %2{title} and %1{album} equals %2{album} and %1{artist} equals %2{artist} and %1{comment} equals %2{comment} and %1{year} equals %2{year} and %1{track} equals %2{track} and %1{genre} equals %2{genre},%{picture} equals "",
@@ -102,9 +102,12 @@ StrRepMapKeys=
 StrRepMapValues=
 
 [MainWindow]
+Height 1080=1081
 Height 1200=1201
+Height 768=769
 State=AAAA/wAAAAD9AAAAAAAABVUAAAJ8AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
 ToolBarsMovable=Disabled
+Width 1366=1367
 Width 1920=1921
 
 [MenuCommands]
@@ -115,6 +118,7 @@ Command4=Amazon,%{browser} http://www.amazon.com/s?search-alias=aps&field-keywor
 Command5=LyricWiki,%{browser} http://lyricwiki.org/%u{artist}:%u{title},0
 Command6=LeosLyrics,%{browser} http://www.leoslyrics.com/search.php?search=%u{artist}%20%u{title}&sartist=1&ssongtitle=1,0
 Command7=Lyrc,%{browser} http://lyrc.com.ar/en/tema1en.php?artist=%u{artist}&songname=%u{title},0
+Command8=Wikipedia,%{browser} http://en.wikipedia.org/wiki/%u{album},0
 
 [MusicBrainz]
 AdditionalTags=true
