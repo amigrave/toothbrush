@@ -65,5 +65,14 @@ if [ "$HOSTNAME" == "agr" ]; then
 fi
 PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]\w\[\033[0m\] [\[\033[35m\]\t\[\033[0m\]]\[\033[31m\]\$\[\033[0m\] '
 
+# Use this in order to get colors in man pages without termcap file
+# export LESS_TERMCAP_mb=$'\E[01;31m'
+# export LESS_TERMCAP_md=$'\E[01;31m'
+# export LESS_TERMCAP_me=$'\E[0m'
+# export LESS_TERMCAP_se=$'\E[0m'
+# export LESS_TERMCAP_so=$'\E[01;44;33m'
+# export LESS_TERMCAP_ue=$'\E[0m'
+# export LESS_TERMCAP_us=$'\E[01;32m'
+
 [ -f ~/.dir_colors ] && eval `dircolors -b ~/.dir_colors `
 

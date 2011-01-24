@@ -3,6 +3,8 @@
 # Likewise, for charset
 setenv LC_CTYPE en_US.UTF-8
 
+defscrollback 5000
+
 #shell bash  # causes problems with mc
 
 attrcolor b ".I"
