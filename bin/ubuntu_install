@@ -7,7 +7,7 @@ import curses
 # vim: set ft=dosini: set nonu
 [core]
 sudo apt-get install acpi alien apg pwgen arj bcrypt build-essential cabextract checkinstall clamav curl ddrescue dlocate \
-git-core hdparm hexedit htop iotop irssi iselect less lha mc ncurses-term nmap openssh-server p7zip-full rar renameutils \
+git-core gitk hdparm hexedit htop iotop irssi iselect less lha mc ncurses-term nmap openssh-server p7zip-full rar renameutils \
 rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-free unzip vim whois wmctrl xbindkeys zip \
 zoo extract autossh hexdiff tidy ctags apt-file aptitude ack-grep
 
@@ -54,7 +54,7 @@ sudo apt-get install milkytracker audacity timidity fluid-soundfont-gm fluid-sou
 [desktop-ubuntu]
 sudo apt-get install kid3-qt exaile pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer qiv \
 oxygen-cursor-theme oxygen-icon-theme timer-applet scrot kismet vim-gnome gparted gcolor2 ubuntu-restricted-extras shutter \
-nautilus-open-terminal
+tucan
 
 [apps-kde]
 sudo apt-get install konsole krusader kid3 konqueror rekonq systemsettings
@@ -197,7 +197,8 @@ i.install_console_font()
 #curses.endwin()
 
 
-In gconf-editor the key /apps/gnome-power-mananager/lock/blank_screen controls whether to lock the screen when it is blanked or not. In my case it was checked, so I unchecked. Now it works exactly how I like
+In gconf-editor the key /apps/gnome-power-mananager/lock/blank_screen controls whether to lock the screen when it is blanked or not.
+In my case it was checked, so I unchecked. Now it works exactly how I like
 
 """
 
@@ -224,3 +225,8 @@ root = "/apps/metacity/window_keybindings"
 c = Client()
 for key in bindings.keys():
     c.set_value("%s/%s" % (root, key), bindings[key])
+
+# Install vbox
+# if driver fails :
+# /var/lib/dkms/vboxhost/4.0.2/build
+# make all; make install

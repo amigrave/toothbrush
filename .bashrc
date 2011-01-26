@@ -39,7 +39,7 @@ if [ "$OSTYPE" == "cygwin" ]; then
     termsetcolors
 fi
 
-export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R"
+export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -E"
 export LS_OPTIONS='--color=auto'
 export VISUAL=vim
 export EDITOR=vim

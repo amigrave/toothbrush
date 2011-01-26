@@ -25,6 +25,7 @@ alias pudb='python -m pudb.run'
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
 alias termkey='tput smkx; cat; tput rmkx'
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
+alias webserve='python -m SimpleHTTPServer'
 
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
 alias s='screen -RdU'
@@ -32,6 +33,7 @@ alias s='screen -RdU'
 alias memo="e ~/local/docs/memos/memo.txt"
 alias memotel="e ~/local/docs/memos/memotel.txt"
 alias memomusic="e ~/local/docs/memos/memomusic.txt"
+alias ack="ack-grep --pager=less"
 
 # Docs
 alias pydoc='links /usr/share/doc/python2.6-doc/html/index.html'
