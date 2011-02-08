@@ -12,7 +12,7 @@ rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-
 zoo extract autossh hexdiff tidy ctags apt-file aptitude ack-grep
 
 [dev]
-sudo apt-get install colordiff mercurial subversion kdiff3
+sudo apt-get install colordiff mercurial subversion kdiff3 gitk
 
 [dev-python]
 sudo apt-get install bpython ipython pyflakes python-doc python-pip python-setuptools python-setuptools python-simplejson \

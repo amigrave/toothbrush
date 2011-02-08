@@ -1,2 +1,2 @@
 #!/bin/bash
-rsync -av --progress --delete --exclude /dev --exclude /sys --exclude /proc  --exclude /media / /media/AGRMOBILE/
+sudo rsync -av --progress --delete --exclude /dev --exclude /sys --exclude /proc  --exclude /media / /media/AGRMOBILE/

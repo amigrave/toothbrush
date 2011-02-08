@@ -137,6 +137,9 @@ inoremap Oc <C-O>w
 
 " Editing
 vmap <C-R> "_dP
+vmap <C-Insert> "_d"+P
+imap <C-Insert> <C-O>"+gP
+vmap <Backspace> "_d
 
 " Tab navigation like firefox
 nmap <C-S-tab> :tabprevious<CR>
