@@ -20,10 +20,14 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
-PADD=~/bin:~/local/bin/:/usr/local/sbin:/usr/sbin:/sbin
+PADD=~/bin:~/local/bin/:~/local/npm/bin:/usr/local/sbin:/usr/sbin:/sbin
 echo "$PATH" | grep "$PADD" > /dev/null || PATH="$PADD:$PATH"
 unset PADD
 export PATH
+
+export NODE_PATH=$HOME/local/npm/root
+MANPATH=`manpath`
+export MANPATH=~/local/npm/man:$MANPATH
 
 if [ "$COLORTERM" == "gnome-terminal" ]; then
     export TERM="gnome-256color"
@@ -50,6 +54,7 @@ export GREP_OPTIONS='--color=always'
 # SDL Fullscreen second monitor
 # export SDL_VIDEO_FULLSCREEN_HEAD=1
 # export SDL_AUDIODRIVER=alsa
+
 
 LANG=en_US.UTF-8
 LC_COLLATE=C

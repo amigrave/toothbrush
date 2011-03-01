@@ -12,7 +12,7 @@ rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-
 zoo extract autossh hexdiff tidy ctags apt-file aptitude ack-grep
 
 [dev]
-sudo apt-get install colordiff mercurial subversion kdiff3 gitk
+sudo apt-get install colordiff mercurial subversion gitk
 
 [dev-python]
 sudo apt-get install bpython ipython pyflakes python-doc python-pip python-setuptools python-setuptools python-simplejson \
@@ -34,7 +34,7 @@ sudo apt-get install apache2.2-bin libapache2-mod-dnssd gmysqlcc
 
 [openerp]
 sudo apt-get install postgresql python-keyring-gnome fabric rst2pdf python-wordaxe bzr bzr-gtk qbzr python-mako python-cherrypy3 \
-python-formencode python-pybabel postgresql-client-common
+python-formencode python-pybabel postgresql-client-common imapfilter
 
 [gfx]
 sudo apt-get install gimp blender inkscape optipng
@@ -46,21 +46,18 @@ sudo apt-get install docky compiz-fusion-plugins-extra compizconfig-settings-man
 sudo apt-get install libdvdcss mplayer mencoder transcode w32codecs
 
 [audio]
-sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer sidplay goattracker mpg321
-
-[music]
-sudo apt-get install milkytracker audacity timidity fluid-soundfont-gm fluid-soundfont-gs
+sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer sidplay goattracker mpg321 milkytracker audacity \
+timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc
 
 [desktop-ubuntu]
-sudo apt-get install kid3-qt exaile pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer qiv \
-oxygen-cursor-theme oxygen-icon-theme timer-applet scrot kismet vim-gnome gparted gcolor2 ubuntu-restricted-extras shutter \
-tucan
+sudo apt-get install pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer thunderbird \
+oxygen-cursor-theme oxygen-icon-theme timer-applet scrot kismet vim-gnome gparted gcolor2 ubuntu-restricted-extras
 
 [apps-kde]
 sudo apt-get install konsole krusader kid3 konqueror rekonq systemsettings
 
 [emu]
-sudo apt-get install dosbox e-uae hatari scummvm sdlmame vice visualboyadvance-gtk wine xdms zsnes
+sudo apt-get install dosbox e-uae hatari scummvm sdlmame vice visualboyadvance-gtk wine xdms zsnes libqt4-opengl dkms
 
 [no-apt]
 install googlecl and google chat/video :

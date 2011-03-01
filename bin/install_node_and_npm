@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# export NODE_PATH=$HOME/local/npm/root
+# MANPATH=`manpath`
+# export MANPATH=~/local/npm/man:$MANPATH
+
+if [ ! -f ~/.npmrc ]; then
+    echo root=$HOME/local/npm/root >> ~/.npmrc
+    echo binroot=$HOME/local/npm/bin >> ~/.npmrc
+    echo manroot=$HOME/local/npm/man >> ~/.npmrc
+fi
+mkdir -p $HOME/local/npm/root
+mkdir -p $HOME/local/npm/bin
+mkdir -p $HOME/local/npm/man
+
+if [ -e ~/local/npm/bin/npm ]; then
+    npm update npm
+else
+    mkdir -p /tmp/npm-install
+    cd /tmp/npm-install
+    git clone http://github.com/isaacs/npm.git
+    cd npm
+    make dev
+fi
