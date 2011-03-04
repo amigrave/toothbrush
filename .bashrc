@@ -26,8 +26,10 @@ unset PADD
 export PATH
 
 export NODE_PATH=$HOME/local/npm/root
-MANPATH=`manpath`
-export MANPATH=~/local/npm/man:$MANPATH
+if [ "$MANPATH" != "" ]; then
+    MANPATH=`manpath`
+    export MANPATH=~/local/npm/man:$MANPATH
+fi
 
 if [ "$COLORTERM" == "gnome-terminal" ]; then
     export TERM="gnome-256color"
@@ -43,7 +45,7 @@ if [ "$OSTYPE" == "cygwin" ]; then
     termsetcolors
 fi
 
-export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -E"
+export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
 export LS_OPTIONS='--color=auto'
 export VISUAL=vim
 export EDITOR=vim

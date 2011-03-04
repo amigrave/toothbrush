@@ -1,0 +1,18 @@
+#!/bin/bash
+
+case "$1" in
+    start)
+        mkdir -p ~/sshfs
+        # afuse -o mount_template="sshfs -o reconnect,transform_symlinks,allow_other,nonempty,ssh_command=/usr/bin/autossh %r:/ %m" -o unmount_template="fusermount -u -z %m" ~/sshfs/
+        afuse -o mount_template="sshfs -o reconnect %r:/ %m" -o unmount_template="fusermount -u -z %m" ~/sshfs/
+    ;;
+    stop)
+        fusermount -u -z ~/sshfs/
+    ;;
+    *)
+        echo "Usage: $0 {start|stop}" >&2
+    exit 1
+    ;;
+esac
+
+exit 0

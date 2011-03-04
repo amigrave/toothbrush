@@ -47,11 +47,11 @@ sudo apt-get install libdvdcss mplayer mencoder transcode w32codecs
 
 [audio]
 sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer sidplay goattracker mpg321 milkytracker audacity \
-timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc
+timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc kid3-qt
 
 [desktop-ubuntu]
 sudo apt-get install pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer thunderbird \
-oxygen-cursor-theme oxygen-icon-theme timer-applet scrot kismet vim-gnome gparted gcolor2 ubuntu-restricted-extras
+oxygen-cursor-theme oxygen-icon-theme timer-applet scrot kismet vim-gnome gparted gcolor2 ubuntu-restricted-extras comix
 
 [apps-kde]
 sudo apt-get install konsole krusader kid3 konqueror rekonq systemsettings

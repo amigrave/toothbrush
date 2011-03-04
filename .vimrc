@@ -77,16 +77,18 @@ if has("autocmd")
 	au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 	au BufRead,BufNewFile *.aspx set syntax=cs
 	au BufRead,BufNewFile *.mako set ft=html
-"	"au BufRead,BufNewFile *.asp set ft=javascript
-	au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.asp syn region myFold start="{" end="}" transparent fold
-							\ | syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
-"	au BufRead,BufNewFile *.js,*.asp syn clear javaScriptBraces
-"	au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
+	au BufRead,BufNewFile *.asp set ft=javascript
+
+    au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
+        \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
+    au BufRead,BufNewFile *.js,*.asp syn clear javaScriptBraces
+
+    " au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
 
 	au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
 	au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
 
-"	au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+    " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
 	if has("unix")
 		au BufNewFile *.py set autoread | s,^,#!/usr/bin/python, | w | !chmod +x %
@@ -234,6 +236,8 @@ function! XmlQweb()
 
 	syn cluster xmlAttribHook contains=xmlAttribQWeb
 	hi link xmlAttribQWeb     xmlAttribQWeb
+    hi xmlAttribQWeb guifg=#f0a040 ctermfg=DarkMagenta
+    hi xmlAttribQWebTrad guifg=#ffffff ctermfg=white
 endfunction
 " }}}
 " Python Debug {{{
