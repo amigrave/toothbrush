@@ -1,2 +1,11 @@
 #!/bin/bash
+
+sudo rsync -avn --progress --delete --exclude /dev --exclude /sys --exclude /proc  --exclude /media / /media/AGRMOBILE/ | less
+
+echo    "---------------------"
+read -p "Confirm rsync ? (y/n)"
+if [ "$REPLY" != "y" ]; then
+    exit
+fi
+
 sudo rsync -av --progress --delete --exclude /dev --exclude /sys --exclude /proc  --exclude /media / /media/AGRMOBILE/

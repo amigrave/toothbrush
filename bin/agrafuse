@@ -1,13 +1,18 @@
 #!/bin/bash
 
+SSHFSDIR="~/sshfs"
+if [ -d "/media/sshfs" ]; then
+    SSHFSDIR="/media/sshfs"
+fi
+
 case "$1" in
     start)
-        mkdir -p ~/sshfs
+        mkdir -p $SSHFSDIR
         # afuse -o mount_template="sshfs -o reconnect,transform_symlinks,allow_other,nonempty,ssh_command=/usr/bin/autossh %r:/ %m" -o unmount_template="fusermount -u -z %m" ~/sshfs/
-        afuse -o mount_template="sshfs -o reconnect %r:/ %m" -o unmount_template="fusermount -u -z %m" ~/sshfs/
+        afuse -o mount_template="sshfs -o reconnect %r:/ %m" -o unmount_template="fusermount -u -z %m" $SSHFSDIR
     ;;
     stop)
-        fusermount -u -z ~/sshfs/
+        fusermount -u -z $SSHFSDIR
     ;;
     *)
         echo "Usage: $0 {start|stop}" >&2

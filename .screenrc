@@ -24,7 +24,7 @@ startup_message off
 bindkey ^[[d prev
 bindkey ^[[c next
 bindkey ^[[b screen
-bindkey ^[[a title
+ #bindkey ^[[a title
 
 # for mintty
 bindkey [1;2D prev

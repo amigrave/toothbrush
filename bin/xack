@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+
+from os.path import join
+from optparse import OptionParser
+from lxml import etree, html
+import logging
+
+import os
+import sys
+
+parser = OptionParser()
+parser.add_option('--html', action='store_const', dest='opener',
+                  default=etree.parse, const=html.parse,
+                  help='Open files as HTML (fuzzy), not XML (strict)')
+parser.add_option('--nocolor', action='store_true', dest='nocolor',
+                  default='false', help="Don't colorize output")
+parser.add_option('-v', action='store_const', dest='loglevel',
+                  default=logging.INFO, const=logging.DEBUG,
+                  help="Display more logging")
+
+def print_string_node(node):
+    if hasattr(node, 'getparent'):
+        print "%s:%s"%(getattr(node.getparent(), 'sourceline', None),
+                       node.strip())
+    else:
+        print node
+
+def ack(xpath, opener=etree.parse, color=True, directory='.'):
+    find_nodes = etree.XPath(
+        xpath, smart_strings=True,
+        namespaces={'rng':'http://relaxng.org/ns/structure/1.0'})
+    for root, _, files in os.walk(directory):
+        for f in files:
+            path = join(root, f)
+            try:
+                nodes = find_nodes(opener(path))
+                if not nodes: continue
+                if color:
+                    print '\033[0;32m%s\033[0m'%path
+                else:
+                    print path
+                if isinstance(nodes, basestring):
+                    print_string_node(nodes)
+                else:
+                    for node in nodes:
+                        if isinstance(node, basestring):
+                            print_string_node(node)
+                        else:
+                            print "%s:%s"%(node.sourceline,
+                                       etree.tostring(node).strip())
+            except etree.XMLSyntaxError:
+                logging.debug('%s is not an XML file', path)
+
+def main():
+    options, args = parser.parse_args()
+
+    if not args:
+        parser.print_help()
+        sys.exit(0)
+    logging.basicConfig(level=options.loglevel)
+    ack(*args, opener=options.opener, color=not options.nocolor)
+
+if __name__ == '__main__':
+    main()

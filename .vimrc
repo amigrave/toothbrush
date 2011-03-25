@@ -81,7 +81,7 @@ if has("autocmd")
 
     au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
         \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
-    au BufRead,BufNewFile *.js,*.asp syn clear javaScriptBraces
+    au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
 
     " au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
 

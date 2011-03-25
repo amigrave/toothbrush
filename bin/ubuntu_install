@@ -7,7 +7,7 @@ import curses
 # vim: set ft=dosini: set nonu
 [core]
 sudo apt-get install acpi alien apg pwgen arj bcrypt build-essential cabextract checkinstall clamav curl ddrescue dlocate \
-git-core gitk hdparm hexedit htop iotop irssi iselect less lha mc ncurses-term nmap openssh-server p7zip-full rar renameutils \
+git-core gitk hdparm hexedit htop iotop iptraf irssi iselect less lha mc ncurses-term nmap openssh-server p7zip-full rar renameutils \
 rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-free unzip vim whois wmctrl xbindkeys zip \
 zoo extract autossh hexdiff tidy ctags apt-file aptitude ack-grep
 
@@ -27,7 +27,7 @@ sudo apt-get install libgnutls-dev libssl-dev libevent-dev libpq-dev
 
 [dev-emu]
 sudo apt-get install automake autoconf libgtk2.0-dev libsdl1.2-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev \
-libsdl-net1.2-dev libsdl-sound1.2-dev libsdl-ttf2.0-dev libgconf2-dev
+libsdl-net1.2-dev libsdl-sound1.2-dev libsdl-ttf2.0-dev libgconf2-dev libao-dev
 
 [dev-web]
 sudo apt-get install apache2.2-bin libapache2-mod-dnssd gmysqlcc
@@ -227,3 +227,4 @@ for key in bindings.keys():
 # if driver fails :
 # /var/lib/dkms/vboxhost/4.0.2/build
 # make all; make install
+# sudo apt-get install linux-headers-generic
