@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo rsync -avn --progress --delete --exclude /dev --exclude /sys --exclude /proc  --exclude /media / /media/AGRMOBILE/ | less
+sudo rsync -avn --progress --delete --exclude /dev --exclude /sys --exclude /proc  --exclude /media / /media/AGRMOBILE/
 
 echo    "---------------------"
 read -p "Confirm rsync ? (y/n)"
