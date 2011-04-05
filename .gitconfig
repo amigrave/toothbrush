@@ -5,3 +5,6 @@
 	diff = true
 	status = false
 	branch = auto
+[alias]
+	co = checkout
+	st = status

@@ -15,3 +15,4 @@ dpkg-buildpackage -us -uc -rfakeroot
 cd ..
 sudo dpkg -i rxvt-unicode_*.deb
 sudo aptitude markauto $(apt-cache showsrc rxvt-unicode | grep Build-Depends: | sed -e 's/Build-Depends:\|,\|([^)]*)//g')
+echo "echo rxvt-unicode hold | dpkg --set-selections" | sudo sh
