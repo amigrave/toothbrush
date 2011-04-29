@@ -33,7 +33,7 @@ libsdl-net1.2-dev libsdl-sound1.2-dev libsdl-ttf2.0-dev libgconf2-dev libao-dev
 sudo apt-get install apache2.2-bin libapache2-mod-dnssd gmysqlcc
 
 [openerp]
-sudo apt-get install postgresql python-keyring-gnome fabric rst2pdf python-wordaxe bzr bzr-gtk qbzr python-mako python-cherrypy3 \
+sudo apt-get install postgresql python-keyring-gnome fabric rst2pdf python-wordaxe bzr bzr-gtk bzr-rewrite qbzr python-mako python-cherrypy3 \
 python-formencode python-pybabel postgresql-client-common imapfilter
 
 [gfx]

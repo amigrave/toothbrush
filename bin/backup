@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo rsync -avn --progress --delete --exclude /dev --exclude /sys --exclude /proc  --exclude /media / /media/AGRMOBILE/
+sudo rsync -avn --progress --delete --exclude /dev --exclude /sys --exclude /proc  --exclude /media / /media/AGRMOBILE/ | tee /tmp/backup.log
 
 echo    "---------------------"
 read -p "Confirm rsync ? (y/n)"
