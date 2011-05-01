@@ -30,6 +30,12 @@
 "wmctrl -r :ACTIVE: -b toggle,maximized_vert,maximized_horz"
    Mod2+Mod4 + Up
 
+"wmctrl -r :ACTIVE: -b remove,maximized_horz ; wmctrl -r :ACTIVE: -e 0,0,0,800,900"
+   Mod2+Mod4 + Left
+
+"wmctrl -r :ACTIVE: -b remove,maximized_horz ; wmctrl -r :ACTIVE: -e 0,800,0,800,900"
+   Mod2+Mod4 + Right
+
 "wmctrl -r :ACTIVE: -b toggle,fullscreen"
    Mod2+Mod4 + F11
 
@@ -39,9 +45,19 @@
 "wmctrl -c :ACTIVE:"
    Mod2+Mod4 + Escape
 
-# Utils
-"/home/amigrave/bin/urxvt"
+# Window Shorcuts
+"wmctrl -a GVIM"
+   Mod2+Mod4 + g
+
+"wmctrl -a 'Mozilla Firefox' || firefox"
+   Mod2+Mod4 + f
+
+"wmctrl -a 'urxvt' || wmctrl -a 'amigrave@agr' || /home/amigrave/bin/urxvt"
    Mod2+Mod4 + t
+
+# Utils
+#"/home/amigrave/bin/urxvt"
+#   Mod2+Mod4 + t
 
 "gcalctool"
    Mod2+Mod4 + c

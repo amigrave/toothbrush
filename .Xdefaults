@@ -88,8 +88,8 @@ URxvt.saveLines: 2000
 URxvt.scrollBar_right: true
 URxvt.scrollColor: #99AA99
 URxvt*scrollstyle:rxvt
-URxvt.cursorBlink:	true
-!URxvt.title:	false
+URxvt.cursorBlink: true
+URxvt.title: urxvt
 
 *Paned.Text.translations:	#override\n\
  Shift<Btn4Down>,<Btn4Up>: scroll-one-line-down()\n\
