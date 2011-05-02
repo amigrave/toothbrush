@@ -46,13 +46,16 @@
    Mod2+Mod4 + Escape
 
 # Window Shorcuts
-"wmctrl -a GVIM"
-   Mod2+Mod4 + g
+"wmctrl -a GVIM || gvim"
+   Mod2+Mod4 + e
 
-"wmctrl -a 'Mozilla Firefox' || firefox"
+"wmctrl -a 'Mozilla Firefox' || firefox -P firefox-4"
    Mod2+Mod4 + f
 
-"wmctrl -a 'urxvt' || wmctrl -a 'amigrave@agr' || /home/amigrave/bin/urxvt"
+"wmctrl -a '- Google Chrome' || google-chrome"
+   Mod2+Mod4 + z
+
+"wmctrl -a 'urxvt' || wmctrl -a 'amigrave@agr' || wmctrl -a '- VIM' || /home/amigrave/bin/urxvt"
    Mod2+Mod4 + t
 
 # Utils
