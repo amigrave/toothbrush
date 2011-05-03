@@ -36,21 +36,25 @@ sudo apt-get install apache2.2-bin libapache2-mod-dnssd gmysqlcc
 sudo apt-get install postgresql python-keyring-gnome fabric rst2pdf python-wordaxe bzr bzr-gtk bzr-rewrite qbzr python-mako python-cherrypy3 \
 python-formencode python-pybabel postgresql-client-common imapfilter
 
+[openerp-debian]
+sudo apt-get install blt graphviz libblas3gf libcdt4 libcgraph5 libgfortran3 libgraph4 libgvc5 libgvpr1 liblapack3gf libpathplan4 python-dateutil python-libxslt1 \
+python-matplotlib python-matplotlib-data python-numpy python-pychart python-pydot python-pyparsing python-tk python-tz tcl8.5 tk8.5 ttf-lyx
+
 [gfx]
 sudo apt-get install gimp blender inkscape optipng
 
 [compiz]
-sudo apt-get install docky compiz-fusion-plugins-extra compizconfig-settings-manager
+sudo apt-get install compiz-fusion-plugins-extra compizconfig-settings-manager
 
 [video]
-sudo apt-get install libdvdcss mplayer mencoder transcode w32codecs
+sudo apt-get install libdvdcss2 mplayer mencoder transcode non-free-codecs w64codecs
 
 [audio]
 sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer sidplay goattracker mpg321 milkytracker audacity \
 timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc kid3-qt
 
 [desktop-ubuntu]
-sudo apt-get install pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer thunderbird \
+sudo apt-get install pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer \
 oxygen-cursor-theme oxygen-icon-theme timer-applet scrot kismet vim-gnome gparted gcolor2 ubuntu-restricted-extras comix
 
 [apps-kde]
@@ -71,58 +75,53 @@ http://www.google.com/chat/video
 # copy .usr.lib.urxvt.perl.tabbed
 #
 # nautilus-script-manager enable ConvertAudioFile
-"""
 
-"""
+
 # Add SSH:// protocol
 gconftool-2 -s /desktop/gnome/url-handlers/ssh/command '/home/amigrave/bin/url-ssh %s' --type String
 gconftool-2 -s /desktop/gnome/url-handlers/ssh/enabled --type Boolean true
-
-
-
-
+"""
 
 
 class Install():
-	def install_console_font(self):
-		reboot = halse
-		if os.path.isfile('/etc/fonts/conf.d/70-no-bitmaps.conf'):
-			print('Enabling bitmap fonts')
-			os.unlink('/etc/fonts/conf.d/70-no-bitmaps.conf')
-			os.symlink('/etc/fonts/conf.avail/70-yes-bitmaps.conf', '/etc/fonts/conf.d/70-yes-bitmaps.conf')
-		if not os.path.isfile('/usr/share/fonts/X11/misc/console8x16.pcf.gz'):
-			pass
-			#/usr/share/fonts/X11/misc/fonts.dir
+    def install_console_font(self):
+        reboot = halse
+        if os.path.isfile('/etc/fonts/conf.d/70-no-bitmaps.conf'):
+            print('Enabling bitmap fonts')
+            os.unlink('/etc/fonts/conf.d/70-no-bitmaps.conf')
+            os.symlink('/etc/fonts/conf.avail/70-yes-bitmaps.conf', '/etc/fonts/conf.d/70-yes-bitmaps.conf')
+        if not os.path.isfile('/usr/share/fonts/X11/misc/console8x16.pcf.gz'):
+            pass
+            #/usr/share/fonts/X11/misc/fonts.dir
+            #FONT = "/hom
+            # console8x16.pcf.gz -misc-console-medium-r-normal--16-160-72-72-c-80-iso10646-1
+            # fc-cache -fv
 
-	#FONT = "/hom
-	# console8x16.pcf.gz -misc-console-medium-r-normal--16-160-72-72-c-80-iso10646-1
-	# fc-cache -fv
+    def set_monday_as_first_day(self):
+        locale = commands.getoutput("locale | grep LC_TIME").strip().split("=")[1][1:-1].split(".")[0]
+        file = "/usr/share/i18n/locales/%s" % locale
+        f = open(file, "r+")
+        c = f.read()
+        r = c.replace("first_weekday\t1", "first_weekday\t2")
+        if c != r:
+            f.seek(0)
+            f.write(r)
+            print("Regenerating locales")
+            commands.getoutput("locale-gen")
+            print("Restarting gnome panel")
+            commands.getoutput("killall gnome-panel")
+        f.close()
 
-	def set_monday_as_first_day(self):
-		locale = commands.getoutput("locale | grep LC_TIME").strip().split("=")[1][1:-1].split(".")[0]
-		file = "/usr/share/i18n/locales/%s" % locale
-		f = open(file, "r+")
-		c = f.read()
-		r = c.replace("first_weekday\t1", "first_weekday\t2")
-		if c != r:
-			f.seek(0)
-			f.write(r)
-			print("Regenerating locales")
-			commands.getoutput("locale-gen")
-			print("Restarting gnome panel")
-			commands.getoutput("killall gnome-panel")
-		f.close()
+    def set_custom_date_format(self):
+        commands.getoutput("gconftool-2 --set /apps/panel/applets/clock_screen0/prefs/custom_format --type string 'Week#%V - %a %d %b, %H:%M'")
+        commands.getoutput("gconftool-2 --set /apps/panel/applets/clock_screen0/prefs/format --type string 'custom'")
 
-	def set_custom_date_format(self):
-		commands.getoutput("gconftool-2 --set /apps/panel/applets/clock_screen0/prefs/custom_format --type string 'Week#%V - %a %d %b, %H:%M'")
-		commands.getoutput("gconftool-2 --set /apps/panel/applets/clock_screen0/prefs/format --type string 'custom'")
-
-	def set_window_buttons_to_left():
-		commands.getoutput("gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close")
+    def set_window_buttons_to_left():
+        commands.getoutput("gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close")
 
 i = Install()
 #i.set_monday_as_first_day()
-i.install_console_font()
+#i.install_console_font()
 
 #parser = OptionParser()
 #parser.add_option("-f", "--file", dest="filename",
@@ -194,11 +193,10 @@ i.install_console_font()
 #curses.endwin()
 
 
-In gconf-editor the key /apps/gnome-power-mananager/lock/blank_screen controls whether to lock the screen when it is blanked or not.
-In my case it was checked, so I unchecked. Now it works exactly how I like
+#In gconf-editor the key /apps/gnome-power-mananager/lock/blank_screen controls whether to lock the screen when it is blanked or not.
+#In my case it was checked, so I unchecked. Now it works exactly how I like
 
 """
-
 
 #!/usr/bin/python
 from gconf import Client
@@ -232,3 +230,5 @@ for key in bindings.keys():
 
 # sudo apt-get remove overlay-scrollbar liboverlay-scrollbar-0.1-0
 # sudo add-apt-repository ppa:ubuntu-wine/ppa
+
+"""

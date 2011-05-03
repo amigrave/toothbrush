@@ -78,6 +78,8 @@ if has("autocmd")
 	au BufRead,BufNewFile *.aspx set syntax=cs
 	au BufRead,BufNewFile *.mako set ft=html
 	au BufRead,BufNewFile *.asp set ft=javascript
+	au BufRead,BufNewFile *.coffee set fdm=indent
+	au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
 
     au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
         \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
@@ -103,6 +105,7 @@ if has("autocmd")
 	let php_asp_tags = 1
 	let g:xml_syntax_folding=1
 	let python_highlight_numbers = 1
+	let coffee_folding = 1
 
 endif
 "}}}

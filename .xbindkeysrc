@@ -49,14 +49,23 @@
 "wmctrl -a GVIM || gvim"
    Mod2+Mod4 + e
 
+"wmctrl -a MPlayer"
+   Mod2+Mod4 + v
+
 "wmctrl -a 'Mozilla Firefox' || firefox -P firefox-4"
    Mod2+Mod4 + f
 
 "wmctrl -a '- Google Chrome' || google-chrome"
    Mod2+Mod4 + z
 
+"wmctrl -a 'Developer Tools -'"
+   Mod2+Mod4 + x
+
 "wmctrl -a 'urxvt' || wmctrl -a 'amigrave@agr' || wmctrl -a '- VIM' || /home/amigrave/bin/urxvt"
    Mod2+Mod4 + t
+
+"wmctrl -a 'Exaile' || exaile"
+   Mod2+Mod4 + m
 
 # Utils
 #"/home/amigrave/bin/urxvt"
