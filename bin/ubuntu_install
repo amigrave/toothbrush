@@ -116,6 +116,11 @@ class Install():
         commands.getoutput("gconftool-2 --set /apps/panel/applets/clock_screen0/prefs/custom_format --type string 'Week#%V - %a %d %b, %H:%M'")
         commands.getoutput("gconftool-2 --set /apps/panel/applets/clock_screen0/prefs/format --type string 'custom'")
 
+    def remove_indicator(self):
+        # http://lifehacker.com/#!5703681/remove-unwanted-entries-from-ubuntus-messaging-menu 
+        commands.getoutput("sudo apt-get remove indicator-messages")
+        commands.getoutput("killall gnome-panel")
+
     def set_window_buttons_to_left():
         commands.getoutput("gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close")
 

@@ -61,7 +61,7 @@
 "wmctrl -a 'Developer Tools -'"
    Mod2+Mod4 + x
 
-"wmctrl -a 'urxvt' || wmctrl -a 'amigrave@agr' || wmctrl -a '- VIM' || /home/amigrave/bin/urxvt"
+"wmctrl -a 'urxvt' || wmctrl -a 'mc [' || wmctrl -a 'screen ' || wmctrl -a '- VIM' || /home/amigrave/bin/urxvt"
    Mod2+Mod4 + t
 
 "wmctrl -a 'Exaile' || exaile"
