@@ -1,10 +1,7 @@
 *customization: -color
-XTerm*termName:  xterm-256color
 URxvt.termName:  rxvt-256color
 
 URxvt*geometry:160x40
-!URxvt*transparent:true
-!URxvt*shading:15
 
 ! to match gnome-terminal "Linux console" scheme
 ! foreground/background
@@ -67,12 +64,13 @@ URxvt.color15 : #EEEEEC
 URxvt.background: black
 URxvt.foreground: #cccccc
 
+URxvt*xftAntialias: true
+URxvt*font: xft:Monospace:pixelsize=12:antialias=false
+URxvt*boldFont: xft:Monospace:bold:pixelsize=12:antialias=false
+!URxvt*letterSpace: -1
 !URxvt.font: -misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
 !xterm*font:-bitstream-terminal-bold-r-*-*-*-140-100-100-*-*-iso8859-1
 !URxvt*font: -*-terminus-*-*-*-*-14-*-*-*-*-*-*-*
-URxvt*font: xft:Monospace:pixelsize=12
-URxvt*boldFont: xft:Monospace:bold:pixelsize=12
-URxvt*letterSpace: -1
 
 URxvt.perl-ext: default,matcher,tabbedex,-searchable-scrollback,-readline
 URxvt.urlLauncher: google-chrome
@@ -84,7 +82,7 @@ URxvt.tabbed.tab-fg: 15
 URxvt.tabbed.tab-bg: 2
 URxvt.tabbed.autohide: true
 
-URxvt.saveLines: 2000
+!URxvt.saveLines: 2000
 URxvt.scrollBar_right: true
 URxvt.scrollColor: #99AA99
 URxvt*scrollstyle:rxvt
