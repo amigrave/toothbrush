@@ -32,6 +32,7 @@ set showmode            " If in Insert, Replace or Visual mode put a message on 
 set viminfo='200,\"5000 nowrap
 "set list listchars=tab:~.,trail:.,extends:>,precedes:<
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
+let mapleader = "²"
 filetype plugin on
 if &t_Co == 256 && !has('win32unix')
 	colorscheme wombat256mod
@@ -41,6 +42,7 @@ endif
 "}}}
 
 " ################################### PLATFORM ################################## {{{
+syntax on
 if has("unix")
 	let $VIMFILES=$HOME . "/.vim"
 else
@@ -130,15 +132,8 @@ inoremap Oa <C-O><C-Y><Up>
 noremap [1;5A <C-E><Up>
 inoremap [1;5A <C-O><C-E><Up>
 
-" Move by words
-noremap <C-Left> b
-inoremap <C-Left> <C-O>b
-noremap Od b
-inoremap Od <C-O>b
-noremap <C-Right> w
-inoremap <C-Right> <C-O>w
-noremap Oc w
-inoremap Oc <C-O>w
+noremap <S-MouseUp> <C-E><Down>
+noremap <S-MouseDown> <C-Y><Up>
 
 " Editing
 vmap <C-R> "_dP
@@ -146,13 +141,6 @@ vmap <C-Insert> "_d"+P
 imap <C-Insert> <C-O>"+gP
 vmap <Backspace> "_d
 
-" Tab navigation like firefox
-nmap <C-S-tab> :tabprevious<CR>
-nmap <C-tab> :tabnext<CR>
-map <C-S-tab> :tabprevious<CR>
-map <C-tab> :tabnext<CR>
-imap <C-S-tab> <Esc>:tabprevious<CR>i
-imap <C-tab> <Esc>:tabnext<CR>i
 nmap <C-t> :tabnew<CR>
 imap <C-t> <Esc>:tabnew<CR>
 command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
@@ -161,6 +149,7 @@ nnoremap <silent> <F2> :tabprevious<CR>
 inoremap <silent> <F2> <C-O>:tabprevious<CR>
 nnoremap <silent> <F3> :tabnext<CR>
 inoremap <silent> <F3> <C-O>:tabnext<CR>
+inoremap <Leader>= <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 " Same for buffers
 nnoremap <silent> <S-F2> :bp<CR>
@@ -188,6 +177,10 @@ inoremap <S-Down> <Nop>
 nnoremap <silent> <F7> :TlistToggle<CR><C-w>h
 inoremap <silent> <F7> <C-O>:TlistToggle<CR><C-w>h
 
+" Find File plugin
+nmap <C-S-F> :FC .<CR>
+nmap <C-F> :FF<CR>
+
 " F8 & Shift-F8 mapped in pydebug addon
 
 
@@ -196,6 +189,8 @@ nnoremap <silent> <F10> :bde<CR>
 inoremap <silent> <F10> <C-O>:bde<CR>
 
 set pastetoggle=<F12>
+nnoremap <F11> :nohlsearch<CR>
+inoremap <F11> <C-O>:nohlsearch<CR>
 
 vnoremap <Tab> >
 vnoremap <S-Tab> <LT>
