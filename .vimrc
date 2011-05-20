@@ -64,7 +64,8 @@ endif
 if has("autocmd")
 	"\ if line("'\"") | exe "normal '\"" | endif |
 	au BufEnter * cd %:p:h		"automatically change cwd to file's dir
-	au BufEnter *
+	au BufRead *
+		\ if line("'\"") | exe "normal '\"" | endif |
 		\ if match( getline(1) , '^\#!') == 0 |
 			\ execute("let b:interpreter = getline(1)[2:]") |
 			\ if getline(1) =~ '^#!.*python' | set filetype=python | endif |
