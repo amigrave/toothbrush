@@ -1,0 +1,23 @@
+#!/bin/sh
+# ~/bin/rxvt-fontsize
+
+args=2			# Number of desired arguments.
+
+if [ $# -ne $args ]
+then
+	echo "Usage: `basename $0` <truetype_font> <size>"
+	echo "   or: `basename $0` -fn <xfont>"
+	exit 1
+else
+	if [ "$1" = "-fn" ] ; then
+		#printf '\33]50;%s\007' "$2"
+		exit 0
+	else
+		#printf '\33]50;%s\007' "xft:$1:pixelsize=$2:antialias=false"
+		printf '\033]710;%s\007' "xft:$1:pixelsize=$2"
+		printf '\033]711;%s\007' "xft:$1:pixelsize=$2"
+		printf '\033]712;%s\007' "xft:$1:pixelsize=$2"
+		exit 0
+	fi
+fi
+
