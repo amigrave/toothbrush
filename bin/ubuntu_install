@@ -12,10 +12,10 @@ rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-
 zoo extract autossh hexdiff tidy ctags apt-file aptitude ack-grep
 
 [dev]
-sudo apt-get install colordiff mercurial subversion tig gitg
+sudo apt-get install colordiff mercurial subversion tig gitg valac gtkaml
 
 [dev-python]
-sudo apt-get install bpython ipython pyflakes python-doc python-pip python-setuptools python-setuptools python-simplejson \
+sudo apt-get install bpython ipython pyflakes python-doc python-pip python-setuptools python-simplejson \
 python-yaml scons python-sphinx
 
 [dev-ruby]
