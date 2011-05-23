@@ -10,7 +10,8 @@ PROXY_LOGIN=""
 PROXY_PASSWD=""
 TUNNEL_PORT_LOCAL=22
 
-TARGET="agr.homelinux.org"
+TARGET="amigrave.dyndns.org"
+TARGET_PORT=443
 
 AGENT="Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.366.2 Safari/533.4"
 
@@ -28,7 +29,7 @@ def tunnel():
 		print 'Connected by', addr,'. Connecting to '+TARGET+' via proxy '+PROXY_IP
 		t="CONNECT %s:%d HTTP/1.1\r\nUser-Agent: %s\r\nProxy-Connection: keep-alive\r\nHost: %s\r\nProxy-Authorization: Basic %s\r\n\r\n"
 		auth= (PROXY_LOGIN + ":" + PROXY_PASSWD).encode("base64").strip()
-		t=t%(TARGET, 443, AGENT, TARGET, auth)
+		t=t%(TARGET, TARGET_PORT, AGENT, TARGET, auth)
 		s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
 		print 'Connected to proxy, sending command',repr(t)
