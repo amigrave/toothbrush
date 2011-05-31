@@ -3,10 +3,14 @@ URxvt.termName:  rxvt-256color
 
 URxvt*geometry:160x40
 
+URxvt*depth: 32
 ! to match gnome-terminal "Linux console" scheme
 ! foreground/background
-URxvt*background: #000000
-URxvt*foreground: #ffffff
+URxvt*background: rgba:0000/0000/0000/dddd
+!URxvt*background: #000000
+!URxvt*foreground: #ffffff
+URxvt.foreground: #cccccc
+
 
 XTerm*background: #000000
 XTerm*foreground: #ffffff
@@ -61,9 +65,6 @@ URxvt.color7  : #D3D7CF
 !URxvt.color15 : #FFFFFF
 URxvt.color15 : #EEEEEC
 
-URxvt.background: black
-URxvt.foreground: #cccccc
-
 URxvt*xftAntialias: true
 URxvt*font: xft:Monospace:pixelsize=12:antialias=false
 URxvt*boldFont: xft:Monospace:bold:pixelsize=12:antialias=false
@@ -88,6 +89,11 @@ URxvt.scrollColor: #99AA99
 URxvt*scrollstyle:rxvt
 URxvt.cursorBlink: true
 URxvt.title: urxvt
+
+!URxvt*transparent:          true
+!URxvt*tint:                 colour
+!URxvt*shading:              10
+!URxvt*inheritPixmap:        true
 
 *Paned.Text.translations:	#override\n\
  Shift<Btn4Down>,<Btn4Up>: scroll-one-line-down()\n\
