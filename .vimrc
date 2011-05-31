@@ -15,7 +15,6 @@ set softtabstop=4
 set textwidth=0         " Maximum width of text that is being inserted
 set history=50          " expand command history
 set hlsearch            " Highlight previous search pattern matches.
-set ignorecase
 "set hidden              " Unused buffers are hidden when abandonned
 set backspace=2         " make backspace work like most other apps
 set smartcase           " ignore case when the pattern contains lowercase letters only.
@@ -135,6 +134,18 @@ inoremap [1;5A <C-O><C-E><Up>
 
 noremap <S-MouseUp> <C-E><Down>
 noremap <S-MouseDown> <C-Y><Up>
+
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 " Editing
 vmap <C-R> "_dP
