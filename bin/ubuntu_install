@@ -54,7 +54,7 @@ sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer 
 timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc kid3-qt
 
 [desktop-ubuntu]
-sudo apt-get install pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer \
+sudo apt-get install pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer unetbootin \
 oxygen-cursor-theme oxygen-icon-theme timer-applet scrot kismet vim-gnome gparted gcolor2 ubuntu-restricted-extras comix
 
 [apps-kde]
