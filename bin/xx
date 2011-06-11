@@ -18,7 +18,8 @@ xrandr --output LVDS --off --output VGA --mode 1280x1024
 xrandr --output LVDS --off --output VGA --mode 1024x768
 
 # vgamirror
-xrandr --output LVDS --mode 1280x768 --output VGA --mode 1280x1024
+xrandr --output LVDS1 --mode 1024x768 --output VGA1 --mode 1024x768  --same-as LVDS1
+xrandr --output LVDS1 --mode 1280x768 --output VGA1 --mode 1280x1024
 
 # vgaxine
 xrandr --output LVDS --mode 1280x768 --output VGA --mode 1280x1024 --above LVDS
