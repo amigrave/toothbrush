@@ -9,7 +9,7 @@ if has("win32")
     "set guifont=MiscFixed\ 8
     set guifont=DejaVu\ Sans\ Mono
 else
-    set lines=999 columns=999   " Hack: maximize gvim
+    "set lines=999 columns=999   " Hack: maximize gvim
     "set guifont=console
     "set guifont=-misc-fixed-medium-r-normal--10-100-75-75-c-60-iso8859-1
     "set guifont=Bitstream\ Vera\ Sans\ Mono/11/-1/5/50/0/0/0/0/0
