@@ -8,3 +8,4 @@
 [alias]
 	co = checkout
 	st = status
+	ci = commit
