@@ -1,11 +1,13 @@
 [user]
-	name = Fabien Meghazi
-	email = agr@amigrave.com
+    name = Fabien Meghazi
+    email = agr@amigrave.com
+[core]
+    filemode = false
 [color]
-	diff = true
-	status = false
-	branch = auto
+    diff = true
+    status = false
+    branch = auto
 [alias]
-	co = checkout
-	st = status
-	ci = commit
+    co = checkout
+    st = status
+    ci = commit
