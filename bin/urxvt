@@ -7,6 +7,5 @@ cmd="/usr/bin/urxvt -icon /home/amigrave/.agr/icons/terminal${num}.png"
 $cmd "$@"
 if [ $? -eq 2 ]; then
     #urxvtd -q -o -f
-    urxvt -q -o -f
     $cmd "$@"
 fi
