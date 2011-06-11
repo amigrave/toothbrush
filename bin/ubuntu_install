@@ -9,7 +9,7 @@ import curses
 sudo apt-get install acpi alien apg pwgen arj bcrypt build-essential cabextract checkinstall clamav curl ddrescue dlocate \
 git-core hdparm hexedit htop iotop iptraf irssi iselect less lha mc ncurses-term nmap openssh-server p7zip-full rar renameutils \
 rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-free unzip vim whois wmctrl xbindkeys zip \
-zoo extract autossh hexdiff tidy ctags apt-file aptitude ack-grep
+zoo extract autossh hexdiff tidy ctags aptitude ack-grep
 
 [dev]
 sudo apt-get install colordiff mercurial subversion tig gitg valac gtkaml
@@ -23,11 +23,11 @@ sudo apt-get install ruby ruby-dev rdoc ri irb libsqlite3-ruby libopenssl-ruby r
 json wirble sqlite3-ruby sinatra libwww-mechanize-ruby
 
 [dev-node.js]
-sudo apt-get install libgnutls-dev libssl-dev libevent-dev libpq-dev
+sudo apt-get install libgnutls-dev libssl-dev libevent-dev libpq-dev libcurl4-openssl-dev
 
 [dev-emu]
 sudo apt-get install automake autoconf libgtk2.0-dev libsdl1.2-dev libsdl-gfx1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev \
-libsdl-net1.2-dev libsdl-sound1.2-dev libsdl-ttf2.0-dev libgconf2-dev libao-dev libqt4-dev
+libsdl-net1.2-dev libsdl-sound1.2-dev libsdl-ttf2.0-dev libgconf2-dev libao-dev libqt4-dev qt4-dev-tools qt4-qmake
 
 [dev-web]
 sudo apt-get install apache2.2-bin libapache2-mod-dnssd gmysqlcc
@@ -51,7 +51,7 @@ sudo apt-get install libdvdcss2 mplayer mencoder transcode non-free-codecs w64co
 
 [audio]
 sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer sidplay goattracker mpg321 milkytracker audacity \
-timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc kid3-qt
+timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc kid3-qt clementine
 
 [desktop-ubuntu]
 sudo apt-get install pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer unetbootin \
