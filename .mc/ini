@@ -3,7 +3,7 @@
 show_backups=1
 kilobyte_si=0
 show_dot_files=1
-verbose=1
+verbose=0
 mark_moves_down=1
 pause_after_run=1
 shell_patterns=1
@@ -109,7 +109,6 @@ source_codepage=Other_8_bit
 find_ignore_dirs=
 
 [Colors]
-base_color=
 rxvt-256color=
 color_terminals=
 
@@ -122,6 +121,8 @@ xterm=
 konsole-256color=
 
 screen-256color=
+
+base_color=
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print
