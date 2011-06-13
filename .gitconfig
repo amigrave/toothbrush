@@ -11,3 +11,4 @@
     co = checkout
     st = status
     ci = commit
+    ls = ls-files
