@@ -16,7 +16,7 @@ sudo apt-get install colordiff mercurial subversion tig gitg valac gtkaml
 
 [dev-python]
 sudo apt-get install bpython ipython pyflakes python-doc python-pip python-setuptools python-simplejson \
-python-yaml scons python-sphinx
+python-yaml scons python-sphinx python-pyside pyside-tools
 
 [dev-ruby]
 sudo apt-get install ruby ruby-dev rdoc ri irb libsqlite3-ruby libopenssl-ruby rubygems libescape-ruby libxml-ruby hpricot nokogiri \
