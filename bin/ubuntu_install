@@ -6,7 +6,7 @@ import curses
 """
 # vim: set ft=dosini: set nonu
 [core]
-sudo apt-get install acpi alien apg pwgen arj bcrypt build-essential cabextract checkinstall clamav curl ddrescue dlocate \
+sudo apt-get install acpi alien apg pwgen arj bcrypt build-essential cabextract checkinstall clamav curl curlftpfs ddrescue dlocate \
 git-core hdparm hexedit htop iotop iptraf irssi iselect less lha mc ncurses-term nmap openssh-server p7zip-full rar renameutils \
 rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-free unzip vim whois wmctrl xbindkeys zip \
 zoo extract autossh hexdiff tidy ctags aptitude ack-grep
