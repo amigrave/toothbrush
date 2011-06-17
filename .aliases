@@ -6,6 +6,7 @@ alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 
 #alias vim='vim -X -p '
 alias vim='vim -p '
+alias e='gvim_tab'
 alias u="cd .."
 alias b="cd .."
 alias m="cd /"
@@ -26,6 +27,8 @@ alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
 alias termkey='tput smkx; cat; tput rmkx'
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 alias webserve='python -m SimpleHTTPServer'
+
+alias track='inotifywait -rm . | grep -iE "(modify |create |delete|attrib|moved)"'
 
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
 alias s='screen -RdU'
