@@ -9,7 +9,7 @@ import curses
 sudo apt-get install acpi alien apg pwgen arj bcrypt build-essential cabextract checkinstall clamav curl curlftpfs ddrescue dlocate \
 git-core hdparm hexedit htop iotop iptraf irssi iselect less lha mc ncurses-term nmap openssh-server p7zip-full rar renameutils \
 rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-free unzip vim whois wmctrl xbindkeys zip \
-zoo extract autossh hexdiff tidy ctags aptitude ack-grep
+zoo extract autossh hexdiff tidy ctags aptitude ack-grep inotify-tools
 
 [dev]
 sudo apt-get install colordiff mercurial subversion tig gitg valac gtkaml
