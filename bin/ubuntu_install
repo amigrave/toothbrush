@@ -11,12 +11,15 @@ git-core hdparm hexedit htop iotop iptraf irssi iselect less lha mc ncurses-term
 rpm rsync rxvt-unicode scanmem screen smbfs sqlite3 sshfs unace unp unrar unrar-free unzip vim whois wmctrl xbindkeys zip \
 zoo extract autossh hexdiff tidy ctags aptitude ack-grep inotify-tools
 
+[server]
+sudo apt-get install nginx fcgiwrap
+
 [dev]
 sudo apt-get install colordiff mercurial subversion tig gitg valac gtkaml
 
 [dev-python]
 sudo apt-get install bpython ipython pyflakes python-doc python-pip python-setuptools python-simplejson \
-python-yaml scons python-sphinx python-pyside pyside-tools
+python-yaml scons python-sphinx python-pyside pyside-tools gazpacho python-gtk2-dev winpdb
 
 [dev-ruby]
 sudo apt-get install ruby ruby-dev rdoc ri irb libsqlite3-ruby libopenssl-ruby rubygems libescape-ruby libxml-ruby hpricot nokogiri \
