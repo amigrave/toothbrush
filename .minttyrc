@@ -1,10 +1,9 @@
 Font=DejaVu Sans Mono
-CursorType=0
+CursorType=block
 Term=xterm-256color
 Columns=180
 Rows=46
-UseSystemColours=0
-BoldAsBright=0
-AllowBlinking=1
+AllowBlinking=yes
 Locale=en_US
 Charset=UTF-8
+BoldAsFont=no
