@@ -256,6 +256,7 @@ endfunction
 " Adapted from sonteks post on Vim as Python IDE
 " http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
 
+if has('python')
 python << EOF
 import vim
 def SetBreakpoint():
@@ -296,4 +297,5 @@ def RemoveBreakpoints():
 
 vim.command( 'map <s-f8> :py RemoveBreakpoints()<cr>')
 EOF
+endif
 " }}}
