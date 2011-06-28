@@ -94,7 +94,8 @@ bindkey ^[^[[29~ eval "title 'Vim'" "split -v" "resize +30" "exec vim ." focus s
 # a "caption" is another line which can show information -
 # in addition to the hardstatus line.
 # use caption to show window list:
-caption always "%{R0}%H %{Y0}%Y-%m-%d %{G0}%c  %{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?"
+#caption always "%{R0}%H %{Y0}%Y-%m-%d %{G0}%c  %{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?"
+caption always "%{R0}%H %{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?"
 # ===============================================================
 # you can find their description in the manual in section
 # "STRING ESCAPES":
