@@ -49,6 +49,9 @@
 "wmctrl -a GVIM || gvim"
    Mod2+Mod4 + e
 
+"wmctrl -a iPython || /usr/bin/urxvt -title iPython -e ipython"
+   Mod2+Mod4 + y
+
 "wmctrl -a MPlayer"
    Mod2+Mod4 + v
 
