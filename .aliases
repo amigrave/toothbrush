@@ -21,6 +21,8 @@ alias qmv='qmv -f do'
 alias vir='clamscan -r *'
 alias py='ipython'
 alias by='bpython'
+alias ft='milkytracker'
+alias am='uade123'
 alias pudb='python -m pudb.run'
 # check for virtualization instructions
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
