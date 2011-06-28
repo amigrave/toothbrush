@@ -64,7 +64,7 @@ oxygen-cursor-theme oxygen-icon-theme timer-applet scrot kismet vim-gnome gparte
 sudo apt-get install konsole krusader kid3 konqueror rekonq systemsettings
 
 [emu]
-sudo apt-get install dosbox e-uae hatari scummvm sdlmame vice visualboyadvance-gtk wine xdms zsnes libqt4-opengl dkms
+sudo apt-get install dosbox e-uae hatari scummvm sdlmame vice visualboyadvance-gtk wine xdms unadf zsnes libqt4-opengl dkms
 
 [no-apt]
 install googlecl and google chat/video :
