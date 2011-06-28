@@ -1,0 +1,12 @@
+# Midnight Commander 3.0 extension file
+
+regex/^[mM][oO][dD].+$
+       Open=mikmod %f
+       Edit=milkytracker %f
+
+regex/\.([mM][oO][dD]|[sS]3[mM]|[xX][mM]|[iI][tT]|[mM][tT][mM]|669|[sS][tT][mM]|[uU][lL][tT]|[fF][aA][rR])$
+       Open=mikmod %f
+       Edit=milkytracker %f
+
+regex/\.(fp|di|cus|pru2)$
+       Open=uade123 %f
