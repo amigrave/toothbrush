@@ -54,7 +54,7 @@ sudo apt-get install libdvdcss2 mplayer mencoder transcode non-free-codecs w64co
 
 [audio]
 sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer sidplay goattracker mpg321 milkytracker audacity \
-timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc kid3-qt clementine
+timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc kid3-qt clementine mpg321 adplay
 
 [desktop-ubuntu]
 sudo apt-get install pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer unetbootin \
@@ -64,7 +64,13 @@ oxygen-cursor-theme oxygen-icon-theme timer-applet scrot kismet vim-gnome gparte
 sudo apt-get install konsole krusader kid3 konqueror rekonq systemsettings
 
 [emu]
-sudo apt-get install dosbox e-uae hatari scummvm sdlmame vice visualboyadvance-gtk wine xdms unadf zsnes libqt4-opengl dkms
+sudo apt-get install dosbox e-uae hatari scummvm sdlmame vice visualboyadvance-gtk xdms unadf zsnes libqt4-opengl dkms
+
+[wine]
+sudo apt-get install wine
+sh winetricks vcrun2005
+sh winetricks vcrun2008
+sh winetricks directx9
 
 [no-apt]
 install googlecl and google chat/video :
