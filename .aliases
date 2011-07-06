@@ -22,6 +22,7 @@ alias vir='clamscan -r *'
 alias py='ipython'
 alias by='bpython'
 alias ft='milkytracker'
+alias adlib='adplay -r -b 8192'
 alias am='uade123'
 alias pudb='python -m pudb.run'
 # check for virtualization instructions
