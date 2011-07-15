@@ -23,7 +23,7 @@ alias py='ipython'
 alias by='bpython'
 alias ft='milkytracker'
 alias adlib='adplay -r -b 8192'
-alias am='uade123'
+alias am='uade123 --detect-format-by-content'
 alias pudb='python -m pudb.run'
 # check for virtualization instructions
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
