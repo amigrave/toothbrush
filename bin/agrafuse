@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SSHFSDIR="~/sshfs"
+SSHFSDIR="$HOME/sshfs"
 if [ -d "/media/sshfs" ]; then
     SSHFSDIR="/media/sshfs"
 fi
