@@ -1,4 +1,6 @@
 [global_config]
+  focus = mouse
+  close_button_on_tab = False
 [keybindings]
   new_tab = <Shift>Down
   next_tab = <Shift>Right
