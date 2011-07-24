@@ -54,7 +54,7 @@ sudo apt-get install libdvdcss2 mplayer mencoder transcode non-free-codecs w64co
 
 [audio]
 sudo apt-get install xmp lame audacious flac vorbis-tools id3v2 opencubicplayer sidplay goattracker mpg321 milkytracker audacity \
-timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc kid3-qt clementine mpg321 adplay
+timidity fluid-soundfont-gm fluid-soundfont-gs exaile moc kid3-qt clementine mpg321 adplay qsynth
 
 [desktop-ubuntu]
 sudo apt-get install pidgin pidgin-hotkeys pidgin-facebookchat qiv ttf-mscorefonts-installer unetbootin \
