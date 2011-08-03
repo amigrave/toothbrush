@@ -7,6 +7,6 @@ else
         $GVIM "$1"
     else
         $GVIM --remote-tab-silent "$*"
-        #wmctrl -a GVIM
+        wmctrl -a GVIM
     fi
 fi
