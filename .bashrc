@@ -31,7 +31,9 @@ if [ "$MANPATH" != "" ]; then
     export MANPATH=~/local/npm/man:$MANPATH
 fi
 
-if [ "$COLORTERM" == "gnome-terminal" ]; then
+if [ "$COLORTERM" == "rxvt-xpm" ]; then
+    export TERM="rxvt-256color"
+elif [ "$COLORTERM" == "gnome-terminal" ]; then
     export TERM="gnome-256color"
 elif [ "$TERM" == "screen" ]; then
     export TERM="screen-256color"
