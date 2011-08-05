@@ -1,1 +1,7 @@
 keycode 49 = F13
+
+! Remap Caps_Lock
+! http://c2.com/cgi/wiki?RemapCapsLock
+clear Lock
+keycode 66 = Control_R
+add Control = Control_R
