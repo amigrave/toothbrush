@@ -30,10 +30,10 @@
 "wmctrl -r :ACTIVE: -b toggle,maximized_vert,maximized_horz"
    Mod2+Mod4 + Up
 
-#"wmctrl -r :ACTIVE: -b remove,maximized_horz ; wmctrl -r :ACTIVE: -e 0,0,0,800,900"
+#"/usr/bin/xte 'keydown Control_L' 'keydown Shift_L' 'key Tab' 'keyup Control_L' 'keyup Shift_L' &"
 #   Mod2+Mod4 + Left
-
-#"wmctrl -r :ACTIVE: -b remove,maximized_horz ; wmctrl -r :ACTIVE: -e 0,800,0,800,900"
+#
+#"/usr/bin/xte 'keydown Control_L' 'key Tab' 'keyup Control_L' &"
 #   Mod2+Mod4 + Right
 
 "wmctrl -r :ACTIVE: -b toggle,fullscreen"
@@ -59,7 +59,7 @@
    Mod2+Mod4 + f
 
 "wmctrl -a '- Google Chrome' || google-chrome --enable-memory-info"  # this option enable use of performance.memory
-   Mod2+Mod4 + z
+   Mod2+Mod4 + w
 
 "wmctrl -a 'Developer Tools -'"
    Mod2+Mod4 + x
