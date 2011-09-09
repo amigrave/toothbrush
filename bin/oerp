@@ -12,7 +12,7 @@ cd /home/amigrave/openerp/source/client/5.0/bin; ./openerp-client.py -s cc.my.op
 # CLIENT TRUNK
 cd /home/amigrave/openerp/client-trunk/bin; ./openerp-client.py &
 cd /home/amigrave/openerp/client-trunk/bin; ./openerp-client.py -s localhost -u admin -l debug_rpc &
-cd /home/amigrave/openerp/bazaar/client-trunk/bin; ./openerp-client.py -s openerp.my.odoo.com -u fme &
+cd /home/amigrave/openerp/source/client/trunk/bin; ./openerp-client.py -s openerp.my.odoo.com -u fme &
 
 # SERVERS
 cd /home/amigrave/openerp/server/bin; ./openerp-server.py
