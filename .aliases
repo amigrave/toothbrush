@@ -2,7 +2,7 @@
 alias ps1='PS1=\\$\ '
 alias ps1c='. ~/.bashrc'
 
-alias apple='setxkbmap us; setxkbmap -option apple:badmap; xmodmap ~/.Xmodmap; echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode"'
+alias apple='setxkbmap us; setxkbmap -option apple:badmap; xmodmap ~/.Xmodmap; xbindkeys; echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode"'
 
 alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 
