@@ -20,16 +20,16 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
-PADD=~/bin:~/local/bin/:~/local/npm/bin:/usr/local/sbin:/usr/sbin:/sbin
+PADD=~/bin:~/local/bin/:~/node_modules/.bin:/usr/local/sbin:/usr/sbin:/sbin
 echo "$PATH" | grep "$PADD" > /dev/null || PATH="$PADD:$PATH"
 unset PADD
 export PATH
 
-export NODE_PATH=$HOME/local/npm/root
-if [ "$MANPATH" != "" ]; then
-    MANPATH=`manpath`
-    export MANPATH=~/local/npm/man:$MANPATH
-fi
+#export NODE_PATH=$HOME/local/npm/root
+#if [ "$MANPATH" != "" ]; then
+#    MANPATH=`manpath`
+#    export MANPATH=~/local/npm/man:$MANPATH
+#fi
 
 if [ "$COLORTERM" == "rxvt-xpm" ]; then
     export TERM="rxvt-256color"
