@@ -2,17 +2,18 @@
   focus = mouse
   close_button_on_tab = False
 [keybindings]
+  switch_to_tab_7 = <Super>egrave
   switch_to_tab_10 = <Super>agrave
   next_tab = <Control>bracketright
   prev_tab = <Control>bracketleft
   switch_to_tab_6 = <Super>§
-  switch_to_tab_7 = <Super>egrave
+  group_tab = None
   switch_to_tab_4 = <Super>apostrophe
   switch_to_tab_5 = <Super>parenleft
   switch_to_tab_2 = <Super>eacute
   switch_to_tab_3 = <Super>quotedbl
   switch_to_tab_1 = <Super>1
-  new_tab = <Shift>Down
+  new_tab = <Super>t
   switch_to_tab_8 = <Super>exclam
   switch_to_tab_9 = <Super>ccedilla
 [profiles]
