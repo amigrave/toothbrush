@@ -58,8 +58,8 @@
 "wmctrl -a 'Mozilla Firefox' || firefox -P firefox-4"
    Mod2+Mod4 + f
 
-"wmctrl -a '- Google Chrome' || google-chrome --enable-memory-info"  # this option enable use of performance.memory
-   Mod2+Mod4 + w
+#"wmctrl -a '- Google Chrome' || google-chrome --enable-memory-info"  # this option enable use of performance.memory
+#   Mod2+Mod4 + w
 
 "wmctrl -a 'Developer Tools -'"
    Mod2+Mod4 + x
@@ -71,8 +71,8 @@
 #"/home/amigrave/bin/urxvt"
 #   Mod2+Mod4 + t
 
-"gcalctool"
-   Mod2+Mod4 + c
+#"gcalctool"
+#   Mod2+Mod4 + c
 
 "/home/amigrave/bin/scs"
    Mod2+Mod4 + c:107
