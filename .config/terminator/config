@@ -2,28 +2,25 @@
   focus = mouse
   close_button_on_tab = False
 [keybindings]
-  new_tab = <Shift>Down
-  next_tab = <Shift>Right
-  prev_tab = <Shift>Left
-  switch_to_tab_1 = <Super>ampersand
-  switch_to_tab_2 = <Super>eacute
-  switch_to_tab_3 = <Super>quotedbl
-  switch_to_tab_4 = <Super>apostrophe
-  switch_to_tab_5 = <Super>parenleft
+  switch_to_tab_10 = <Super>agrave
+  next_tab = <Control>bracketright
+  prev_tab = <Control>bracketleft
   switch_to_tab_6 = <Super>§
   switch_to_tab_7 = <Super>egrave
+  switch_to_tab_4 = <Super>apostrophe
+  switch_to_tab_5 = <Super>parenleft
+  switch_to_tab_2 = <Super>eacute
+  switch_to_tab_3 = <Super>quotedbl
+  switch_to_tab_1 = <Super>1
+  new_tab = <Shift>Down
   switch_to_tab_8 = <Super>exclam
   switch_to_tab_9 = <Super>ccedilla
-  switch_to_tab_10 = <Super>agrave
 [profiles]
   [[default]]
     copy_on_selection = True
     scrollback_lines = 1000
     font = Monospace 9
-    #palette = "#000000:#b21717:#17b217:#b26717:#1717b2:#b217b2:#17b2b2:#b2b2b2:#686868:#ff5454:#54ff54:#ffff54:#5454ff:#ff54ff:#54ffff:#ffffff"
-    #palette = "#2E3436:#CC0000:#4E9A06:#C4A000:#3465A4:#995099:#06989A:#D3D7CF:#555753:#EF2929:#8AE234:#FCE94F:#729FCF:#CC7FCC:#34E2E2:#EEEEEC"
     use_system_font = False
-
 [layouts]
   [[default]]
     [[[child1]]]
