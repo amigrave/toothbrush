@@ -9,8 +9,7 @@ alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 #alias vim='vim -X -p '
 alias vim='vim -p '
 alias e='gvim_tab'
-alias u="cd .."
-alias b="cd .."
+alias ..="cd .."
 alias m="cd /"
 alias ll="ls -lAh --color=yes | less -r -E -X"
 alias l="ls -lAh --color=yes "
