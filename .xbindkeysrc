@@ -52,8 +52,8 @@
 "wmctrl -a iPython || /usr/bin/urxvt -title iPython -e ipython"
    Mod2+Mod4 + y
 
-"wmctrl -a MPlayer"
-   Mod2+Mod4 + v
+#"wmctrl -a MPlayer"
+#   Mod2+Mod4 + v
 
 "wmctrl -a 'Mozilla Firefox' || firefox -P firefox-4"
    Mod2+Mod4 + f

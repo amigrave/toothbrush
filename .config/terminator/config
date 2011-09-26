@@ -2,20 +2,22 @@
   focus = mouse
   close_button_on_tab = False
 [keybindings]
-  switch_to_tab_7 = <Super>egrave
-  switch_to_tab_10 = <Super>agrave
-  next_tab = <Control>bracketright
-  prev_tab = <Control>bracketleft
-  switch_to_tab_6 = <Super>§
+  switch_to_tab_7 = <Super>7
+  switch_to_tab_10 = <Super>0
+  next_tab = <Alt><Super>Right
+  prev_tab = <Alt><Super>Left
+  switch_to_tab_6 = <Super>6
   group_tab = None
-  switch_to_tab_4 = <Super>apostrophe
-  switch_to_tab_5 = <Super>parenleft
-  switch_to_tab_2 = <Super>eacute
-  switch_to_tab_3 = <Super>quotedbl
+  switch_to_tab_4 = <Super>4
+  switch_to_tab_5 = <Super>5
+  switch_to_tab_2 = <Super>2
+  switch_to_tab_3 = <Super>3
   switch_to_tab_1 = <Super>1
   new_tab = <Super>t
-  switch_to_tab_8 = <Super>exclam
-  switch_to_tab_9 = <Super>ccedilla
+  copy = <Super>c
+  paste = <Super>v
+  switch_to_tab_8 = <Super>8
+  switch_to_tab_9 = <Super>9
 [profiles]
   [[default]]
     copy_on_selection = True
