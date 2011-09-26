@@ -1,27 +1,27 @@
 #!/bin/sh
 (iselect -a | sh -x) <<EOS
 # CLIENT 5.0
-cd /home/agr/openerp/source/client/5.0/bin; ./openerp-client.py &
-cd /home/agr/openerp/source/client/5.0/bin; ./openerp-client.py -s localhost -u admin &
-cd /home/agr/openerp/source/client/5.0/bin; ./openerp-client.py -s tiny.my.odoo.com -u fme &
-cd /home/agr/openerp/source/client/5.0/bin; ./openerp-client.py -s agrplus.com -u admin &
-cd /home/agr/openerp/source/client/5.0/bin; ./openerp-client.py -s cc.odoo.com -u fme &
-cd /home/agr/openerp/source/client/5.0/bin; ./openerp-client.py -s cc.test.odoo.com -u fme &
-cd /home/agr/openerp/source/client/5.0/bin; ./openerp-client.py -s cc.my.openerp.com -u fme &
+cd $HOME/openerp/source/client/5.0/bin; ./openerp-client.py &
+cd $HOME/openerp/source/client/5.0/bin; ./openerp-client.py -s localhost -u admin &
+cd $HOME/openerp/source/client/5.0/bin; ./openerp-client.py -s tiny.my.odoo.com -u fme &
+cd $HOME/openerp/source/client/5.0/bin; ./openerp-client.py -s agrplus.com -u admin &
+cd $HOME/openerp/source/client/5.0/bin; ./openerp-client.py -s cc.odoo.com -u fme &
+cd $HOME/openerp/source/client/5.0/bin; ./openerp-client.py -s cc.test.odoo.com -u fme &
+cd $HOME/openerp/source/client/5.0/bin; ./openerp-client.py -s cc.my.openerp.com -u fme &
 
 # CLIENT TRUNK
-cd /home/agr/openerp/client-trunk/bin; ./openerp-client.py &
-cd /home/agr/openerp/client-trunk/bin; ./openerp-client.py -s localhost -u admin -l debug_rpc &
-cd /home/agr/openerp/source/client/trunk/bin; ./openerp-client.py -s openerp.my.odoo.com -u fme &
+cd $HOME/openerp/client-trunk/bin; ./openerp-client.py &
+cd $HOME/openerp/client-trunk/bin; ./openerp-client.py -s localhost -u admin -l debug_rpc &
+cd $HOME/openerp/source/client/trunk/bin; ./openerp-client.py -s openerp.my.odoo.com -u fme &
 
 # SERVERS
-cd /home/agr/openerp/server/bin; ./openerp-server.py
-cd /home/agr/openerp/server/bin; ./openerp-server.py -u odms -d cc --enable-code-actions --log-level=debug
-cd /home/agr/openerp/server-trunk/bin; ./openerp-server.py -c ~/.openerp_serverrc_trunk
+cd $HOME/openerp/server/bin; ./openerp-server.py
+cd $HOME/openerp/server/bin; ./openerp-server.py -u odms -d cc --enable-code-actions --log-level=debug
+cd $HOME/openerp/server-trunk/bin; ./openerp-server.py -c ~/.openerp_serverrc_trunk
 
 # WEB
-/home/agr/openerp/web/openerp-web.py
-/home/agr/openerp/web-trunk/openobject-web.py
+$HOME/openerp/web/openerp-web.py
+$HOME/openerp/web-trunk/openobject-web.py
 
 # SSH
 ssh root@delta.openerp.com

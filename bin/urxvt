@@ -11,8 +11,8 @@ fi
 num=`ps aux | grep "$urxvt" | grep -v grep | wc -l`
 
 num=`expr $num + 1`
-#cmd="/usr/bin/urxvtc -icon /home/amigrave/.agr/icons/terminal${num}.png"
-cmd="$urxvt -icon /home/amigrave/.agr/icons/terminal${num}.png"
+#cmd="/usr/bin/urxvtc -icon $HOME/.agr/icons/terminal${num}.png"
+cmd="$urxvt -icon $HOME/.agr/icons/terminal${num}.png"
 
 $cmd "$@"
 if [ $? -eq 2 ]; then

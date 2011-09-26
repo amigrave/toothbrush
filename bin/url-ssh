@@ -1,2 +1,2 @@
 #!/bin/bash
-/home/amigrave/bin/urxvt --title "${1:6}" -e sh  -c "ssh ${1:6}"
+$HOME/bin/urxvt --title "${1:6}" -e sh  -c "ssh ${1:6}"

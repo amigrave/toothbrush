@@ -87,7 +87,7 @@ http://www.google.com/chat/video
 
 
 # Add SSH:// protocol
-gconftool-2 -s /desktop/gnome/url-handlers/ssh/command '/home/amigrave/bin/url-ssh %s' --type String
+gconftool-2 -s /desktop/gnome/url-handlers/ssh/command '$HOME/bin/url-ssh %s' --type String
 gconftool-2 -s /desktop/gnome/url-handlers/ssh/enabled --type Boolean true
 """
 
