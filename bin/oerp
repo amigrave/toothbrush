@@ -10,8 +10,8 @@ cd $HOME/openerp/source/client/5.0/bin; ./openerp-client.py -s cc.test.odoo.com 
 cd $HOME/openerp/source/client/5.0/bin; ./openerp-client.py -s cc.my.openerp.com -u fme &
 
 # CLIENT TRUNK
-cd $HOME/openerp/client-trunk/bin; ./openerp-client.py &
-cd $HOME/openerp/client-trunk/bin; ./openerp-client.py -s localhost -u admin -l debug_rpc &
+cd $HOME/openerp/source/client/trunk/bin; ./openerp-client.py &
+cd $HOME/openerp/source/client/trunk/bin; ./openerp-client.py -s localhost -u admin -l debug_rpc &
 cd $HOME/openerp/source/client/trunk/bin; ./openerp-client.py -s openerp.my.odoo.com -u fme &
 
 # SERVERS
