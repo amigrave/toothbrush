@@ -15,54 +15,36 @@ URxvt.foreground: #cccccc
 XTerm*background: #000000
 XTerm*foreground: #ffffff
 
-! black
-!URxvt.color0  : #000000
+! Black - rgb(46, 52, 54) - rgb(85, 87, 83)
 URxvt.color0  : #2E3436
-!URxvt.color8  : #555555
 URxvt.color8  : #555753
 
-! red
-!URxvt.color1  : #AA0000
+! Red - rgb(204, 0, 0) - rgb(239, 41, 41)
 URxvt.color1  : #CC0000
-!URxvt.color9  : #FF5555
 URxvt.color9  : #EF2929
 
-! green
-!URxvt.color2  : #00AA00
+! Green - rgb(78, 154, 6) - rgb(138, 226, 52)
 URxvt.color2  : #4E9A06
-!URxvt.color10 : #55FF55
 URxvt.color10 : #8AE234
 
-! yellow
-!URxvt.color3  : #AA5500
+! Yellow - rgb(196, 160, 0) - rgb(252, 233, 79)
 URxvt.color3  : #C4A000
-!URxvt.color11 : #FFFF55
 URxvt.color11 : #FCE94F
 
-! blue
-!URxvt.color4  : #0000AA
+! Blue - rgb(52, 101, 164) - rgb(114, 159, 207)
 URxvt.color4  : #3465A4
-!URxvt.color12 : #5555FF
 URxvt.color12 : #729FCF
 
-! magenta
-!URxvt.color5  : #AA00AA
-!URxvt.color5  : #75507B
+! Magenta - rgb(153, 80, 153) - rgb(204, 127, 204)
 URxvt.color5  : #995099
-!URxvt.color13 : #FF55FF
-!URxvt.color13 : #AD7FA8
 URxvt.color13 : #CC7FCC
 
-! cyan
-!URxvt.color6  : #00AAAA
+! Cyan - rgb(6, 152, 154) - rgb(52, 226, 226)
 URxvt.color6  : #06989A
-!URxvt.color14 : #55FFFF
 URxvt.color14 : #34E2E2
 
-! white
-!URxvt.color7  : #AAAAAA
+! White - rgb(211, 215, 207) - rgb(238, 238, 236)
 URxvt.color7  : #D3D7CF
-!URxvt.color15 : #FFFFFF
 URxvt.color15 : #EEEEEC
 
 URxvt*xftAntialias: true
