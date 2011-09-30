@@ -1,13 +1,38 @@
-# Permettre de rentrer & recevoir des caract�res accentu�s
-set meta-flag on
-set convert-meta off
-set input-meta on
-set output-meta on
-set show-all-if-ambiguous on
-set visible-stats on
+# do not bell on tab-completion
 set bell-style none
-## set bell-style visible
-##"\M-k": kill-whole-line
+
+# enable 8bit input
+set input-meta on
+set meta-flag on
+
+# disable stripping of 8bit characters
+set convert-meta off
+
+# enable 8bit output
+set output-meta on
+
+# show multiple possibilities on tab completion
+set show-all-if-ambiguous on
+
+# set file completion case-insensitive
+set completion-ignore-case on
+
+# completes names which are symbolic links to directories with slash appended
+set mark-symlinked-directories on
+
+# If set to ‘on’, a character denoting a file's type is appended to the filename
+# when listing possible completions. The default is ‘off’.
+set visible-stats on
+
+# OSX Terminal
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
+"\e[3~": delete-char
+"\e[5C": forward-word
+"\e[5D": backward-word
+
 ##----------------------------------------------------------
 ## arrows left/right/up/down
 #"\e[C": forward-char
@@ -16,8 +41,8 @@ set bell-style none
 #"\e[B": next-history
 ## ---------------------------------------------------------
 # pgup/pgdn
-"\e[6~": history-search-forward
-"\e[5~": history-search-backward
+#"\e[6~": history-search-forward
+#"\e[5~": history-search-backward
 ##----------------------------------------------------------
 ## insert,delete
 ##"\e[2~": quoted-insert
