@@ -31,6 +31,11 @@ inoremap <silent> <C-S-Up> <C-O><C-W>+
 nnoremap <silent> <C-S-Down> <C-W>-
 inoremap <silent> <C-S-Down> <C-O><C-W>-
 
+nnoremap <silent> <M-D-Left> :tabprevious<CR>
+inoremap <silent> <M-D-Left> <C-O>:tabprevious<CR>
+nnoremap <silent> <M-D-Right> :tabnext<CR>
+inoremap <silent> <M-D-Right> <C-O>:tabnext<CR>
+
 
 "The following removes bold from all highlighting
 " Steve Hall wrote this function for me on vim@vim.org
