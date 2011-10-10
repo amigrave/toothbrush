@@ -31,11 +31,11 @@ elif [ $KONSOLE_DBUS_SESSION ]; then
 fi
 
 
-if [ -f "~/.aliases" ]; then
-    . "~/.aliases"
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
 fi
-if [ -f "~/.aliases_$OSTYPE" ]; then
-    ."~/.aliases_$OSTYPE"
+if [ -f ~/.aliases_$OSTYPE ]; then
+    . ~/.aliases_$OSTYPE
 fi
 
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
