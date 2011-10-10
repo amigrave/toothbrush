@@ -1,0 +1,5 @@
+# vim:filetype=sh syntax=sh:
+alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
+alias ack="ack-grep --pager=less --color-match=red"
+alias mpk="kid3-qt ."
+

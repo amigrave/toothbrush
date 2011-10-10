@@ -4,9 +4,6 @@ alias ps1c='. ~/.bashrc'
 
 alias apple='setxkbmap us; setxkbmap -option apple:badmap; xmodmap ~/.Xmodmap; xbindkeys; echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode"'
 
-alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
-
-#alias vim='vim -X -p '
 alias vim='vim -p '
 alias e='gvim_tab'
 alias ..="cd .."
@@ -41,7 +38,6 @@ alias s='screen -RdU'
 alias memo="e ~/local/docs/memos/memo.txt"
 alias memotel="e ~/local/docs/memos/memotel.txt"
 alias memomusic="e ~/local/docs/memos/memomusic.txt"
-alias ack="ack-grep --pager=less --color-match=red"
 
 # Docs
 alias pydoc='links /usr/share/doc/python2.6-doc/html/index.html'
@@ -49,14 +45,12 @@ alias phpdoc='links ~/local/docs/coding/lang_php/php_manual_en.html'
 
 alias pdf='evince'
 alias web='google-chrome'
-alias say='espeak'
 
 #alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=8 -dao -eject -overburn -v'
 alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
 
 alias x="extract"
 alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
-alias mpk="kid3-qt ."
 alias mpi="mp3info -x -F -r a"
 alias ss="ssh -o 'ProtocolKeepAlives 30' -C "
 alias lower='for i in *; do mv "$i" "$(echo $i | tr "[A-Z]" "[a-z]" )"; done'
