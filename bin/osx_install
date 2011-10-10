@@ -1,0 +1,10 @@
+#!/bin/bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
+
+brew install coreutils --default-names
+brew install findutils --default-names
+brew install htop
+chmod 6555 /usr/local/Cellar/htop/HEAD/bin/htop
+sudo chown root /usr/local/Cellar/htop/HEAD/bin/htop
+
+brew install ack autossh bazaar cd-discid colordiff flac fuse4x fuse4x-kext gdbm gettext glib htop id3lib id3v2 lame lha libao libiconv libid3tag libmikmod libogg libvorbis mad midnight-commander mikmod mpg321 mplayer node oniguruma p7zip pcre pkg-config pyqt qt renameutils s-lang sip smake sshfs tig uade unrar vorbis-tools wget xmp yasm zsh
