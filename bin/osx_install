@@ -1,4 +1,12 @@
 #!/bin/bash
+
+# Some symlinks
+ln -s ~/.dosbox/dosbox-0.74.conf Library/Preferences/DOSBox\ 0.74\ Preferences
+
+# Change some defaults
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
 
 brew install coreutils --default-names
