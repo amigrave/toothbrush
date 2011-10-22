@@ -20,10 +20,6 @@ regex/\.([aA][mM][dD]|[rR][aA][dD]|[hH][sS][cC]|[sS][aA]2)$
 regex/\.([sS][iI][dD])$
        Open=killall xsidplay; xsidplay %f &
 
-regex/\.([mM][pP]3|[mM]3[uU])$
-    Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (clementine -l %f; clementine -s; clementine -p); fi
-    View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
-
 # Midnight Commander 3.0 extension file
 # Warning: Structure of this file has changed completely with version 3.0
 #
@@ -435,12 +431,14 @@ regex/\.([wW][aA][wW]22)$
        Open=vplay -s 22 %f
 
 regex/\.([mM][pP]3)$
-	Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (xmms %f >/dev/null 2>&1 &); fi
-	View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
+    #Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (clementine -l %f; clementine -s; clementine -p); fi
+    Open=mpg123 %f
+    View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
 
 regex/\.([oO][gG][gG|aA|vV|xX])$
-	Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f >/dev/null 2>&1 &); fi
-	View=%view{ascii} ogginfo %s
+    #Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f >/dev/null 2>&1 &); fi
+    Open=ogg123 %f
+    View=%view{ascii} ogginfo %s
 
 regex/\.([sS][pP][xX]|[fF][lL][aA][cC])$
 	Open=if [ "$DISPLAY" = "" ]; then play %f; else (xmms %f >/dev/null 2>&1 &); fi
