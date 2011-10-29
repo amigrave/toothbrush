@@ -38,6 +38,9 @@ if &t_Co == 256 && !has('win32unix')
 else
 	colorscheme agr
 endif
+if has("gui_macvim")
+    set vb
+endif
 "}}}
 
 " ################################### PLATFORM ################################## {{{
