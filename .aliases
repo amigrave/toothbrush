@@ -1,4 +1,5 @@
 # vim:filetype=sh syntax=sh:
+alias wakegw="wakeonlan  00:1C:C4:D0:5F:D2"
 alias ps1='PS1=\\$\ '
 alias ps1c='. ~/.bashrc'
 
