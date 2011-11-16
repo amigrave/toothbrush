@@ -64,54 +64,54 @@ endif
 
 " ############################ AUTOCMD & FILETYPES ############################## {{{
 if has("autocmd")
-	"\ if line("'\"") | exe "normal '\"" | endif |
-	au BufEnter * cd %:p:h		"automatically change cwd to file's dir
-	au BufRead *
-		\ if line("'\"") | exe "normal '\"" | endif |
-		\ if match( getline(1) , '^\#!') == 0 |
-			\ execute("let b:interpreter = getline(1)[2:]") |
-			\ if getline(1) =~ '^#!.*python' | set filetype=python | endif |
-			\ if getline(1) =~ '^#!.*ruby' | set filetype=ruby | endif |
-			\ if getline(1) =~ '^#!.*bash' | set filetype=sh | endif |
-			\ if getline(1) =~ '^<DOCTYPE' | set filetype=html | endif |
-		\endif
+    "\ if line("'\"") | exe "normal '\"" | endif |
+    au BufEnter * silent! lcd %:p:h    "automatically change cwd to file's dir
+    au BufRead *
+        \ if line("'\"") | exe "normal '\"" | endif |
+        \ if match( getline(1) , '^\#!') == 0 |
+            \ execute("let b:interpreter = getline(1)[2:]") |
+            \ if getline(1) =~ '^#!.*python' | set filetype=python | endif |
+            \ if getline(1) =~ '^#!.*ruby' | set filetype=ruby | endif |
+            \ if getline(1) =~ '^#!.*bash' | set filetype=sh | endif |
+            \ if getline(1) =~ '^<DOCTYPE' | set filetype=html | endif |
+        \endif
 
-	au BufRead *.txt,*.rst set expandtab tw=78
-	au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
-	au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
-	au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
-	au BufRead,BufNewFile *.aspx set syntax=cs
-	au BufRead,BufNewFile *.mako set ft=html
-	au BufRead,BufNewFile *.asp set ft=javascript
-	au BufRead,BufNewFile *.coffee set fdm=indent
-	au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
-	au BufWritePost,FileWritePost *.md,*.mkd :!markdown <afile> > <afile>.html
+    au BufRead *.txt,*.rst set expandtab tw=78
+    au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.php,*.php3 set foldmethod=manual foldcolumn=3 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.aspx set syntax=cs
+    au BufRead,BufNewFile *.mako set ft=html
+    au BufRead,BufNewFile *.asp set ft=javascript
+    au BufRead,BufNewFile *.coffee set fdm=indent
+    au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
+    au BufWritePost,FileWritePost *.md,*.mkd :!markdown <afile> > <afile>.html
 
     au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
-        \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
+        \ syn sync fromstart | set foldmethod=manual foldcolumn=3 foldnestmax=3 foldlevel=2
     au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
 
     " au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
 
-	au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
-	au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
+    au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
+    au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
-	if has("unix")
-		au BufNewFile *.py set autoread | s,^,#!/usr/bin/python, | w | !chmod +x %
-		au BufNewFile *.rb set autoread | s,^,#!/usr/bin/ruby, | w | !chmod +x %
-		au BufNewFile *.sh set autoread | s,^,#!/bin/bash, | w | !chmod +x %
-	endif
+    if has("unix")
+        au BufNewFile *.py set autoread | s,^,#!/usr/bin/python, | w | !chmod +x %
+        au BufNewFile *.rb set autoread | s,^,#!/usr/bin/ruby, | w | !chmod +x %
+        au BufNewFile *.sh set autoread | s,^,#!/bin/bash, | w | !chmod +x %
+    endif
 
-	au Filetype xml call XmlQweb()
+    au Filetype xml call XmlQweb()
 
-	let php_sync_method=0
-	let php_folding=1
-	let php_asp_tags = 1
-	let g:xml_syntax_folding=1
-	let python_highlight_numbers = 1
-	let coffee_folding = 1
+    let php_sync_method=0
+    let php_folding=1
+    let php_asp_tags = 1
+    let g:xml_syntax_folding=1
+    let python_highlight_numbers = 1
+    let coffee_folding = 1
 
 endif
 "}}}
