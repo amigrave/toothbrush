@@ -57,7 +57,7 @@ alias ss="ssh -o 'ProtocolKeepAlives 30' -C "
 alias lower='for i in *; do mv "$i" "$(echo $i | tr "[A-Z]" "[a-z]" )"; done'
 alias upper='for i in *; do mv "$i" "$(echo $i | tr "[a-z]" "[A-Z]" )"; done'
 alias chmodx="find . -type d -exec chmod 0755 '{}' ';'; find . -type f -exec chmod 0644 '{}' ';'"
-alias chownx="sudo chown -R amigrave:amigrave"
+alias chownx="sudo chown -R $USER:amigrave"
 
 alias 7zx='for i in *.7z; do 7z x "$i"; done'
 alias zipx='for i in *.zip; do unzip "$i"; done'
