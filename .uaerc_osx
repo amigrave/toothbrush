@@ -1,7 +1,7 @@
 config_description=UAE default configuration
 unix.rom_path=/Users/agr/Softs/amiga/roms/
 unix.floppy_path=/Users/agr/Softs/amiga/disks/
-unix.hardfile_path=/Users/agr/Softs/amiga/hd/
+unix.hardfile_path=/Users/agr/Softs/amiga/hds/
 unix.savestate_path=~/
 kickstart_rom_file=$(FILE_PATH)/kickstart-3.1.rom
 ;kickstart_rom_file=/Users/agr/Softs/amiga/roms/kickstart-3.1.rom
