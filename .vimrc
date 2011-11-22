@@ -78,7 +78,7 @@ if has("autocmd")
 
     au BufRead *.txt,*.rst set expandtab tw=78
     au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
-    au BufRead,BufNewFile *.php,*.php3 set foldmethod=manual foldcolumn=3 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.aspx set syntax=cs
     au BufRead,BufNewFile *.mako set ft=html
@@ -88,7 +88,7 @@ if has("autocmd")
     au BufWritePost,FileWritePost *.md,*.mkd :!markdown <afile> > <afile>.html
 
     au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
-        \ syn sync fromstart | set foldmethod=manual foldcolumn=3 foldnestmax=3 foldlevel=2
+        \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
     au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
 
     " au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
@@ -97,6 +97,12 @@ if has("autocmd")
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+
+    " Don't screw up folds when inserting text that might affect them, until
+    " leaving insert mode. Foldmethod is local to the window. Protect against
+    " screwing up folding when switching between windows.
+    au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+    au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
     if has("unix")
         au BufNewFile *.py set autoread | s,^,#!/usr/bin/python, | w | !chmod +x %
