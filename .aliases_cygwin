@@ -1,0 +1,11 @@
+# vim:filetype=sh syntax=sh:
+alias jsc1="/cygdrive/c/WINNT/Microsoft.NET/Framework/v1.*/jsc.exe"
+alias jsc2="/cygdrive/c/WINNT/Microsoft.NET/Framework/v2.*/jsc.exe"
+alias jsc3="/cygdrive/c/WINNT/Microsoft.NET/Framework/v3.*/jsc.exe"
+alias jsc4="/cygdrive/c/WINNT/Microsoft.NET/Framework/v4.*/jsc.exe"
+
+alias csc1="/cygdrive/c/WINNT/Microsoft.NET/Framework/v1.*/csc.exe"
+alias csc2="/cygdrive/c/WINNT/Microsoft.NET/Framework/v2.*/csc.exe"
+alias csc3="/cygdrive/c/WINNT/Microsoft.NET/Framework/v3.*/csc.exe"
+alias csc4="/cygdrive/c/WINNT/Microsoft.NET/Framework/v4.*/csc.exe"
+
