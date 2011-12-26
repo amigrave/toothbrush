@@ -20,10 +20,12 @@
   switch_to_tab_9 = <Super>9
 [profiles]
   [[default]]
-    copy_on_selection = True
-    scrollback_lines = 1000
-    font = Monospace 9
     use_system_font = False
+    font = Monospace 9
+    background_darkness = 0.91
+    scrollback_lines = 1000
+    background_type = transparent
+    copy_on_selection = True
 [layouts]
   [[default]]
     [[[child1]]]
