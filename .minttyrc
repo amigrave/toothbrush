@@ -1,4 +1,4 @@
-Font=DejaVu Sans Mono
+Font=Lucida Console
 CursorType=block
 Term=xterm-256color
 Columns=180
@@ -7,3 +7,4 @@ AllowBlinking=yes
 Locale=en_US
 Charset=UTF-8
 BoldAsFont=no
+WindowShortcuts=no
