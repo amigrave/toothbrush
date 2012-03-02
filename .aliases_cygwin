@@ -9,3 +9,4 @@ alias csc2="/cygdrive/c/WINNT/Microsoft.NET/Framework/v2.*/csc.exe"
 alias csc3="/cygdrive/c/WINNT/Microsoft.NET/Framework/v3.*/csc.exe"
 alias csc4="/cygdrive/c/WINNT/Microsoft.NET/Framework/v4.*/csc.exe"
 
+alias cyginstall='~/Desktop/setup.exe -q -n -N -d -R "c:\cygwin" -s "http://mirrors.kernel.org/sourceware/cygwin/" -l "c:\cygwin\tmp" -P '
