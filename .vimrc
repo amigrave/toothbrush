@@ -15,6 +15,7 @@ set softtabstop=4
 set textwidth=0         " Maximum width of text that is being inserted
 set history=50          " expand command history
 set hlsearch            " Highlight previous search pattern matches.
+set incsearch           " Use incremental search
 "set hidden              " Unused buffers are hidden when abandonned
 set backspace=2         " make backspace work like most other apps
 set smartcase           " ignore case when the pattern contains lowercase letters only.
@@ -86,7 +87,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.coffee set fdm=indent
     au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
     au BufWritePost,FileWritePost *.sass :!sass --style expanded <afile> > "%:p:r.css"
-    au BufWritePost,FileWritePost *.md,*.mkd :!markdown <afile> > "%:p:r.html"
+    au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
 
     au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
         \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
@@ -278,7 +279,7 @@ def SetBreakpoint():
     strWhite = re.search( '^(\s*)', strLine).group(1)
 
     vim.current.buffer.append(
-       "%(space)sfrom ipdb import set_trace;set_trace() %(mark)s Breakpoint %(mark)s" %
+       "%(space)sfrom pudb import set_trace;set_trace() %(mark)s Breakpoint %(mark)s" %
          {'space':strWhite, 'mark': '#' * 30}, nLine - 1)
 
 vim.command( 'map <f8> :py SetBreakpoint()<cr>')
