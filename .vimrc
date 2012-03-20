@@ -16,6 +16,7 @@ set textwidth=0         " Maximum width of text that is being inserted
 set history=50          " expand command history
 set hlsearch            " Highlight previous search pattern matches.
 set incsearch           " Use incremental search
+set scrolloff=5         " minimum number of screen lines that you would like above and below the cursor
 "set hidden              " Unused buffers are hidden when abandonned
 set backspace=2         " make backspace work like most other apps
 set smartcase           " ignore case when the pattern contains lowercase letters only.
@@ -35,9 +36,9 @@ set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
 let mapleader = "²"
 filetype plugin on
 if &t_Co == 256 && !has('win32unix')
-	colorscheme wombat256mod
+    colorscheme wombat256mod
 else
-	colorscheme agr
+    colorscheme agr
 endif
 if has("gui_macvim")
     set vb
@@ -47,19 +48,19 @@ endif
 " ################################### PLATFORM ################################## {{{
 syntax on
 if has("unix")
-	let $VIMFILES=$HOME . "/.vim"
+    let $VIMFILES=$HOME . "/.vim"
 else
-	let $VIMFILES=$HOME . "\\vim"
+    let $VIMFILES=$HOME . "\\vim"
 endif
 "if $TERM == "screen"
-"	set term=rxvt
+"    set term=rxvt
 "endif
 if &term =~ "screen\\|rxvt"
-"	"Set the cursor white in cmd-mode and orange in insert mode
-"	let &t_EI = "\<Esc>]12;white\x9c"
-"	let &t_SI = "\<Esc>]12;orange\x9c"
-"	"We normally start in cmd-mode
-"	silent !echo -e "\e]12;white\x9c"
+"    "Set the cursor white in cmd-mode and orange in insert mode
+"    let &t_EI = "\<Esc>]12;white\x9c"
+"    let &t_SI = "\<Esc>]12;orange\x9c"
+"    "We normally start in cmd-mode
+"    silent !echo -e "\e]12;white\x9c"
 endif
 "}}}
 
@@ -127,7 +128,7 @@ endif
 "" ################################### KEYMAPS ################################### {{{
 " Broken terminals. Rxvt.
 if (&term =~ "xterm") || (&term =~ "vt100")
-	set t_kP=[5~ t_kN=[6~ t_kh=[1~ t_@7=[4~
+    set t_kP=[5~ t_kN=[6~ t_kh=[1~ t_@7=[4~
 endif
 
 " Fixed scrolling
@@ -250,14 +251,14 @@ map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 "" ################################### ADDONS #################################### {{{
 " Xml QWeb {{{
 function! XmlQweb()
-	syn match   xmlAttribQWeb
-		\ +[-'"<]\@<!\<t-[a-zA-Z:_][-.0-9a-zA-Z0-9:_]*\>\(['">]\@!\|$\)+
-		\ contained
-		\ contains=xmlAttribPunct,@xmlAttribHook
-		\ display
+    syn match   xmlAttribQWeb
+        \ +[-'"<]\@<!\<t-[a-zA-Z:_][-.0-9a-zA-Z0-9:_]*\>\(['">]\@!\|$\)+
+        \ contained
+        \ contains=xmlAttribPunct,@xmlAttribHook
+        \ display
 
-	syn cluster xmlAttribHook contains=xmlAttribQWeb
-	hi link xmlAttribQWeb     xmlAttribQWeb
+    syn cluster xmlAttribHook contains=xmlAttribQWeb
+    hi link xmlAttribQWeb     xmlAttribQWeb
     hi xmlAttribQWeb guifg=#f0a040 ctermfg=DarkMagenta
     hi xmlAttribQWebTrad guifg=#ffffff ctermfg=white
 endfunction
