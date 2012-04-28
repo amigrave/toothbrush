@@ -14,3 +14,6 @@ chipmem_size=4
 bogomem_size=0
 fastmem_size=4
 show_leds=true
+
+;hardfile2=rw,:/dev/hdb,0,0,0,512,0,
+;hardfile=rw,0,0,0,512,/dev/hdb
