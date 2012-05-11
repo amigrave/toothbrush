@@ -8,10 +8,10 @@ regex/\.([mM][oO][dD]|[sS]3[mM]|[xX][mM]|[iI][tT]|[mM][tT][mM]|669|[sS][tT][mM]|
        Open=mikmod %f
        Edit=milkytracker %f
 
-regex/\.(fp|fi|cust?|pru2|aam|bp|hip|d[zw]|mdat|rjp|dm2|sonic)$
+regex/\.(fp|fi|cust?|pru2|aam|bp|hip|d[izw]|mdat|rjp|dm2|sonic)$
        Open=uade123 %f
 
-regex/^(di|fp|fi|cust?|pru2|aam|bp|hip|d[zw]|mdat|rjp|dm2|sonic)\.
+regex/^(fp|fi|cust?|pru2|aam|bp|hip|d[izw]|mdat|rjp|dm2|sonic)\.
        Open=uade123 %f
 
 regex/\.([aA][mM][dD]|[rR][aA][dD]|[hH][sS][cC]|[sS][aA]2)$
