@@ -1,8 +1,9 @@
 " vim:ft=vim:fdm=marker:nowrap:foldmethod=marker
 scriptencoding utf-8
+call pathogen#infect()
 
 " ################################### OPTIONS ################################### {{{
-set all&                " reset all options to compiled in defaults
+"set all&                " reset all options to compiled in defaults
 "set fileencodings=ascii,ucs-bom,utf-8,ucs-2,ucs-le,latin1
 set encoding=utf8
 set fileencoding=utf8
@@ -43,6 +44,23 @@ endif
 if has("gui_macvim")
     set vb
 endif
+
+set laststatus=2
+set statusline=   " clear the statusline for when vimrc is reloaded
+set statusline+=[Buf:\ %3.3n]\                                         " buffer number
+set statusline+=%f\                                                     " file name
+set statusline+=-\ %{FileSize()}\                                          " file size
+set statusline+=%h                                                      "help file flag
+set statusline+=%m                                                      "modified flag
+set statusline+=%r                                                      "read only flag
+set statusline+=[%{strlen(&ft)?&ft:'Unknown'},\                         " filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc},\                           " encoding
+set statusline+=%{&fileformat}]                                         " file format
+set statusline+=%=                                                      " right align
+set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\       " highlight
+set statusline+=%b,0x%-8B\                                              " current char
+set statusline+=%10.(%l,%c%V%)%<\ of\ %L\ :\ %P                       " offset
+
 "}}}
 
 " ################################### PLATFORM ################################## {{{
@@ -144,7 +162,6 @@ noremap Oa <C-Y><Up>
 inoremap Oa <C-O><C-Y><Up>
 noremap [1;5A <C-E><Up>
 inoremap [1;5A <C-O><C-E><Up>
-
 noremap <S-MouseUp> <C-E><Down>
 noremap <S-MouseDown> <C-Y><Up>
 
@@ -213,12 +230,19 @@ nmap <C-F> :FF<CR>
 nnoremap <silent> <F10> :bde<CR>
 inoremap <silent> <F10> <C-O>:bde<CR>
 
-set pastetoggle=<F12>
 nnoremap <F11> :nohlsearch<CR>
 inoremap <F11> <C-O>:nohlsearch<CR>
 
-vnoremap <Tab> >
-vnoremap <S-Tab> <LT>
+" NERD Tree
+nnoremap <F12> :NERDTreeMirrorToggle<CR>
+inoremap <F12> <C-O>:NERDTreeMirrorToggle<CR>
+nnoremap <S-F12> :NERDTree<CR>
+inoremap <S-F12> <C-O>:NERDTree<CR>
+
+set pastetoggle=<C-F12>
+
+vmap <Tab> >
+vmap <S-Tab> <LT>
 
 "inoremap {{ {
 "imap %% <%%><left><left>
@@ -249,6 +273,37 @@ map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 "" }}}
 
 "" ################################### ADDONS #################################### {{{
+
+function! FileSize()
+    let bytes = getfsize(expand("%:p"))
+    if bytes <= 0
+        return ""
+    endif
+    if bytes < 1024
+        return bytes
+    else
+        return (bytes / 1024) . "K"
+    endif
+endfunction
+
+" SnipMate
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-agr'
+
+" NERDTree
+let g:nerdtree_tabs_open_on_gui_startup=0
+let NERDTreeMapCloseDir='<Left>'
+let NERDTreeMapUpdir='<C-Left>'
+let NERDTreeMapActivateNode='<Right>'
+let NERDTreeMapChangeRoot='<C-Right>'
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+"let g:syntastic_auto_loc_list=1
+
 " Xml QWeb {{{
 function! XmlQweb()
     syn match   xmlAttribQWeb
