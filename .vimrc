@@ -20,6 +20,7 @@ set incsearch           " Use incremental search
 set scrolloff=5         " minimum number of screen lines that you would like above and below the cursor
 "set hidden              " Unused buffers are hidden when abandonned
 set backspace=2         " make backspace work like most other apps
+set ignorecase          " ignore case when searching
 set smartcase           " ignore case when the pattern contains lowercase letters only.
 set nobackup            " do not write a .bak file
 set nocompatible        " do not use vi compatible mode
@@ -234,10 +235,10 @@ nnoremap <F11> :nohlsearch<CR>
 inoremap <F11> <C-O>:nohlsearch<CR>
 
 " NERD Tree
-nnoremap <F12> :NERDTreeMirrorToggle<CR>
-inoremap <F12> <C-O>:NERDTreeMirrorToggle<CR>
-nnoremap <S-F12> :NERDTree<CR>
-inoremap <S-F12> <C-O>:NERDTree<CR>
+nnoremap <F12> :NERDTreeToggle<CR>
+inoremap <F12> <C-O>:NERDTreeToggle<CR>
+nnoremap <S-F12> :NERDTreeMirror<CR>
+inoremap <S-F12> <C-O>:NERDTreeMirror<CR>
 
 set pastetoggle=<C-F12>
 

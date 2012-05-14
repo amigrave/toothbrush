@@ -6,7 +6,6 @@ git clone https://github.com/tomtom/tlib_vim.git
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
 git clone https://github.com/honza/snipmate-snippets.git
 git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/jistr/vim-nerdtree-tabs.git
 git clone https://github.com/ervandew/supertab.git
 git clone https://github.com/tpope/vim-surround
 git clone https://github.com/mattn/zencoding-vim.git
