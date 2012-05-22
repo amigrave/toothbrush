@@ -29,7 +29,7 @@ alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
 alias termkey='tput smkx; cat; tput rmkx'
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 alias webserve='python -m SimpleHTTPServer'
-alias v='DISPLAY=:0 mplayer -geometry 0x1366 -fs'
+alias v='DISPLAY=:0 mplayer -geometry 0x1366 -cache 8192 -fs'
 
 alias track='inotifywait -rm . | grep -iE "(modify |create |delete|attrib|moved)"'
 
