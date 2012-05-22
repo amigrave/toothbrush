@@ -15,3 +15,4 @@ git clone https://github.com/vim-scripts/vcscommand.vim.git
 git clone https://github.com/kchmck/vim-coffee-script.git
 git clone https://github.com/vim-scripts/ASPJScript.git
 git clone https://github.com/plasticboy/vim-markdown.git
+git clone https://github.com/marzocchi/vim-color-picker-osx.git

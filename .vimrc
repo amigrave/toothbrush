@@ -35,7 +35,8 @@ set showmode            " If in Insert, Replace or Visual mode put a message on 
 set viminfo='200,\"5000 nowrap
 "set list listchars=tab:~.,trail:.,extends:>,precedes:<
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
-let mapleader = "²"
+"let mapleader = "²"
+let mapleader = "§"
 filetype plugin on
 if &t_Co == 256 && !has('win32unix')
     colorscheme wombat256mod
@@ -252,6 +253,17 @@ vmap <S-Tab> <LT>
 "inoremap {{ {{   }}<left><left><left><left>
 "inoremap [ []<left>
 "inoremap ( ()<left>
+inoremap ({<cr> ({<cr><Backspace>});<esc>O
+inoremap {<cr> {<cr><Backspace>}<esc>O
+
+nmap <silent> <A-Up> :wincmd k<CR>
+nmap <silent> <A-Down> :wincmd j<CR>
+nmap <silent> <A-Left> :wincmd h<CR>
+nmap <silent> <A-Right> :wincmd l<CR>
+nmap <silent> <A-Up> <C-O>:wincmd k<CR>
+nmap <silent> <A-Down> <C-O>:wincmd j<CR>
+nmap <silent> <A-Left> <C-O>:wincmd h<CR>
+nmap <silent> <A-Right> <C-O>:wincmd l<CR>
 
 " lhs comments
 map ,# :s/^/#/<CR>:nohl<CR>
@@ -275,6 +287,7 @@ map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 "" ################################### ADDONS #################################### {{{
 
+" Misc Configuration {{{
 function! FileSize()
     let bytes = getfsize(expand("%:p"))
     if bytes <= 0
@@ -304,7 +317,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 "let g:syntastic_auto_loc_list=1
-
+" }}}
 " Xml QWeb {{{
 function! XmlQweb()
     syn match   xmlAttribQWeb
