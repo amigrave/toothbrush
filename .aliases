@@ -18,8 +18,6 @@ alias mc='command mc -c --printwd=/tmp/mc-$USER-$$-dir; cd "`cat /tmp/mc-$USER-$
 alias mcc='LANG=C mc'
 alias qmv='qmv -f do'
 alias vir='clamscan -r *'
-alias py='ipython'
-alias by='bpython'
 alias ft='milkytracker'
 alias adlib='adplay -r -b 8192'
 alias am='uade123 --detect-format-by-content'

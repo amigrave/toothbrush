@@ -106,6 +106,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.mako set ft=html
     au BufRead,BufNewFile *.asp set ft=javascript
     au BufRead,BufNewFile *.coffee set fdm=indent
+    au BufNewFile,BufRead *.boo set filetype=boo
     au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
     au BufWritePost,FileWritePost *.sass :!sass --style expanded <afile> > "%:p:r.css"
     au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
@@ -260,10 +261,10 @@ nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
-nmap <silent> <A-Up> <C-O>:wincmd k<CR>
-nmap <silent> <A-Down> <C-O>:wincmd j<CR>
-nmap <silent> <A-Left> <C-O>:wincmd h<CR>
-nmap <silent> <A-Right> <C-O>:wincmd l<CR>
+imap <silent> <A-Up> <C-O>:wincmd k<CR>
+imap <silent> <A-Down> <C-O>:wincmd j<CR>
+imap <silent> <A-Left> <C-O>:wincmd h<CR>
+imap <silent> <A-Right> <C-O>:wincmd l<CR>
 
 " lhs comments
 map ,# :s/^/#/<CR>:nohl<CR>
