@@ -5,4 +5,5 @@
     , "evil": true          // Allow eval
     , "sub": true           // Do not force dot notation
     , "shadow": true        // Do not warn for variable already defined
+    , "loopfunc": true      // Do not warn for function declaration in loops
 }

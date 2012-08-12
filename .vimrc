@@ -86,8 +86,8 @@ endif
 
 " ############################ AUTOCMD & FILETYPES ############################## {{{
 if has("autocmd")
-    "\ if line("'\"") | exe "normal '\"" | endif |
     au BufEnter * silent! lcd %:p:h    "automatically change cwd to file's dir
+    "\ if line("'\"") | exe "normal '\"" | endif |
     au BufRead *
         \ if line("'\"") | exe "normal '\"" | endif |
         \ if match( getline(1) , '^\#!') == 0 |
@@ -300,6 +300,14 @@ function! FileSize()
         return (bytes / 1024) . "K"
     endif
 endfunction
+function! s:DiffWithSaved()
+    let filetype=&ft
+    diffthis
+    vnew | r # | normal! 1Gdd
+    diffthis
+    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
 
 " SnipMate
 let g:snipMate = {}

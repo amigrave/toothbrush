@@ -1,0 +1,34 @@
+#!/usr/bin/python
+import sys, os, commands
+
+if len(sys.argv) == 1:
+    sys.exit("Usage: bnew <branch name>")
+
+branch = sys.argv[1]
+
+def execute(*cmds):
+    for c in cmds:
+        print c
+        out = commands.getstatusoutput(c)
+        if out[0]:
+            sys.exit(out[1])
+
+if os.popen('bzr nick').read().strip() != 'trunk':
+    sys.exit("Not in trunk")
+
+path = os.path.realpath(os.curdir).split('/')
+
+branches = {
+    'web': 'lp:~openerp-dev/openerp-web/',
+    'addons': 'lp:~openerp-dev/openobject-addons/',
+    'server': 'lp:~openerp-dev/openobject-server/',
+}
+address = ''
+for proj in branches.keys():
+    if path.count(proj):
+        address = branches[proj] + branch
+        break
+if not address:
+    os.exit("Could not find current branch type.")
+
+execute("bzr info", "bzr shelve --all", "bzr pull", "bzr branch --switch ../trunk ../%s" % branch, "bzr unshelve", "bzr push --remember %s" % address)
