@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries (ignorespace is for mc bug)
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
