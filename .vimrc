@@ -36,7 +36,8 @@ set viminfo='200,\"5000 nowrap
 "set list listchars=tab:~.,trail:.,extends:>,precedes:<
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
 "let mapleader = "²"
-let mapleader = "§"
+"let mapleader = "§"
+let mapleader = ","
 filetype plugin on
 if &t_Co == 256 && !has('win32unix')
     colorscheme wombat256mod
@@ -86,7 +87,7 @@ endif
 
 " ############################ AUTOCMD & FILETYPES ############################## {{{
 if has("autocmd")
-    au BufEnter * silent! lcd %:p:h    "automatically change cwd to file's dir
+    "au BufEnter * silent! lcd %:p:h    "automatically change cwd to file's dir
     "\ if line("'\"") | exe "normal '\"" | endif |
     au BufRead *
         \ if line("'\"") | exe "normal '\"" | endif |
@@ -129,8 +130,8 @@ if has("autocmd")
     au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
     if has("unix")
-        au BufNewFile *.py set autoread | s,^,#!/usr/bin/python, | w | !chmod +x %
-        au BufNewFile *.rb set autoread | s,^,#!/usr/bin/ruby, | w | !chmod +x %
+        au BufNewFile *.py set autoread | s,^,#!/usr/bin/python\r# -*- coding: utf-8 -*-,
+        au BufNewFile *.rb set autoread | s,^,#!/usr/bin/ruby,
         au BufNewFile *.sh set autoread | s,^,#!/bin/bash, | w | !chmod +x %
     endif
 
@@ -151,6 +152,8 @@ endif
 if (&term =~ "xterm") || (&term =~ "vt100")
     set t_kP=[5~ t_kN=[6~ t_kh=[1~ t_@7=[4~
 endif
+
+nnoremap <Leader>. :lcd %:p:h<CR>
 
 " Fixed scrolling
 noremap <C-Down> <C-E><Down>
@@ -320,6 +323,15 @@ let NERDTreeMapCloseDir='<Left>'
 let NERDTreeMapUpdir='<C-Left>'
 let NERDTreeMapActivateNode='<Right>'
 let NERDTreeMapChangeRoot='<C-Right>'
+
+" Command-T
+let g:CommandTMatchWindowAtTop=1
+"nnoremap <silent> <Leader>oea :CommandT ~/Projects/openerp/source/addons/current/<CR>
+"nnoremap <silent> <Leader>oew :CommandT ~/Projects/openerp/source/web/current/<CR>
+"nnoremap <silent> <Leader>oes :CommandT ~/Projects/openerp/source/web/server/<CR>
+nnoremap <silent> <Leader>oea :cd ~/Projects/openerp/source/addons/current/<CR>
+nnoremap <silent> <Leader>oew :cd ~/Projects/openerp/source/web/current/<CR>
+nnoremap <silent> <Leader>oes :cd ~/Projects/openerp/source/web/server/<CR>
 
 " Syntastic
 set statusline+=%#warningmsg#
