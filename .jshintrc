@@ -6,5 +6,5 @@
     , "sub": true           // Do not force dot notation
     , "shadow": true        // Do not warn for variable already defined
     , "loopfunc": true      // Do not warn for function declaration in loops
-    , "boss": true          // Do not warn for assignations used as expression
+    //, "boss": true          // Do not warn for assignations used as expression
 }
