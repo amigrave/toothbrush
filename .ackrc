@@ -1,2 +1,6 @@
 --type-set=mako=mako
 --type-set=sass=sass
+--ignore-dir=node_modules
+--ignore-dir=.git
+--ignore-dir=.bzr
+--ignore-dir=.sass-cache
