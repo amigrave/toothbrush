@@ -99,7 +99,7 @@ if has("autocmd")
             \ if getline(1) =~ '^<DOCTYPE' | set filetype=html | endif |
         \endif
 
-    au BufRead *.txt,*.rst set expandtab tw=78
+    au BufRead *.txt,*.rst set expandtab tw=78 colorcolumn=80
     au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
@@ -230,7 +230,8 @@ nmap <C-S-F> :FC .<CR>
 nmap <C-F> :FF<CR>
 
 " F8 & Shift-F8 mapped in pydebug addon
-
+nnoremap <F7> :TogglePudbBreakPoint<CR>
+inoremap <F7> <ESC>:TogglePudbBreakPoint<CR>a
 
 " Quit
 nnoremap <silent> <F10> :bde<CR>
@@ -383,7 +384,7 @@ def RemoveBreakpoints():
     nLines = []
     nLine = 1
     for strLine in vim.current.buffer:
-        if strLine.lstrip()[:38] == 'from ipdb import set_trace;set_trace()':
+        if strLine.lstrip()[:38] == 'from pudb import set_trace;set_trace()':
             nLines.append( nLine)
             print nLine
         nLine += 1

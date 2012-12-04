@@ -20,3 +20,4 @@ git clone https://github.com/marzocchi/vim-color-picker-osx.git
 #git clone https://github.com/jelera/vim-javascript-syntax
 #git clone https://github.com/vim-scripts/JavaScript-syntax.git
 git clone https://github.com/mileszs/ack.vim.git
+git clone https://github.com/KangOl/vim-pudb
