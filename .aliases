@@ -29,6 +29,7 @@ alias termkey='tput smkx; cat; tput rmkx'
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 alias webserve='python -m SimpleHTTPServer'
 alias v='DISPLAY=:0 mplayer -geometry 0x1366 -cache 4096 -fs'
+alias psql='PAGER="less -S -F" psql'
 
 alias track='inotifywait -rm . | grep -iE "(modify |create |delete|attrib|moved)"'
 
