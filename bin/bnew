@@ -13,9 +13,7 @@ def execute(*cmds):
         if out[0]:
             sys.exit(out[1])
 
-if os.popen('bzr nick').read().strip() != 'trunk':
-    sys.exit("Not in trunk")
-
+parent_branch = os.popen('bzr nick').read().strip()
 path = os.path.realpath(os.curdir).split('/')
 
 branches = {
@@ -31,4 +29,4 @@ for proj in branches.keys():
 if not address:
     os.exit("Could not find current branch type.")
 
-execute("bzr info", "bzr shelve --all", "bzr pull", "bzr branch --switch ../trunk ../%s" % branch, "bzr unshelve", "bzr push --remember %s" % address)
+execute("bzr info", "bzr shelve --all", "bzr pull", "bzr branch --switch ../%s ../%s" % (parent_branch, branch), "bzr unshelve", "bzr push --remember %s" % address)
