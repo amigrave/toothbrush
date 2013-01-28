@@ -22,7 +22,7 @@ alias ft='milkytracker'
 alias adlib='adplay -r -b 8192'
 alias am='uade123 --detect-format-by-content'
 alias pudb='python -m pudb.run'
-alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \;'
+alias bclean='find . -name "*.pyc" -exec rm -rf {} \; ; find -name "*.moved" -exec rm -ri {} \; ; bzr resolve --all ;'
 # check for virtualization instructions
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
 alias termkey='tput smkx; cat; tput rmkx'

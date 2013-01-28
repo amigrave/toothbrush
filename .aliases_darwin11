@@ -4,7 +4,7 @@ alias mpk="/Applications/kid3.app/Contents/MacOS/kid3 ."
 
 alias safari="/Applications/Safari.app/Contents/MacOS/Safari"
 alias google-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-alias google-chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
+alias google-chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --disable-web-security"
 alias clementine="/Applications/clementine.app/Contents/MacOS/clementine"
 alias dosbox="/Applications/DOSBox.app/Contents/MacOS/DOSBox"
 alias gimp="/Applications/Gimp.app/Contents/MacOS/Gimp"
