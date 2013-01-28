@@ -13,7 +13,7 @@ shopt -s histappend                      # append to history, don't overwrite it
 #shopt -s checkwinsize
 
 
-PADD=~/bin::/usr/local/sbin:/usr/sbin:/sbin
+PADD=~/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/share/npm/bin:/usr/local/ringojs/bin
 echo "$PATH" | grep "$PADD" > /dev/null || PATH="$PADD:$PATH"
 unset PADD
 export PATH
@@ -86,3 +86,4 @@ PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]
 
 [ -f ~/.dir_colors ] && eval `dircolors -b ~/.dir_colors `
 
+export HOSTING="amigrave@amigrave.com"
