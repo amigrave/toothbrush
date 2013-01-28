@@ -107,6 +107,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.mako set ft=html
     au BufRead,BufNewFile *.asp set ft=javascript
     au BufRead,BufNewFile *.coffee set fdm=indent
+    au BufRead,BufNewFile *.iced set filetype=coffee
     au BufNewFile,BufRead *.boo set filetype=boo
     au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
     au BufWritePost,FileWritePost *.sass :!sass --style expanded <afile> > "%:p:r.css"
@@ -115,8 +116,6 @@ if has("autocmd")
     au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
         \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
     au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
-
-    " au BufReadPost *.js,*.css,*.asp set tabstop=4 shiftwidth=4 " override ftplugin tab=4
 
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
@@ -248,6 +247,9 @@ inoremap <S-F12> <C-O>:NERDTreeMirror<CR>
 
 set pastetoggle=<C-F12>
 
+" IP Lookup
+nmap <silent> <Leader>IP :python lookupIPUnderCursor()<CR>
+
 vmap <Tab> >
 vmap <S-Tab> <LT>
 
@@ -269,23 +271,6 @@ imap <silent> <A-Up> <C-O>:wincmd k<CR>
 imap <silent> <A-Down> <C-O>:wincmd j<CR>
 imap <silent> <A-Left> <C-O>:wincmd h<CR>
 imap <silent> <A-Right> <C-O>:wincmd l<CR>
-
-" lhs comments
-map ,# :s/^/#/<CR>:nohl<CR>
-map ,/ :s/^/\/\//<CR>:nohl<CR>
-map ,> :s/^/> /<CR>:nohl<CR>
-map ," :s/^/\"/<CR>:nohl<CR>
-map ,% :s/^/%/<CR>:nohl<CR>
-map ,! :s/^/!/<CR>:nohl<CR>
-map ,; :s/^/;/<CR>:nohl<CR>
-map ,- :s/^/--/<CR>:nohl<CR>
-map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:nohl<CR>
-
-" wrapping comments
-map ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>:nohl<CR>
-map ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:nohl<CR>
-map ,< :s/^\(.*\)$/<!-- \1 -->/<CR>:nohl<CR>
-map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:nohl<CR>
 
 map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") ."> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 "" }}}
@@ -400,6 +385,25 @@ def RemoveBreakpoints():
     vim.command( 'normal %dG' % nCurrentLine)
 
 vim.command( 'map <s-f8> :py RemoveBreakpoints()<cr>')
+EOF
+endif
+" }}}
+" IP Lookup {{{
+" Website: http://codeseekah.com/2012/03/04/vim-scripting-with-python-lookup-ip-country/
+" Lookup the country for an IP address under the current cursor
+" Make sure Python is ready
+
+if has('python')
+python << EOF
+import vim, urllib
+
+def lookupIPUnderCursor():
+    ip = vim.eval("expand('<cWORD>')")
+    print "Looking up %s..." % ip
+    # api info : http://www.hostip.info/use.html API
+    info = urllib.urlopen('http://api.hostip.info/get_html.php?position=true&ip=%s' % ip).read()
+    vim.command("redraw") # discard previous messages
+    print info
 EOF
 endif
 " }}}
