@@ -1,6 +1,7 @@
 --type-set=mako=mako
 --type-set=sass=sass
 --type-set=conf=conf
+--type-set=asp=asp
 --ignore-dir=node_modules
 --ignore-dir=.git
 --ignore-dir=.bzr
