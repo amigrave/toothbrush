@@ -1,4 +1,4 @@
-" vim:ft=vim:fdm=marker:nowrap:foldmethod=marker
+" vim:ft=vim:fdm=marker:nowrap
 scriptencoding utf-8
 call pathogen#infect()
 
@@ -153,6 +153,7 @@ if (&term =~ "xterm") || (&term =~ "vt100")
 endif
 
 nnoremap <Leader>. :lcd %:p:h<CR>
+nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
 
 " Fixed scrolling
 noremap <C-Down> <C-E><Down>
@@ -207,6 +208,8 @@ inoremap <silent> <S-F3> <C-O>:bn<CR>
 " Folding
 nnoremap <silent> <S-Up> zc
 inoremap <silent> <S-Up> <C-O>zc
+nnoremap <silent> <S-Down> zO
+inoremap <silent> <S-Down> <C-O>zO
 noremap [a zc
 inoremap [a <C-O>zc
 noremap [1;5B zc
@@ -215,10 +218,6 @@ nnoremap <silent> <F4> zi
 inoremap <silent> <F4> <C-O>zi
 nnoremap <silent> <F5> zm
 inoremap <silent> <F5> <C-O>zm
-
-" Disable <S-Down>
-noremap <S-Down> <Nop>
-inoremap <S-Down> <Nop>
 
 " Taglist
 nnoremap <silent> <F7> :TlistToggle<CR><C-w>h
@@ -303,6 +302,13 @@ let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-agr'
 
+" CtrlP
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("t")': ['<cr>'],
+    \ 'AcceptSelection("e")': ['<c-x>'],
+\ }
+nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
+
 " NERDTree
 let g:nerdtree_tabs_open_on_gui_startup=0
 let NERDTreeMapCloseDir='<Left>'
@@ -310,14 +316,14 @@ let NERDTreeMapUpdir='<C-Left>'
 let NERDTreeMapActivateNode='<Right>'
 let NERDTreeMapChangeRoot='<C-Right>'
 
-" Command-T
-let g:CommandTMatchWindowAtTop=1
-"nnoremap <silent> <Leader>oea :CommandT ~/Projects/openerp/source/addons/current/<CR>
-"nnoremap <silent> <Leader>oew :CommandT ~/Projects/openerp/source/web/current/<CR>
-"nnoremap <silent> <Leader>oes :CommandT ~/Projects/openerp/source/web/server/<CR>
+"" Command-T
+"let g:CommandTMatchWindowAtTop=1
+""nnoremap <silent> <Leader>oea :CommandT ~/Projects/openerp/source/addons/current/<CR>
+""nnoremap <silent> <Leader>oew :CommandT ~/Projects/openerp/source/web/current/<CR>
+""nnoremap <silent> <Leader>oes :CommandT ~/Projects/openerp/source/web/server/<CR>
 nnoremap <silent> <Leader>oea :cd ~/Projects/openerp/source/addons/current/<CR>
 nnoremap <silent> <Leader>oew :cd ~/Projects/openerp/source/web/current/<CR>
-nnoremap <silent> <Leader>oes :cd ~/Projects/openerp/source/web/server/<CR>
+nnoremap <silent> <Leader>oes :cd ~/Projects/openerp/source/server/current/<CR>
 
 " Syntastic
 set statusline+=%#warningmsg#
