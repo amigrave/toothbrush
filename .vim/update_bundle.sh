@@ -27,3 +27,4 @@ git clone git://github.com/digitaltoad/vim-jade.git
 git clone https://github.com/wavded/vim-stylus.git
 git clone https://github.com/rainux/vim-vala.git
 git clone https://github.com/kien/ctrlp.vim.git
+git clone https://github.com/evanmiller/nginx-vim-syntax.git
