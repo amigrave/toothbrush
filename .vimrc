@@ -241,10 +241,8 @@ inoremap <F11> <C-O>:nohlsearch<CR>
 " NERD Tree
 nnoremap <F12> :NERDTreeToggle<CR>
 inoremap <F12> <C-O>:NERDTreeToggle<CR>
-nnoremap <S-F12> :NERDTreeMirror<CR>
-inoremap <S-F12> <C-O>:NERDTreeMirror<CR>
 
-set pastetoggle=<C-F12>
+set pastetoggle=<S-F12>
 
 " IP Lookup
 nmap <silent> <Leader>IP :python lookupIPUnderCursor()<CR>
