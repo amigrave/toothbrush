@@ -109,9 +109,9 @@ if has("autocmd")
     au BufRead,BufNewFile *.coffee set fdm=indent
     au BufRead,BufNewFile *.iced set filetype=coffee
     au BufNewFile,BufRead *.boo set filetype=boo
-    au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
+    "au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
     au BufWritePost,FileWritePost *.sass :!sass --style expanded <afile> > "%:p:r.css"
-    au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
+    "au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
 
     au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
         \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2

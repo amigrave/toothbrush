@@ -22,7 +22,7 @@ alias ft='milkytracker'
 alias adlib='adplay -r -b 8192'
 alias am='uade123 --detect-format-by-content'
 alias pudb='python -m pudb.run'
-alias bclean='find . -name "*.pyc" -exec rm -rf {} \; ; find -name "*.moved" -exec rm -ri {} \; ; bzr resolve --all ;'
+alias bclean='find . -name "*.pyc" -exec rm -rf {} \; ; find -name "*.~*~" -exec rm -r {} \; ; find -name "*.moved" -exec rm -r {} \; ; bzr resolve --all ;'
 # check for virtualization instructions
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
 alias termkey='tput smkx; cat; tput rmkx'
@@ -35,6 +35,7 @@ alias track='inotifywait -rm . | grep -iE "(modify |create |delete|attrib|moved)
 
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
 alias s='screen -RdU'
+alias tm='tmux attach || tmux'
 
 alias memo="e ~/local/docs/memos/memo.txt"
 alias memotel="e ~/local/docs/memos/memotel.txt"

@@ -1,3 +1,4 @@
+--type-set=po=po
 --type-set=mako=mako
 --type-set=sass=sass
 --type-set=conf=conf

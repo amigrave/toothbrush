@@ -413,7 +413,8 @@ shell/.ico
 	Include=image
 
 include/image
-	Open=(see %f &)
+	#Open=(see %f &)
+	Open=(open %f &)
 	View=%view{ascii} identify %f
 	#View=%view{ascii} asciiview %f
 
