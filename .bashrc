@@ -69,9 +69,9 @@ usercolor="33"
 if [ "$USER" == "agr" ]; then
     usercolor="35"
 fi
-hostcolor="34"
-if [ "$HOSTNAME" == "amigrave" ]; then
-    hostcolor="31"
+hostcolor="31"
+if [ "$HOSTNAME" == "amigrave" ] || [ "$HOSTNAME" == "amigrave.local" ]; then
+    hostcolor="34"
 fi
 PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]\w\[\033[0m\] [\[\033[35m\]\t\[\033[0m\]]\[\033[31m\]\$\[\033[0m\] '
 
