@@ -110,12 +110,12 @@ if has("autocmd")
     au BufRead,BufNewFile *.iced set filetype=coffee
     au BufNewFile,BufRead *.boo set filetype=boo
     "au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
-    au BufWritePost,FileWritePost *.sass :!sass --style expanded <afile> > "%:p:r.css"
     "au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
+    au BufWritePost,FileWritePost *.sass :!sass --compass --style expanded <afile> > "%:p:r.css"
 
-    au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
-        \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
-    au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
+    " au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
+    "     \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
+    " au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
 
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
@@ -294,6 +294,9 @@ function! s:DiffWithSaved()
     exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
+
+" SuperTab
+let g:SuperTabDefaultCompletionType = "context"
 
 " SnipMate
 let g:snipMate = {}
