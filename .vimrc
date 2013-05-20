@@ -153,6 +153,9 @@ if (&term =~ "xterm") || (&term =~ "vt100")
 endif
 
 nnoremap <Leader>. :lcd %:p:h<CR>
+" RepoRoot
+nnoremap <silent> <Leader>/ :lcd %:p:h<CR>:RepoRoot<CR>
+
 nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
 
 " Fixed scrolling
@@ -223,9 +226,8 @@ inoremap <silent> <F5> <C-O>zm
 nnoremap <silent> <F7> :TlistToggle<CR><C-w>h
 inoremap <silent> <F7> <C-O>:TlistToggle<CR><C-w>h
 
-" Find File plugin
-nmap <C-S-F> :FC .<CR>
-nmap <C-F> :FF<CR>
+" Ack
+noremap <Leader>ack :Ack <c-r>=expand("<cword>")<cr><Home><Right><Right><Right><Right>
 
 " F8 & Shift-F8 mapped in pydebug addon
 nnoremap <F7> :TogglePudbBreakPoint<CR>
@@ -295,8 +297,20 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
+" Tabular
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a\| :Tabularize /\|<CR>
+vmap <Leader>a\| :Tabularize /\|<CR>
+
 " SuperTab
 let g:SuperTabDefaultCompletionType = "context"
+
+" Session.vim
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
 
 " SnipMate
 let g:snipMate = {}
@@ -304,10 +318,11 @@ let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-agr'
 
 " CtrlP
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("t")': ['<cr>'],
-    \ 'AcceptSelection("e")': ['<c-x>'],
-\ }
+let g:ctrlp_max_files = 0
+"let g:ctrlp_prompt_mappings = {
+"    \ 'AcceptSelection("t")': ['<cr>'],
+"    \ 'AcceptSelection("e")': ['<c-x>'],
+"\ }
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
 
 " NERDTree
