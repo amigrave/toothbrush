@@ -86,4 +86,4 @@ PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]
 
 [ -f ~/.dir_colors ] && eval `dircolors -b ~/.dir_colors `
 
-export HOSTING="amigrave@amigrave.com"
+export HOSTING="amigrave.com"

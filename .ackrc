@@ -7,3 +7,4 @@
 --ignore-dir=.git
 --ignore-dir=.bzr
 --ignore-dir=.sass-cache
+--type-set=aspx=aspx
