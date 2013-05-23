@@ -316,6 +316,7 @@ let g:session_autoload = 'no'
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-agr'
+let g:snipMate.scope_aliases['xml'] = 'xml-agr'
 
 " CtrlP
 let g:ctrlp_max_files = 0
