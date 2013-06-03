@@ -109,7 +109,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.coffee set fdm=indent
     au BufRead,BufNewFile *.iced set filetype=coffee
     au BufNewFile,BufRead *.boo set filetype=boo
-    "au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
+    au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
     "au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
     au BufWritePost,FileWritePost *.sass :!sass --compass --style expanded <afile> > "%:p:r.css"
 
@@ -222,6 +222,22 @@ inoremap <silent> <F4> <C-O>zi
 nnoremap <silent> <F5> zm
 inoremap <silent> <F5> <C-O>zm
 
+nnoremap <F6> :call ToggleMarkers()<CR>
+vnoremap <F6> :call ToggleMarkers()<CR>gv
+inoremap <F6> <C-O>:call ToggleMarkers()<CR>
+let g:agr_markers = 0
+function! ToggleMarkers()
+    if g:agr_markers
+        set colorcolumn=0
+        set nocursorline nocursorcolumn
+        let g:agr_markers = 0
+    else
+        set colorcolumn=80
+        set cursorline cursorcolumn
+        let g:agr_markers = 1
+    endif
+endfunction
+
 " Taglist
 nnoremap <silent> <F7> :TlistToggle<CR><C-w>h
 inoremap <silent> <F7> <C-O>:TlistToggle<CR><C-w>h
@@ -243,6 +259,14 @@ inoremap <F11> <C-O>:nohlsearch<CR>
 " NERD Tree
 nnoremap <F12> :NERDTreeToggle<CR>
 inoremap <F12> <C-O>:NERDTreeToggle<CR>
+
+" Zen coding
+let g:user_zen_expandabbr_key = '<c-e>'
+" let g:user_zen_leader_key = '<c-e>'
+let g:use_zen_complete_tag = 1
+let g:user_zen_settings = {
+    \  'indentation' : '    '
+\}
 
 set pastetoggle=<S-F12>
 
