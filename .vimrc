@@ -111,7 +111,7 @@ if has("autocmd")
     au BufNewFile,BufRead *.boo set filetype=boo
     au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
     "au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
-    au BufWritePost,FileWritePost *.sass :!sass --compass --style expanded <afile> > "%:p:r.css"
+    au BufWritePost,FileWritePost *.sass :silent !sass --compass --style expanded <afile> > "%:p:r.css"
 
     " au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
     "     \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
@@ -340,14 +340,15 @@ let g:session_autoload = 'no'
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-agr'
-let g:snipMate.scope_aliases['xml'] = 'xml-agr'
+let g:snipMate.scope_aliases['xml'] = 'xml,xml-agr'
+let g:snipMate.scope_aliases['_'] = '_,_-agr'
 
 " CtrlP
 let g:ctrlp_max_files = 0
-"let g:ctrlp_prompt_mappings = {
-"    \ 'AcceptSelection("t")': ['<cr>'],
-"    \ 'AcceptSelection("e")': ['<c-x>'],
-"\ }
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("t")': ['<cr>'],
+    \ 'AcceptSelection("e")': ['<c-x>'],
+\ }
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
 
 " NERDTree

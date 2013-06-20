@@ -22,7 +22,6 @@ alias ft='milkytracker'
 alias adlib='adplay -r -b 8192'
 alias am='uade123 --detect-format-by-content'
 alias pudb='python -m pudb.run'
-alias bclean='find . -name "*.pyc" -exec rm -rf {} \; ; find -name "*.~*~" -exec rm -r {} \; ; find -name "*.moved" -exec rm -r {} \; ; bzr resolve --all ;'
 # check for virtualization instructions
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo'
 alias termkey='tput smkx; cat; tput rmkx'
@@ -91,4 +90,13 @@ function diffresolver() {
 }
 function assh() {
 	autossh -x "$*" 'screen -RdU'
+}
+function bclean() {
+    find . -name "*.pyc" -delete
+    find . -name "*.~*~" -delete
+    find . -name ".DS_Store" -delete
+    find -name '.sass-cache' -type d | xargs rm -rf
+    #find . -name "*.moved" -delete
+    find . -type d -empty ! -path '*/.bzr/*' -delete
+    #bzr resolve --all
 }

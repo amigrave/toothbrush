@@ -1,0 +1,28 @@
+# Global snippets
+
+snippet agrmd
+	<!DOCTYPE html>
+	<html>
+	<title>${1:Title}</title>
+	
+	<xmp theme="cerulean" style="display:none;">
+		${2:Text}
+	</xmp>
+	
+	<style type="text/css">
+	.page-breaker {
+		display: block;
+		clear: both;
+		page-break-after: always;
+	}
+	@media print {
+		.table {
+			page-break-inside: avoid;
+		}
+	}
+	</style>
+	<script src="http://www.hagrid.be/sd/strapdown.js"></script>
+	</html>
+	<!-- vim:ft=markdown:
+	-->
+

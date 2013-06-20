@@ -8,6 +8,9 @@ git clone https://github.com/ervandew/supertab.git
 git clone https://github.com/kien/ctrlp.vim.git
 git clone https://github.com/jmcantrell/vim-reporoot.git
 
+# Look
+######
+#git clone https://github.com/goatslacker/mango.vim.git
 
 # Edition
 #########
@@ -25,11 +28,11 @@ git clone https://github.com/godlygeek/tabular.git
 git clone https://github.com/scrooloose/syntastic.git
 
 git clone https://github.com/OrgaChem/JavaScript-syntax.git
-git clone https://github.com/marijnh/tern_for_vim.git
+#git clone https://github.com/marijnh/tern_for_vim.git
 git clone https://github.com/dmitry-ilyashevich/vim-typescript.git
 git clone https://github.com/vim-scripts/ASPJScript.git
 git clone https://github.com/kchmck/vim-coffee-script.git
-
+git clone https://github.com/groenewege/vim-less.git
 git clone https://github.com/sukima/xmledit.git
 git clone https://github.com/digitaltoad/vim-jade.git
 git clone https://github.com/wavded/vim-stylus.git
