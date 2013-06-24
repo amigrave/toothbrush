@@ -142,6 +142,7 @@ if has("autocmd")
     let g:xml_syntax_folding=1
     let python_highlight_numbers = 1
     let coffee_folding = 1
+    let g:javascript_fold = 1
 
 endif
 "}}}
@@ -217,10 +218,10 @@ noremap [a zc
 inoremap [a <C-O>zc
 noremap [1;5B zc
 inoremap [1;5B <C-O>zc
-nnoremap <silent> <F4> zi
-inoremap <silent> <F4> <C-O>zi
-nnoremap <silent> <F5> zm
-inoremap <silent> <F5> <C-O>zm
+nnoremap <silent> <F4> zR
+inoremap <silent> <F4> <C-O>zR
+nnoremap <silent> <F5> zM
+inoremap <silent> <F5> <C-O>zM
 
 nnoremap <F6> :call ToggleMarkers()<CR>
 vnoremap <F6> :call ToggleMarkers()<CR>gv
@@ -372,6 +373,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 "let g:syntastic_auto_loc_list=1
+let g:syntastic_python_checkers = ['flake8']
 " }}}
 " Xml QWeb {{{
 function! XmlQweb()

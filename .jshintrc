@@ -2,9 +2,9 @@
       "laxcomma": true      // Allow leading comma
     , "laxbreak": true      // Allow bad line breaking
     , "es5": true           // Use es5 (trailing commas, ...)
-    , "evil": true          // Allow eval
+    /* , "evil": true          // Allow eval */
     , "sub": true           // Do not force dot notation
     , "shadow": true        // Do not warn for variable already defined
     , "loopfunc": true      // Do not warn for function declaration in loops
-    //, "boss": true          // Do not warn for assignations used as expression
+    /* , "boss": true          // Do not warn for assignations used as expression */
 }
