@@ -1,6 +1,7 @@
 # vim:filetype=sh syntax=sh:
 alias ack="ack --pager=less --color-match=red"
 alias mpk="/Applications/kid3.app/Contents/MacOS/kid3 ."
+alias fm="/Developer/Applications/Utilities/FileMerge.app/Contents/MacOS/FileMerge"
 
 alias safari="/Applications/Safari.app/Contents/MacOS/Safari"
 alias google-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
