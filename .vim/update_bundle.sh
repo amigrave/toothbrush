@@ -7,10 +7,13 @@ git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/ervandew/supertab.git
 git clone https://github.com/kien/ctrlp.vim.git
 git clone https://github.com/jmcantrell/vim-reporoot.git
+git clone https://github.com/majutsushi/tagbar.git
 
 # Look
 ######
 #git clone https://github.com/goatslacker/mango.vim.git
+git clone https://github.com/vim-scripts/hybrid.vim.git
+git clone https://github.com/jnurmine/Zenburn.git
 
 # Edition
 #########
@@ -20,13 +23,12 @@ git clone https://github.com/tpope/vim-surround
 git clone https://github.com/mattn/zencoding-vim.git
 git clone https://github.com/tpope/vim-commentary
 git clone https://github.com/godlygeek/tabular.git
-#git clone https://github.com/davidhalter/jedi-vim.git
+# git clone https://github.com/terryma/vim-expand-region.git
 
 # Languages
 ###########
 #git clone https://github.com/amigrave/vim-pudb
 git clone https://github.com/scrooloose/syntastic.git
-
 git clone https://github.com/OrgaChem/JavaScript-syntax.git
 #git clone https://github.com/marijnh/tern_for_vim.git
 git clone https://github.com/dmitry-ilyashevich/vim-typescript.git
@@ -40,6 +42,8 @@ git clone https://github.com/rainux/vim-vala.git
 git clone https://github.com/evanmiller/nginx-vim-syntax.git
 git clone https://github.com/Glench/Vim-Jinja2-Syntax.git
 git clone https://github.com/plasticboy/vim-markdown.git
+#git clone https://github.com/ivanov/vim-ipython.git
+#git clone https://github.com/davidhalter/jedi-vim.git
 
 
 # Misc Tools

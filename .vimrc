@@ -64,6 +64,10 @@ set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\       " highli
 set statusline+=%b,0x%-8B\                                              " current char
 set statusline+=%10.(%l,%c%V%)%<\ of\ %L\ :\ %P                       " offset
 
+set tags+=.git/tags
+set tags+=.bzr/tags
+set tags+=~/.vim/tags
+
 "}}}
 
 " ################################### PLATFORM ################################## {{{
@@ -107,6 +111,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.mako set ft=html
     au BufRead,BufNewFile *.asp set ft=javascript
     au BufRead,BufNewFile *.coffee set fdm=indent
+    au BufRead,BufNewFile .vimrc set fdm=marker
     au BufRead,BufNewFile *.iced set filetype=coffee
     au BufNewFile,BufRead *.boo set filetype=boo
     au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
@@ -119,6 +124,7 @@ if has("autocmd")
 
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
+    au FileType python set omnifunc=pythoncomplete#Complete
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
@@ -142,7 +148,8 @@ if has("autocmd")
     let g:xml_syntax_folding=1
     let python_highlight_numbers = 1
     let coffee_folding = 1
-    let g:javascript_fold = 1
+    " let g:javaScript_fold = 1
+    " let g:javascript_fold = 1
 
 endif
 "}}}
@@ -193,15 +200,14 @@ vmap <C-Insert> "_d"+P
 imap <C-Insert> <C-O>"+gP
 vmap <Backspace> "_d
 
-nmap <C-t> :tabnew<CR>
-imap <C-t> <Esc>:tabnew<CR>
+" nmap <C-t> :tabnew<CR>
+" imap <C-t> <Esc>:tabnew<CR>
 command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
 cabbrev e <c-R>=(getcmdtype()==':' && getcmdpos()==1 ? 'E' : 'e')<cr>
 nnoremap <silent> <F2> :tabprevious<CR>
 inoremap <silent> <F2> <C-O>:tabprevious<CR>
 nnoremap <silent> <F3> :tabnext<CR>
 inoremap <silent> <F3> <C-O>:tabnext<CR>
-inoremap <Leader>= <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 " Same for buffers
 nnoremap <silent> <S-F2> :bp<CR>
@@ -239,16 +245,9 @@ function! ToggleMarkers()
     endif
 endfunction
 
-" Taglist
-nnoremap <silent> <F7> :TlistToggle<CR><C-w>h
-inoremap <silent> <F7> <C-O>:TlistToggle<CR><C-w>h
-
-" Ack
-noremap <Leader>ack :Ack <c-r>=expand("<cword>")<cr><Home><Right><Right><Right><Right>
-
 " F8 & Shift-F8 mapped in pydebug addon
-nnoremap <F7> :TogglePudbBreakPoint<CR>
-inoremap <F7> <ESC>:TogglePudbBreakPoint<CR>a
+" nnoremap <F8> :TogglePudbBreakPoint<CR>
+" inoremap <F8> <ESC>:TogglePudbBreakPoint<CR>a
 
 " Quit
 nnoremap <silent> <F10> :bde<CR>
@@ -261,6 +260,26 @@ inoremap <F11> <C-O>:nohlsearch<CR>
 nnoremap <F12> :NERDTreeToggle<CR>
 inoremap <F12> <C-O>:NERDTreeToggle<CR>
 
+" Taglist
+nnoremap <silent> <S-F12> :TagbarToggle<CR><C-w>l
+inoremap <silent> <S-F12> <C-O>:TagbarToggle<CR><C-w>l
+" nnoremap <silent> <S-F7> :lcd %:p:h<CR>:RepoRoot<CR>:!ctags .<CR>
+
+" Calculator
+inoremap <Leader>= <C-O>yiW<End>=<C-R>=<C-R>0<CR>
+
+" Ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
+noremap <Leader>ag :Ack! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+vnoremap <Leader>ag :Ack! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+
+nnoremap <silent> <Leader>oea :cd ~/Projects/openerp/source/addons/current/<CR>
+nnoremap <silent> <Leader>oew :cd ~/Projects/openerp/source/web/current/<CR>
+nnoremap <silent> <Leader>oes :cd ~/Projects/openerp/source/server/current/<CR>
+noremap <Leader>oeA :Ack! '<c-r>=expand("<cword>")<cr>' ~/Projects/openerp/source/addons/current/<Home><Right><Right><Right><Right><Right><Right>
+noremap <Leader>oeW :Ack! '<c-r>=expand("<cword>")<cr>' ~/Projects/openerp/source/web/current/<Home><Right><Right><Right><Right><Right><Right>
+noremap <Leader>oeS :Ack! '<c-r>=expand("<cword>")<cr>' ~/Projects/openerp/source/server/current/<Home><Right><Right><Right><Right><Right><Right>
+
 " Zen coding
 let g:user_zen_expandabbr_key = '<c-e>'
 " let g:user_zen_leader_key = '<c-e>'
@@ -269,7 +288,7 @@ let g:user_zen_settings = {
     \  'indentation' : '    '
 \}
 
-set pastetoggle=<S-F12>
+" set pastetoggle=<S-F12>
 
 " IP Lookup
 nmap <silent> <Leader>IP :python lookupIPUnderCursor()<CR>
@@ -346,10 +365,10 @@ let g:snipMate.scope_aliases['_'] = '_,_-agr'
 
 " CtrlP
 let g:ctrlp_max_files = 0
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("t")': ['<cr>'],
-    \ 'AcceptSelection("e")': ['<c-x>'],
-\ }
+" let g:ctrlp_prompt_mappings = {
+"     \ 'AcceptSelection("t")': ['<cr>'],
+"     \ 'AcceptSelection("e")': ['<c-x>'],
+" \ }
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
 
 " NERDTree
@@ -358,15 +377,6 @@ let NERDTreeMapCloseDir='<Left>'
 let NERDTreeMapUpdir='<C-Left>'
 let NERDTreeMapActivateNode='<Right>'
 let NERDTreeMapChangeRoot='<C-Right>'
-
-"" Command-T
-"let g:CommandTMatchWindowAtTop=1
-""nnoremap <silent> <Leader>oea :CommandT ~/Projects/openerp/source/addons/current/<CR>
-""nnoremap <silent> <Leader>oew :CommandT ~/Projects/openerp/source/web/current/<CR>
-""nnoremap <silent> <Leader>oes :CommandT ~/Projects/openerp/source/web/server/<CR>
-nnoremap <silent> <Leader>oea :cd ~/Projects/openerp/source/addons/current/<CR>
-nnoremap <silent> <Leader>oew :cd ~/Projects/openerp/source/web/current/<CR>
-nnoremap <silent> <Leader>oes :cd ~/Projects/openerp/source/server/current/<CR>
 
 " Syntastic
 set statusline+=%#warningmsg#

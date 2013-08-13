@@ -4,6 +4,7 @@ set guioptions-=T           " hide toolbar
 
 
 if has("win32")
+    set clipboard=unnamedplus " Always use unnamed register
     au GUIEnter * simalt ~x
     "set guifont=Fixedsys\ Excelsior\ 2.00\ 11
     "set guifont=MiscFixed\ 8
