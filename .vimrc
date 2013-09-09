@@ -18,7 +18,7 @@ set history=50          " expand command history
 set hlsearch            " Highlight previous search pattern matches.
 set incsearch           " Use incremental search
 set scrolloff=5         " minimum number of screen lines that you would like above and below the cursor
-"set hidden              " Unused buffers are hidden when abandonned
+set hidden              " Unused buffers are hidden when abandonned
 set backspace=2         " make backspace work like most other apps
 set ignorecase          " ignore case when searching
 set smartcase           " ignore case when the pattern contains lowercase letters only.
@@ -103,17 +103,17 @@ if has("autocmd")
             \ if getline(1) =~ '^<DOCTYPE' | set filetype=html | endif |
         \endif
 
-    au BufRead *.txt,*.rst set expandtab tw=78 colorcolumn=80
-    au BufRead,BufNewFile *.xml,*.xsl  set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
-    au BufRead,BufNewFile *.php,*.php3 set foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
-    au BufRead,BufNewFile *.rb set fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
-    au BufRead,BufNewFile *.aspx set syntax=cs
-    au BufRead,BufNewFile *.mako set ft=html
-    au BufRead,BufNewFile *.asp set ft=javascript
-    au BufRead,BufNewFile *.coffee set fdm=indent
-    au BufRead,BufNewFile .vimrc set fdm=marker
-    au BufRead,BufNewFile *.iced set filetype=coffee
-    au BufNewFile,BufRead *.boo set filetype=boo
+    au BufRead *.txt,*.rst setlocal expandtab tw=78 colorcolumn=80
+    au BufRead,BufNewFile *.xml,*.xsl  setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2 synmaxcol=300
+    au BufRead,BufNewFile *.php,*.php3 setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.rb setlocal fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.aspx setlocal syntax=cs
+    au BufRead,BufNewFile *.mako setlocal ft=html
+    au BufRead,BufNewFile *.asp setlocal ft=javascript
+    au BufRead,BufNewFile *.coffee setlocal fdm=indent
+    au BufRead,BufNewFile .vimrc setlocal fdm=marker
+    au BufRead,BufNewFile *.iced setlocal filetype=coffee
+    au BufNewFile,BufRead *.boo setlocal filetype=boo
     au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
     "au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
     au BufWritePost,FileWritePost *.sass :silent !sass --compass --style expanded <afile> > "%:p:r.css"
@@ -124,7 +124,7 @@ if has("autocmd")
 
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
-    au FileType python set omnifunc=pythoncomplete#Complete
+    au FileType python setlocal omnifunc=pythoncomplete#Complete colorcolumn=80
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
@@ -135,9 +135,9 @@ if has("autocmd")
     au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
     if has("unix")
-        au BufNewFile *.py set autoread | s,^,#!/usr/bin/python\r# -*- coding: utf-8 -*-,
-        au BufNewFile *.rb set autoread | s,^,#!/usr/bin/ruby,
-        au BufNewFile *.sh set autoread | s,^,#!/bin/bash, | w | !chmod +x %
+        au BufNewFile *.py setlocal autoread | s,^,#!/usr/bin/python\r# -*- coding: utf-8 -*-,
+        au BufNewFile *.rb setlocal autoread | s,^,#!/usr/bin/ruby,
+        au BufNewFile *.sh setlocal autoread | s,^,#!/bin/bash, | w | !chmod +x %
     endif
 
     au Filetype xml call XmlQweb()
@@ -273,9 +273,9 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 noremap <Leader>ag :Ack! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 vnoremap <Leader>ag :Ack! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 
-nnoremap <silent> <Leader>oea :cd ~/Projects/openerp/source/addons/current/<CR>
-nnoremap <silent> <Leader>oew :cd ~/Projects/openerp/source/web/current/<CR>
-nnoremap <silent> <Leader>oes :cd ~/Projects/openerp/source/server/current/<CR>
+nnoremap <silent> <Leader>oea :lcd ~/Projects/openerp/source/addons/current/<CR>
+nnoremap <silent> <Leader>oew :lcd ~/Projects/openerp/source/web/current/<CR>
+nnoremap <silent> <Leader>oes :lcd ~/Projects/openerp/source/server/current/<CR>
 noremap <Leader>oeA :Ack! '<c-r>=expand("<cword>")<cr>' ~/Projects/openerp/source/addons/current/<Home><Right><Right><Right><Right><Right><Right>
 noremap <Leader>oeW :Ack! '<c-r>=expand("<cword>")<cr>' ~/Projects/openerp/source/web/current/<Home><Right><Right><Right><Right><Right><Right>
 noremap <Leader>oeS :Ack! '<c-r>=expand("<cword>")<cr>' ~/Projects/openerp/source/server/current/<Home><Right><Right><Right><Right><Right><Right>
@@ -300,11 +300,11 @@ vmap <S-Tab> <LT>
 "imap %% <%%><left><left>
 "imap %%<cr> <%<cr>%><esc>O<Tab>
 "inoremap {<cr> {<cr>}<esc>O<Tab>
-"inoremap {{ {{   }}<left><left><left><left>
 "inoremap [ []<left>
 "inoremap ( ()<left>
 inoremap ({<cr> ({<cr><Backspace>});<esc>O
 inoremap {<cr> {<cr><Backspace>}<esc>O
+inoremap {{ {{  }}<left><left><left>
 
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
@@ -397,6 +397,11 @@ function! XmlQweb()
     hi link xmlAttribQWeb     xmlAttribQWeb
     hi xmlAttribQWeb guifg=#f0a040 ctermfg=DarkMagenta
     hi xmlAttribQWebTrad guifg=#ffffff ctermfg=white
+
+    syn region qwebVarBlock matchgroup=qwebVarDelim start=/{{-\?/ end=/-\?}}/ containedin=xmlString
+    syn region qwebVarBlock2 matchgroup=qwebVarDelim start=/#{-\?/ end=/-\?}/ containedin=xmlString
+    hi def link qwebVarDelim qwebVarBlock
+    hi qwebVarDelim guifg=#D4C828 ctermfg=DarkYellow
 endfunction
 " }}}
 " Python Debug {{{
@@ -466,4 +471,18 @@ def lookupIPUnderCursor():
     print info
 EOF
 endif
+" }}}
+" CloseHiddenBuffers {{{
+" This one doesn't work with tab.
+" TODO: find another one
+function! CloseHiddenBuffers()
+    let lastBuffer = bufnr('$')
+    let currentBuffer = 1
+    while currentBuffer <= lastBuffer
+        if bufexists(currentBuffer) && buflisted(currentBuffer) && bufwinnr(currentBuffer) < 0
+            execute 'bdelete' currentBuffer
+        endif
+        let currentBuffer = currentBuffer + 1
+    endwhile
+endfunction
 " }}}
