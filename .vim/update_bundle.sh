@@ -53,6 +53,7 @@ git clone https://github.com/vim-scripts/vcscommand.vim.git
 git clone https://github.com/marzocchi/vim-color-picker-osx.git
 git clone https://github.com/mileszs/ack.vim.git
 git clone https://github.com/xolox/vim-session.git
+git clone https://github.com/xolox/vim-misc.git
 
 
 # Libs

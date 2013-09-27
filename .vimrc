@@ -35,9 +35,17 @@ set showmode            " If in Insert, Replace or Visual mode put a message on 
 set viminfo='200,\"5000 nowrap
 "set list listchars=tab:~.,trail:.,extends:>,precedes:<
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
+set shortmess+=I          " do not display welcome message
+set wildmode=longest,list " Improve autocompletion on command line
+set splitbelow            " Invert horizontal split order
+set splitright            " Invert vertical split order
+
 "let mapleader = "²"
 "let mapleader = "§"
 let mapleader = ","
+
 filetype plugin on
 if &t_Co == 256 && !has('win32unix')
     colorscheme wombat256mod
@@ -159,6 +167,10 @@ endif
 if (&term =~ "xterm") || (&term =~ "vt100")
     set t_kP=[5~ t_kN=[6~ t_kh=[1~ t_@7=[4~
 endif
+
+" Change behavior of some default mappings
+nnoremap J mzJ`z
+vnoremap J J`<
 
 nnoremap <Leader>. :lcd %:p:h<CR>
 " RepoRoot
