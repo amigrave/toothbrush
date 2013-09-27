@@ -3,14 +3,79 @@
     email = agr@amigrave.com
 [core]
     filemode = false
+    excludesfile = .gitignore.local
+    editor = vim
 [color]
+    ui = true
     diff = true
-    status = false
+    status = true
     branch = auto
-[alias]
-    co = checkout
-    st = status
-    ci = commit
-    ls = ls-files
+[pretty]
+    hist  = "%C(bold yellow)%h %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)"
+    histp = "%C(bold yellow)%h %C(reset)%C(yellow)%p %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)" # with parents
+    ghist = "%C(bold red)%d %C(bold yellow)%gD %C(reset)%C(yellow)%h %C(reset)%aD %C(red)[%an] %C(green)%gs %C(reset)%s"
+
+[column]
+    ui = always
 [http]
-	sslVerify = false
+    sslVerify = false
+[status]
+    submodulesummary = true
+[diff]
+    renames = true
+    noprefix = true # drops the annoying a/filename.foo b/filename.foo prefixes
+[format]
+    pretty = fuller # more detail for "git show"
+[merge]
+    conflictstyle = diff3
+    defaultToUpstream = true
+[include]
+    path = ~/.gitconfig.local
+[alias]
+    ci = commit
+    cia = commit -a
+    co = checkout
+    st = status --short --branch -- .
+    ls = ls-files
+    diffc = diff --cached
+    subs = submodule foreach git
+
+    force-ignore = update-index --assume-unchanged
+    undo-ignore = update-index --no-assume-unchanged
+
+    hlog    = !git log --color=always --date=relative --pretty=hist
+    ghist   = !git hlog -g --pretty=ghist
+
+    hist    = !git hlog --graph --date-order
+    h       = !git --no-pager hist -10
+    hh      = !git --no-pager hist -20
+    hhh     = !git --no-pager hist
+
+    histstat= "!git h --stat=160,160 \"$@\" | perl -ne '/([|*])/; if($1 eq \"*\") { print } else { m/[|] *[0-9]/ and print }'; true"
+    hstat   = !git --no-pager histstat -10
+    hhstat  = !git --no-pager histstat -20
+    hhhstat = !git --no-pager histstat
+
+    hstats  = !git h --shortstat --dirstat=changes,10
+    hhstats = !git hh --shortstat --dirstat=changes,10
+    hhhstats= !git hhh--shortstat --dirstat=changes,10
+
+    lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"
+    remove-history = "! \
+        files=$@ \
+        git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch $files' HEAD \
+        rm -rf .git/refs/original/ && git reflog expire --all &&  git gc --aggressive --prune"
+
+    # Fetch-Rebase: pure AWESOMEness.
+    # Fetches 'origin' and rebases the current branch on top of origin/master.
+    # Uses 'stash' intelligently to avoid blocking on trivial working-dir changes
+    # https://github.com/ddopson/dotfiles/blob/master/.gitconfig
+    frb = "! \
+        git fetch; \
+        if git diff-index --quiet --ignore-submodules HEAD --; then \
+            git rebase origin/master \"$@\"; \
+        else \
+            git stash save -q 'Fetch-Rebase Stashed Changes'; \
+            git rebase origin/master \"$@\"; \
+            git stash pop -q; \
+        fi; true"
