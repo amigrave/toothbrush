@@ -1,5 +1,22 @@
 # vim:filetype=sh syntax=sh:
-alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 alias ack="ack-grep --pager=less --color-match=red"
+alias applekey='setxkbmap us; setxkbmap -option apple:badmap; xmodmap ~/.Xmodmap; xbindkeys; echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode"'
+alias btdl="btdownloadcurses --max_upload_rate 3"
+alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
+alias deletelogs="rm -rf /var/log/wtmp ; rm -rf /var/log/lastlog ; rm -rf /var/log/secure ; rm -rf /var/log/xferlog ; rm -rf /var/log/messages ; rm -rf /var/run/utmp ; touch /var/run/utmp ; touch /var/log/messages ; touch /var/log/wtmp ; touch /var/log/messages ; touch /var/log/xferlog ; touch /var/log/secure ; touch /var/log/lastlog ; rm -rf /var/log/maillog ; touch /var/log/maillog ; rm -rf /root/.bash_history ; touch /root/.bash_history ; history -r"
+alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
+alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 alias mpk="kid3-qt ."
+alias o="xdg-open"
+alias qmv='qmv -f do'
+alias track='inotifywait -rm . | grep -iE "(modify |create |delete|attrib|moved)"'
+alias tsys="tail -f /var/log/dmesg /var/log/messages"
+alias ubuntuwin="gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close"
+alias vboxusb="sudo chown -R amigrave:vboxusers /proc/bus/usb"
+alias vir='clamscan -r *'
+alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo' # check for virtualization instructions
+alias zsnes_gamepad="sudo ln -s /dev/input/js0 /dev/js0"
 
+function diffresolver() {
+    kdiff3 -L1 Base -L2 Other -LMine --auto -o $1 -- $1.BASE $1.OTHER $1.THIS
+}
