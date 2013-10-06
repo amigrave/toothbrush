@@ -41,6 +41,7 @@ git clone https://github.com/wavded/vim-stylus.git
 git clone https://github.com/rainux/vim-vala.git
 git clone https://github.com/evanmiller/nginx-vim-syntax.git
 git clone https://github.com/Glench/Vim-Jinja2-Syntax.git
+git clone https://github.com/sophacles/vim-bundle-mako.git
 git clone https://github.com/plasticboy/vim-markdown.git
 #git clone https://github.com/ivanov/vim-ipython.git
 #git clone https://github.com/davidhalter/jedi-vim.git
@@ -49,6 +50,7 @@ git clone https://github.com/plasticboy/vim-markdown.git
 # Misc Tools
 ############
 git clone https://github.com/tpope/vim-fugitive.git
+git clone https://github.com/mattn/gist-vim.git
 git clone https://github.com/vim-scripts/vcscommand.vim.git
 git clone https://github.com/marzocchi/vim-color-picker-osx.git
 git clone https://github.com/mileszs/ack.vim.git
@@ -57,5 +59,7 @@ git clone https://github.com/xolox/vim-misc.git
 
 
 # Libs
+######
 git clone https://github.com/tomtom/tlib_vim.git
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
+git clone https://github.com/mattn/webapi-vim.git # used by gist-vim
