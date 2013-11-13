@@ -3,7 +3,7 @@ DEST="/Users/agr/.vim/tags"
 time (
     echo "Building web client tags"
     time (
-        ctags -w -f $DEST ~/Projects/openerp/source/web/current/
+        ctags -w -f $DEST ~/Projects/openerp/source/web/
     )
     echo "Building addons tags"
     time (
@@ -11,7 +11,7 @@ time (
     )
     echo "Building server tags"
     time (
-        ctags -w -f $DEST --append ~/Projects/openerp/source/server/current/
+        ctags -w -f $DEST --append ~/Projects/openerp/source/server/
     )
     echo "TOTAL:"
     ls -alh $DEST
