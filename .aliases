@@ -1,6 +1,7 @@
 # vim:filetype=sh syntax=sh:
 alias ps1c='. ~/.bashrc'
 
+alias qmv='qmv --format=destination-only'
 alias vim='vim -p '
 alias e='gvim_tab'
 alias ..="cd .."
@@ -60,10 +61,9 @@ function bclean() {
     find . -name "*.pyc" -delete
     find . -name "*.~*~" -delete
     find . -name ".DS_Store" -delete
-    find -name '.sass-cache' -type d | xargs rm -rf
+    find . -name '.sass-cache' -type d | xargs rm -rf
     find . -name "*.moved" -delete
     find . -type d -empty ! -path '*/.bzr/*' -delete
-    #bzr resolve --all
 }
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
