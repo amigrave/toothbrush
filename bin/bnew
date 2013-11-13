@@ -29,4 +29,4 @@ for proj in branches.keys():
 if not address:
     os.exit("Could not find current branch type.")
 
-execute("bzr info", "bzr shelve --all", "bzr pull", "bzr branch --switch ../%s ../%s" % (parent_branch, branch), "bzr unshelve", "bzr push --remember %s" % address)
+execute("bzr info", "bzr shelve --all", "bzr branch --switch ../%s ../%s" % (parent_branch, branch), "bzr unshelve", "bzr push --remember %s" % address)
