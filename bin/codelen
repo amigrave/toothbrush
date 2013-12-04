@@ -1,0 +1,23 @@
+#!/usr/bin/python
+import sys
+
+if len(sys.argv) != 2:
+  sys.exit("invalid arguments")
+
+try:
+  file = open(sys.argv[1], "rb")
+except IOError:
+  sys.exit("could not open %r" % sys.argv[1])
+
+longest = ""
+longest_on = count = 0
+for line in file:
+  count += 1
+  if len(line) > len(longest):
+    longest = line
+    longest_on = count
+
+longest = longest.rstrip("\n")
+print "File has total of", count, "lines."
+print "Longest line found on line", longest_on, "with", len(longest), "characters."
+print "The line is:", longest

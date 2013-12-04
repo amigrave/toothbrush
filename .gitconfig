@@ -14,9 +14,6 @@
     hist  = "%C(bold yellow)%h %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)"
     histp = "%C(bold yellow)%h %C(reset)%C(yellow)%p %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)" # with parents
     ghist = "%C(bold red)%d %C(bold yellow)%gD %C(reset)%C(yellow)%h %C(reset)%aD %C(red)[%an] %C(green)%gs %C(reset)%s"
-
-[column]
-    ui = always
 [http]
     sslVerify = false
 [status]
@@ -32,6 +29,7 @@
 [include]
     path = ~/.gitconfig.local
 [alias]
+    b = branch -a
     ci = commit
     cia = commit -a
     co = checkout
@@ -39,6 +37,7 @@
     ls = ls-files
     diffc = diff --cached
     subs = submodule foreach git
+    upstream = remote add --track master upstream
 
     force-ignore = update-index --assume-unchanged
     undo-ignore = update-index --no-assume-unchanged
@@ -79,3 +78,5 @@
             git rebase origin/master \"$@\"; \
             git stash pop -q; \
         fi; true"
+[push]
+	default = simple

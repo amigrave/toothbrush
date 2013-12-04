@@ -8,6 +8,7 @@ git clone https://github.com/ervandew/supertab.git
 git clone https://github.com/kien/ctrlp.vim.git
 git clone https://github.com/jmcantrell/vim-reporoot.git
 git clone https://github.com/majutsushi/tagbar.git
+git clone https://github.com/gcmt/taboo.vim.git
 
 # Look
 ######
@@ -45,6 +46,7 @@ git clone https://github.com/sophacles/vim-bundle-mako.git
 git clone https://github.com/plasticboy/vim-markdown.git
 #git clone https://github.com/ivanov/vim-ipython.git
 #git clone https://github.com/davidhalter/jedi-vim.git
+git clone https://github.com/jimmyhchan/dustjs.vim.git
 
 
 # Misc Tools
