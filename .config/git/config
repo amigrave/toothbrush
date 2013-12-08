@@ -27,7 +27,7 @@
     conflictstyle = diff3
     defaultToUpstream = true
 [include]
-    path = ~/.gitconfig.local
+    path = ~/.config/git/config.local
 [alias]
     b = branch -a
     ci = commit
