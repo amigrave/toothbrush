@@ -2,6 +2,9 @@
 [ -z "$PS1" ] && return
 
 export XDG_CONFIG_HOME=~/.config
+export MPV_HOME=$XDG_CONFIG_HOME/mpv
+export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
+
 export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries (ignorespace is for mc bug)
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
@@ -59,9 +62,11 @@ elif [ "$OSTYPE" == "cygwin" ]; then
 
     termsetcolors
 
-elif [ "$OSTYPE" == "darwin11" ]; then
+elif [[ "$OSTYPE" =~ darwin* ]]; then
 
     export BROWSER=safari
+    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 fi
 
