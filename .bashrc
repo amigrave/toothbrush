@@ -38,9 +38,6 @@ fi
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
-if [ -f ~/.aliases_$OSTYPE ]; then
-    . ~/.aliases_$OSTYPE
-fi
 
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
 export LS_OPTIONS='--color=auto'
@@ -49,8 +46,11 @@ export EDITOR=vim
 export BROWSER=google-chrome
 export GREP_OPTIONS='--color=auto'
 
-if [ "$OSTYPE" == "linux" ]; then
+if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
+    if [ -f ~/.aliases_linux ]; then
+        . ~/.aliases_linux
+    fi
     # make less more friendly for non-text input files, see lesspipe(1)
     [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -60,10 +60,16 @@ if [ "$OSTYPE" == "linux" ]; then
 
 elif [ "$OSTYPE" == "cygwin" ]; then
 
+    if [ -f ~/.aliases_cygwin ]; then
+        . ~/.aliases_cygwin
+    fi
     termsetcolors
 
 elif [[ "$OSTYPE" =~ darwin* ]]; then
 
+    if [ -f ~/.aliases_osx ]; then
+        . ~/.aliases_osx
+    fi
     export BROWSER=safari
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"

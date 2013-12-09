@@ -3,7 +3,6 @@ alias ps1c='. ~/.bashrc'
 
 alias qmv='qmv --format=destination-only'
 alias vim='vim -p '
-alias e='gvim_tab'
 alias ..="cd .."
 alias m="cd /"
 alias ll="ls -lAh --color=yes | less -r -E -X"

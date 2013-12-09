@@ -1,4 +1,5 @@
 # vim:filetype=sh syntax=sh:
+alias e="/cygdrive/c/PROGRA~1/Vim/vim74/gvim.exe --remote-tab-silent"
 alias jsc1="/cygdrive/c/WINNT/Microsoft.NET/Framework/v1.*/jsc.exe"
 alias jsc2="/cygdrive/c/WINNT/Microsoft.NET/Framework/v2.*/jsc.exe"
 alias jsc3="/cygdrive/c/WINNT/Microsoft.NET/Framework/v3.*/jsc.exe"
