@@ -17,6 +17,7 @@ alias am='uade123 --detect-format-by-content'
 alias i='ipython'
 alias pudb='python -m pudb.run'
 alias b="bzr"
+alias f="find . | egrep -i"
 
 alias termkey='tput smkx; cat; tput rmkx'
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
