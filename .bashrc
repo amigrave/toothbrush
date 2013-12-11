@@ -35,8 +35,8 @@ elif [ $KONSOLE_DBUS_SESSION ]; then
 fi
 
 
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
+if [ -f ~/.config/aliases ]; then
+    . ~/.config/aliases
 fi
 
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
@@ -48,8 +48,8 @@ export GREP_OPTIONS='--color=auto'
 
 if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
-    if [ -f ~/.aliases_linux ]; then
-        . ~/.aliases_linux
+    if [ -f ~/.config/aliases_linux ]; then
+        . ~/.config/aliases_linux
     fi
     # make less more friendly for non-text input files, see lesspipe(1)
     [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -60,15 +60,15 @@ if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
 elif [ "$OSTYPE" == "cygwin" ]; then
 
-    if [ -f ~/.aliases_cygwin ]; then
-        . ~/.aliases_cygwin
+    if [ -f ~/.config/aliases_cygwin ]; then
+        . ~/.config/aliases_cygwin
     fi
     termsetcolors
 
 elif [[ "$OSTYPE" =~ darwin* ]]; then
 
-    if [ -f ~/.aliases_osx ]; then
-        . ~/.aliases_osx
+    if [ -f ~/.config/aliases_osx ]; then
+        . ~/.config/aliases_osx
     fi
     export BROWSER=safari
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -96,6 +96,6 @@ PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]
 # export LESS_TERMCAP_ue=$'\E[0m'
 # export LESS_TERMCAP_us=$'\E[01;32m'
 
-[ -f ~/.dir_colors ] && eval `dircolors -b ~/.dir_colors `
+[ -f ~/.config/dir_colors ] && eval `dircolors -b ~/.config/dir_colors `
 
 export HOSTING="amigrave.com"
