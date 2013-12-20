@@ -132,7 +132,7 @@ if has("autocmd")
 
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
-    au FileType python setlocal omnifunc=pythoncomplete#Complete colorcolumn=80
+    au FileType python setlocal omnifunc=pythoncomplete#Complete colorcolumn=100
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 

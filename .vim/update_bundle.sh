@@ -47,6 +47,7 @@ git clone https://github.com/plasticboy/vim-markdown.git
 #git clone https://github.com/ivanov/vim-ipython.git
 #git clone https://github.com/davidhalter/jedi-vim.git
 git clone https://github.com/jimmyhchan/dustjs.vim.git
+git clone https://github.com/tpope/vim-haml.git
 
 
 # Misc Tools
