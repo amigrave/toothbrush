@@ -1,0 +1,78 @@
+[scummvm]
+mute=false
+alsa_port=128
+speech_volume=192
+native_mt32=false
+midi_gain=200
+talkspeed=60
+gfx_mode=tv2x
+#gfx_mode=3x
+subtitles=true
+multi_midi=false
+fullscreen=false
+browser_lastpath=/agr/softs/scummvm/Monkey Island/Monkey Island 3 (Fr) (bad COMIM.LA2)
+sfx_volume=192
+music_volume=192
+autosave_period=300
+lastselectedgame=comi-fr
+music_driver=alsa
+aspect_ratio=false
+versioninfo=1.2.1
+speech_mute=false
+enable_gs=false
+
+[ft]
+gameid=ft
+description=Full Throttle (Version B/English)
+language=en
+path=/agr/softs/scummvm/Full Throttle/ft
+guioptions=sndNoMIDI
+
+[ft-1]
+gameid=ft
+description=Full Throttle (Version B/English)
+language=en
+path=/agr/softs/scummvm/Full Throttle/Full Throttle (En)
+guioptions=sndNoMIDI
+
+[lgop2-fr]
+platform=pc
+gameid=made
+description=Leather Goddesses of Phobos 2 (DOS/French)
+language=fr
+path=/agr/softs/scummvm/LGOP2
+guioptions=sndNoSpeech
+
+[tentacle-fr]
+gameid=tentacle
+description=Day of the Tentacle (CD?/French)
+language=fr
+path=/agr/softs/scummvm/Day of the Tentacle/Day of the Tentacle (VGA-CD) (En-SubFr)/
+
+[monkey-fr]
+platform=pc
+gameid=monkey
+description=The Secret of Monkey Island (CD/DOS/French)
+language=fr
+path=/agr/softs/scummvm/Monkey Island/Monkey Island 1 (VGA-CD) (Fr)
+guioptions=sndNoSpeech sndNoMIDI lang_French
+
+[comi-fr]
+dimuse_tempo=10
+description=The Curse of Monkey Island (Windows/French)
+mute=false
+speech_volume=197
+talkspeed=28
+gfx_mode=tv2x
+path=/agr/softs/scummvm/Monkey Island/Monkey Island 3 (Fr) (bad COMIM.LA2)
+subtitles=false
+fullscreen=false
+gameid=comi
+language=fr
+sfx_volume=157
+music_volume=205
+platform=windows
+aspect_ratio=false
+speech_mute=false
+guioptions=sndNoMIDI 
+

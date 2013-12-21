@@ -13,6 +13,16 @@ export LC_ALL=$LANG
 export LC_CTYPE=$LANG
 export LC_COLLATE=C
 
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
+export MPV_HOME=$XDG_CONFIG_HOME/mpv
+export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
+export INPUTRC=$XDG_CONFIG_HOME/inputrc
+export SCREENRC=$XDG_CONFIG_HOME/screenrc
+export IRBRC=$XDG_CONFIG_HOME/irbrc
+export LFTP_HOME=$XDG_CONFIG_HOME/lftp
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
