@@ -7,11 +7,15 @@ time (
     )
     echo "Building addons tags"
     time (
-        ctags -w -f $DEST --append ~/Projects/openerp/source/addons/current/
+        ctags -w -f $DEST --append ~/Projects/openerp/source/addons/
     )
     echo "Building server tags"
     time (
         ctags -w -f $DEST --append ~/Projects/openerp/source/server/
+    )
+    echo "Building python libs"
+    time (
+        ctags -w -f $DEST --append ~/Projects/openerp/env/lib/python2.7/site-packages
     )
     echo "TOTAL:"
     ls -alh $DEST

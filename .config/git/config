@@ -31,11 +31,12 @@
 [alias]
     b = branch -a
     ci = commit
-    cia = commit -a
+    info = remote show origin
     co = checkout
     st = status --short --branch -- .
     ls = ls-files
     diffc = diff --cached
+    cdiff = !cdiff -s
     subs = submodule foreach git
     upstream = remote add --track master upstream
 

@@ -1,6 +1,11 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# homebrew bash completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
 export XDG_CONFIG_HOME=~/.config
 export MPV_HOME=$XDG_CONFIG_HOME/mpv
 export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
