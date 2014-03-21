@@ -492,8 +492,8 @@ Keymap = keymap
 # Examples:   ExecCommand1 = "cp %f /mnt/usb_drive"
 #             ExecCommand2 = "/home/joe/now_playing %I"
 #
-#ExecCommand1 =
-#ExecCommand2 =
+ExecCommand1 = "rm %f"
+ExecCommand2 = "mkdir -p /tmp/music-selection; cp %f /tmp/music-selection/"
 #ExecCommand3 =
 #ExecCommand4 =
 #ExecCommand5 =

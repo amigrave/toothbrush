@@ -49,7 +49,7 @@ quit_client           = q
 quit                  = Q
 
 # Menu and interface control keys:
-go                    = ENTER
+go                    = RIGHT ENTER
 menu_down             = DOWN
 menu_up               = UP
 menu_page_down        = PAGE_DOWN
@@ -71,10 +71,10 @@ refresh               = ^r
 reload                = r
 
 # Audio playing and positioning keys:
-seek_forward          = RIGHT
-seek_backward         = LEFT
-seek_forward_fast     = ]
-seek_backward_fast    = [
+seek_forward          = ]
+seek_backward         = [
+seek_forward_fast     = }
+seek_backward_fast    = {
 pause                 = p SPACE
 stop                  = s
 next                  = n
@@ -115,7 +115,7 @@ go_to_fast_dir8       = *
 go_to_fast_dir9       = (
 go_to_fast_dir10      = )
 go_to_playing_file    = G
-go_up                 = U
+go_up                 = U LEFT
 
 # Playlist specific keys:
 add_file              = a
@@ -154,7 +154,7 @@ equalizer_next        = k
 # External commands:
 mark_start            = '
 mark_end              = "
-exec_command1         = F1
+exec_command1         = D
 exec_command2         = F2
 exec_command3         = F3
 exec_command4         = F4
