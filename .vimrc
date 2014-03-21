@@ -8,7 +8,8 @@ call pathogen#infect()
 set encoding=utf8
 set fileencoding=utf8
 set fileencodings=utf-8,latin1
-set novb t_vb=            " no visual bell
+set visualbell
+set t_vb=
 set noerrorbells        " do not bell on error
 set shiftwidth=4        " Number of spaces to use for each step of (auto)
 set tabstop=4           " Number of spaces that a <Tab> in the file counts for
@@ -143,8 +144,8 @@ if has("autocmd")
     au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
     if has("unix")
-        au BufNewFile *.py setlocal autoread | s,^,#!/usr/bin/python\r# -*- coding: utf-8 -*-,
-        au BufNewFile *.rb setlocal autoread | s,^,#!/usr/bin/ruby,
+        au BufNewFile *.py setlocal autoread | s,^,#!/usr/bin/env python\r# -*- coding: utf-8 -*-,
+        au BufNewFile *.rb setlocal autoread | s,^,#!/usr/bin/env ruby,
         au BufNewFile *.sh setlocal autoread | s,^,#!/bin/bash, | w | !chmod +x %
     endif
 
@@ -158,7 +159,6 @@ if has("autocmd")
     let coffee_folding = 1
     " let g:javaScript_fold = 1
     " let g:javascript_fold = 1
-
 endif
 "}}}
 
@@ -222,10 +222,10 @@ nnoremap <silent> <F3> :tabnext<CR>
 inoremap <silent> <F3> <C-O>:tabnext<CR>
 
 " Same for buffers
-nnoremap <silent> <S-F2> :bp<CR>
-inoremap <silent> <S-F2> <C-O>:bp<CR>
-nnoremap <silent> <S-F3> :bn<CR>
-inoremap <silent> <S-F3> <C-O>:bn<CR>
+nnoremap <silent> <S-F2> :lprevious<CR>
+inoremap <silent> <S-F2> <C-O>:lprevious<CR>
+nnoremap <silent> <S-F3> :lnext<CR>
+inoremap <silent> <S-F3> <C-O>:lnext<CR>
 
 " Folding
 nnoremap <silent> <S-Up> zc
@@ -285,18 +285,11 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 noremap <Leader>ag :Ack! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 vnoremap <Leader>ag :Ack! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 
-nnoremap <silent> <Leader>oea :lcd ~/Projects/openerp/source/addons/current/<CR>
-nnoremap <silent> <Leader>oew :lcd ~/Projects/openerp/source/web/current/<CR>
-nnoremap <silent> <Leader>oes :lcd ~/Projects/openerp/source/server/current/<CR>
-noremap <Leader>oeA :Ack! '<c-r>=expand("<cword>")<cr>' ~/Projects/openerp/source/addons/current/<Home><Right><Right><Right><Right><Right><Right>
-noremap <Leader>oeW :Ack! '<c-r>=expand("<cword>")<cr>' ~/Projects/openerp/source/web/current/<Home><Right><Right><Right><Right><Right><Right>
-noremap <Leader>oeS :Ack! '<c-r>=expand("<cword>")<cr>' ~/Projects/openerp/source/server/current/<Home><Right><Right><Right><Right><Right><Right>
-
-" Zen coding
-let g:user_zen_expandabbr_key = '<c-e>'
-" let g:user_zen_leader_key = '<c-e>'
-let g:use_zen_complete_tag = 1
-let g:user_zen_settings = {
+" Emmet (used to be Zen coding)
+let g:user_emmet_expandabbr_key = '<c-e>'
+" let g:user_emmet_leader_key = '<c-e>'
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_settings = {
     \  'indentation' : '    '
 \}
 
@@ -367,7 +360,7 @@ let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
 " SuperTab
-let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "context"
 
 " Session.vim
 let g:session_autosave = 'no'
@@ -399,8 +392,23 @@ let NERDTreeMapChangeRoot='<C-Right>'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-"let g:syntastic_auto_loc_list=1
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '⚠'
+let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_auto_loc_list = 1
+
+" localvimrmc
+" TODO: check if $HOME can be injected in string
+let g:localvimrc_whitelist='/Users/agr/Projects/openerp/.lvimrc'
+let g:localvimrc_sandbox=0
+" TODO: blacklist everything else
+" :localvimrc_blacklist
+
+" Jedi
+let g:jedi#popup_on_dot = 0
+
 " }}}
 " Xml QWeb {{{
 function! XmlQweb()

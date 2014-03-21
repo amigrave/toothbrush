@@ -21,7 +21,7 @@ git clone https://github.com/jnurmine/Zenburn.git
 git clone https://github.com/garbas/vim-snipmate.git
 git clone https://github.com/honza/vim-snippets.git
 git clone https://github.com/tpope/vim-surround
-git clone https://github.com/mattn/zencoding-vim.git
+git clone https://github.com/mattn/emmet-vim.git
 git clone https://github.com/tpope/vim-commentary
 git clone https://github.com/godlygeek/tabular.git
 # git clone https://github.com/terryma/vim-expand-region.git
@@ -45,9 +45,10 @@ git clone https://github.com/Glench/Vim-Jinja2-Syntax.git
 git clone https://github.com/sophacles/vim-bundle-mako.git
 git clone https://github.com/plasticboy/vim-markdown.git
 #git clone https://github.com/ivanov/vim-ipython.git
-#git clone https://github.com/davidhalter/jedi-vim.git
+git clone https://github.com/davidhalter/jedi-vim.git
 git clone https://github.com/jimmyhchan/dustjs.vim.git
 git clone https://github.com/tpope/vim-haml.git
+git clone https://github.com/elzr/vim-json.git
 
 
 # Misc Tools
@@ -59,6 +60,7 @@ git clone https://github.com/marzocchi/vim-color-picker-osx.git
 git clone https://github.com/mileszs/ack.vim.git
 git clone https://github.com/xolox/vim-session.git
 git clone https://github.com/xolox/vim-misc.git
+git clone https://github.com/embear/vim-localvimrc.git
 
 
 # Libs
