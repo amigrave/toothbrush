@@ -1,3 +1,7 @@
+snippet def
+	<t t-def="${1}">
+		${2}
+	</t>
 snippet name
 	<t t-name="${1}">
 		${2}
@@ -18,4 +22,47 @@ snippet esc
 	<t t-esc="${1}"/>${2}
 snippet raw
 	<t t-esc="${1}"/>${2}
-
+snippet openerp
+	<?xml version="1.0" encoding="utf-8"?>
+	<!-- vim:fdn=3:
+	-->
+	<openerp>
+		<data>
+			${1}
+		</data>
+	</openerp>
+snippet record
+	<record id="${1}" model="${2}">
+		<field name="${3}">${4}</field>
+	</record>
+snippet field
+	<field name="${1}">${2}</field>
+snippet template
+	<template id="${1}" name="${2}">
+		${3}
+	</template>
+snippet xpath
+	<xpath expr="${1://div[contains(@class, 'oe_test')]}" position="${2:after}">
+		${3}
+	</xpath>
+snippet ir.ui.view
+	<record id="${1}" model="ir.ui.view">
+		<field name="name">${2}</field>
+		<field name="model">${3}</field>
+		<field name="arch" type="xml">
+			${4}
+		</field>
+	</record>
+snippet ir.actions.act_window
+	<record id="${1}" model="ir.actions.act_window">
+		<field name="name">${2}</field>
+		<field name="res_model">${3}</field>
+		<field name="view_mode">${4:form}</field>
+		<field name="target">inline</field>
+	</record>
+snippet bundle
+	<template id="assets_${1:backend}" inherit_id="${2:web}.assets_${3:$1}" name="${4:$2} Assets">
+		<xpath expr="." position="inside">
+			${3}
+		</xpath>
+	</template>

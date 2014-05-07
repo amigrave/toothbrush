@@ -6,3 +6,21 @@ snippet self
 	var self = this;
 snippet super
 	this._super.apply(this, arguments);
+snippet debug
+	eval("'DEBUGGER'"); debugger;
+snippet node
+	#!/usr/bin/env node
+	var http = require('http');
+	var port = process.argv[2] || 7777;
+	
+	http.createServer(function (req, res) {
+		if (req.url == '/favicon.ico') {
+			res.statusCode = 404;
+			res.end();
+		}
+		res.writeHead(200, {'Content-Type': 'text/plain'});
+		res.end('Hello World\n');
+	}).listen(port, '127.0.0.1');
+	
+	console.log('Server running at http://127.0.0.1:' + port + '/');
+

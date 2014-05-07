@@ -280,10 +280,10 @@ inoremap <silent> <S-F12> <C-O>:TagbarToggle<CR><C-w>l
 " Calculator
 inoremap <Leader>= <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
-" Ack
-let g:ackprg = 'ag --nogroup --nocolor --column'
-noremap <Leader>ag :Ack! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
-vnoremap <Leader>ag :Ack! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+" Ag
+let g:agprg = 'ag --nogroup --nocolor --column'
+noremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 
 " Emmet (used to be Zen coding)
 let g:user_emmet_expandabbr_key = '<c-e>'
@@ -370,7 +370,7 @@ let g:session_autoload = 'no'
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-agr'
-let g:snipMate.scope_aliases['xml'] = 'xml,xml-agr'
+let g:snipMate.scope_aliases['xml'] = 'xml,xml-agr,html'
 let g:snipMate.scope_aliases['_'] = '_,_-agr'
 
 " CtrlP
@@ -408,6 +408,9 @@ let g:localvimrc_sandbox=0
 
 " Jedi
 let g:jedi#popup_on_dot = 0
+
+" Xmledit
+let g:xmledit_enable_html = 1
 
 " }}}
 " Xml QWeb {{{

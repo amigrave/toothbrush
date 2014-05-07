@@ -24,7 +24,7 @@ git clone https://github.com/tpope/vim-surround
 git clone https://github.com/mattn/emmet-vim.git
 git clone https://github.com/tpope/vim-commentary
 git clone https://github.com/godlygeek/tabular.git
-# git clone https://github.com/terryma/vim-expand-region.git
+git clone https://github.com/terryma/vim-expand-region.git
 
 # Languages
 ###########
@@ -57,7 +57,8 @@ git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/mattn/gist-vim.git
 git clone https://github.com/vim-scripts/vcscommand.vim.git
 git clone https://github.com/marzocchi/vim-color-picker-osx.git
-git clone https://github.com/mileszs/ack.vim.git
+#git clone https://github.com/mileszs/ack.vim.git
+git clone https://github.com/rking/ag.vim.git
 git clone https://github.com/xolox/vim-session.git
 git clone https://github.com/xolox/vim-misc.git
 git clone https://github.com/embear/vim-localvimrc.git
