@@ -9,6 +9,7 @@ fi
 export XDG_CONFIG_HOME=~/.config
 export MPV_HOME=$XDG_CONFIG_HOME/mpv
 export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
+export HTTPIE_CONFIG_DIR=$XDG_CONFIG_HOME/httpie
 
 export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries (ignorespace is for mc bug)
 export HISTSIZE=100000                   # big big history
