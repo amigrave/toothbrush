@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# In order to avoid having a terminal window opened each time
+# it's launched by better touch tool:
+# osascript -e 'do shell script "~/bin/focus-ipython"'
+
+# If launched as terminal command in BTT:
+# bash -l -c "~/bin/focus-ipython"
+
+import appscript
+import commands
+
+proc = commands.getoutput('ps aux | grep qtconsole | grep -v zmq | grep -v grep')
+if proc:
+    pid = proc.split()[1]
+    appscript.app(pid=int(pid)).activate()

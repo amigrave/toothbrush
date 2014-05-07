@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import os
+import re
+import subprocess
+import sys
+
+# TODO: support local AND remote
+backups_path = "/Volumes/MobileBackups/Backups.backupdb/amigrave/"
+backups = os.listdir(backups_path)
+backups.sort()
+backups.reverse()
+
+confirm = False
+delete = False
+backup_index = None
+
+for arg in sys.argv:
+    if arg == '--confirm':
+        confirm = True
+    elif arg == '--delete':
+        delete = True
+    elif re.match(r"^-[0-9]+$", arg):
+        backup_index = int(arg[1:])
+
+if backup_index is None:
+    print "Usage: tmrestore -<backup index> [--confirm] [--delete]"
+    print ""
+    index = 0
+    for backup in backups:
+        print "%s. %s" % (index, backup)
+        index += 1
+elif backup_index > len(backups):
+    sys.exit("Wrong backup index %s" % backup_index)
+else:
+    bdir = os.path.join(backups_path, backups[backup_index])
+    bdir = os.path.join(bdir, os.listdir(bdir)[0])
+    dest = os.path.realpath(os.curdir)
+    src = bdir + dest
+    cmd = ['rsync', '-av']
+    if not confirm:
+        cmd.extend(['--dry-run'])
+    if delete:
+        cmd.extend(['--delete'])
+    cmd.extend([src + '/', dest + '/'])
+    print "Executing command: " + ' '.join(cmd)
+    subprocess.call(cmd)
+
