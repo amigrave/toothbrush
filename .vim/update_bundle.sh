@@ -62,6 +62,8 @@ git clone https://github.com/rking/ag.vim.git
 git clone https://github.com/xolox/vim-session.git
 git clone https://github.com/xolox/vim-misc.git
 git clone https://github.com/embear/vim-localvimrc.git
+git clone https://github.com/vim-scripts/ingo-library.git
+git clone https://github.com/vim-scripts/SearchHighlighting.git
 
 
 # Libs
