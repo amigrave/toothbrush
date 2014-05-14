@@ -59,6 +59,7 @@ alias msx="mess msx -cart1 \`iselect -a *\`"
 alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]}" -3 "${files[3]}"'
 
 alias git-force-ignore='git update-index --assume-unchanged'
+alias bfg='java -jar ~/bin/bfg*'
 
 # FUNCTIONS
 function assh() {
@@ -66,6 +67,9 @@ function assh() {
 }
 function pclean() {
     find . -name "*.pyc" -delete
+    find . -name "*.THIS" -delete
+    find . -name "*.BASE" -delete
+    find . -name "*.OTHER" -delete
     find . -name "*.~*~" -delete
     find . -name ".DS_Store" -delete
     find . -name '.sass-cache' -type d | xargs rm -rf
