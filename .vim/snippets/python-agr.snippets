@@ -1,0 +1,9 @@
+snippet wraps
+	from functools import wraps
+
+	def ${1:new_function}(f):
+		@wraps(f)
+		def wrapper(*args, **kw):
+			return f(*args, **kw)
+		return wrapper
+
