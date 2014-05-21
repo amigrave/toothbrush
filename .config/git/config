@@ -29,14 +29,17 @@
 [include]
     path = ~/.config/git/config.local
 [alias]
-    b = branch -a
+    b = branch
     ci = commit
-    info = remote show origin
+    fa = fetch --all -p
+    info = remote show
     co = checkout
     st = status --short --branch -- .
     ls = ls-files
     diffc = diff --cached
     cdiff = !cdiff -s
+    gvdiff = difftool -t gvimdiff
+    vdiff = difftool -t vimdiff
     subs = submodule foreach git
     upstream = remote add --track master upstream
 
@@ -80,4 +83,8 @@
             git stash pop -q; \
         fi; true"
 [push]
-	default = simple
+    default = simple
+[difftool "gvimdiff"]
+    path = /usr/local/bin/mvimdiff
+[mergetool "gvimdiff"]
+    path = /usr/local/bin/mvimdiff

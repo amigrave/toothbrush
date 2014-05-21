@@ -20,7 +20,6 @@ alias am='uade123 --detect-format-by-content'
 alias i='ipython'
 alias ii='ipython qtconsole --ConsoleWidget.font_family="Menlo" --ConsoleWidget.font_size=12 --colors=linux --pprint &'
 alias pudb='python -m pudb.run'
-alias b="bzr"
 alias f="find . | egrep -i"
 alias ag="ag --page=less"
 

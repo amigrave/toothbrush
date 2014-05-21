@@ -1,6 +1,11 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# GIT bash completion
+if [ -f ~/bin/git-completion.bash ]; then
+    . ~/bin/git-completion.bash
+fi
+
 export XDG_CONFIG_HOME=~/.config
 export MPV_HOME=$XDG_CONFIG_HOME/mpv
 export IPYTHONDIR=$XDG_CONFIG_HOME/ipython

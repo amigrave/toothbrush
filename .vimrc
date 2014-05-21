@@ -176,7 +176,9 @@ nnoremap <Leader>. :lcd %:p:h<CR>
 " RepoRoot
 nnoremap <silent> <Leader>/ :lcd %:p:h<CR>:RepoRoot<CR>
 
-nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
+" nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
+nnoremap <Leader>l :'<,'>Gbrowse<CR>
+vnoremap <Leader>l :Gbrowse<CR>
 
 " Fixed scrolling
 noremap <C-Down> <C-E><Down>
@@ -390,13 +392,14 @@ let g:syntastic_auto_loc_list = 1
 
 " localvimrmc
 " TODO: check if $HOME can be injected in string
-let g:localvimrc_whitelist='/Users/agr/Projects/openerp/.lvimrc'
+let g:localvimrc_whitelist='/Users/agr/Projects/odoo/.lvimrc'
 let g:localvimrc_sandbox=0
 " TODO: blacklist everything else
 " :localvimrc_blacklist
 
 " Jedi
 let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = 0
 
 " Xmledit
 let g:xmledit_enable_html = 1
