@@ -6,7 +6,7 @@ cd bundle
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/ervandew/supertab.git
 git clone https://github.com/kien/ctrlp.vim.git
-git clone https://github.com/jmcantrell/vim-reporoot.git
+git clone https://github.com/dbakker/vim-projectroot.git
 git clone https://github.com/majutsushi/tagbar.git
 git clone https://github.com/gcmt/taboo.vim.git
 

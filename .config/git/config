@@ -88,3 +88,5 @@
     path = /usr/local/bin/mvimdiff
 [mergetool "gvimdiff"]
     path = /usr/local/bin/mvimdiff
+[github]
+	user = amigrave

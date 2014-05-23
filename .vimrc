@@ -173,8 +173,8 @@ nnoremap J mzJ`z
 vnoremap J J`<
 
 nnoremap <Leader>. :lcd %:p:h<CR>
-" RepoRoot
-nnoremap <silent> <Leader>/ :lcd %:p:h<CR>:RepoRoot<CR>
+" Reporoot
+nnoremap <silent> <Leader>/ :ProjectRootLCD<cr>
 
 " nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
 nnoremap <Leader>l :'<,'>Gbrowse<CR>
@@ -345,7 +345,6 @@ nmap <Leader>a\| :Tabularize /\|<CR>
 vmap <Leader>a\| :Tabularize /\|<CR>
 
 " Gist
-let g:gist_use_password_in_gitconfig = 1
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
 
