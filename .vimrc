@@ -288,8 +288,14 @@ let g:user_emmet_settings = {
 " IP Lookup
 nmap <silent> <Leader>IP :python lookupIPUnderCursor()<CR>
 
+" Visual mode stuff
 vmap <Tab> >
 vmap <S-Tab> <LT>
+" http://vim.wikia.com/wiki/Selecting_your_pasted_text
+nnoremap gp `[v`]
+
+" Don't wanna ex mode, prefer quick Quit
+map Q :qa<CR>
 
 "inoremap {{ {
 "imap %% <%%><left><left>
