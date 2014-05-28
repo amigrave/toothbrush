@@ -26,7 +26,9 @@ set smartcase           " ignore case when the pattern contains lowercase letter
 set nobackup            " do not write a .bak file
 set nocompatible        " do not use vi compatible mode
 "set autoindent          " automatic indentation
-set smartindent
+" set smartindent -- going to try cindent for a while as I have issues with python:
+" http://stackoverflow.com/questions/354097/how-to-configure-vim-to-not-put-comments-at-the-beginning-of-lines-while-editing
+set cindent
 "set noexpandtab         " do not expand tab to spaces
 set expandtab           " expand tab to spaces
 set ruler               " Show the line and column number of the cursor position
