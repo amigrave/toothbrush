@@ -42,6 +42,7 @@ set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 set shortmess+=I          " do not display welcome message
 set wildmode=longest,list " Improve autocompletion on command line
+set wildignore=*.o,*~,*.pyc
 set splitbelow            " Invert horizontal split order
 set splitright            " Invert vertical split order
 
@@ -177,6 +178,13 @@ vnoremap J J`<
 nnoremap <Leader>. :lcd %:p:h<CR>
 " Reporoot
 nnoremap <silent> <Leader>/ :ProjectRootLCD<cr>
+
+" iPython macvim
+" https://github.com/jkitzes/ipyqtmacvim/
+if has("gui_macvim")
+    nmap <C-S> "+yy:execute "silent !osascript ~/bin/osx/ipyqtmacvim.scpt"<CR>
+    vmap <C-S> "+y:execute "silent !osascript ~/bin/osx/ipyqtmacvim.scpt"<CR>
+endif
 
 " nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
 nnoremap <Leader>l :'<,'>Gbrowse<CR>

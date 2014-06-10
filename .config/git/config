@@ -24,8 +24,10 @@
 [format]
     pretty = fuller # more detail for "git show"
 [merge]
-    conflictstyle = diff3
-    defaultToUpstream = true
+    tool = vimdiff
+    # tool = kdiff3
+    # conflictstyle = diff3
+    # defaultToUpstream = true
 [include]
     path = ~/.config/git/config.local
 [alias]
@@ -37,8 +39,7 @@
     st = status --short --branch -- .
     ls = ls-files
     diffc = diff --cached
-    cdiff = !cdiff -s -w$(echo "$(stty size | cut -d ' ' -f2) / 2 - 5" | bc ) --no-prefix
-    gvdiff = difftool -t gvimdiff
+    cdiff = !cdiff -s -w$(echo "$(stty size | cut -d ' ' -f2) / 2 - 5" | bc )
     vdiff = difftool -t vimdiff
     subs = submodule foreach git
     upstream = remote add --track master upstream
@@ -84,18 +85,11 @@
         fi; true"
 [push]
     default = simple
-<<<<<<< HEAD
-[difftool "gvimdiff"]
-    path = /usr/local/bin/mvimdiff
-[mergetool "gvimdiff"]
-    path = /usr/local/bin/mvimdiff
-=======
 [diff]
     renames = true
-#     noprefix = true # drops the annoying a/filename.foo b/filename.foo prefixes
+    noprefix = true # drops the annoying a/filename.foo b/filename.foo prefixes
 [multidiff]
     tool = mdiff -f
 
->>>>>>> 3053904... Still more git power to you
 [github]
 	user = amigrave

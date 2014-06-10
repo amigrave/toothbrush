@@ -25,6 +25,7 @@ git clone https://github.com/mattn/emmet-vim.git
 git clone https://github.com/tpope/vim-commentary
 git clone https://github.com/godlygeek/tabular.git
 git clone https://github.com/terryma/vim-expand-region.git
+git clone https://github.com/michaeljsmith/vim-indent-object.git
 
 # Languages
 ###########
