@@ -17,8 +17,8 @@ alias mcc='LANG=C mc'
 alias ft='milkytracker'
 alias adlib='adplay -r -b 8192'
 alias am='uade123 --detect-format-by-content'
-alias i='ipython'
-alias ii='ipython qtconsole --ConsoleWidget.font_family="Menlo" --ConsoleWidget.font_size=12 --colors=linux --pprint &'
+alias i='ipython -i ~/bin/agr.py'
+alias ii='cd ~/bin; ipython qtconsole --ConsoleWidget.font_family="Menlo" --ConsoleWidget.font_size=12 --colors=linux --pprint -m agr &'
 alias pudb='python -m pudb.run'
 alias f="find . | egrep -i"
 alias ag="ag --page=less"
