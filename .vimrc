@@ -187,7 +187,7 @@ if has("gui_macvim")
 endif
 
 " nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
-nnoremap <Leader>l :'<,'>Gbrowse<CR>
+nnoremap <Leader>l :execute ":silent !git gui blame --line=" . line('.') . " %"<CR>
 vnoremap <Leader>l :Gbrowse<CR>
 
 " Fixed scrolling
@@ -363,6 +363,7 @@ vmap <Leader>a\| :Tabularize /\|<CR>
 " Gist
 let g:gist_clip_command = 'pbcopy'
 let g:gist_detect_filetype = 1
+let g:gist_post_private = 1
 
 " SuperTab
 " let g:SuperTabDefaultCompletionType = "context"
@@ -386,6 +387,7 @@ let g:ctrlp_max_files = 0
 "     \ 'AcceptSelection("e")': ['<c-x>'],
 " \ }
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
+nnoremap <silent> <Leader>t :CtrlPTag<CR>
 
 " NERDTree
 let g:nerdtree_tabs_open_on_gui_startup=0

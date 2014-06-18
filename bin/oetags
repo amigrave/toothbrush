@@ -1,22 +1,8 @@
 #!/bin/bash
 DEST="/Users/agr/.vim/tags"
 time (
-    echo "Building web client tags"
+    echo "Building Odoo tags"
     time (
-        ctags -w -f $DEST ~/Projects/openerp/source/web/
+        ctags -w -f $DEST ~/Projects/odoo/odoo/
     )
-    echo "Building addons tags"
-    time (
-        ctags -w -f $DEST --append ~/Projects/openerp/source/addons/
-    )
-    echo "Building server tags"
-    time (
-        ctags -w -f $DEST --append ~/Projects/openerp/source/server/
-    )
-    echo "Building python libs"
-    time (
-        ctags -w -f $DEST --append ~/Projects/openerp/env/lib/python2.7/site-packages
-    )
-    echo "TOTAL:"
-    ls -alh $DEST
 )
