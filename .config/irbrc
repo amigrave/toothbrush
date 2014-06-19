@@ -3,7 +3,7 @@
 begin
 	require 'rubygems'
 	require 'wirble'
-	Wirble.init
+	Wirble.init(:history_path => "#{ENV['HOME']}/.cache/irb-history")
 	Wirble.colorize
 rescue LoadError
 	require 'irb/completion'
@@ -29,3 +29,5 @@ rescue LoadError
 		end
 	end
 end
+
+IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.cache/irb-history"

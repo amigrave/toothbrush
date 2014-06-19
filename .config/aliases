@@ -4,6 +4,10 @@ alias ps1c='. ~/.bashrc'
 LESSPIPE=`which src-hilite-lesspipe.sh`
 alias src='LESSOPEN="| ${LESSPIPE} %s" less'
 
+# Aliases for lack of XDG support
+alias mocp='mocp -M ~/.config/moc'
+alias irssi='irssi --home=~/.config/irssi'
+
 alias qmv='qmv --format=destination-only'
 alias vim='vim -p '
 alias ..="cd .."

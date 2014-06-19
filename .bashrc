@@ -6,12 +6,7 @@ if [ -f ~/bin/git-completion.bash ]; then
     . ~/bin/git-completion.bash
 fi
 
-export XDG_CONFIG_HOME=~/.config
-export MPV_HOME=$XDG_CONFIG_HOME/mpv
-export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
-export HTTPIE_CONFIG_DIR=$XDG_CONFIG_HOME/httpie
-export DVDCSS_CACHE=~/.cache/dvdcss/
-
+export HISTFILE="$HOME/.cache/bash_history"
 export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries (ignorespace is for mc bug)
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history

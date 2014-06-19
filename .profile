@@ -14,7 +14,6 @@ export LC_CTYPE=$LANG
 export LC_COLLATE=C
 
 export XDG_CONFIG_HOME=~/.config
-export XDG_CACHE_HOME=~/.cache
 export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
 export MPV_HOME=$XDG_CONFIG_HOME/mpv
 export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
@@ -22,6 +21,13 @@ export INPUTRC=$XDG_CONFIG_HOME/inputrc
 export SCREENRC=$XDG_CONFIG_HOME/screenrc
 export IRBRC=$XDG_CONFIG_HOME/irbrc
 export LFTP_HOME=$XDG_CONFIG_HOME/lftp
+export MPV_HOME=$XDG_CONFIG_HOME/mpv
+export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
+export HTTPIE_CONFIG_DIR=$XDG_CONFIG_HOME/httpie
+
+export XDG_CACHE_HOME=~/.cache
+export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
+export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
