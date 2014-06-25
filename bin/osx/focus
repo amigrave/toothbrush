@@ -12,20 +12,24 @@ import appscript
 import commands
 import sys
 
-if len(sys.argv) != 2:
-    print "Usage: focus program"
+if len(sys.argv) == 1:
+    sys.exit("Usage: focus <program>")
 
 program = sys.argv[1]
 
 if program == 'ipython':
     cmd = 'ps aux | grep qtconsole | grep -v zmq'
 elif program == 'macvim':
-    cmd = 'ps aux | grep macvim | grep "MMNoWindow"'
+    cmd = 'ps aux | grep "MacOS/MacVim"'
 else:
     cmd = 'ps aux | grep %s' % program
 
-cmd = cmd + ' | grep -v grep | grep -v focus'
+cmd = cmd + ' | grep -v grep | grep -v focus | grep -v " -v "'
+print cmd
 proc = commands.getoutput(cmd)
 if proc:
+    print proc
     pid = proc.split()[1]
     appscript.app(pid=int(pid)).activate()
+else:
+    print "No match"
