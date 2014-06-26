@@ -33,7 +33,6 @@ alias webserve='python -m SimpleHTTPServer'
 # alias v='DISPLAY=:0 mplayer -geometry 0x1366 -cache 4096 -fs'
 alias v='DISPLAY=:0 mpv -cache 4096 -fs'
 alias stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
-alias psql='PAGER="less -S -F" psql'
 
 alias s='screen -RdU'
 alias tm='tmux attach || tmux'
