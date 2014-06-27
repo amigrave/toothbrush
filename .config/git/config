@@ -34,12 +34,12 @@
     b = branch -vv
     ci = commit
     fa = fetch --all -p
-    info = remote show
+    info = "!for i in $(git remote); do git remote show $i -n; done"
     co = checkout
     st = status --short --branch --
     ls = ls-files
+    li = ls-files --other --ignored --exclude-standard # List ignored files
     lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"
-    diffc = diff --cached
     vdiff = difftool -t vimdiff
     subs = submodule foreach git
     upstream = remote add --track master upstream

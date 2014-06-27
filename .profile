@@ -29,6 +29,7 @@ export PSQLRC=$XDG_CONFIG_HOME/psqlrc
 export XDG_CACHE_HOME=~/.cache
 export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
+export BZR_LOG=/dev/null
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
