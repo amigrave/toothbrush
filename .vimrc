@@ -175,6 +175,9 @@ endif
 nnoremap J mzJ`z
 vnoremap J J`<
 
+" Find non-ascii characters
+nnoremap <Leader>§ /[^\x00-\x7F]<CR>
+
 nnoremap <Leader>. :lcd %:p:h<CR>
 " Reporoot
 nnoremap <silent> <Leader>/ :ProjectRootLCD<cr>
@@ -408,11 +411,8 @@ let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list = 1
 
 " localvimrmc
-" TODO: check if $HOME can be injected in string
-let g:localvimrc_whitelist='/Users/agr/Projects/odoo/.lvimrc'
 let g:localvimrc_sandbox=0
-" TODO: blacklist everything else
-" :localvimrc_blacklist
+let g:localvimrc_persistent = 1
 
 " Jedi
 let g:jedi#popup_on_dot = 0
