@@ -34,7 +34,7 @@
     b = branch -vv
     ci = commit
     fa = fetch --all -p
-    info = "!for i in $(git remote); do git remote show $i -n; done"
+    inf = "!for i in $(git remote); do git remote show $i -n; done"
     co = checkout
     st = status --short --branch --
     ls = ls-files
@@ -47,8 +47,7 @@
     mm = "!f() { git merge --no-ff -mm $1 && git reset HEAD^; }; f"
 
     sl = stash list --pretty=format:'%gd %Cblue%h %Cred* %C(yellow)%s'
-    sll = stash-list
-    slll = stash-list --full
+    sp = stash pop
     ss = stash save
     sa = "!sh -c 'git stash apply stash@{$1}' -"
     sd = "!sh -c 'git stash drop stash@{$1}' -"

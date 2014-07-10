@@ -41,7 +41,8 @@ set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 set shortmess+=I          " do not display welcome message
-set wildmode=longest,list " Improve autocompletion on command line
+set wildmenu
+set wildmode=longest:full,full " Improve autocompletion on command line
 set wildignore=*.o,*~,*.pyc
 set splitbelow            " Invert horizontal split order
 set splitright            " Invert vertical split order
@@ -174,6 +175,9 @@ endif
 " Change behavior of some default mappings
 nnoremap J mzJ`z
 vnoremap J J`<
+
+" gt open file in new tab
+nnoremap gt <C-w>gf
 
 " Find non-ascii characters
 nnoremap <Leader>§ /[^\x00-\x7F]<CR>
@@ -412,7 +416,8 @@ let g:syntastic_auto_loc_list = 1
 
 " localvimrmc
 let g:localvimrc_sandbox=0
-let g:localvimrc_persistent = 1
+let g:localvimrc_persistent = 2
+let g:localvimrc_persistence_file = expand('~') . '/.vim/localvimrc_persistent'
 
 " Jedi
 let g:jedi#popup_on_dot = 0
