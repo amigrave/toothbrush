@@ -1,4 +1,3 @@
--- vim:ft=plsql:
 \set QUIET ON
 \set HISTFILE ~/.cache/psql_history- :DBNAME
 \set HISTSIZE 2000
@@ -17,7 +16,6 @@
 \set COMP_KEYWORD_CASE upper
 \timing
 
-CREATE LANGUAGE plpythonu;
 
 \set QUIET OFF
 
@@ -58,6 +56,14 @@ CREATE LANGUAGE plpythonu;
 \echo '\t:functions\t\t-- Custom PL functions'
 \set functions 'SELECT proname as name, proargnames as arguments, prosrc as source FROM pg_catalog.pg_namespace n JOIN pg_catalog.pg_proc p ON pronamespace = n.oid WHERE nspname = \'public\';'
 
+\echo '\t:dropfunctions\t\t-- Drop Custom PL functions'
+\set dropfunctions 'SELECT \'DROP FUNCTION \' || ns.nspname || \'.\' || proname || \'(\' || oidvectortypes(proargtypes) || \');\' as agr FROM pg_proc INNER JOIN pg_namespace ns ON (pg_proc.pronamespace = ns.oid) WHERE ns.nspname = \'public\'  order by proname;'
+
+-- CREATE LANGUAGE plpythonu;
+\echo '\t:def\t\t-- Define a new pl/python function'
+\set def '\\prompt \'Name of function: \' fname \\; CREATE OR REPLACE FUNCTION :fname(name text DEFAULT \'\') RETURNS text LANGUAGE plpythonu AS $function$\n\n_name = name or "Anonymous"\nreturn "Hello %s" % _name\n\n$function$; '
+
 \echo '\t:menu\t\t-- Show this Menu'
 \set menu '\\i ~/.config/psqlrc'
 
+-- vim:ft=plsql:
