@@ -36,6 +36,7 @@
     fa = fetch --all -p
     inf = "!for i in $(git remote); do git remote show $i -n; done"
     co = checkout
+    cp = cherry-pick
     st = status --short --branch --
     ls = ls-files
     li = ls-files --other --ignored --exclude-standard # List ignored files

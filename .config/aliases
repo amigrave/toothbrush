@@ -60,6 +60,7 @@ alias dboxcd="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox_cd.conf ."
 alias msx="mess msx -cart1 \`iselect -a *\`"
 alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]}" -3 "${files[3]}"'
 
+alias g='git'
 alias cdiff='cdiff -s -w0'
 alias git-force-ignore='git update-index --assume-unchanged'
 alias bfg='java -jar ~/bin/java/bfg*'
