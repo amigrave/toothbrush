@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
-import click
 
 sys.path.append('/Users/agr/Projects/odoo/odoo/')
 sys.path.append('/Users/agr/Projects/odoo/.env/lib/python2.7/site-packages/')
@@ -16,8 +15,6 @@ class DB(object):
         model = attr.replace('_', '.')
         return self._pool[model]
 
-@click.group()
-def cli():
     pass
 
 
@@ -64,8 +61,6 @@ def dump(node, annotate_fields=True, include_attributes=False, indent='  '):
         raise TypeError('expected AST, got %r' % node.__class__.__name__)
     return _format(node)
 
-@cli.command()
-@click.argument('code')
 def ppast(code):
     """
     Print pretty ast.
@@ -77,7 +72,3 @@ def ppast(code):
     """
     # print dump(ast.parse(code, filename=filename), include_attributes=True)
     print dump(ast.parse(code), include_attributes=True)
-
-
-if __name__ == '__main__':
-    cli()
