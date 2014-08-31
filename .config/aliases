@@ -35,7 +35,8 @@ alias v='DISPLAY=:0 mpv -cache 4096 -fs'
 alias stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
 
 alias s='screen -RdU'
-alias tm='tmux attach || tmux'
+TMUXCONF="~/.config/tmux/tmux.conf"
+alias tm="tmux -f $TMUXCONF attach || tmux -f $TMUXCONF"
 
 alias memo="e ~/Documents/agr/memos/"
 
