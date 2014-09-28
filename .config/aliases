@@ -67,6 +67,29 @@ alias git-force-ignore='git update-index --assume-unchanged'
 alias bfg='java -jar ~/bin/java/bfg*'
 
 # FUNCTIONS
+function shellshock() {
+    if [ -z "$1" ]; then
+        shellshock 'bash'
+        echo
+        echo "----------------------------------------------------------------"
+        echo "You should also check with other values, eg:  /bin/bash, /bin/sh"
+    else
+        # Checks it you are vulnerable to shellshock
+        # http://serverfault.com/questions/631257/how-to-test-if-my-server-is-vulnerable-to-the-shellshock-bug
+        echo "************************* Checking $1"
+        env X="() { :;} ; echo YOU_ARE_VULNERABLE_TO_SHELLSHOCK" $1 -c "echo ' '"
+        echo "************************* Checking $1 (/tmp/echo should not exist)"
+        cd /tmp
+        env X='() { (a)=>\' $1 -c "echo date"
+        if [ -f echo ]; then
+            echo "YOU_ARE_VULNERABLE_TO_SHELLSHOCK"
+            rm echo
+        fi
+    fi
+}
+function findrecent() {
+    find $1 -type f -printf '%TY-%Tm-%Td %TT %p\n' | sort -r | less
+}
 function assh() {
     autossh -x "$*" 'screen -RdU'
 }
