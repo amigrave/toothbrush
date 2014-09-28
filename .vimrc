@@ -194,8 +194,10 @@ if has("gui_macvim")
 endif
 
 " nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
-nnoremap <Leader>l :execute ":silent !git gui blame --line=" . line('.') . " %"<CR>
-vnoremap <Leader>l :Gbrowse<CR>
+nnoremap <Leader>gl :execute ":silent !git gui blame --line=" . line('.') . " %"<CR>
+vnoremap <Leader>gw :Gbrowse<CR>
+nnoremap <Leader>gs :execute "!git qshow " . expand("<cword>")<CR>
+nnoremap <Leader>gb :Gblame<CR>
 
 " Fixed scrolling
 noremap <C-Down> <C-E><Down>
