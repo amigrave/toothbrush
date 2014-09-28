@@ -414,7 +414,8 @@ shell/.ico
 
 include/image
 	#Open=(see %f &)
-	Open=(open %f &)
+	# Open=(open %f &)
+	Open=(qiv %f ; ~/bin/osx/focus iTerm)
 	View=%view{ascii} identify %f
 	#View=%view{ascii} asciiview %f
 
