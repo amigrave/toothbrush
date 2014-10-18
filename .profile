@@ -25,6 +25,7 @@ export MPV_HOME=$XDG_CONFIG_HOME/mpv
 export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
 export HTTPIE_CONFIG_DIR=$XDG_CONFIG_HOME/httpie
 export PSQLRC=$XDG_CONFIG_HOME/psqlrc
+export WGETRC=$XDG_CONFIG_HOME/wgetrc
 
 export XDG_CACHE_HOME=~/.cache
 export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
