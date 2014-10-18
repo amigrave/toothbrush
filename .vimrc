@@ -195,6 +195,7 @@ endif
 
 " nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
 nnoremap <Leader>gl :execute ":silent !git gui blame --line=" . line('.') . " %"<CR>
+nnoremap <Leader>gg :Gblame<CR>
 vnoremap <Leader>gb :Gbrowse<CR>
 nnoremap <Leader>gb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
 nnoremap <Leader>gs :execute "!git qshow " . expand("<cword>")<CR>

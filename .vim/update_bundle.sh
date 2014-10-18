@@ -13,7 +13,7 @@ git clone https://github.com/gcmt/taboo.vim.git
 # Look
 ######
 #git clone https://github.com/goatslacker/mango.vim.git
-git clone https://github.com/vim-scripts/hybrid.vim.git
+git clone https://github.com/w0ng/vim-hybrid.git
 git clone https://github.com/jnurmine/Zenburn.git
 
 # Edition
@@ -50,6 +50,7 @@ git clone https://github.com/davidhalter/jedi-vim.git
 git clone https://github.com/jimmyhchan/dustjs.vim.git
 git clone https://github.com/tpope/vim-haml.git
 git clone https://github.com/elzr/vim-json.git
+hg clone http://bitbucket.org/ramonrocha/cobra-on-vim/ cobra-vim
 
 
 # Misc Tools
@@ -65,7 +66,7 @@ git clone https://github.com/xolox/vim-misc.git
 git clone https://github.com/embear/vim-localvimrc.git
 git clone https://github.com/vim-scripts/ingo-library.git
 git clone https://github.com/vim-scripts/SearchHighlighting.git
-
+git clone https://github.com/AndrewRadev/linediff.vim.git
 
 # Libs
 ######

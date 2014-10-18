@@ -1,4 +1,4 @@
-colorscheme wombat
+colorscheme wombat256mod
 set guioptions-=T           " hide toolbar
 "set guioptions-=m           " Remove menu bar
 
