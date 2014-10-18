@@ -67,6 +67,14 @@ alias git-force-ignore='git update-index --assume-unchanged'
 alias bfg='java -jar ~/bin/java/bfg*'
 
 # FUNCTIONS
+function check_pings() {
+    if [ -z "$1" ]; then
+        check_pings 'eth0'
+    else
+        echo "Checking pings on interface $1"
+        tcpdump -i $1 icmp and icmp[icmptype]=icmp-echo
+    fi
+}
 function shellshock() {
     if [ -z "$1" ]; then
         shellshock 'bash'
