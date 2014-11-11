@@ -15,6 +15,7 @@ git clone https://github.com/gcmt/taboo.vim.git
 #git clone https://github.com/goatslacker/mango.vim.git
 git clone https://github.com/w0ng/vim-hybrid.git
 git clone https://github.com/jnurmine/Zenburn.git
+git clone https://github.com/nanotech/jellybeans.vim.git
 
 # Edition
 #########
