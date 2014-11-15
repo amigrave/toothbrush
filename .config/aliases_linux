@@ -1,6 +1,7 @@
 # vim:filetype=sh syntax=sh:
 alias e="gvim --remote-tab-silent"
 alias ack="ack-grep --pager=less --color-match=red"
+alias logs="cd /var/log; multitail -s 2 auth.log  daemon.log  dpkg.log  fail2ban.log  fontconfig.log  kern.log  lpr.log  mail.log  pycentral.log  user.log; cd -"
 alias applekey='setxkbmap us; setxkbmap -option apple:badmap; xmodmap ~/.Xmodmap; xbindkeys; echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode"'
 alias btdl="btdownloadcurses --max_upload_rate 3"
 alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
