@@ -2,8 +2,6 @@
 scriptencoding utf-8
 call pathogen#infect()
 
-" TODO: mkdir .vim/backup and .vim/swap
-
 " ################################### OPTIONS ################################### {{{
 "set all&                " reset all options to compiled in defaults
 "set fileencodings=ascii,ucs-bom,utf-8,ucs-2,ucs-le,latin1
@@ -340,7 +338,6 @@ map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 "" }}}
 
 "" ################################### ADDONS #################################### {{{
-
 " Misc Configuration {{{
 function! FileSize()
     let bytes = getfsize(expand("%:p"))
@@ -558,3 +555,20 @@ function! TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
   \ contains=@'.group
 endfunction
 " }}}
+" EnsureDirExists {{{
+" http://stackoverflow.com/questions/1549263/how-can-i-create-a-folder-if-it-doesnt-exist-from-vimrc
+function! EnsureDirExists (dir)
+  if !isdirectory(a:dir)
+    if exists("*mkdir")
+      call mkdir(a:dir,'p')
+      echo "Created directory: " . a:dir
+    else
+      echo "Please create directory: " . a:dir
+    endif
+  endif
+endfunction
+" }}}
+
+"" ################################# POST CONFIG ################################# {{{
+call EnsureDirExists($HOME . '/.vim/backup')
+call EnsureDirExists($HOME . '/.vim/swap')
