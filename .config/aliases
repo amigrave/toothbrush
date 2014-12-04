@@ -27,6 +27,7 @@ alias pudb='python -m pudb.run'
 alias f="find . | egrep -i"
 alias ag="ag --page=less"
 
+alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
 alias termkey='tput smkx; cat; tput rmkx'
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 alias webserve='python -m SimpleHTTPServer'

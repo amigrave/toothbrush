@@ -45,8 +45,6 @@ set wildignore=*.o,*~,*.pyc
 set splitbelow            " Invert horizontal split order
 set splitright            " Invert vertical split order
 
-"let mapleader = "²"
-"let mapleader = "§"
 let mapleader = ","
 
 filetype plugin on
