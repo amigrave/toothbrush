@@ -104,8 +104,6 @@
 [diff]
     renames = true
     noprefix = true # drops the annoying a/filename.foo b/filename.foo prefixes
-[multidiff]
-    tool = mdiff -f
 
 [github]
     user = amigrave
