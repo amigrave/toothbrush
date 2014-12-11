@@ -1,8 +1,0 @@
-#!/bin/bash
-DEST="/Users/agr/.vim/tags"
-time (
-    echo "Building Odoo tags"
-    time (
-        ctags -w -f $DEST ~/Projects/odoo/odoo/
-    )
-)

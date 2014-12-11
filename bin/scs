@@ -1,5 +1,0 @@
-#!/bin/bash
-default_app="qiv"
-APP=${1:-$default_app}
-
-scrot "/tmp/%Y-%m-%d_$wx$h.png" -e "$APP \$f &" -s

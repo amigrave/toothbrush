@@ -1,6 +1,0 @@
-#!/usr/bin/env python
-
-import re, sys
-url_re = re.compile('(http[^\x00]+)\x00')
-
-print '\n'.join(url_re.findall(open(sys.argv[1], 'rb').read()))

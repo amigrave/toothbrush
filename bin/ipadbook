@@ -1,2 +1,0 @@
-#!/bin/bash
-curl -i -s -F author="$1" -F datafile=@"$2" http://192.168.0.3:8080/post
