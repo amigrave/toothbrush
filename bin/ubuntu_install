@@ -19,7 +19,8 @@ sudo apt-get install colordiff mercurial subversion tig gitg valac gtkaml xmlsta
 
 [dev-python]
 sudo apt-get install bpython ipython pyflakes python-doc python-pip python-setuptools python-simplejson \
-python-yaml scons python-sphinx python-pyside pyside-tools gazpacho python-gtk2-dev winpdb
+python-yaml scons python-sphinx python-pyside pyside-tools gazpacho python-gtk2-dev winpdb \
+python-ipdb ipython-qtconsole python-flake8
 
 [dev-ruby]
 sudo apt-get install ruby ruby-dev rdoc ri irb libsqlite3-ruby libopenssl-ruby rubygems libescape-ruby libxml-ruby hpricot nokogiri \
