@@ -13,7 +13,7 @@ export LC_ALL=$LANG
 export LC_CTYPE=$LANG
 export LC_COLLATE=C
 
-export XDG_CONFIG_HOME=~/.config
+export XDG_CONFIG_HOME=$HOME/.config
 export MPLAYER_HOME=$XDG_CONFIG_HOME/mplayer
 export MPV_HOME=$XDG_CONFIG_HOME/mpv
 export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
@@ -27,7 +27,7 @@ export HTTPIE_CONFIG_DIR=$XDG_CONFIG_HOME/httpie
 export PSQLRC=$XDG_CONFIG_HOME/psqlrc
 export WGETRC=$XDG_CONFIG_HOME/wgetrc
 
-export XDG_CACHE_HOME=~/.cache
+export XDG_CACHE_HOME=$HOME/.cache
 export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 export BZR_LOG=/dev/null
@@ -60,3 +60,7 @@ fi
 if [ -d "/usr/local/lib/node_modules" ]; then
     NODE_PATH="/usr/local/lib/node_modules"
 fi
+
+# https://gist.github.com/cjbarnes18/4078704
+# enable this for non-reparenting window managers
+export _JAVA_AWT_WM_NONREPARENTING=1
