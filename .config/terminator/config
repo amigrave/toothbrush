@@ -1,30 +1,37 @@
 [global_config]
-  focus = mouse
   close_button_on_tab = False
 [keybindings]
-  switch_to_tab_7 = <Super>7
-  switch_to_tab_10 = <Super>0
-  next_tab = <Alt><Super>Right
+  switch_to_tab_10 = <Alt><Super>KP_0
+  reset_clear = <Super>k
+  go_right = <Super>Right
+  go_left = <Super>Left
+  toggle_zoom = <Shift><Super>Return
   prev_tab = <Alt><Super>Left
-  switch_to_tab_6 = <Super>6
+  switch_to_tab_6 = <Alt><Super>KP_6
+  switch_to_tab_7 = <Alt><Super>KP_7
+  switch_to_tab_4 = <Alt><Super>KP_4
+  switch_to_tab_5 = <Alt><Super>KP_5
+  switch_to_tab_2 = <Alt><Super>KP_2
+  switch_to_tab_3 = <Alt><Super>KP_3
+  switch_to_tab_1 = <Alt><Super>KP_1
+  split_vert = <Super>d
   group_tab = None
-  switch_to_tab_4 = <Super>4
-  switch_to_tab_5 = <Super>5
-  switch_to_tab_2 = <Super>2
-  switch_to_tab_3 = <Super>3
-  switch_to_tab_1 = <Super>1
+  switch_to_tab_8 = <Alt><Super>KP_8
+  switch_to_tab_9 = <Alt><Super>KP_9
   new_tab = <Super>t
   copy = <Super>c
   paste = <Super>v
-  switch_to_tab_8 = <Super>8
-  switch_to_tab_9 = <Super>9
+  go_up = <Super>Up
+  next_tab = <Alt><Super>Right
+  split_horiz = <Shift><Super>d
+  go_down = <Super>Down
 [profiles]
   [[default]]
-    use_system_font = False
-    font = Monospace 9
+    background_image = None
+    font = DejaVu Sans Mono 9
     background_darkness = 0.91
     scrollback_lines = 1000
-    background_type = transparent
+    use_system_font = False
     copy_on_selection = True
 [layouts]
   [[default]]
