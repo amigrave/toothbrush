@@ -27,7 +27,9 @@ export PATH
 if [ "$COLORTERM" == "rxvt-xpm" ]; then
     export TERM="rxvt-256color"
 elif [ "$COLORTERM" == "gnome-terminal" ]; then
-    export TERM="gnome-256color"
+    # TODO: check issues with S-F* keys
+    # export TERM="gnome-256color"
+    export TERM="xterm-256color"
 elif [ "$TERM" == "screen" ]; then
     export TERM="screen-256color"
 elif [ "$TERM" == "screen-bce" ]; then
@@ -101,3 +103,5 @@ PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]
 [ -f ~/.config/dir_colors ] && eval `dircolors -b ~/.config/dir_colors `
 
 export HOSTING="amigrave.com"
+
+xset r rate 200 50
