@@ -26,7 +26,6 @@ alias ii='cd ~/bin; ipython qtconsole --ConsoleWidget.font_family="Menlo" --Cons
 alias pudb='python -m pudb.run'
 alias f="find . | egrep -i"
 alias ag="ag --page=less"
-
 alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
 alias termkey='tput smkx; cat; tput rmkx'
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
@@ -36,8 +35,8 @@ alias v='DISPLAY=:0 mpv -cache 4096 -fs'
 alias stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
 
 alias s='screen -RdU'
-TMUXCONF="~/.config/tmux/tmux.conf"
-alias tm="tmux -f $TMUXCONF attach || tmux -f $TMUXCONF"
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
+alias tm="tmux attach || tmux"
 
 alias memo="e ~/Documents/agr/memos/"
 
@@ -65,6 +64,7 @@ alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]
 alias g='git'
 alias cdiff='cdiff -s -w0'
 alias git-force-ignore='git update-index --assume-unchanged'
+alias svnupdry='svn merge --dry-run -r BASE:HEAD .'
 alias bfg='java -jar ~/bin/java/bfg*'
 
 # FUNCTIONS
