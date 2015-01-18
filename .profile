@@ -32,6 +32,8 @@ export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 export BZR_LOG=/dev/null
 
+export ERRFILE=$XDG_CACHE_HOME/xsession-errors.log
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
