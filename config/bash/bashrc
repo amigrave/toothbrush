@@ -1,9 +1,14 @@
-# If not running interactively, don't do anything
+# vim: ft=sh:
+
+export DOTFILES=$HOME/amigrave
+source $DOTFILES/config/common_profile
+
+# If not running interactively, don't do anything further
 [ -z "$PS1" ] && return
 
 # GIT bash completion
-if [ -f ~/bin/git-completion.bash ]; then
-    . ~/bin/git-completion.bash
+if [ -f $DOTFILES/config/bash/git-completion.bash ]; then
+    . $DOTFILES/config/bash/git-completion.bash
 fi
 
 export HISTFILE="$HOME/.cache/bash_history"

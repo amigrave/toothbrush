@@ -1,0 +1,52 @@
+# vim: ft=sh:
+
+export LANG=en_US.UTF-8
+export LC_ALL=$LANG
+export LC_CTYPE=$LANG
+export LC_COLLATE=C
+
+# Set up main paths
+export DOTFILES=$HOME/amigrave
+export XDG_CONFIG_DIRS=$DOTFILES/config:$XDG_CONFIG_DIRS
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+mkdir -p $XDG_CONFIG_HOME
+
+# config
+export MPLAYER_HOME=$DOTFILES/config/mplayer
+export MPV_HOME=$DOTFILES/config/mpv
+export IPYTHONDIR=$DOTFILES/config/ipython
+export INPUTRC=$DOTFILES/config/inputrc
+export SCREENRC=$DOTFILES/config/screenrc
+export IRBRC=$DOTFILES/config/irbrc
+export LFTP_HOME=$DOTFILES/config/lftp
+export MPV_HOME=$DOTFILES/config/mpv
+export HTTPIE_CONFIG_DIR=$DOTFILES/config/httpie
+export PSQLRC=$DOTFILES/config/psqlrc
+export WGETRC=$DOTFILES/config/wgetrc
+
+# cache and logs
+export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
+export LESSHISTFILE=$XDG_CACHE_HOME/less_history
+export ERRFILE=$XDG_CACHE_HOME/xsession-errors.log
+export BZR_LOG=/dev/null
+
+# Homebrew
+if [ -d "/usr/local/Cellar/coreutils" ]; then
+    PATH="/usr/local/bin:$PATH"
+    export PYTHONPATH=/usr/local/lib/python
+    #PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
+fi
+
+if [ -d "/usr/local/lib/node_modules" ]; then
+    NODE_PATH="/usr/local/lib/node_modules"
+fi
+
+# https://gist.github.com/cjbarnes18/4078704
+# enable this for non-reparenting window managers
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# local configuration
+if [ -f "$XDG_CONFIG_HOME/local" ]; then
+    source $XDG_CONFIG_HOME/local
+fi
