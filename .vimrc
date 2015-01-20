@@ -1,6 +1,82 @@
 " vim:ft=vim:fdm=marker:nowrap
 scriptencoding utf-8
-call pathogen#infect()
+
+" #################################### VUNDLE ################################### {{{
+set nocompatible        " do not use vi compatible mode
+filetype off
+" set the runtime path to include Vundle and initialize
+"set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+" "call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+"Plugin 'gmarik/Vundle.vim'
+
+" Navigation
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'ervandew/supertab.git'
+Plugin 'kien/ctrlp.vim.git'
+Plugin 'dbakker/vim-projectroot.git'
+Plugin 'majutsushi/tagbar.git'
+Plugin 'gcmt/taboo.vim.git'
+
+" Look
+Plugin 'w0ng/vim-hybrid.git'
+Plugin 'jnurmine/Zenburn.git'
+Plugin 'nanotech/jellybeans.vim.git'
+
+" Edition
+Plugin 'garbas/vim-snipmate.git'
+Plugin 'honza/vim-snippets.git'
+Plugin 'tpope/vim-surround'
+Plugin 'mattn/emmet-vim.git'
+Plugin 'tpope/vim-commentary'
+Plugin 'godlygeek/tabular.git'
+Plugin 'terryma/vim-expand-region.git'
+Plugin 'michaeljsmith/vim-indent-object.git'
+
+" Languages
+Plugin 'scrooloose/syntastic.git'
+Plugin 'OrgaChem/JavaScript-syntax.git'
+Plugin 'dmitry-ilyashevich/vim-typescript.git'
+Plugin 'vim-scripts/ASPJScript.git'
+Plugin 'kchmck/vim-coffee-script.git'
+Plugin 'groenewege/vim-less.git'
+Plugin 'sukima/xmledit.git'
+Plugin 'digitaltoad/vim-jade.git'
+Plugin 'wavded/vim-stylus.git'
+Plugin 'rainux/vim-vala.git'
+Plugin 'evanmiller/nginx-vim-syntax.git'
+Plugin 'Glench/Vim-Jinja2-Syntax.git'
+Plugin 'sophacles/vim-bundle-mako.git'
+Plugin 'plasticboy/vim-markdown.git'
+Plugin 'davidhalter/jedi-vim.git'
+Plugin 'jimmyhchan/dustjs.vim.git'
+Plugin 'tpope/vim-haml.git'
+Plugin 'elzr/vim-json.git'
+
+" Misc Tools
+Plugin 'tpope/vim-fugitive.git'
+Plugin 'mattn/gist-vim.git'
+Plugin 'vim-scripts/vcscommand.vim.git'
+Plugin 'marzocchi/vim-color-picker-osx.git'
+Plugin 'rking/ag.vim.git'
+Plugin 'xolox/vim-session.git'
+Plugin 'xolox/vim-misc.git'
+Plugin 'embear/vim-localvimrc.git'
+Plugin 'vim-scripts/ingo-library.git'
+Plugin 'vim-scripts/SearchHighlighting.git'
+Plugin 'AndrewRadev/linediff.vim.git'
+
+" Libs
+Plugin 'tomtom/tlib_vim.git'
+Plugin 'MarcWeber/vim-addon-mw-utils.git'
+Plugin 'mattn/webapi-vim.git' " used by gist-vim
+
+call vundle#end()
+filetype plugin indent on
+"}}}
 
 " ################################### OPTIONS ################################### {{{
 "set all&                " reset all options to compiled in defaults
@@ -24,7 +100,6 @@ set backspace=2         " make backspace work like most other apps
 set ignorecase          " ignore case when searching
 set smartcase           " ignore case when the pattern contains lowercase letters only.
 set nobackup            " do not write a .bak file
-set nocompatible        " do not use vi compatible mode
 set autoindent          " automatic indentation
 set smartindent
 "set noexpandtab         " do not expand tab to spaces
@@ -47,7 +122,6 @@ set splitright            " Invert vertical split order
 
 let mapleader = ","
 
-filetype plugin on
 if &t_Co == 256 && !has('win32unix')
     colorscheme wombat256mod
 else
