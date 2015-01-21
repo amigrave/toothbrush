@@ -1,17 +1,24 @@
 " vim:ft=vim:fdm=marker:nowrap
 scriptencoding utf-8
 
+" ################################# CUSTOM PATH ################################# {{{
+let s:dotfiles = expand('~/amigrave/config')
+" set default 'runtimepath' (without ~/.vim folders)
+let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME, $VIM)
+
+" what is the name of the directory containing this file?
+" let s:portable = expand('<sfile>:p:h')
+let s:portable = s:dotfiles . '/vim'
+
+" add the directory to 'runtimepath'
+let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
+" }}}
+
 " #################################### VUNDLE ################################### {{{
 set nocompatible        " do not use vi compatible mode
 filetype off
 " set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-"Plugin 'gmarik/Vundle.vim'
+call vundle#begin(s:portable . '/bundle')
 
 " Navigation
 Plugin 'scrooloose/nerdtree.git'
@@ -108,11 +115,11 @@ set ruler               " Show the line and column number of the cursor position
 set number              " precede each line with its line number
 set showcmd             " Show (partial) command in the last line of the screen
 set showmode            " If in Insert, Replace or Visual mode put a message on the last line
-set viminfo='200,\"5000,n~/.vim/viminfo nowrap
+set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/viminfo nowrap
 "set list listchars=tab:~.,trail:.,extends:>,precedes:<
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
-set backupdir=~/.vim/backup
-set directory=~/.vim/swap
+set backupdir=$XDG_CACHE_HOME/vim/backup
+set directory=$XDG_CACHE_HOME/vim/swap
 set shortmess+=I          " do not display welcome message
 set wildmenu
 set wildmode=longest:full,full " Improve autocompletion on command line
@@ -149,27 +156,27 @@ set statusline+=%10.(%l,%c%V%)%<\ of\ %L\ :\ %P                       " offset
 
 set tags+=.git/tags
 set tags+=.bzr/tags
-set tags+=~/.vim/tags
+set tags+="$XDG_CACHE_HOME/vim/tags"
 
 "}}}
 
 " ################################### PLATFORM ################################## {{{
 syntax on
-if has("unix")
-    let $VIMFILES=$HOME . "/.vim"
-else
-    let $VIMFILES=$HOME . "\\vim"
-endif
-"if $TERM == "screen"
-"    set term=rxvt
-"endif
-if &term =~ "screen\\|rxvt"
-"    "Set the cursor white in cmd-mode and orange in insert mode
-"    let &t_EI = "\<Esc>]12;white\x9c"
-"    let &t_SI = "\<Esc>]12;orange\x9c"
-"    "We normally start in cmd-mode
-"    silent !echo -e "\e]12;white\x9c"
-endif
+" if has("unix")
+"     let $VIMFILES=$HOME . "/.vim"
+" else
+"     let $VIMFILES=$HOME . "\\vim"
+" endif
+" "if $TERM == "screen"
+" "    set term=rxvt
+" "endif
+" if &term =~ "screen\\|rxvt"
+" "    "Set the cursor white in cmd-mode and orange in insert mode
+" "    let &t_EI = "\<Esc>]12;white\x9c"
+" "    let &t_SI = "\<Esc>]12;orange\x9c"
+" "    "We normally start in cmd-mode
+" "    silent !echo -e "\e]12;white\x9c"
+" endif
 "}}}
 
 " ############################ AUTOCMD & FILETYPES ############################## {{{
@@ -267,7 +274,11 @@ endif
 nnoremap <Leader>gl :execute ":silent !git gui blame --line=" . line('.') . " %"<CR>
 nnoremap <Leader>gg :Gblame<CR>
 vnoremap <Leader>gb :Gbrowse<CR>
-nnoremap <Leader>gb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
+if has("gui_macvim")
+    nnoremap <Leader>gb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
+else
+    nnoremap <Leader>gb :execute "!urxvt -cd '%:p:h' -e tig blame %:p:t +" . line('.')<CR>
+endif
 nnoremap <Leader>gs :execute "!git qshow " . expand("<cword>")<CR>
 
 " Fixed scrolling
@@ -642,5 +653,5 @@ endfunction
 " }}}
 
 "" ################################# POST CONFIG ################################# {{{
-call EnsureDirExists($HOME . '/.vim/backup')
-call EnsureDirExists($HOME . '/.vim/swap')
+call EnsureDirExists($XDG_CACHE_HOME . '/vim/backup')
+call EnsureDirExists($XDG_CACHE_HOME . '/vim/swap')

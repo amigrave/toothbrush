@@ -1,3 +1,5 @@
+source ~/amigrave/config/vim/vimrc
+
 colorscheme wombat256mod
 set guioptions-=T           " hide toolbar
 "set guioptions-=m           " Remove menu bar
