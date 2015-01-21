@@ -1,71 +1,65 @@
-# vim:filetype=sh syntax=sh:
-alias ps1c='. ~/.bashrc'
+# vim:filetype=sh syntax=sh:fdm=marker:
 
-LESSPIPE=`which src-hilite-lesspipe.sh`
-alias src='LESSOPEN="| ${LESSPIPE} %s" less'
+# Lack of XDG support {{{
+alias mocp="mocp -M $DOTFILES/config/moc"
+alias irssi="irssi --home=$DOTFILES/config/irssi"
+# }}}
 
-# Aliases for lack of XDG support
-alias mocp='mocp -M ~/.config/moc'
-alias irssi='irssi --home=~/.config/irssi'
-
+# Applications {{{
 alias qmv='qmv --format=destination-only'
 alias vim='vim -p '
-alias ..="cd .."
-alias m="cd /"
-alias ll="ls -lAh --color=yes | less -r -E -X"
-alias l="ls -lAh --color=yes "
-alias d="ls --color=yes "
-alias dusage="du -sk * | sort -nr | cut -f2 | xargs -d '\n' du -sh"
-alias mc='command mc -c --printwd=/tmp/mc-$USER-$$-dir; cd "`cat /tmp/mc-$USER-$$-dir`"; rm -f "/tmp/mc-$USER-$$-dir"; :'
+alias mc='command mc -c --printwd=/tmp/mc-$USER-$$-dir; cd "`cat /tmp/mc-$USER-$$-dir`"; rm -f "/tmp/mc-$USER-$$-dir"; :' # make mc cd's to last browsed directory
 alias mcc='LANG=C mc'
-alias ft='milkytracker'
-alias adlib='adplay -r -b 8192'
-alias am='uade123 --detect-format-by-content'
-alias i='ipython -i ~/bin/agr.py'
-alias ii='cd ~/bin; ipython qtconsole --ConsoleWidget.font_family="Menlo" --ConsoleWidget.font_size=12 --colors=linux --pprint -m agr &'
-alias pudb='python -m pudb.run'
-alias f="find . | egrep -i"
 alias ag="ag --page=less"
-alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
-alias termkey='tput smkx; cat; tput rmkx'
-alias winrsync='rsync -rltDvu --modify-window=1 --progress'
-alias webserve='python -m SimpleHTTPServer'
-# alias v='DISPLAY=:0 mplayer -geometry 0x1366 -cache 4096 -fs'
-alias v='DISPLAY=:0 mpv -cache 4096 -fs'
-alias stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
+alias ack="ack --pager=less --color-match=red"
+alias tmux="tmux -f $DOTFILES/config/tmux/tmux.conf"
+alias cdiff='cdiff -s -w0'
 
-alias s='screen -RdU'
-alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 alias tm="tmux attach || tmux"
-
-alias memo="e ~/Documents/agr/memos/"
-
+alias s='screen -RdU'
 alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
 alias mpi="mp3info -x -F -r a"
+alias adlib='adplay -r -b 8192'
+alias uade='uade123 --detect-format-by-content'
+alias i="ipython -i $DOTFILES/bin/agr.py"
+alias ii="cd $DOTFILES/bin; ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint -m agr &"
+alias f="find . | egrep -i"
+alias v='DISPLAY=:0 mpv -cache 4096 -fs'
+# }}}
+
+# Path naviguation {{{
+alias d="ls -lh --color=yes "
+alias l="ls -lAh --color=yes "
+alias ll="ls -lAh --color=yes | less -r -E -X"
+# }}}
+
+# Misc utils {{{
 alias lower='for i in *; do mv "$i" "$(echo $i | tr "[A-Z]" "[a-z]" )"; done'
 alias upper='for i in *; do mv "$i" "$(echo $i | tr "[a-z]" "[A-Z]" )"; done'
 alias chmodx="find . -type d -exec chmod 0755 '{}' ';'; find . -type f -exec chmod 0644 '{}' ';'"
-alias chownx="sudo chown -R $USER:amigrave"
+alias chownx="sudo chown -R $USER:$(id -g -n $USER)"
+alias dusage="du -sk * | sort -nr | cut -f2 | xargs -d '\n' du -sh"
 
-alias 7zx='for i in *.7z; do 7z x "$i"; done'
-alias zipx='for i in *.zip; do unzip "$i"; done'
-alias rarx='for i in *.rar; do rar x "$i"; done'
-
-alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
-
-# emu
-alias sdl1="SDL_VIDEO_FULLSCREEN_HEAD=1 "
-alias db='dosbox -c "MOUNT C . -freesize 1024" -c "c:"'
-alias dbox="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox.conf ."
-alias dboxcd="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox_cd.conf ."
-alias msx="mess msx -cart1 \`iselect -a *\`"
-alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]}" -3 "${files[3]}"'
-
-alias g='git'
-alias cdiff='cdiff -s -w0'
 alias git-force-ignore='git update-index --assume-unchanged'
 alias svnupdry='svn merge --dry-run -r BASE:HEAD .'
 alias bfg='java -jar ~/bin/java/bfg*'
+
+alias winrsync='rsync -rltDvu --modify-window=1 --progress'
+alias webserve='python -m SimpleHTTPServer'
+alias vlc_stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
+alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
+alias termkey='tput smkx; cat; tput rmkx'
+alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
+# }}}
+
+# emulation {{{
+alias sdl1="SDL_VIDEO_FULLSCREEN_HEAD=1 "
+alias db='dosbox -c "MOUNT C . -freesize 1024" -c "c:"'
+alias dbox="dosbox -conf $DOTFILES/local/bin/bin-Dos-i386/dosbox.conf ."
+alias dboxcd="dosbox -conf ~/local/bin/bin-Dos-i386/dosbox_cd.conf ."
+alias msx="mess msx -cart1 \`iselect -a *\`"
+alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]}" -3 "${files[3]}"'
+# }}}
 
 # FUNCTIONS
 function check_pings() {

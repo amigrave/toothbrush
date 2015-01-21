@@ -1,4 +1,5 @@
 # vim: ft=sh:fdm=marker:
+# Profile shared amongst all shells
 
 # Main environment {{{
 export LANG=en_US.UTF-8
@@ -7,15 +8,22 @@ export LC_CTYPE=$LANG
 export LC_COLLATE=C
 # }}}
 
-# Main applicatons {{{
+# Applicatons {{{
 export EDITOR=vim
 export VISUAL=vim
 export TERMINAL=terminator
 export BROWSER=google-chrome
 
+export VIMINIT='let $MYVIMRC="$DOTFILES/config/vim/vimrc" | source $MYVIMRC'
+export GVIMINIT='let $MYGVIMRC="$DOTFILES/.gvimrc" | source $MYGVIMRC'
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
 export LS_OPTIONS='--color=auto'
 export GREP_OPTIONS='--color=auto'
+
+# https://gist.github.com/cjbarnes18/4078704
+# enable this for non-reparenting window managers
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 # }}}
 
 # Set up paths {{{
@@ -25,7 +33,6 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 mkdir -p $XDG_CONFIG_HOME
 
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 export MPLAYER_HOME=$DOTFILES/config/mplayer
 export MPV_HOME=$DOTFILES/config/mpv
 export IPYTHONDIR=$DOTFILES/config/ipython
@@ -46,24 +53,34 @@ export BZR_LOG=/dev/null
 
 # socket paths - temporary fix until systemd sets this automatically (or until this is the default path for dbus)
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UID/dbus/user_bus_socket
+
+PATH=$DOTFILES/bin:$PATH
 # }}}
 
-# Homebrew
+# Homebrew {{{
 if [ -d "/usr/local/Cellar/coreutils" ]; then
     PATH="/usr/local/bin:$PATH"
     export PYTHONPATH=/usr/local/lib/python
     #PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 fi
+# }}}
 
+# Node {{{
 if [ -d "/usr/local/lib/node_modules" ]; then
     NODE_PATH="/usr/local/lib/node_modules"
 fi
+# }}}
 
-# https://gist.github.com/cjbarnes18/4078704
-# enable this for non-reparenting window managers
-export _JAVA_AWT_WM_NONREPARENTING=1
+# local configuration {{{
+if [ -f "$XDG_CONFIG_HOME/local" ]; then
+    source $XDG_CONFIG_HOME/local
+fi
+# }}}
 
-# Set up terminal emulation
+# If not running interactively, don't do anything further
+[ -z "$PS1" ] && return
+
+# Set up terminal emulation {{{
 if [ "$COLORTERM" == "rxvt-xpm" ]; then
     export TERM="rxvt-256color"
 elif [ "$COLORTERM" == "gnome-terminal" ]; then
@@ -77,20 +94,39 @@ elif [ "$TERM" == "screen-bce" ]; then
 elif [ $KONSOLE_DBUS_SESSION ]; then
     export TERM="konsole-256color"
 fi
+# }}}
 
-# local configuration
-if [ -f "$XDG_CONFIG_HOME/local" ]; then
-    source $XDG_CONFIG_HOME/local
+# TODO: src-highlight {{{
+# LESSPIPE=`which src-hilite-lesspipe.sh`
+# alias src='LESSOPEN="| ${LESSPIPE} %s" less'
+# }}}
+
+# extra files {{{
+source $DOTFILES/config/aliases
+eval `dircolors -b $DOTFILES/config/dir_colors `
+# }}}
+
+# OS dependencies {{{
+if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
+
+    source $DOTFILES/config/aliases_linux
+    # make less more friendly for non-text input files, see lesspipe(1)
+    [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+    # SDL Fullscreen second monitor
+    # export SDL_VIDEO_FULLSCREEN_HEAD=1
+    # export SDL_AUDIODRIVER=alsa
+elif [ "$OSTYPE" == "cygwin" ]; then
+
+    source $DOTFILES/config/aliases_cygwin
+    termsetcolors
+
+elif [[ "$OSTYPE" =~ darwin* ]]; then
+
+    source $DOTFILES/config/aliases_osx
+    export BROWSER=safari
+    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
 fi
-
-# If not running interactively, don't do anything further
-[ -z "$PS1" ] && return
-
-# setup aliases
-if [ -f $DOTFILES/config/aliases ]; then
-    . $DOTFILES/config/aliases
-fi
-
-if [ -f $DOTFILES/config/dir_colors ]; then
-    eval `dircolors -b $DOTFILES/config/dir_colors `
-fi
+# }}}

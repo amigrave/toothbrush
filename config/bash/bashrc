@@ -1,9 +1,9 @@
-# vim: ft=sh:
+# vim: ft=sh:fdm=marker:
 
 export DOTFILES=$HOME/amigrave
 source $DOTFILES/config/common_profile
 
-export HISTFILE="$OME/.cache/bash_history"
+export HISTFILE="$XDG_CACHE_HOME/bash_history"
 export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries (ignorespace is for mc bug)
 export HISTSIZE=10000                    # big big history
 export HISTFILESIZE=10000                # big big history
@@ -12,36 +12,9 @@ shopt -s histappend                      # append to history, don't overwrite it
 # If not running interactively, don't do anything further
 [ -z "$PS1" ] && return
 
-if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
-
-    if [ -f $DOTFILES/config/aliases_linux ]; then
-        . $DOTFILES/config/aliases_linux
-    fi
-    # make less more friendly for non-text input files, see lesspipe(1)
-    [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-    # SDL Fullscreen second monitor
-    # export SDL_VIDEO_FULLSCREEN_HEAD=1
-    # export SDL_AUDIODRIVER=alsa
-
-elif [ "$OSTYPE" == "cygwin" ]; then
-
-    if [ -f $DOTFILES/config/aliases_cygwin ]; then
-        . $DOTFILES/config/aliases_cygwin
-    fi
-    termsetcolors
-
-elif [[ "$OSTYPE" =~ darwin* ]]; then
-
-    if [ -f $DOTFILES/config/aliases_osx ]; then
-        . $DOTFILES/config/aliases_osx
-    fi
-    export BROWSER=safari
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-
-fi
-
+# Zshify bash {{{
+alias ..="cd .."
+# }}}
 
 usercolor="33"
 if [ "$USER" == "agr" ]; then

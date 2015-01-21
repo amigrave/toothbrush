@@ -1,4 +1,4 @@
-# vim: ft=zsh:
+# vim: ft=zsh:fdm=marker:
 
 export DOTFILES=$HOME/amigrave
 source $DOTFILES/config/common_profile
