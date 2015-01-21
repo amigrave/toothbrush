@@ -123,7 +123,7 @@ vertical_equal=1
 horizontal_equal=1
 top_panel_size=49
 
-left_panel_size=118
+left_panel_size=135
 
 [Misc]
 ftp_proxy_host=gate
@@ -137,6 +137,8 @@ timeformat_old=%b %e  %Y
 autodetect_codeset=
 clipboard_store=
 clipboard_paste=
+
+spell_language=en
 
 [Colors]
 rxvt-256color=
@@ -157,6 +159,8 @@ base_color=
 xterm-256color=
 
 linux=
+
+rxvt-unicode=
 
 [Panels]
 kilobyte_si=false
