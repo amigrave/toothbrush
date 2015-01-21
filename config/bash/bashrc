@@ -3,62 +3,19 @@
 export DOTFILES=$HOME/amigrave
 source $DOTFILES/config/common_profile
 
+export HISTFILE="$OME/.cache/bash_history"
+export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries (ignorespace is for mc bug)
+export HISTSIZE=10000                    # big big history
+export HISTFILESIZE=10000                # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+
 # If not running interactively, don't do anything further
 [ -z "$PS1" ] && return
 
-# GIT bash completion
-if [ -f $DOTFILES/config/bash/git-completion.bash ]; then
-    . $DOTFILES/config/bash/git-completion.bash
-fi
-
-export HISTFILE="$HOME/.cache/bash_history"
-export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries (ignorespace is for mc bug)
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
-shopt -s histappend                      # append to history, don't overwrite it
-# Save and reload the history after each command finishes
-# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-#shopt -s checkwinsize
-
-
-PADD=~/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/share/npm/bin:/usr/local/ringojs/bin
-echo "$PATH" | grep "$PADD" > /dev/null || PATH="$PADD:$PATH"
-unset PADD
-export PATH
-
-if [ "$COLORTERM" == "rxvt-xpm" ]; then
-    export TERM="rxvt-256color"
-elif [ "$COLORTERM" == "gnome-terminal" ]; then
-    # TODO: check issues with S-F* keys
-    # export TERM="gnome-256color"
-    export TERM="xterm-256color"
-elif [ "$TERM" == "screen" ]; then
-    export TERM="screen-256color"
-elif [ "$TERM" == "screen-bce" ]; then
-    export TERM="screen-256color-bce-s"
-elif [ $KONSOLE_DBUS_SESSION ]; then
-    export TERM="konsole-256color"
-fi
-
-
-if [ -f ~/.config/aliases ]; then
-    . ~/.config/aliases
-fi
-
-export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
-export LS_OPTIONS='--color=auto'
-export VISUAL=vim
-export EDITOR=vim
-export BROWSER=google-chrome
-export GREP_OPTIONS='--color=auto'
-
 if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
-    if [ -f ~/.config/aliases_linux ]; then
-        . ~/.config/aliases_linux
+    if [ -f $DOTFILES/config/aliases_linux ]; then
+        . $DOTFILES/config/aliases_linux
     fi
     # make less more friendly for non-text input files, see lesspipe(1)
     [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -69,15 +26,15 @@ if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
 elif [ "$OSTYPE" == "cygwin" ]; then
 
-    if [ -f ~/.config/aliases_cygwin ]; then
-        . ~/.config/aliases_cygwin
+    if [ -f $DOTFILES/config/aliases_cygwin ]; then
+        . $DOTFILES/config/aliases_cygwin
     fi
     termsetcolors
 
 elif [[ "$OSTYPE" =~ darwin* ]]; then
 
-    if [ -f ~/.config/aliases_osx ]; then
-        . ~/.config/aliases_osx
+    if [ -f $DOTFILES/config/aliases_osx ]; then
+        . $DOTFILES/config/aliases_osx
     fi
     export BROWSER=safari
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -105,8 +62,12 @@ PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]
 # export LESS_TERMCAP_ue=$'\E[0m'
 # export LESS_TERMCAP_us=$'\E[01;32m'
 
-[ -f ~/.config/dir_colors ] && eval `dircolors -b ~/.config/dir_colors `
 
 export HOSTING="amigrave.com"
+
+# GIT bash completion
+if [ -f $DOTFILES/config/bash/git-completion.bash ]; then
+    . $DOTFILES/config/bash/git-completion.bash
+fi
 
 xset r rate 200 50

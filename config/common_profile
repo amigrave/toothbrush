@@ -1,18 +1,31 @@
-# vim: ft=sh:
+# vim: ft=sh:fdm=marker:
 
+# Main environment {{{
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LC_CTYPE=$LANG
 export LC_COLLATE=C
+# }}}
 
-# Set up main paths
+# Main applicatons {{{
+export EDITOR=vim
+export VISUAL=vim
+export TERMINAL=terminator
+export BROWSER=google-chrome
+
+export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
+export LS_OPTIONS='--color=auto'
+export GREP_OPTIONS='--color=auto'
+# }}}
+
+# Set up paths {{{
 export DOTFILES=$HOME/amigrave
 export XDG_CONFIG_DIRS=$DOTFILES/config:$XDG_CONFIG_DIRS
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 mkdir -p $XDG_CONFIG_HOME
 
-# config
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 export MPLAYER_HOME=$DOTFILES/config/mplayer
 export MPV_HOME=$DOTFILES/config/mpv
 export IPYTHONDIR=$DOTFILES/config/ipython
@@ -24,12 +37,16 @@ export MPV_HOME=$DOTFILES/config/mpv
 export HTTPIE_CONFIG_DIR=$DOTFILES/config/httpie
 export PSQLRC=$DOTFILES/config/psqlrc
 export WGETRC=$DOTFILES/config/wgetrc
+export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"
 
-# cache and logs
 export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 export ERRFILE=$XDG_CACHE_HOME/xsession-errors.log
 export BZR_LOG=/dev/null
+
+# socket paths - temporary fix until systemd sets this automatically (or until this is the default path for dbus)
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UID/dbus/user_bus_socket
+# }}}
 
 # Homebrew
 if [ -d "/usr/local/Cellar/coreutils" ]; then
@@ -46,7 +63,34 @@ fi
 # enable this for non-reparenting window managers
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# Set up terminal emulation
+if [ "$COLORTERM" == "rxvt-xpm" ]; then
+    export TERM="rxvt-256color"
+elif [ "$COLORTERM" == "gnome-terminal" ]; then
+    # TODO: check issues with S-F* keys
+    # export TERM="gnome-256color"
+    export TERM="xterm-256color"
+elif [ "$TERM" == "screen" ]; then
+    export TERM="screen-256color"
+elif [ "$TERM" == "screen-bce" ]; then
+    export TERM="screen-256color-bce-s"
+elif [ $KONSOLE_DBUS_SESSION ]; then
+    export TERM="konsole-256color"
+fi
+
 # local configuration
 if [ -f "$XDG_CONFIG_HOME/local" ]; then
     source $XDG_CONFIG_HOME/local
+fi
+
+# If not running interactively, don't do anything further
+[ -z "$PS1" ] && return
+
+# setup aliases
+if [ -f $DOTFILES/config/aliases ]; then
+    . $DOTFILES/config/aliases
+fi
+
+if [ -f $DOTFILES/config/dir_colors ]; then
+    eval `dircolors -b $DOTFILES/config/dir_colors `
 fi
