@@ -93,7 +93,7 @@ set encoding=utf8
 set fileencoding=utf8
 set fileencodings=utf-8,latin1
 set visualbell
-set t_vb=
+set novb
 set noerrorbells        " do not bell on error
 set shiftwidth=4        " Number of spaces to use for each step of (auto)
 set tabstop=4           " Number of spaces that a <Tab> in the file counts for
@@ -183,12 +183,6 @@ if has('gui')
     hi PmenuSel guibg=white guifg=black
     hi Cursor guifg=white guibg=red
     hi FoldColumn guibg=black guifg=gray
-    set novb
-endif
-
-if has("gui_macvim")
-    " TODO: check why I used that
-    " set vb
 endif
 
 if has("win32")
@@ -335,8 +329,8 @@ vmap <C-Insert> "_d"+P
 imap <C-Insert> <C-O>"+gP
 vmap <Backspace> "_d
 
-" nmap <C-t> :tabnew<CR>
-" imap <C-t> <Esc>:tabnew<CR>
+nmap <C-t> :tabnew<CR>
+imap <C-t> <Esc>:tabnew<CR>
 command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
 cabbrev e <c-R>=(getcmdtype()==':' && getcmdpos()==1 ? 'E' : 'e')<cr>
 nnoremap <silent> <F2> :tabprevious<CR>
