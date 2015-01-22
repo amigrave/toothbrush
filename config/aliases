@@ -6,6 +6,7 @@ alias irssi="irssi --home=$DOTFILES/config/irssi"
 # }}}
 
 # Applications {{{
+alias qipython="ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint &"
 alias qmv='qmv --format=destination-only'
 alias vim='vim -p '
 alias mc='command mc -c --printwd=/tmp/mc-$USER-$$-dir; cd "`cat /tmp/mc-$USER-$$-dir`"; rm -f "/tmp/mc-$USER-$$-dir"; :' # make mc cd's to last browsed directory
@@ -21,8 +22,6 @@ alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
 alias mpi="mp3info -x -F -r a"
 alias adlib='adplay -r -b 8192'
 alias uade='uade123 --detect-format-by-content'
-alias i="ipython -i $DOTFILES/bin/agr.py"
-alias ii="cd $DOTFILES/bin; ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint -m agr &"
 alias f="find . | egrep -i"
 alias v='DISPLAY=:0 mpv -cache 4096 -fs'
 # }}}
