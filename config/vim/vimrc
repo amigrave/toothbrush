@@ -2,13 +2,11 @@
 scriptencoding utf-8
 
 " ################################# CUSTOM PATH ################################# {{{
-let s:dotfiles = expand('~/amigrave/config')
 " set default 'runtimepath' (without ~/.vim folders)
 let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME, $VIM)
 
 " what is the name of the directory containing this file?
-" let s:portable = expand('<sfile>:p:h')
-let s:portable = s:dotfiles . '/vim'
+let s:portable = expand('<sfile>:p:h')
 
 " add the directory to 'runtimepath'
 let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
@@ -18,7 +16,7 @@ let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable
 set nocompatible        " do not use vi compatible mode
 filetype off
 " set the runtime path to include Vundle and initialize
-call vundle#begin(s:portable . '/bundle')
+call vundle#begin(expand('<sfile>:p:h') . '/bundle')
 
 " Navigation
 Plugin 'scrooloose/nerdtree.git'
@@ -88,6 +86,9 @@ filetype plugin indent on
 " ################################### OPTIONS ################################### {{{
 "set all&                " reset all options to compiled in defaults
 "set fileencodings=ascii,ucs-bom,utf-8,ucs-2,ucs-le,latin1
+let mapleader = ","
+colorscheme wombat256mod
+
 set encoding=utf8
 set fileencoding=utf8
 set fileencodings=utf-8,latin1
@@ -127,17 +128,6 @@ set wildignore=*.o,*~,*.pyc
 set splitbelow            " Invert horizontal split order
 set splitright            " Invert vertical split order
 
-let mapleader = ","
-
-if &t_Co == 256 && !has('win32unix')
-    colorscheme wombat256mod
-else
-    colorscheme agr
-endif
-if has("gui_macvim")
-    set vb
-endif
-
 set laststatus=2
 set statusline=   " clear the statusline for when vimrc is reloaded
 set statusline+=[Buf:\ %3.3n]\                                         " buffer number
@@ -162,21 +152,63 @@ set tags+="$XDG_CACHE_HOME/vim/tags"
 
 " ################################### PLATFORM ################################## {{{
 syntax on
-" if has("unix")
-"     let $VIMFILES=$HOME . "/.vim"
-" else
-"     let $VIMFILES=$HOME . "\\vim"
-" endif
-" "if $TERM == "screen"
-" "    set term=rxvt
-" "endif
-" if &term =~ "screen\\|rxvt"
-" "    "Set the cursor white in cmd-mode and orange in insert mode
-" "    let &t_EI = "\<Esc>]12;white\x9c"
-" "    let &t_SI = "\<Esc>]12;orange\x9c"
-" "    "We normally start in cmd-mode
-" "    silent !echo -e "\e]12;white\x9c"
-" endif
+
+if has('gui')
+    set guioptions-=T           " hide toolbar
+    " set guioptions-=m           " Remove menu bar
+    " set lines=999 columns=999   " Hack: maximize gvim
+    set guifont=Monospace\ 9
+
+    " Windows handling
+    nnoremap <silent> <C-H> :vne<CR>
+    "nnoremap <silent> <C-S-L> :rightb vne<CR>
+    nnoremap <silent> <C-J> :rightb new<CR>
+    nnoremap <silent> <C-K> :new<CR>
+    "nnoremap <silent> <C-S-Up> <C-O>:rightb vne<CR>
+    nnoremap <silent> <C-S-Right> <C-W>>
+    inoremap <silent> <C-S-Right> <C-O><C-W>>
+    nnoremap <silent> <C-S-Left> <C-W><
+    inoremap <silent> <C-S-Left> <C-O><C-W><
+    nnoremap <silent> <C-S-Up> <C-W>+
+    inoremap <silent> <C-S-Up> <C-O><C-W>+
+    nnoremap <silent> <C-S-Down> <C-W>-
+    inoremap <silent> <C-S-Down> <C-O><C-W>-
+
+    nnoremap <silent> <M-D-Left> :tabprevious<CR>
+    inoremap <silent> <M-D-Left> <C-O>:tabprevious<CR>
+    nnoremap <silent> <M-D-Right> :tabnext<CR>
+    inoremap <silent> <M-D-Right> <C-O>:tabnext<CR>
+
+    hi Pmenu guibg=yellow guifg=black
+    hi PmenuSel guibg=white guifg=black
+    hi Cursor guifg=white guibg=red
+    hi FoldColumn guibg=black guifg=gray
+    set novb
+endif
+
+if has("gui_macvim")
+    " TODO: check why I used that
+    " set vb
+endif
+
+if has("win32")
+    set clipboard=unnamedplus " Always use unnamed register
+    au GUIEnter * simalt ~x
+    set guifont=DejaVu\ Sans\ Mono
+
+    " Note adding ,Syntax above messes up the syntax loading
+    " See :help syntax-loading for more info
+    autocmd BufNewFile,BufRead * call Highlight_remove_attr("bold")
+    autocmd BufNewFile,BufRead * call Highlight_remove_attr("italic")
+endif
+
+if &term =~ "screen\\|rxvt"
+    "Set the cursor white in cmd-mode and orange in insert mode
+    let &t_EI = "\<Esc>]12;white\x9c"
+    let &t_SI = "\<Esc>]12;orange\x9c"
+    "We normally start in cmd-mode
+    silent !echo -e "\e]12;white\x9c"
+endif
 "}}}
 
 " ############################ AUTOCMD & FILETYPES ############################## {{{
@@ -651,7 +683,57 @@ function! EnsureDirExists (dir)
   endif
 endfunction
 " }}}
+" Highlight_remove_attr {{{
+" The following removes bold from all highlighting
+" Steve Hall wrote this function for me on vim@vim.org
+" See :help attr-list for possible attrs to pass
+function! Highlight_remove_attr(attr)
+    " save selection registers
+    new
+    silent! put
+
+    " get current highlight configuration
+    redir @x
+    silent! highlight
+    redir END
+    " open temp buffer
+    new
+    " paste in
+    silent! put x
+
+    " convert to vim syntax (from Mkcolorscheme.vim,
+    "   http://vim.sourceforge.net/scripts/script.php?script_id=85)
+    " delete empty,"links" and "cleared" lines
+    silent! g/^$\| links \| cleared/d
+    " join any lines wrapped by the highlight command output
+    silent! %s/\n \+/ /
+    " remove the xxx's
+    silent! %s/ xxx / /
+    " add highlight commands
+    silent! %s/^/highlight /
+    " protect spaces in some font names
+    silent! %s/font=\(.*\)/font='\1'/
+
+    " substitute bold with "NONE"
+    execute 'silent! %s/' . a:attr . '\([\w,]*\)/NONE\1/geI'
+    " yank entire buffer
+    normal ggVG
+    " copy
+    silent! normal "xy
+    " run
+    execute @x
+
+    " remove temp buffer
+    bwipeout!
+
+    " restore selection registers
+    silent! normal ggVGy
+    bwipeout!
+endfunction
+" }}}
+"" }}}
 
 "" ################################# POST CONFIG ################################# {{{
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/backup')
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/swap')
+"" }}}

@@ -15,7 +15,6 @@ export TERMINAL=terminator
 export BROWSER=google-chrome
 
 export VIMINIT='let $MYVIMRC="$DOTFILES/config/vim/vimrc" | source $MYVIMRC'
-export GVIMINIT='let $MYGVIMRC="$DOTFILES/.gvimrc" | source $MYGVIMRC'
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
 export LS_OPTIONS='--color=auto'
 export GREP_OPTIONS='--color=auto'
