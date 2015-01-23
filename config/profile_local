@@ -1,0 +1,19 @@
+# vim: ft=sh:fdm=marker:
+# Place this in ~/.config for a local profile
+
+# export SHELL=/bin/zsh
+# export PYTHONPATH=$DOTFILES:$PYTHONPATH
+
+# Linux stuff
+#############
+# xrdb -merge $DOTFILES/config/Xdefaults
+# setxkbmap us
+# setxkbmap -option apple:badmap
+# xmodmap $DOTFILES/config/Xmodmap
+# xbindkeys
+# echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode
+# xset r rate 200 50
+
+# TODO: find a solution for ssh keys
+# ssh-add ~/.ssh/id_rsa
+# SSH_ASKPASS=ssh-askpass ssh-add ~/.ssh/id_rsa

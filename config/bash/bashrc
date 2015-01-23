@@ -1,7 +1,9 @@
 # vim: ft=sh:fdm=marker:
 
-export DOTFILES=$HOME/amigrave
-source $DOTFILES/config/common_profile
+# If not running interactively, don't do anything further
+[ -z "$PS1" ] && return
+
+source $DOTFILES/config/profile_interactive
 
 export HISTFILE="$XDG_CACHE_HOME/bash_history"
 export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries (ignorespace is for mc bug)
@@ -9,12 +11,8 @@ export HISTSIZE=10000                    # big big history
 export HISTFILESIZE=10000                # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 
-# If not running interactively, don't do anything further
-[ -z "$PS1" ] && return
-
-# Zshify bash {{{
+# Zshify bash
 alias ..="cd .."
-# }}}
 
 usercolor="33"
 if [ "$USER" == "agr" ]; then
@@ -35,12 +33,7 @@ PS1='\[\033[$usercolor;1m\]\u\[\033[0m\]@\[\033[$hostcolor;1m\]\h \[\033[32;1m\]
 # export LESS_TERMCAP_ue=$'\E[0m'
 # export LESS_TERMCAP_us=$'\E[01;32m'
 
-
-export HOSTING="amigrave.com"
-
 # GIT bash completion
 if [ -f $DOTFILES/config/bash/git-completion.bash ]; then
     . $DOTFILES/config/bash/git-completion.bash
 fi
-
-xset r rate 200 50

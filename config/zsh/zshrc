@@ -1,7 +1,6 @@
 # vim: ft=zsh:fdm=marker:
 
-export DOTFILES=$HOME/amigrave
-source $DOTFILES/config/common_profile
+source $DOTFILES/config/profile_interactive
 
 # My history is bigger than yours
 HISTSIZE=10000

@@ -1,14 +1,17 @@
 # vim: ft=sh:fdm=marker:
-# Profile shared amongst all shells
+# Non interactive profile
 
-# Main environment {{{
+
+# Global environment {{{
+export DOTFILES=$HOME/amigrave
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LC_CTYPE=$LANG
 export LC_COLLATE=C
-# }}}
 
-# Applicatons {{{
+PATH=$DOTFILES/bin:$PATH
+
+# Applicatons
 export EDITOR=vim
 export VISUAL=vim
 export TERMINAL=terminator
@@ -23,10 +26,7 @@ export GREP_OPTIONS='--color=auto'
 # enable this for non-reparenting window managers
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-# }}}
-
-# Set up paths {{{
-export DOTFILES=$HOME/amigrave
+# Set up paths
 export XDG_CONFIG_DIRS=$DOTFILES/config:$XDG_CONFIG_DIRS
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
@@ -52,8 +52,12 @@ export BZR_LOG=/dev/null
 
 # socket paths - temporary fix until systemd sets this automatically (or until this is the default path for dbus)
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UID/dbus/user_bus_socket
+# }}}
 
-PATH=$DOTFILES/bin:$PATH
+# Bash startup {{{
+#if [ -n "$BASH_VERSION" ]; then
+#    source $DOTFILES/config/bash/bashrc
+#fi
 # }}}
 
 # Homebrew {{{
@@ -70,62 +74,8 @@ if [ -d "/usr/local/lib/node_modules" ]; then
 fi
 # }}}
 
-# local configuration {{{
-if [ -f "$XDG_CONFIG_HOME/local" ]; then
-    source $XDG_CONFIG_HOME/local
+# Load local profile
+if [ -f "$XDG_CONFIG_HOME/profile_local" ]; then
+    . $XDG_CONFIG_HOME/profile_local
 fi
-# }}}
-
-# If not running interactively, don't do anything further
-[ -z "$PS1" ] && return
-
-# Set up terminal emulation {{{
-if [ "$COLORTERM" == "rxvt-xpm" ]; then
-    export TERM="rxvt-256color"
-elif [ "$COLORTERM" == "gnome-terminal" ]; then
-    # TODO: check issues with S-F* keys
-    # export TERM="gnome-256color"
-    export TERM="xterm-256color"
-elif [ "$TERM" == "screen" ]; then
-    export TERM="screen-256color"
-elif [ "$TERM" == "screen-bce" ]; then
-    export TERM="screen-256color-bce-s"
-elif [ $KONSOLE_DBUS_SESSION ]; then
-    export TERM="konsole-256color"
-fi
-# }}}
-
-# TODO: src-highlight {{{
-# LESSPIPE=`which src-hilite-lesspipe.sh`
-# alias src='LESSOPEN="| ${LESSPIPE} %s" less'
-# }}}
-
-# extra files {{{
-source $DOTFILES/config/aliases
-eval `dircolors -b $DOTFILES/config/dir_colors `
-# }}}
-
-# OS dependencies {{{
-if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
-
-    source $DOTFILES/config/aliases_linux
-    # make less more friendly for non-text input files, see lesspipe(1)
-    [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-    # SDL Fullscreen second monitor
-    # export SDL_VIDEO_FULLSCREEN_HEAD=1
-    # export SDL_AUDIODRIVER=alsa
-elif [ "$OSTYPE" == "cygwin" ]; then
-
-    source $DOTFILES/config/aliases_cygwin
-    termsetcolors
-
-elif [[ "$OSTYPE" =~ darwin* ]]; then
-
-    source $DOTFILES/config/aliases_osx
-    export BROWSER=safari
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-
-fi
-# }}}
+export LD_LIBRARY_PATH=/usr/lib/oracle/12.1/client64/lib:$LD_LIBRARY_PATH
