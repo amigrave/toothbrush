@@ -517,6 +517,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args = '--config=' . $DOTFILES . '/config/flake8'
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '⚠'
@@ -572,7 +573,7 @@ def SetBreakpoint():
     strWhite = re.search( '^(\s*)', strLine).group(1)
 
     vim.current.buffer.append(
-       "%(space)sfrom pudb import set_trace;set_trace() %(mark)s Breakpoint %(mark)s" %
+       "%(space)sfrom pudb import set_trace; set_trace() # %(mark)s Breakpoint %(mark)s" %
          {'space':strWhite, 'mark': '#' * 30}, nLine - 1)
 
 vim.command( 'map <f8> :py SetBreakpoint()<cr>')

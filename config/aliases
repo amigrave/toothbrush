@@ -1,8 +1,11 @@
 # vim:filetype=sh syntax=sh:fdm=marker:
 
-# Lack of XDG support {{{
+# Manually provide config file {{{
+# TODO: put this in $DOTFILES/bin so it's not confined to shells
 alias mocp="mocp -M $DOTFILES/config/moc"
 alias irssi="irssi --home=$DOTFILES/config/irssi"
+alias tmux="tmux -f $DOTFILES/config/tmux/tmux.conf"
+alias flake8="flake8 --config=$DOTFILES/config/flake8"
 # }}}
 
 # Applications {{{
@@ -10,10 +13,8 @@ alias qipython="ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleW
 alias qmv='qmv --format=destination-only'
 alias vim='vim -p '
 alias mc='command mc -c --printwd=/tmp/mc-$USER-$$-dir; cd "`cat /tmp/mc-$USER-$$-dir`"; rm -f "/tmp/mc-$USER-$$-dir"; :' # make mc cd's to last browsed directory
-alias mcc='LANG=C mc'
 alias ag="ag --page=less"
 alias ack="ack --pager=less --color-match=red"
-alias tmux="tmux -f $DOTFILES/config/tmux/tmux.conf"
 alias cdiff='cdiff -s -w0'
 
 alias tm="tmux attach || tmux"
@@ -33,6 +34,7 @@ alias ll="ls -lAh --color=yes | less -r -E -X"
 # }}}
 
 # Misc utils {{{
+alias C='LANG=C'
 alias lower='for i in *; do mv "$i" "$(echo $i | tr "[A-Z]" "[a-z]" )"; done'
 alias upper='for i in *; do mv "$i" "$(echo $i | tr "[a-z]" "[A-Z]" )"; done'
 alias chmodx="find . -type d -exec chmod 0755 '{}' ';'; find . -type f -exec chmod 0644 '{}' ';'"
@@ -51,7 +53,7 @@ alias termkey='tput smkx; cat; tput rmkx'
 alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
 # }}}
 
-# emulation {{{
+# Emulation {{{
 alias sdl1="SDL_VIDEO_FULLSCREEN_HEAD=1 "
 alias db='dosbox -c "MOUNT C . -freesize 1024" -c "c:"'
 alias dbox="dosbox -conf $DOTFILES/local/bin/bin-Dos-i386/dosbox.conf ."
