@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from baker import command, run
+try:
+    from libqtile.command import Client
+except ImportError:
+    import sys
+    if '--silent' in sys.argv:
+        sys.exit(0)
+    else:
+        raise
+
+c = Client()
+
+
+@command
+def switch_group(name):
+    """Switch to a named group"""
+    c.group[name].toscreen()
+
+if __name__ == '__main__':
+    run()

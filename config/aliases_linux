@@ -1,5 +1,5 @@
 # vim:filetype=sh syntax=sh:
-alias e="gvim --remote-tab-silent"
+alias e="qtile-agr --silent switch_group gvim; gvim --remote-tab-silent"
 alias ack="ack-grep --pager=less --color-match=red"
 alias logs="cd /var/log; multitail -s 2 auth.log  daemon.log  dpkg.log  fail2ban.log  fontconfig.log  kern.log  lpr.log  mail.log  pycentral.log  user.log; cd -"
 alias applekey='setxkbmap us; setxkbmap -option apple:badmap; xmodmap ~/.Xmodmap; xbindkeys; echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode"'
