@@ -1,3 +1,4 @@
+! vim: ft=xdefaults:
 *customization: -color
 URxvt.termName:  rxvt-256color
 
