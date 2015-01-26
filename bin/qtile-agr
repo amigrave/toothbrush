@@ -1,17 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import sys
+
 from baker import command, run
+
+SILENT = False
+if '--silent' in sys.argv:
+    SILENT = True
+    sys.argv.remove('--silent')
+
 try:
     from libqtile.command import Client
 except ImportError:
-    import sys
-    if '--silent' in sys.argv:
+    if SILENT:
         sys.exit(0)
-    else:
-        raise
+    raise
 
 c = Client()
-
 
 @command
 def switch_group(name):
