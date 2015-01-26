@@ -28,7 +28,6 @@ fi
 # OS dependencies {{{
 if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
-    source $DOTFILES/config/aliases_linux
     # make less more friendly for non-text input files, see lesspipe(1)
     [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -37,12 +36,10 @@ if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
     # export SDL_AUDIODRIVER=alsa
 elif [[ "$OSTYPE" == "cygwin" ]]; then
 
-    source $DOTFILES/config/aliases_cygwin
     termsetcolors
 
 elif [[ "$OSTYPE" =~ darwin* ]]; then
 
-    source $DOTFILES/config/aliases_osx
     export BROWSER=safari
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"

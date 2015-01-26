@@ -62,7 +62,73 @@ alias msx="mess msx -cart1 \`iselect -a *\`"
 alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]}" -3 "${files[3]}"'
 # }}}
 
-# FUNCTIONS
+# Linux aliases {{{
+if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
+
+alias e="qtile-agr --silent switch_group gvim; gvim --remote-tab-silent"
+alias ack="ack-grep --pager=less --color-match=red"
+alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
+alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
+# alias man="TERMINFO=$HOME/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
+alias kid="kid3-qt ."
+alias o="xdg-open"
+alias qmv='qmv -f do'
+alias track='inotifywait -rm . | grep -iE "(modify |create |delete|attrib|moved)"'
+alias tsys="tail -f /var/log/dmesg /var/log/messages"
+alias ubuntuwin="gconftool-2 --set /apps/metacity/general/button_layout --type string menu:minimize,maximize,close"
+alias vboxusb="sudo chown -R amigrave:vboxusers /proc/bus/usb"
+alias vir='clamscan -r *'
+alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo' # check for virtualization instructions
+alias zsnes_gamepad="sudo ln -s /dev/input/js0 /dev/js0"
+
+fi
+# }}}
+
+# OSX aliases {{{
+if [[ "$OSTYPE" =~ darwin* ]]; then
+
+alias vim="mvim -v"
+alias e="mvim --remote-tab-silent"
+
+alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
+alias jjs="rlwrap /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/bin/jjs"
+alias kid3="/Applications/kid3.app/Contents/MacOS/kid3 ."
+alias xee="/Applications/Xee.app/Contents/MacOS/Xee"
+alias safari="/Applications/Safari.app/Contents/MacOS/Safari"
+alias google-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias google-chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --disable-web-security"
+alias clementine="/Applications/clementine.app/Contents/MacOS/clementine"
+alias gimp="/Applications/Gimp.app/Contents/MacOS/Gimp"
+alias milkytracker="/Applications/MilkyTracker.app/Contents/MacOS/MilkyTracker"
+alias fsuae="/Applications/FS-UAE.app/Contents/MacOS/fs-uae $DOTFILES/config/fs-uae/fs-uaerc"
+alias pixelmator="/Applications/Pixelmator.app/Contents/MacOS/Pixelmator"
+alias ggx2="cd ~/.wine/drive_c/Program\ Files/ZOO\ Digital\ Publishing/GUILTY\ GEAR\ X2\ #RELOAD/; wine ggx2.exe"
+alias bitcoin="/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -conf=$DOTFILES/config/bitcoin/bitcoin.conf -datadir=$XDG_CONFIG_HOME/bitcoin/ &"
+alias retroarch="/Applications/RetroArch.app/Contents/MacOS/RetroArch"
+
+fi
+# }}}
+
+# Cygwim aliases {{{
+if [[ "$OSTYPE" == "cygwin" ]]; then
+
+alias e="/cygdrive/c/PROGRA~1/Vim/vim74/gvim.exe --remote-tab-silent"
+alias jsc1="/cygdrive/c/WINNT/Microsoft.NET/Framework/v1.*/jsc.exe"
+alias jsc2="/cygdrive/c/WINNT/Microsoft.NET/Framework/v2.*/jsc.exe"
+alias jsc3="/cygdrive/c/WINNT/Microsoft.NET/Framework/v3.*/jsc.exe"
+alias jsc4="/cygdrive/c/WINNT/Microsoft.NET/Framework/v4.*/jsc.exe"
+
+alias csc1="/cygdrive/c/WINNT/Microsoft.NET/Framework/v1.*/csc.exe"
+alias csc2="/cygdrive/c/WINNT/Microsoft.NET/Framework/v2.*/csc.exe"
+alias csc3="/cygdrive/c/WINNT/Microsoft.NET/Framework/v3.*/csc.exe"
+alias csc4="/cygdrive/c/WINNT/Microsoft.NET/Framework/v4.*/csc.exe"
+
+alias cyginstall='/setup.exe -q -n -N -d -R "c:\cygwin" -s "http://mirrors.kernel.org/sourceware/cygwin/" -l "c:\cygwin\tmp" -P '
+
+fi
+# }}}
+
+# FUNCTIONS {{{
 function check_pings() {
     if [ -z "$1" ]; then
         check_pings 'eth0'
@@ -108,15 +174,15 @@ function pclean() {
     find . -name "*.moved" -delete
     # find . -type d -empty ! -path '*/.bzr/*' -delete
 }
-man() {
-    env LESS_TERMCAP_mb=$'\E[01;31m' \
-    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-    LESS_TERMCAP_me=$'\E[0m' \
-    LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_ue=$'\E[0m' \
-    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-    man "$@"
-}
+# man() {
+#     env LESS_TERMCAP_mb=$'\E[01;31m' \
+#     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+#     LESS_TERMCAP_me=$'\E[0m' \
+#     LESS_TERMCAP_se=$'\E[0m' \
+#     LESS_TERMCAP_ue=$'\E[0m' \
+#     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+#     man "$@"
+# }
 activate() {
     local VIRTUALENV_DIRECTORY=".env"
     local PATH_TO_VIRTUALENV=$(pwd)
@@ -135,3 +201,4 @@ activate() {
     echo "Could not find a virtualenv"
     return 1
 }
+# }}}

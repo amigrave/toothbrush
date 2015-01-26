@@ -341,3 +341,10 @@ def ppast(code):
 # APP=${1:-$default_app}
 #
 # scrot "/tmp/%Y-%m-%d_$wx$h.png" -e "$APP \$f &" -s
+
+#############################################################
+# linux multitail
+# #!/bin/bash
+# alias logs="cd /var/log; multitail -s 2 auth.log  daemon.log  dpkg.log  fail2ban.log  fontconfig.log  kern.log  lpr.log  mail.log  pycentral.log  user.log; cd -"
+#
+# scrot "/tmp/%Y-%m-%d_$wx$h.png" -e "$APP \$f &" -s
