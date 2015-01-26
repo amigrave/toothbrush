@@ -3,7 +3,9 @@
 
 
 # Global environment {{{
-export DOTFILES=$HOME/amigrave
+# export DOTFILES=$HOME/amigrave
+current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+export DOTFILES=$( dirname "$current_dir" )
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LC_CTYPE=$LANG
@@ -32,6 +34,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 mkdir -p $XDG_CONFIG_HOME
 
+export ZDOTDIR=$DOTFILES/config/zsh
 export MPLAYER_HOME=$DOTFILES/config/mplayer
 export MPV_HOME=$DOTFILES/config/mpv
 export IPYTHONDIR=$DOTFILES/config/ipython
@@ -78,4 +81,3 @@ fi
 if [ -f "$XDG_CONFIG_HOME/profile_local" ]; then
     . $XDG_CONFIG_HOME/profile_local
 fi
-export LD_LIBRARY_PATH=/usr/lib/oracle/12.1/client64/lib:$LD_LIBRARY_PATH

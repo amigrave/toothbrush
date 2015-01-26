@@ -35,7 +35,7 @@ if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
     # SDL Fullscreen second monitor
     # export SDL_VIDEO_FULLSCREEN_HEAD=1
     # export SDL_AUDIODRIVER=alsa
-elif [ "$OSTYPE" == "cygwin" ]; then
+elif [[ "$OSTYPE" == "cygwin" ]]; then
 
     source $DOTFILES/config/aliases_cygwin
     termsetcolors
