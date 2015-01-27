@@ -52,9 +52,6 @@ export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 export ERRFILE=$XDG_CACHE_HOME/xsession-errors.log
 export BZR_LOG=/dev/null
-
-# socket paths - temporary fix until systemd sets this automatically (or until this is the default path for dbus)
-export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$UID/dbus/user_bus_socket
 # }}}
 
 # Bash startup {{{
