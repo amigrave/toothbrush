@@ -15,5 +15,5 @@
 # xset r rate 200 50
 
 # TODO: find a solution for ssh keys
-# ssh-add ~/.ssh/id_rsa
+# ssh-add ~/.ssh/id_rsa > /dev/null 2>&1
 # SSH_ASKPASS=ssh-askpass ssh-add ~/.ssh/id_rsa
