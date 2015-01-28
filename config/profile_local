@@ -1,8 +1,10 @@
 # vim: ft=sh:fdm=marker:
 # Place this in ~/.config for a local profile
 
+if [[ -n "$DISPLAY" ]]; then
+
 # export SHELL=/bin/zsh
-# export PYTHONPATH=$DOTFILES:$PYTHONPATH
+export PYTHONPATH=$DOTFILES:$PYTHONPATH
 
 # Linux stuff
 #############
@@ -17,3 +19,5 @@
 # TODO: find a solution for ssh keys
 # ssh-add ~/.ssh/id_rsa > /dev/null 2>&1
 # SSH_ASKPASS=ssh-askpass ssh-add ~/.ssh/id_rsa
+
+fi
