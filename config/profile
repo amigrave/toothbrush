@@ -11,8 +11,6 @@ export LC_ALL=$LANG
 export LC_CTYPE=$LANG
 export LC_COLLATE=C
 
-PATH=$DOTFILES/bin:$PATH
-
 # Applicatons
 export EDITOR=vim
 export VISUAL=vim
@@ -29,6 +27,15 @@ export GREP_OPTIONS='--color=auto'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Set up paths
+if [ -d "$HOME/.local/bin" ]; then
+    PATH=$HOME/.local/bin:$PATH
+fi
+if [ -f "$HOME/.local/lib/python2.7/site-packages/" ]; then
+    # TODO: python version !!!
+    export PYTHONPATH=$HOME/.local/lib/python2.7/site-packages:$PYTHONPATH
+fi
+PATH=$DOTFILES/bin:$PATH
+
 export XDG_CONFIG_DIRS=$DOTFILES/config:$XDG_CONFIG_DIRS
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
@@ -62,9 +69,9 @@ export BZR_LOG=/dev/null
 
 # Homebrew {{{
 if [ -d "/usr/local/Cellar/coreutils" ]; then
+    # TODO: check if still necessary on OSX
     PATH="/usr/local/bin:$PATH"
-    export PYTHONPATH=/usr/local/lib/python
-    #PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
+    export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 fi
 # }}}
 
