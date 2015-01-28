@@ -10,6 +10,8 @@ mod = "mod4"
 alt = "mod1"
 win = "mod4"
 
+SCROT_ARGS = " -e 'mv $f ~/Downloads/'"
+
 keys = [
     # Switch between windows in current stack pane
     Key([mod], "Tab", lazy.layout.down()),
@@ -34,6 +36,10 @@ keys = [
     # Show launcher
     Key([mod], "space", lazy.spawncmd()),
 
+    # Screenshot stuff
+    Key([mod, "shift"], "3", lazy.spawn("scrot" + SCROT_ARGS)),
+    Key([mod, "shift"], "4", lazy.spawn("scrot -s" + SCROT_ARGS)),
+
     # Win+c/v == copy/paste
     # Key([mod], "c", lazy.fake_keypress("XF86Copy")),
     # Key([mod], "v", lazy.fake_keypress("XF86Paste")),
@@ -55,10 +61,11 @@ for i in groups:
         Key([mod], i.name, lazy.group[i.name].toscreen())
     )
 
+    # TODO: find better way to move window (eg move to the left or right, that's all)
     # mod1 + shift + letter of group = switch to & move focused window to group
-    keys.append(
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
-    )
+    # keys.append(
+    #     Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
+    # )
 
 groups.append(Group('term'))
 keys.append(
