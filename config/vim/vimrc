@@ -30,6 +30,7 @@ Plugin 'gcmt/taboo.vim.git'
 Plugin 'w0ng/vim-hybrid.git'
 Plugin 'jnurmine/Zenburn.git'
 Plugin 'nanotech/jellybeans.vim.git'
+Plugin 'bling/vim-airline'
 
 " Edition
 Plugin 'garbas/vim-snipmate.git'
@@ -157,7 +158,7 @@ if has('gui')
     set guioptions-=T           " hide toolbar
     " set guioptions-=m           " Remove menu bar
     " set lines=999 columns=999   " Hack: maximize gvim
-    set guifont=Monospace\ 9
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 
     " Windows handling
     nnoremap <silent> <C-H> :vne<CR>
@@ -188,7 +189,7 @@ endif
 if has("win32")
     set clipboard=unnamedplus " Always use unnamed register
     au GUIEnter * simalt ~x
-    set guifont=DejaVu\ Sans\ Mono
+    set guifont=DejaVu\ Sans\ Mono:h9
 
     " Note adding ,Syntax above messes up the syntax loading
     " See :help syntax-loading for more info
@@ -396,6 +397,10 @@ inoremap <silent> <S-F12> <C-O>:TagbarToggle<CR><C-w>l
 
 " Calculator
 inoremap <Leader>= <C-O>yiW<End>=<C-R>=<C-R>0<CR>
+
+" airline
+let g:airline_powerline_fonts=1
+" let g:airline_section_c = '%f - (%{FileSize()})'
 
 " Ag
 let g:agprg = 'ag --nogroup --nocolor --column'

@@ -28,7 +28,7 @@
 [profiles]
   [[default]]
     background_image = None
-    font = DejaVu Sans Mono 9
+    font = DejaVu Sans Mono for Powerline 9
     background_darkness = 0.91
     scrollback_lines = 1000
     use_system_font = False
