@@ -93,6 +93,12 @@ widget_defaults = dict(
     padding=3,
 )
 
+symbol_font = {
+    # http://www.iemoji.com/view
+    'font': 'Symbola',
+    'fontsize': 20,
+}
+
 screens = [
     Screen(
         bottom=bar.Bar(
@@ -100,8 +106,23 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
-                # widget.TextBox("default config", name="default"),
+
+                widget.TextBox(u"\u2620", name="mood", **symbol_font),
+
+                widget.Sep(),
+                widget.TextBox(u"\U0001F3B5", **symbol_font),
+                widget.Volume(emoji=True, **symbol_font),
+
+                # widget.Sep(),
+                # widget.Battery(),
+                # widget.TextBox(u"\U0001F50B", **symbol_font),
+
+                widget.Sep(),
+                widget.CPUGraph(),
+
+                widget.Sep(),
                 widget.Systray(),
+
                 widget.Clock(format='%Y-%m-%d %A %H:%M'),
             ],
             30,
