@@ -71,6 +71,8 @@ bindkey '^P' up-history
 bindkey '^N' down-history
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
+bindkey '^[[5~' history-beginning-search-backward
+bindkey '^[[6~' history-beginning-search-forward
 
 # function zle-line-init zle-keymap-select {
 #     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
