@@ -30,7 +30,8 @@ pip install appscript
 brew install homebrew/dupes/gdb # for pyrasite
 PYTHON=/usr/local/bin/python3 brew install --with-python postgresql
 
-
+# Those fonts brings emoji and other unicode fonts
+sudo apt-get install ttf-ancient-fonts
 
 # GIT: show author on rebase interactive:
 # /usr/libexec/git-core/git-rebase--interactive
