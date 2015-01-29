@@ -1,7 +1,7 @@
 # vim: ft=zsh:fdm=marker:
 
 source $DOTFILES/config/profile_interactive
-
+# setopt AUTO_CD
 # eval "$(dircolors -b)"
 
 # History stuff {{{
@@ -37,24 +37,30 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # }}}
 
 # Set up the prompt {{{
-autoload -Uz promptinit
-promptinit
+# autoload -Uz promptinit
+# promptinit
+prompt_agr () {
+    local usercol=${1:-'blue'}
+    local hostcol=${1:-'blue'}
+    local atcol=${1:-'blue'}
+    local date=${3:-'blue'}
 
-prompt_agr_setup () {
-    local fadebar_cwd=${1:-'green'}
-    local userhost=${2:-'white'}
-    local date=${3:-'white'}
+    [[ $USER != 'agr' ]] && usercol='green'
+    [[ $USER == 'root' ]] && usercol='red'
+    is_ssh && hostcol='green'
+    [[ $usercol != $hostcol ]] && atcol='black'
 
     local -A schars
     autoload -Uz prompt_special_chars
     prompt_special_chars
 
-    PS1="%F{$fadebar_cwd}%B%K{$fadebar_cwd}$schars[333]$schars[262]$schars[261]$schars[260]%F{$userhost}%K{$fadebar_cwd}%B%n@%m%b%F{$fadebar_cwd}%K{black}$schars[333]$schars[262]$schars[261]$schars[260]%F{$date}%K{black}%B %~ %F{blue}[%D{%H:%M:%S}]%F{$fadebar_cwd}%K{black}%B%b%k%f "
-    # RPS1="%F{$fadebar_cwd}%K{black}$schars[333]$schars[262]$schars[261]$schars[260]%f%k>"
+    local GRAD1="$schars[333]$schars[262]$schars[261]$schars[260]"
+    local GRAD2="$schars[333]$schars[262]$schars[261]$schars[260]"
+    PS1="%F{$usercol}%B%K{$usercol}$GRAD1%F{white}%K{$usercol}%B%n%K{$atcol}@%F{white}%K{$hostcol}%m%b%F{$hostcol}%K{black}$GRAD2%F{white}%K{black}%B %~ %F{$date}[%D{%H:%M:%S}]%F{$usercol}%K{black}%B%b%k%f "
 
     prompt_opts=(cr subst percent)
 }
-prompt_agr_setup red
+prompt_agr
 # }}}
 
 # Setup command input key binding {{{

@@ -4,6 +4,16 @@
 source $DOTFILES/config/aliases
 eval `dircolors -b $DOTFILES/config/dir_colors `
 
+# Functions {{{
+function is_ssh() {
+    # TODO: better ssh detection
+    if [ -z "$SSH_TTY" ]; then
+        return 1
+    fi
+    return 0
+}
+# }}}
+
 # Set up terminal emulation {{{
 if [[ "$COLORTERM" == "rxvt-xpm" ]]; then
     export TERM="rxvt-256color"
