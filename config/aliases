@@ -9,6 +9,7 @@ alias flake8="flake8 --config=$DOTFILES/config/flake8"
 # }}}
 
 # Applications {{{
+alias i="ipython"
 alias qipython="ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint &"
 alias qmv='qmv --format=destination-only'
 alias vim='vim -p '
@@ -34,7 +35,7 @@ alias ll="ls -lAh --color=yes | less -r -E -X"
 # }}}
 
 # Misc utils {{{
-alias please='sudo $(fc -ln -1)'
+alias please='sudo -E $(fc -ln -1)'
 alias C='LANG=C'
 alias lower='for i in *; do mv "$i" "$(echo $i | tr "[A-Z]" "[a-z]" )"; done'
 alias upper='for i in *; do mv "$i" "$(echo $i | tr "[a-z]" "[A-Z]" )"; done'
