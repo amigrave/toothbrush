@@ -42,7 +42,8 @@ alias upper='for i in *; do mv "$i" "$(echo $i | tr "[a-z]" "[A-Z]" )"; done'
 alias chmodx="find . -type d -exec chmod 0755 '{}' ';'; find . -type f -exec chmod 0644 '{}' ';'"
 alias chownx="sudo chown -R $USER:$(id -g -n $USER)"
 alias dusage="du -sk * | sort -nr | cut -f2 | xargs -d '\n' du -sh"
-alias setdate="sudo date -s \"$(curl -sD - google.com | grep ^Date: | cut -d' ' -f3-6)Z\""
+# Make a function out of this or even consider to put it in agr.py
+# alias setdate="sudo date -s \"$(curl -sD - google.com | grep ^Date: | cut -d' ' -f3-6)Z\""
 
 alias git-force-ignore='git update-index --assume-unchanged'
 alias svnupdry='svn merge --dry-run -r BASE:HEAD .'
