@@ -17,6 +17,8 @@ alias mc='command mc -c --printwd=/tmp/mc-$USER-$$-dir; cd "`cat /tmp/mc-$USER-$
 alias ag="ag --page=less"
 alias ack="ack --pager=less --color-match=red"
 alias cdiff='cdiff -s -w0'
+alias dk='sudo docker'
+alias dkb='sudo docker build --force-rm=true --no-cache=true'
 
 alias tm="tmux attach || tmux"
 alias s='screen -RdU'
@@ -45,6 +47,7 @@ alias dusage="du -sk * | sort -nr | cut -f2 | xargs -d '\n' du -sh"
 # Make a function out of this or even consider to put it in agr.py
 # alias setdate="sudo date -s \"$(curl -sD - google.com | grep ^Date: | cut -d' ' -f3-6)Z\""
 
+alias vbox_reload="killall VBoxClient; VBoxClient-all"
 alias git-force-ignore='git update-index --assume-unchanged'
 alias svnupdry='svn merge --dry-run -r BASE:HEAD .'
 alias bfg='java -jar ~/bin/java/bfg*'
