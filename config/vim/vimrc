@@ -25,6 +25,7 @@ Plugin 'kien/ctrlp.vim.git'
 Plugin 'dbakker/vim-projectroot.git'
 Plugin 'majutsushi/tagbar.git'
 Plugin 'gcmt/taboo.vim.git'
+Plugin 'moll/vim-bbye.git'
 
 " Look
 Plugin 'w0ng/vim-hybrid.git'
@@ -61,6 +62,7 @@ Plugin 'davidhalter/jedi-vim.git'
 Plugin 'jimmyhchan/dustjs.vim.git'
 Plugin 'tpope/vim-haml.git'
 Plugin 'elzr/vim-json.git'
+Plugin 'ekalinin/Dockerfile.vim'
 
 " Misc Tools
 Plugin 'tpope/vim-fugitive.git'
@@ -334,16 +336,18 @@ nmap <C-t> :tabnew<CR>
 imap <C-t> <Esc>:tabnew<CR>
 command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
 cabbrev e <c-R>=(getcmdtype()==':' && getcmdpos()==1 ? 'E' : 'e')<cr>
-nnoremap <silent> <F2> :tabprevious<CR>
-inoremap <silent> <F2> <C-O>:tabprevious<CR>
-nnoremap <silent> <F3> :tabnext<CR>
-inoremap <silent> <F3> <C-O>:tabnext<CR>
+
+" Tab switching
+nnoremap <silent> <S-F2> :tabprevious<CR>
+inoremap <silent> <S-F2> <C-O>:tabprevious<CR>
+nnoremap <silent> <S-F3> :tabnext<CR>
+inoremap <silent> <S-F3> <C-O>:tabnext<CR>
 
 " Same for buffers
-nnoremap <silent> <S-F2> :lprevious<CR>
-inoremap <silent> <S-F2> <C-O>:lprevious<CR>
-nnoremap <silent> <S-F3> :lnext<CR>
-inoremap <silent> <S-F3> <C-O>:lnext<CR>
+nnoremap <silent> <F2> :bprevious<CR>
+inoremap <silent> <F2> <C-O>:bprevious<CR>
+nnoremap <silent> <F3> :bnext<CR>
+inoremap <silent> <F3> <C-O>:bnext<CR>
 
 " Folding
 nnoremap <silent> <S-Up> zc
@@ -379,9 +383,9 @@ endfunction
 " nnoremap <F8> :TogglePudbBreakPoint<CR>
 " inoremap <F8> <ESC>:TogglePudbBreakPoint<CR>a
 
-" Quit
-nnoremap <silent> <F10> :bde<CR>
-inoremap <silent> <F10> <C-O>:bde<CR>
+" Quit using vim-bbye
+nnoremap <silent> <F10> :Bdelete<CR>
+inoremap <silent> <F10> <C-O>:Bdelete<CR>
 
 nnoremap <F11> :nohlsearch<CR>
 inoremap <F11> <C-O>:nohlsearch<CR>
@@ -401,6 +405,12 @@ inoremap <Leader>= <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 " airline
 let g:airline_powerline_fonts=1
 " let g:airline_section_c = '%f - (%{FileSize()})'
+let g:airline#extensions#tabline#enabled = 1        " Enable the list of buffers
+let g:airline#extensions#tabline#fnamemod = ':t'    " Show just the filename
+let g:airline#extensions#tabline#show_tabs = 0
+
+" Taboo
+let g:taboo_tabline = 0 " do not conflict with airline tabline
 
 " Ag
 let g:agprg = 'ag --nogroup --nocolor --column'
