@@ -243,7 +243,7 @@ if has("autocmd")
 
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
-    au FileType python setlocal omnifunc=pythoncomplete#Complete colorcolumn=100
+    au FileType python setlocal omnifunc=pythoncomplete#Complete colorcolumn=99
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
@@ -334,7 +334,7 @@ vmap <Backspace> "_d
 
 nmap <C-t> :tabnew<CR>
 imap <C-t> <Esc>:tabnew<CR>
-command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
+" command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
 cabbrev e <c-R>=(getcmdtype()==':' && getcmdpos()==1 ? 'E' : 'e')<cr>
 
 " Tab switching
@@ -386,6 +386,8 @@ endfunction
 " Quit using vim-bbye
 nnoremap <silent> <F10> :Bdelete<CR>
 inoremap <silent> <F10> <C-O>:Bdelete<CR>
+nnoremap <silent> <S-F10> :bde<CR>
+inoremap <silent> <S-F10> <C-O>:bde<CR>
 
 nnoremap <F11> :nohlsearch<CR>
 inoremap <F11> <C-O>:nohlsearch<CR>
@@ -418,7 +420,7 @@ noremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right>
 vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 
 " Emmet (used to be Zen coding)
-let g:user_emmet_expandabbr_key = '<c-e>'
+" let g:user_emmet_expandabbr_key = '<c-e>'
 " let g:user_emmet_leader_key = '<c-e>'
 let g:use_emmet_complete_tag = 1
 let g:user_emmet_settings = {
@@ -426,6 +428,8 @@ let g:user_emmet_settings = {
 \}
 
 " set pastetoggle=<S-F12>
+imap <c-e> <c-o>:lnext<cr>
+nmap <c-e> :lnext<cr>
 
 " IP Lookup
 nmap <silent> <Leader>IP :python lookupIPUnderCursor()<CR>
@@ -522,6 +526,7 @@ nnoremap <silent> <Leader>t :CtrlPTag<CR>
 
 " NERDTree
 let g:nerdtree_tabs_open_on_gui_startup=0
+let NERDTreeQuitOnOpen=1
 let NERDTreeMapCloseDir='<Left>'
 let NERDTreeMapUpdir='<C-Left>'
 let NERDTreeMapActivateNode='<Right>'
@@ -588,7 +593,7 @@ def SetBreakpoint():
     strWhite = re.search( '^(\s*)', strLine).group(1)
 
     vim.current.buffer.append(
-       "%(space)sfrom pudb import set_trace; set_trace() # %(mark)s Breakpoint %(mark)s" %
+       "%(space)sfrom pudb import set_trace; set_trace()  # %(mark)s Breakpoint %(mark)s" %
          {'space':strWhite, 'mark': '#' * 30}, nLine - 1)
 
 vim.command( 'map <f8> :py SetBreakpoint()<cr>')
