@@ -1,2 +1,6 @@
 [flake8]
-ignore=E501,E301,E302,E261,E128
+# ignore=E501
+max-line-length = 99
+#
+# http://pep8.readthedocs.org/en/latest/intro.html
+# ignore=E501,E301,E302,E261,E128
