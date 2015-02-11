@@ -335,7 +335,7 @@ vmap <Backspace> "_d
 nmap <C-t> :tabnew<CR>
 imap <C-t> <Esc>:tabnew<CR>
 " command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
-cabbrev e <c-R>=(getcmdtype()==':' && getcmdpos()==1 ? 'E' : 'e')<cr>
+" cabbrev e <c-R>=(getcmdtype()==':' && getcmdpos()==1 ? 'E' : 'e')<cr>
 
 " Tab switching
 nnoremap <silent> <S-F2> :tabprevious<CR>
@@ -594,7 +594,7 @@ def SetBreakpoint():
 
     vim.current.buffer.append(
        "%(space)sfrom pudb import set_trace; set_trace()  # %(mark)s Breakpoint %(mark)s" %
-         {'space':strWhite, 'mark': '#' * 30}, nLine - 1)
+         {'space':strWhite, 'mark': '*' * 3}, nLine - 1)
 
 vim.command( 'map <f8> :py SetBreakpoint()<cr>')
 
