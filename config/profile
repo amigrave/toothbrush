@@ -6,6 +6,7 @@
 # export DOTFILES=$HOME/amigrave
 current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 export DOTFILES=$( dirname "$current_dir" )
+export DOTFILES=$HOME/amigrave
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LC_CTYPE=$LANG
