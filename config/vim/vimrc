@@ -386,8 +386,8 @@ endfunction
 " Quit using vim-bbye
 nnoremap <silent> <F10> :Bdelete<CR>
 inoremap <silent> <F10> <C-O>:Bdelete<CR>
-nnoremap <silent> <S-F10> :bde<CR>
-inoremap <silent> <S-F10> <C-O>:bde<CR>
+nnoremap <silent> <S-F10> :bde!<CR>
+inoremap <silent> <S-F10> <C-O>:bde!<CR>
 
 nnoremap <F11> :nohlsearch<CR>
 inoremap <F11> <C-O>:nohlsearch<CR>
