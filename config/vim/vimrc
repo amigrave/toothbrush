@@ -254,7 +254,7 @@ if has("autocmd")
     au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
     if has("unix")
-        au BufNewFile *.py setlocal autoread | s,^,#!/usr/bin/env python\r# -*- coding: utf-8 -*-,
+        au BufNewFile *.py setlocal autoread | s,^,#!/usr/bin/env python\r# -*- coding: utf-8 -*-\rfrom __future__ import absolute_import\, division\, print_function\r\r,
         au BufNewFile *.rb setlocal autoread | s,^,#!/usr/bin/env ruby,
         au BufNewFile *.sh setlocal autoread | s,^,#!/bin/bash, | w | !chmod +x %
     endif
