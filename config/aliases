@@ -25,15 +25,15 @@ alias s='screen -RdU'
 alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
 alias mpi="mp3info -x -F -r a"
 alias adlib='adplay -r -b 8192'
-alias uade='uade123 --detect-format-by-content'
+alias uade='uade123 --detect-format-by-content --frequency=40000 --headphones'
 alias f="find . | egrep -i"
 alias v='DISPLAY=:0 mpv -cache 4096 -fs'
 # }}}
 
 # Path naviguation {{{
-alias d="ls -lh --color=yes "
-alias l="ls -lAh --color=yes "
-alias ll="ls -lAh --color=yes | less -r -E -X"
+alias d="LC_ALL=C ls --color=yes "
+alias l="LC_ALL=C ls -lh --color=yes "
+alias ll="LC_ALL=C ls -lAh --color=yes | less -r -E -X"
 # }}}
 
 # Misc utils {{{
