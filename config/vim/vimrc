@@ -222,7 +222,7 @@ if has("autocmd")
             \ if getline(1) =~ '^<DOCTYPE' | set filetype=html | endif |
         \endif
 
-    au BufRead *.txt,*.rst setlocal expandtab tw=78 colorcolumn=80
+    au BufRead *.txt,*.rst setlocal expandtab tw=78 colorcolumn=79
     au BufRead,BufNewFile *.xml,*.xsl  setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2 synmaxcol=300
     au BufRead,BufNewFile *.php,*.php3 setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.rb setlocal fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
@@ -243,7 +243,6 @@ if has("autocmd")
 
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
-    au FileType python setlocal colorcolumn=99
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
@@ -373,7 +372,7 @@ function! ToggleMarkers()
         set nocursorline nocursorcolumn
         let g:agr_markers = 0
     else
-        set colorcolumn=80
+        set colorcolumn=79
         set cursorline cursorcolumn
         let g:agr_markers = 1
     endif
