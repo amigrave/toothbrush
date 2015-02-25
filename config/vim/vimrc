@@ -392,8 +392,10 @@ nnoremap <F11> :nohlsearch<CR>
 inoremap <F11> <C-O>:nohlsearch<CR>
 
 " NERD Tree
-nnoremap <F12> :NERDTreeToggle<CR>
-inoremap <F12> <C-O>:NERDTreeToggle<CR>
+nnoremap <F12> :NERDTreeFind<CR>
+inoremap <F12> <C-O>:NERDTreeFind<CR>
+let NERDTreeBookmarksFile=expand("$XDG_CACHE_HOME/vim/NERDTreeBookmarks")
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '\.gem$',  '\.rbc$', '\~$']
 
 " Taglist
 nnoremap <silent> <S-F12> :TagbarToggle<CR><C-w>l
