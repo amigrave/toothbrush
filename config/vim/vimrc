@@ -42,6 +42,8 @@ Plugin 'tpope/vim-commentary'
 Plugin 'godlygeek/tabular.git'
 Plugin 'terryma/vim-expand-region.git'
 Plugin 'michaeljsmith/vim-indent-object.git'
+Plugin 'kana/vim-textobj-user.git'             " Allows to create own text objects
+Plugin 'bps/vim-textobj-python.git'            " Python function and class text objects
 
 " Languages
 Plugin 'scrooloose/syntastic.git'
