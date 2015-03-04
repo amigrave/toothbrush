@@ -350,6 +350,14 @@ inoremap <silent> <F2> <C-O>:bprevious<CR>
 nnoremap <silent> <F3> :bnext<CR>
 inoremap <silent> <F3> <C-O>:bnext<CR>
 
+" Skip quickfix buffers when bnext, bprevious
+" http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
+augroup qf
+    autocmd!
+    autocmd FileType qf set nobuflisted
+augroup END
+
+
 " Folding
 nnoremap <silent> <S-Up> zc
 inoremap <silent> <S-Up> <C-O>zc
