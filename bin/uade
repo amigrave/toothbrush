@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function
+
+import os
+import subprocess
+import sys
+
+from os.path import join, realpath, expanduser
+
+# TODO: DOTFILES env should be amigrave/config
+# dotfiles = os.environ.get('DOTFILES', '~/.config')
+dotfiles = '%s/config' % os.environ['DOTFILES']
+conf = join(realpath(expanduser(dotfiles)), 'uade.conf')
+
+try:
+    with open(conf, 'r') as f:
+        content = f.read()
+        pargs = ['uade123']
+        for line in content.splitlines():
+            if not line.startswith('#'):
+                pargs += ['--%s' % line]
+        pargs += sys.argv[1:]
+        print(pargs)
+        subprocess.call(pargs)
+except IOError:
+    sys.exit("Could not open uade cponfiguration file %s" % conf)

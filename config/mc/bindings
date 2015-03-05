@@ -9,10 +9,10 @@ regex/\.([mM][oO][dD]|[sS]3[mM]|[xX][mM]|[iI][tT]|[mM][tT][mM]|669|[sS][tT][mM]|
        Edit=milkytracker %f
 
 regex/\.(fp|fi|cust?|pru2|aam|bp|hip|d[izw]|mdat|rjp|dm2|sonic|avp)$
-       Open=uade123 %f
+       Open=uade %f
 
 regex/^(fp|fi|cust?|pru2|aam|bp|hip|d[izw]|mdat|rjp|dm2|sonic|avp)\.
-       Open=uade123 %f
+       Open=uade %f
 
 regex/\.([aA][mM][dD]|[rR][aA][dD]|[hH][sS][cC]|[sS][aA]2)$
        Open=adplay -r -b 8192 %f
