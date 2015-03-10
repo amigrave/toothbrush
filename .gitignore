@@ -1,8 +1,8 @@
 *.pyc
-config/mc/panels.ini
-config/vim/bundle
-config/ipython/README
-config/ipython/profile_default/history.sqlite
-config/ipython/profile_default/security/
-config/ipython/profile_default/startup/README
-config/pudb/saved-breakpoints*
+dotfiles/mc/panels.ini
+dotfiles/vim/bundle
+dotfiles/ipython/README
+dotfiles/ipython/profile_default/history.sqlite
+dotfiles/ipython/profile_default/security/
+dotfiles/ipython/profile_default/startup/README
+dotfiles/pudb/saved-breakpoints*
