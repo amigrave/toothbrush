@@ -92,5 +92,6 @@ hash -d dpkg=/var/lib/dpkg/info
 # }}}
 
 # Zsh aliases {{{
+alias zshrehash="rehash" # more a reminder than anything else
 alias -g NUL="> /dev/null 2>&1"
 # }}}
