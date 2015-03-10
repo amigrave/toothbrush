@@ -1,27 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import argparse
 import sys
 
-from baker import command, run
+client = None
 
-SILENT = False
-if '--silent' in sys.argv:
-    SILENT = True
-    sys.argv.remove('--silent')
 
-try:
-    from libqtile.command import Client
-except ImportError:
-    if SILENT:
-        sys.exit(0)
-    raise
-
-c = Client()
-
-@command
 def switch_group(name):
     """Switch to a named group"""
-    c.group[name].toscreen()
+    client.group[name].toscreen()
+
+
+def main(options):
+    from libqtile.command import Client
+    global client
+    client = Client()
+    if options.subcommand == 'switch_group':
+        switch_group(options.name[0])
 
 if __name__ == '__main__':
-    run()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--silent', action='store_true',
+                        help="Silent errors for non interactive usage")
+    subparsers = parser.add_subparsers(title="Subcommands:", dest='subcommand')
+    sg = subparsers.add_parser('switch_group')
+    sg.add_argument('name', nargs=1, help=switch_group.__doc__)
+    options = parser.parse_args()
+
+    try:
+        main(options)
+    except Exception:
+        if options.silent:
+            sys.exit(0)
+        raise
