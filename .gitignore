@@ -1,6 +1,7 @@
 *.pyc
 config/mc/panels.ini
 config/vim/bundle
+config/ipython/README
 config/ipython/profile_default/history.sqlite
 config/ipython/profile_default/security/
 config/ipython/profile_default/startup/README
