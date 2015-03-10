@@ -123,7 +123,7 @@ vertical_equal=1
 horizontal_equal=1
 top_panel_size=49
 
-left_panel_size=135
+left_panel_size=67
 
 [Misc]
 ftp_proxy_host=gate

@@ -1,8 +1,8 @@
 # vim: ft=sh:fdm=marker:
 # Interactive profile shared amongst all shells
 
-source $DOTFILES/config/aliases
-eval `dircolors -b $DOTFILES/config/dir_colors `
+source $DOTFILES/aliases
+eval `dircolors -b $DOTFILES/dir_colors `
 
 # Functions {{{
 function is_ssh() {

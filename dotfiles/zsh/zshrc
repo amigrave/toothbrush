@@ -1,6 +1,6 @@
 # vim: ft=zsh:fdm=marker:
 
-source $DOTFILES/config/profile_interactive
+source $DOTFILES/profile_interactive
 # setopt AUTO_CD
 # eval "$(dircolors -b)"
 
@@ -84,7 +84,7 @@ bindkey '^[[6~' history-beginning-search-forward
 # zle -N zle-keymap-select
 # export KEYTIMEOUT=1
 
-source $DOTFILES/config/zsh/opp.zsh
+source $DOTFILES/zsh/opp.zsh
 # }}}
 
 # Location aliases {{{

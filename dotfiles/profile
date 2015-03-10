@@ -3,10 +3,15 @@
 
 
 # Global environment {{{
+
+# TODO: find a way to make it dynamic
 # export DOTFILES=$HOME/amigrave
-current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-export DOTFILES=$( dirname "$current_dir" )
-export DOTFILES=$HOME/amigrave
+# current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+# export DOTFILES=$( dirname "$current_dir" )
+export AMIGRAVE=$HOME/amigrave
+echo $AMIGRAVE
+export DOTFILES=$AMIGRAVE/dotfiles
+echo $DOTFILES
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LC_CTYPE=$LANG
@@ -18,7 +23,7 @@ export VISUAL=vim
 export TERMINAL=terminator
 export BROWSER=google-chrome
 
-export VIMINIT='let $MYVIMRC="$DOTFILES/config/vim/vimrc" | source $MYVIMRC'
+export VIMINIT='let $MYVIMRC="$DOTFILES/vim/vimrc" | source $MYVIMRC'
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
 export LS_OPTIONS='--color=auto'
 export GREP_OPTIONS='--color=auto'
@@ -35,25 +40,25 @@ if [ -f "$HOME/.local/lib/python2.7/site-packages/" ]; then
     # TODO: python version !!!
     export PYTHONPATH=$HOME/.local/lib/python2.7/site-packages:$PYTHONPATH
 fi
-PATH=$DOTFILES/bin:$PATH
+PATH=$AMIGRAVE/bin:$PATH
 
-export XDG_CONFIG_DIRS=$DOTFILES/config:$XDG_CONFIG_DIRS
+export XDG_CONFIG_DIRS=$DOTFILES:$XDG_CONFIG_DIRS
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 mkdir -p $XDG_CONFIG_HOME
 
-export ZDOTDIR=$DOTFILES/config/zsh
-export MPLAYER_HOME=$DOTFILES/config/mplayer
-export MPV_HOME=$DOTFILES/config/mpv
-export IPYTHONDIR=$DOTFILES/config/ipython
-export INPUTRC=$DOTFILES/config/inputrc
-export SCREENRC=$DOTFILES/config/screenrc
-export IRBRC=$DOTFILES/config/irbrc
-export LFTP_HOME=$DOTFILES/config/lftp
-export MPV_HOME=$DOTFILES/config/mpv
-export HTTPIE_CONFIG_DIR=$DOTFILES/config/httpie
-export PSQLRC=$DOTFILES/config/psqlrc
-export WGETRC=$DOTFILES/config/wgetrc
+export ZDOTDIR=$DOTFILES/zsh
+export MPLAYER_HOME=$DOTFILES/mplayer
+export MPV_HOME=$DOTFILES/mpv
+export IPYTHONDIR=$DOTFILES/ipython
+export INPUTRC=$DOTFILES/inputrc
+export SCREENRC=$DOTFILES/screenrc
+export IRBRC=$DOTFILES/irbrc
+export LFTP_HOME=$DOTFILES/lftp
+export MPV_HOME=$DOTFILES/mpv
+export HTTPIE_CONFIG_DIR=$DOTFILES/httpie
+export PSQLRC=$DOTFILES/psqlrc
+export WGETRC=$DOTFILES/wgetrc
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"
 
 export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
@@ -64,7 +69,7 @@ export BZR_LOG=/dev/null
 
 # Bash startup {{{
 #if [ -n "$BASH_VERSION" ]; then
-#    source $DOTFILES/config/bash/bashrc
+#    source $DOTFILES/bash/bashrc
 #fi
 # }}}
 

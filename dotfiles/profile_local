@@ -4,14 +4,14 @@
 if [[ -n "$DISPLAY" ]]; then
 
 # export SHELL=/bin/zsh
-export PYTHONPATH=$DOTFILES:$PYTHONPATH
+export PYTHONPATH=$AMIGRAVE:$PYTHONPATH
 
 # Linux stuff
 #############
-# xrdb -merge $DOTFILES/config/Xdefaults
+# xrdb -merge $DOTFILES/Xdefaults
 # setxkbmap us
 # setxkbmap -option apple:badmap
-# xmodmap $DOTFILES/config/Xmodmap
+# xmodmap $DOTFILES/Xmodmap
 # xbindkeys
 # echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode
 # xset r rate 200 50

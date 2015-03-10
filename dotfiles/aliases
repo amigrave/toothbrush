@@ -1,11 +1,11 @@
 # vim:filetype=sh syntax=sh:fdm=marker:
 
 # Manually provide config file {{{
-# TODO: put this in $DOTFILES/bin so it's not confined to shells
-alias mocp="mocp -M $DOTFILES/config/moc"
-alias irssi="irssi --home=$DOTFILES/config/irssi"
-alias tmux="tmux -f $DOTFILES/config/tmux/tmux.conf"
-alias flake8="flake8 --config=$DOTFILES/config/flake8"
+# TODO: put this in $AMIGRAVE/bin so it's not confined to shells
+alias mocp="mocp -M $DOTFILES/moc"
+alias irssi="irssi --home=$DOTFILES/irssi"
+alias tmux="tmux -f $DOTFILES/tmux/tmux.conf"
+alias flake8="flake8 --config=$DOTFILES/flake8"
 # }}}
 
 # Applications {{{
@@ -106,10 +106,10 @@ alias google-chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/Ma
 alias clementine="/Applications/clementine.app/Contents/MacOS/clementine"
 alias gimp="/Applications/Gimp.app/Contents/MacOS/Gimp"
 alias milkytracker="/Applications/MilkyTracker.app/Contents/MacOS/MilkyTracker"
-alias fsuae="/Applications/FS-UAE.app/Contents/MacOS/fs-uae $DOTFILES/config/fs-uae/fs-uaerc"
+alias fsuae="/Applications/FS-UAE.app/Contents/MacOS/fs-uae $DOTFILES/fs-uae/fs-uaerc"
 alias pixelmator="/Applications/Pixelmator.app/Contents/MacOS/Pixelmator"
 alias ggx2="cd ~/.wine/drive_c/Program\ Files/ZOO\ Digital\ Publishing/GUILTY\ GEAR\ X2\ #RELOAD/; wine ggx2.exe"
-alias bitcoin="/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -conf=$DOTFILES/config/bitcoin/bitcoin.conf -datadir=$XDG_CONFIG_HOME/bitcoin/ &"
+alias bitcoin="/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -conf=$DOTFILES/bitcoin/bitcoin.conf -datadir=$XDG_CONFIG_HOME/bitcoin/ &"
 alias retroarch="/Applications/RetroArch.app/Contents/MacOS/RetroArch"
 
 fi
