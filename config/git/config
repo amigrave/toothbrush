@@ -1,3 +1,4 @@
+# vim: ft=gitconfig:
 [user]
     name = Fabien Meghazi
     email = agr@amigrave.com
@@ -58,7 +59,7 @@
     sd = "!sh -c 'git stash drop stash@{$1}' -"
     sh = "!sh -c 'git stash show -p stash@{$1}' -"
 
-    force-ignore = update-index --assume-unchanged
+    force-ignore = update-index --assume-unchanged  # eg: when added to .git/info/exclude but was changed before
     undo-ignore = update-index --no-assume-unchanged
 
     ll      = !git log --color=always --date=relative --pretty=hist
