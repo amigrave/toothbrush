@@ -16,12 +16,17 @@ conf = join(realpath(expanduser(dotfiles)), 'uade.conf')
 try:
     with open(conf, 'r') as f:
         content = f.read()
-        pargs = ['uade123']
-        for line in content.splitlines():
-            if not line.startswith('#'):
-                pargs += ['--%s' % line]
-        pargs += sys.argv[1:]
-        print(pargs)
-        subprocess.call(pargs)
 except IOError:
     sys.exit("Could not open uade cponfiguration file %s" % conf)
+
+pargs = ['uade123']
+for line in content.splitlines():
+    if not line.startswith('#'):
+        pargs += ['--%s' % line]
+pargs += sys.argv[1:]
+
+try:
+    proc = subprocess.Popen(pargs)
+    proc.communicate()
+except KeyboardInterrupt:
+    proc.terminate()
