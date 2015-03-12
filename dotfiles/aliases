@@ -51,6 +51,8 @@ alias git-force-ignore='git update-index --assume-unchanged'
 alias svnupdry='svn merge --dry-run -r BASE:HEAD .'
 alias bfg='java -jar ~/bin/java/bfg*'
 
+alias ssh-nokey="ssh -o PreferredAuthentications=keyboard-interactive,password -o PubkeyAuthentication=no"
+
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 alias webserve='python -m SimpleHTTPServer'
 alias vlc_stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
