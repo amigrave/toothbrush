@@ -8,15 +8,20 @@ alias tmux="tmux -f $DOTFILES/tmux/tmux.conf"
 alias flake8="flake8 --config=$DOTFILES/flake8"
 # }}}
 
-# Applications {{{
-alias i="ipython"
-alias qipython="ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint &"
-alias qmv='qmv --format=destination-only'
+# Application shadowers {{{
 alias vim='vim -p '
+alias ssh="autossh"
+alias qmv='qmv --format=destination-only'
 alias mc='command mc -c --printwd=/tmp/mc-$USER-$$-dir; cd "`cat /tmp/mc-$USER-$$-dir`"; rm -f "/tmp/mc-$USER-$$-dir"; :' # make mc cd's to last browsed directory
 alias ag="ag --page=less"
 alias ack="ack --pager=less --color-match=red"
 alias cdiff='cdiff -s -w0'
+# }}}
+
+# Application shortcuts {{{
+alias i="ipython"
+alias qi="ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint &"
+
 alias dk='sudo docker'
 alias dkb='sudo docker build --force-rm=true --no-cache=true'
 
