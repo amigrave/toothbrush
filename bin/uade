@@ -8,16 +8,14 @@ import sys
 
 from os.path import join, realpath, expanduser
 
-# TODO: DOTFILES env should be amigrave/config
-# dotfiles = os.environ.get('DOTFILES', '~/.config')
-dotfiles = '%s/config' % os.environ['DOTFILES']
+dotfiles = os.environ.get('DOTFILES', '~/.config')
 conf = join(realpath(expanduser(dotfiles)), 'uade.conf')
 
 try:
     with open(conf, 'r') as f:
         content = f.read()
 except IOError:
-    sys.exit("Could not open uade cponfiguration file %s" % conf)
+    sys.exit("Could not open uade configuration file %s" % conf)
 
 pargs = ['uade123']
 for line in content.splitlines():
