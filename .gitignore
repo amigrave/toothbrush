@@ -1,8 +1,11 @@
 *.pyc
-dotfiles/mc/panels.ini
-dotfiles/vim/bundle
-dotfiles/ipython/README
 dotfiles/ipython/profile_default/history.sqlite
 dotfiles/ipython/profile_default/security/
 dotfiles/ipython/profile_default/startup/README
+dotfiles/ipython/README
+dotfiles/lftp/cwd_history
+dotfiles/lftp/rl_history
+dotfiles/mc/panels.ini
 dotfiles/pudb/saved-breakpoints*
+dotfiles/vim/bundle
+dotfiles/zsh/.zcompdump

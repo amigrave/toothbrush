@@ -1,0 +1,3 @@
+#!/bin/bash
+# TODO: autodetect virtual box and add touch-device flag: https://code.google.com/p/chromium/issues/detail?id=456222
+chromium-browser --touch-devices=123 "$@"
