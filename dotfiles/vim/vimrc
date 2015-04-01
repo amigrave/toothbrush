@@ -244,7 +244,7 @@ if has("autocmd")
     " au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
 
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
-    au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=gray guifg=gray
+    au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=darkcyan guifg=darkcyan
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
@@ -266,7 +266,7 @@ if has("autocmd")
     let php_folding=1
     let php_asp_tags = 1
     let g:xml_syntax_folding=1
-    let python_highlight_numbers = 1
+    let python_highlight_all = 1
     let coffee_folding = 1
     " let g:javaScript_fold = 1
     " let g:javascript_fold = 1
@@ -387,10 +387,6 @@ function! ToggleMarkers()
         let g:agr_markers = 1
     endif
 endfunction
-
-" F8 & Shift-F8 mapped in pydebug addon
-" nnoremap <F8> :TogglePudbBreakPoint<CR>
-" inoremap <F8> <ESC>:TogglePudbBreakPoint<CR>a
 
 " Quit using vim-bbye
 nnoremap <silent> <F10> :Bdelete<CR>
@@ -588,11 +584,6 @@ function! XmlQweb()
 endfunction
 " }}}
 " Python Debug {{{
-" Author: Nick Anderson <nick at anders0n.net>
-" Website: http://www.cmdln.org
-" Adapted from sonteks post on Vim as Python IDE
-" http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
-
 if has('python')
 python << EOF
 import vim
@@ -604,37 +595,13 @@ def SetBreakpoint():
     strWhite = re.search( '^(\s*)', strLine).group(1)
 
     vim.current.buffer.append(
-       "%(space)sfrom pudb import set_trace; set_trace()  # %(mark)s Breakpoint %(mark)s" %
-         {'space':strWhite, 'mark': '*' * 3}, nLine - 1)
+       "%sfrom pudb import set_trace; set_trace()  # *** Breakpoint ***" %
+       strWhite, nLine - 1)
 
-vim.command( 'map <f8> :py SetBreakpoint()<cr>')
-
-def RemoveBreakpoints():
-    import re
-
-    nCurrentLine = int( vim.eval( 'line(".")'))
-
-    nLines = []
-    nLine = 1
-    for strLine in vim.current.buffer:
-        if strLine.lstrip()[:38] == 'from pudb import set_trace;set_trace()':
-            nLines.append( nLine)
-            print nLine
-        nLine += 1
-
-    nLines.reverse()
-
-    for nLine in nLines:
-        vim.command( 'normal %dG' % nLine)
-        vim.command( 'normal dd')
-        if nLine < nCurrentLine:
-            nCurrentLine -= 1
-
-    vim.command( 'normal %dG' % nCurrentLine)
-
-vim.command( 'map <s-f8> :py RemoveBreakpoints()<cr>')
+vim.command('map <F8> :py SetBreakpoint()<cr>')
 EOF
 endif
+imap <F8> from pudb import set_trace; set_trace()  # *** Breakpoint ***
 " }}}
 " IP Lookup {{{
 " Website: http://codeseekah.com/2012/03/04/vim-scripting-with-python-lookup-ip-country/
