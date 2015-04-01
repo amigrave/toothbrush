@@ -1,1 +1,2 @@
-from .agr import *
+# -*- coding: utf-8 -*-
+from .agr import *  # noqa

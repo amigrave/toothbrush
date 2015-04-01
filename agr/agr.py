@@ -5,12 +5,14 @@ import sys
 sys.path.append('/Users/agr/Projects/odoo/odoo/')
 sys.path.append('/Users/agr/Projects/odoo/.env/lib/python2.7/site-packages/')
 
+
 class DB(object):
     def __init__(self, db):
         import openerp
         self._db = db
         self._pool = openerp.registry(db)
         self._cr = self._pool.cursor()
+
     def __getattr__(self, attr):
         model = attr.replace('_', '.')
         return self._pool[model]
@@ -25,6 +27,8 @@ the ast.dump function and modified slightly to pretty-print.
 Alex Leone (acleone ~AT~ gmail.com), 2010-01-30
 """
 import ast
+
+
 def dump(node, annotate_fields=True, include_attributes=False, indent='  '):
     """
     Return a formatted dump of the tree in *node*.  This is mainly useful for
@@ -348,3 +352,6 @@ def ppast(code):
 # alias logs="cd /var/log; multitail -s 2 auth.log  daemon.log  dpkg.log  fail2ban.log  fontconfig.log  kern.log  lpr.log  mail.log  pycentral.log  user.log; cd -"
 #
 # scrot "/tmp/%Y-%m-%d_$wx$h.png" -e "$APP \$f &" -s
+
+def cli():
+    print("CLI")
