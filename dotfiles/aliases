@@ -20,7 +20,6 @@ alias cdiff='cdiff -s -w0'
 
 # Application shortcuts {{{
 alias i="ipython"
-alias qi="ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint &"
 
 alias dk='sudo docker'
 alias dkb='sudo docker build --force-rm=true --no-cache=true'

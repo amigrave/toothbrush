@@ -1,0 +1,2 @@
+#!/bin/bash
+ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint
