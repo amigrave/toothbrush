@@ -59,6 +59,7 @@ alias ssh-nokey="ssh -o PreferredAuthentications=keyboard-interactive,password -
 
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 alias webserve='python -m SimpleHTTPServer'
+alias ftpserve='python -m pyftpdlib'
 alias vlc_stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
 alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
 alias termkey='tput smkx; cat; tput rmkx'
