@@ -345,6 +345,15 @@ def ppast(code):
 # APP=${1:-$default_app}
 #
 # scrot "/tmp/%Y-%m-%d_$wx$h.png" -e "$APP \$f &" -s
+# import json
+# import requests
+# import time
+# client_id = OUR_CLIENT_ID
+# headers = {'Authorization': 'Client-ID '+client_id} # authorization header.
+# data = {'image': b64image, 'title': 'Screenshot-%s' %(time.strftime("%H:%M:%S-%d/%m/%Y"))}
+# r = requests.post(url="https://api.imgur.com/3/upload.json", data=data, headers=headers)
+# lol = json.loads(r.text) # load the json response as ... json
+# print lol['data']['link'] # print the link to image stored in the json response
 
 #############################################################
 # linux multitail
