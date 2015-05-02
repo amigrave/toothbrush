@@ -12,7 +12,6 @@ alias flake8="flake8 --config=$DOTFILES/flake8"
 alias vim='vim -p '
 alias ssh="autossh"
 alias qmv='qmv --format=destination-only'
-alias mc='command mc -c --printwd=/tmp/mc-$USER-$$-dir; cd "`cat /tmp/mc-$USER-$$-dir`"; rm -f "/tmp/mc-$USER-$$-dir"; :' # make mc cd's to last browsed directory
 alias ag="ag --page=less"
 alias ack="ack --pager=less --color-match=red"
 alias cdiff='cdiff -s -w0'
@@ -143,6 +142,19 @@ fi
 # }}}
 
 # FUNCTIONS {{{
+function mc() {
+    cwd_file=/tmp/mc-$USER-$$-dir
+    env mc -c --printwd=$cwd_file "$@"
+    if [ -f $cwd_file ]; then
+        cd "`cat /tmp/mc-$USER-$$-dir`"
+        rm -f "/tmp/mc-$USER-$$-dir"
+    fi
+}
+
+function sshmc() {
+    mc ./ sh://$1
+}
+
 function check_pings() {
     if [ -z "$1" ]; then
         check_pings 'eth0'
@@ -151,6 +163,7 @@ function check_pings() {
         tcpdump -i $1 icmp and icmp[icmptype]=icmp-echo
     fi
 }
+
 function shellshock() {
     if [ -z "$1" ]; then
         shellshock 'bash'
@@ -171,12 +184,15 @@ function shellshock() {
         fi
     fi
 }
+
 function findrecent() {
     find $1 -type f -printf '%TY-%Tm-%Td %TT %p\n' | sort -r | less
 }
+
 function assh() {
     autossh -x "$*" 'screen -RdU'
 }
+
 function pclean() {
     find . -name "*.pyc" -delete
     find . -name "*.THIS" -delete
@@ -188,6 +204,7 @@ function pclean() {
     find . -name "*.moved" -delete
     # find . -type d -empty ! -path '*/.bzr/*' -delete
 }
+
 # man() {
 #     env LESS_TERMCAP_mb=$'\E[01;31m' \
 #     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
