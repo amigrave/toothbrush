@@ -9,9 +9,7 @@
 # current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 # export DOTFILES=$( dirname "$current_dir" )
 export AMIGRAVE=$HOME/amigrave
-echo $AMIGRAVE
 export DOTFILES=$AMIGRAVE/dotfiles
-echo $DOTFILES
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LC_CTYPE=$LANG
@@ -33,6 +31,10 @@ export GREP_OPTIONS='--color=auto'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Set up paths
+PATH=$AMIGRAVE/bin:$PATH
+if [ -d "$HOME/bin" ]; then
+    PATH=$HOME/bin:$PATH
+fi
 if [ -d "$HOME/.local/bin" ]; then
     PATH=$HOME/.local/bin:$PATH
 fi
@@ -40,7 +42,6 @@ if [ -f "$HOME/.local/lib/python2.7/site-packages/" ]; then
     # TODO: python version !!!
     export PYTHONPATH=$HOME/.local/lib/python2.7/site-packages:$PYTHONPATH
 fi
-PATH=$AMIGRAVE/bin:$PATH
 
 export XDG_CONFIG_DIRS=$DOTFILES:$XDG_CONFIG_DIRS
 export XDG_CONFIG_HOME=$HOME/.config
