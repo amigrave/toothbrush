@@ -76,9 +76,8 @@ export BZR_LOG=/dev/null
 
 # Homebrew {{{
 if [ -d "/usr/local/Cellar/coreutils" ]; then
-    # TODO: check if still necessary on OSX
-    PATH="/usr/local/bin:$PATH"
-    export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
+    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 # }}}
 
