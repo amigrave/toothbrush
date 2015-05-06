@@ -80,8 +80,15 @@ bindkey '^P' up-history
 bindkey '^N' down-history
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
-bindkey '^[[5~' history-beginning-search-backward
-bindkey '^[[6~' history-beginning-search-forward
+
+# zsh doesn't use readline so translated .inputrc here
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
+bindkey '^[[5~' history-search-backward  # history-beginning-search-backward
+bindkey '^[[6~' history-search-forward  # history-beginning-search-forward
+bindkey '^[[3~' delete-char
+bindkey '^[[5C' forward-word
+bindkey '^[[5D' backward-word
 
 # function zle-line-init zle-keymap-select {
 #     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
