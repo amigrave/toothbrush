@@ -34,9 +34,10 @@ alias v='DISPLAY=:0 mpv -cache 4096 -fs'
 # }}}
 
 # Path naviguation {{{
-alias d="LC_ALL=C ls --color=yes "
-alias l="LC_ALL=C ls -lh --color=yes "
-alias ll="LC_ALL=C ls -lAh --color=yes | less -r -E -X"
+alias ls="ls --color=yes"
+alias d="LC_ALL=C ls -lh"
+alias l="LC_ALL=C ls -lAh | less -r -E -X"
+alias ll=l
 # }}}
 
 # Misc utils {{{
