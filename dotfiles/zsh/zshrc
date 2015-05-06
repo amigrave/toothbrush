@@ -5,7 +5,7 @@ if [ -z "$AMIGRAVE" ]; then
 fi
 
 source $DOTFILES/profile_interactive
-# setopt AUTO_CD
+setopt AUTO_CD
 # eval "$(dircolors -b)"
 
 # History stuff {{{
