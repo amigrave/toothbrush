@@ -97,7 +97,8 @@ colorscheme wombat256mod
 set encoding=utf8
 set fileencoding=utf8
 set fileencodings=utf-8,latin1
-set visualbell t_vb=
+set visualbell
+set novb
 set noerrorbells        " do not bell on error
 set shiftwidth=4        " Number of spaces to use for each step of (auto)
 set tabstop=4           " Number of spaces that a <Tab> in the file counts for
@@ -190,6 +191,7 @@ if has('gui')
 endif
 
 if has("gui_macvim")
+    set visualbell t_vb=
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
 endif
 
