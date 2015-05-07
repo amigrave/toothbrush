@@ -115,7 +115,6 @@ set smartcase           " ignore case when the pattern contains lowercase letter
 set nobackup            " do not write a .bak file
 set autoindent          " automatic indentation
 set smartindent
-"set noexpandtab         " do not expand tab to spaces
 set expandtab           " expand tab to spaces
 set ruler               " Show the line and column number of the cursor position
 set number              " precede each line with its line number
@@ -399,8 +398,11 @@ inoremap <silent> <F10> <C-O>:Bdelete<CR>
 nnoremap <silent> <S-F10> :bde!<CR>
 inoremap <silent> <S-F10> <C-O>:bde!<CR>
 
-nnoremap <F11> :nohlsearch<CR>
-inoremap <F11> <C-O>:nohlsearch<CR>
+set pastetoggle=<F11>
+
+" Temporary stop displaying search results on Ctrl+L
+" http://blog.sanctum.geek.nz/vim-search-highlighting/
+nnoremap <C-l> :nohlsearch<CR><C-l>
 
 " NERD Tree
 nnoremap <F12> :NERDTreeFind<CR>
@@ -439,7 +441,6 @@ let g:user_emmet_settings = {
     \  'indentation' : '    '
 \}
 
-" set pastetoggle=<S-F12>
 imap <c-e> <c-o>:lnext<cr>
 nmap <c-e> :lnext<cr>
 
