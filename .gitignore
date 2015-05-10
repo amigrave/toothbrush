@@ -1,4 +1,5 @@
 *.pyc
+dotfiles/bazaar/plugins/*
 dotfiles/httpie/sessions
 dotfiles/ipython/profile_default/history.sqlite
 dotfiles/ipython/profile_default/security/
