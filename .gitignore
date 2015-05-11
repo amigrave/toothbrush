@@ -1,4 +1,5 @@
 *.pyc
+dotfiles/httpie/sessions
 dotfiles/ipython/profile_default/history.sqlite
 dotfiles/ipython/profile_default/security/
 dotfiles/ipython/profile_default/startup/README
