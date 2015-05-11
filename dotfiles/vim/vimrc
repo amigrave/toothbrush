@@ -425,6 +425,12 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$', '\.o$', '\.so
 " Taglist
 nnoremap <silent> <S-F12> :TagbarToggle<CR><C-w>l
 inoremap <silent> <S-F12> <C-O>:TagbarToggle<CR><C-w>l
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_map_closeallfolds = ['<F5>']
+let g:tagbar_map_closefold = ['<S-Up>']
+let g:tagbar_map_openfold = ['<Right>']
+
 " nnoremap <silent> <S-F7> :lcd %:p:h<CR>:RepoRoot<CR>:!ctags .<CR>
 
 " Calculator
