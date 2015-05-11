@@ -2,35 +2,48 @@
 [user]
     name = Fabien Meghazi
     email = agr@amigrave.com
+
 [core]
     filemode = false
     excludesfile = .gitignore.local
     editor = vim
+
 [color]
     ui = true
     diff = true
     status = true
     branch = auto
+
 [pretty]
     hist  = "%C(bold yellow)%h %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)"
     histp = "%C(bold yellow)%h %C(reset)%C(yellow)%p %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)" # with parents
     ghist = "%C(bold red)%d %C(bold yellow)%gD %C(reset)%C(yellow)%h %C(reset)%aD %C(red)[%an] %C(green)%gs %C(reset)%s"
+
 [http]
     sslVerify = false
+
 [status]
     submodulesummary = true
+
 [diff]
     renames = true
     noprefix = true # drops the annoying a/filename.foo b/filename.foo prefixes
+
+[difftool "vim-dirdiff"]
+  # cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax off'
+  cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
+
 [format]
     pretty = fuller # more detail for "git show"
+
 [merge]
-    tool = vimdiff
-    # tool = kdiff3
+    tool = meld
     # conflictstyle = diff3
     # defaultToUpstream = true
+
 [include]
     path = ~/.config/git/config.local
+
 [alias]
     s = status
     b = branch -vv
@@ -44,7 +57,8 @@
     ls = ls-files
     li = ls-files --other --ignored --exclude-standard # List ignored files
     lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"
-    vdiff = difftool -t vimdiff
+    dd = difftool --dir-diff -t meld
+    vdd = difftool --dir-diff -t vim-dirdiff
     subs = submodule foreach git
     upstream = remote add --track master upstream
 
@@ -102,9 +116,6 @@
         fi; true"
 [push]
     default = simple
-[diff]
-    renames = true
-    noprefix = true # drops the annoying a/filename.foo b/filename.foo prefixes
 
 [github]
     user = amigrave
@@ -112,7 +123,7 @@
 [tig "bind"]
     generic = P !<tig --first-parent %(commit)
     generic = O !tig --first-parent %(commit)^2
-    generic = <F1> !git qdiff %(commit)~1..%(commit)
+    generic = <F1> !git dd %(commit)~1..%(commit)
     generic = "<F2> !git filter-branch -f --env-filter \
         'if test $GIT_COMMIT = \"%(commit)\"; then \
             mydate=\"%(prompt Enter new commit date: )\"; \
