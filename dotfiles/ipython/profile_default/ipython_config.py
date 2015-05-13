@@ -1,6 +1,11 @@
+# flake8: noqa
 # Configuration file for ipython.
+import os
 
 c = get_config()
+
+c.HistoryManager.hist_file = os.path.expandvars("$XDG_CACHE_HOME/ipython_hist.sqlite")
+c.TerminalInteractiveShell.confirm_exit = False
 
 #------------------------------------------------------------------------------
 # InteractiveShellApp configuration
@@ -242,7 +247,6 @@ c = get_config()
 # Control-Z/Enter in Windows). By typing 'exit' or 'quit', you can force a
 # direct exit without any confirmation.
 # c.TerminalInteractiveShell.confirm_exit = True
-c.TerminalInteractiveShell.confirm_exit = False
 
 # 
 # c.TerminalInteractiveShell.ipython_dir = ''
