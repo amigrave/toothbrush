@@ -7,7 +7,7 @@ try:
 except ImportError:
     pass
 else:
-    histfile = os.path.join(os.environ["HOME"], ".pythonhistory")
+    histfile = os.path.join(os.environ["XDG_CACHE_HOME"], "python_history")
     readline.parse_and_bind("tab: complete")
     if os.path.isfile(histfile):
         readline.read_history_file(histfile)
