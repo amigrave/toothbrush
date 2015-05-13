@@ -19,70 +19,72 @@ filetype off
 call vundle#begin(expand('<sfile>:p:h') . '/bundle')
 
 " Navigation
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'ervandew/supertab.git'
-Plugin 'kien/ctrlp.vim.git'
-Plugin 'dbakker/vim-projectroot.git'
-Plugin 'majutsushi/tagbar.git'
-Plugin 'gcmt/taboo.vim.git'
-Plugin 'moll/vim-bbye.git'
+Plugin 'scrooloose/nerdtree'
+" Plugin 'ervandew/supertab'
+Plugin 'kien/ctrlp.vim'
+Plugin 'dbakker/vim-projectroot'  " Brings function to cd to the current repository root
+" Plugin 'majutsushi/tagbar.git'
+" Plugin 'gcmt/taboo.vim.git'
+Plugin 'moll/vim-bbye.git'  " provides :Bdelete
 
 " Look
-Plugin 'w0ng/vim-hybrid.git'
-Plugin 'jnurmine/Zenburn.git'
-Plugin 'nanotech/jellybeans.vim.git'
+" Plugin 'w0ng/vim-hybrid.git'
+" Plugin 'jnurmine/Zenburn.git'
+" Plugin 'nanotech/jellybeans.vim.git'
 Plugin 'bling/vim-airline'
 
 " Edition
-Plugin 'garbas/vim-snipmate.git'
-Plugin 'honza/vim-snippets.git'
-Plugin 'tpope/vim-surround'
-Plugin 'mattn/emmet-vim.git'
-Plugin 'tpope/vim-commentary'
-Plugin 'godlygeek/tabular.git'
-Plugin 'terryma/vim-expand-region.git'
-Plugin 'michaeljsmith/vim-indent-object.git'
-Plugin 'kana/vim-textobj-user.git'             " Allows to create own text objects
-Plugin 'bps/vim-textobj-python.git'            " Python function and class text objects
+" Plugin 'garbas/vim-snipmate.git'
+" Plugin 'honza/vim-snippets.git'
+" Plugin 'tpope/vim-surround'
+" Plugin 'mattn/emmet-vim.git'
+Plugin 'tomtom/tcomment_vim'
+" Plugin 'godlygeek/tabular.git'
+" Plugin 'terryma/vim-expand-region.git'
+" Plugin 'michaeljsmith/vim-indent-object.git'
+" Plugin 'kana/vim-textobj-user.git'             " Allows to create own text objects
+" Plugin 'bps/vim-textobj-python.git'            " Python function and class text objects
 
 " Languages
-Plugin 'scrooloose/syntastic.git'
-Plugin 'OrgaChem/JavaScript-syntax.git'
-Plugin 'dmitry-ilyashevich/vim-typescript.git'
-Plugin 'vim-scripts/ASPJScript.git'
-Plugin 'kchmck/vim-coffee-script.git'
-Plugin 'groenewege/vim-less.git'
-Plugin 'sukima/xmledit.git'
-Plugin 'digitaltoad/vim-jade.git'
-Plugin 'wavded/vim-stylus.git'
-Plugin 'rainux/vim-vala.git'
-Plugin 'evanmiller/nginx-vim-syntax.git'
-Plugin 'Glench/Vim-Jinja2-Syntax.git'
-Plugin 'sophacles/vim-bundle-mako.git'
-Plugin 'plasticboy/vim-markdown.git'
-Plugin 'davidhalter/jedi-vim.git'
-Plugin 'jimmyhchan/dustjs.vim.git'
-Plugin 'tpope/vim-haml.git'
-Plugin 'elzr/vim-json.git'
-Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'scrooloose/syntastic'
+" Plugin 'OrgaChem/JavaScript-syntax.git'
+" Plugin 'dmitry-ilyashevich/vim-typescript.git'
+" Plugin 'vim-scripts/ASPJScript.git'
+" Plugin 'kchmck/vim-coffee-script.git'
+" Plugin 'groenewege/vim-less.git'
+" Plugin 'sukima/xmledit.git'
+" Plugin 'rainux/vim-vala.git'
+" Plugin 'Glench/Vim-Jinja2-Syntax.git'
+Plugin 'davidhalter/jedi-vim'
+" Plugin 'jimmyhchan/dustjs.vim.git'
+" Plugin 'elzr/vim-json.git'
+
+" Templating and special filetypes
+" Plugin 'sophacles/vim-bundle-mako.git'
+" Plugin 'digitaltoad/vim-jade.git'
+" Plugin 'wavded/vim-stylus.git'
+" Plugin 'plasticboy/vim-markdown.git'
+" Plugin 'tpope/vim-haml.git'
+" Plugin 'evanmiller/nginx-vim-syntax'
+" Plugin 'ekalinin/Dockerfile.vim'
 
 " Misc Tools
-Plugin 'tpope/vim-fugitive.git'
-Plugin 'mattn/gist-vim.git'
-Plugin 'vim-scripts/vcscommand.vim.git'
-Plugin 'marzocchi/vim-color-picker-osx.git'
-Plugin 'rking/ag.vim.git'
-Plugin 'xolox/vim-session.git'
-Plugin 'xolox/vim-misc.git'
+Plugin 'tpope/vim-fugitive'
+" Plugin 'mattn/gist-vim.git'
+" Plugin 'vim-scripts/vcscommand.vim.git'
+" Plugin 'marzocchi/vim-color-picker-osx.git'
+Plugin 'rking/ag.vim'
+" Plugin 'xolox/vim-session.git'
+" Plugin 'xolox/vim-misc.git'
 Plugin 'embear/vim-localvimrc.git'
-Plugin 'vim-scripts/ingo-library.git'
-Plugin 'vim-scripts/SearchHighlighting.git'
-Plugin 'AndrewRadev/linediff.vim.git'
+" Plugin 'vim-scripts/ingo-library.git'
+" Plugin 'vim-scripts/SearchHighlighting'  " Allow to use * on visual selection -- Seems broken
+" Plugin 'AndrewRadev/linediff.vim.git'
 
 " Libs
-Plugin 'tomtom/tlib_vim.git'
-Plugin 'MarcWeber/vim-addon-mw-utils.git'
-Plugin 'mattn/webapi-vim.git' " used by gist-vim
+" Plugin 'tomtom/tlib_vim.git'
+" Plugin 'MarcWeber/vim-addon-mw-utils.git'
+" Plugin 'mattn/webapi-vim.git' " used by gist-vim
 
 call vundle#end()
 filetype plugin indent on
