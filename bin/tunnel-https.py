@@ -6,7 +6,7 @@ import sys
 
 
 def tunnel(target_host, target_port=8080, proxy_ip='127.0.0.1', proxy_port=3128, proxy_login=None,
-           proxy_password=None, tunnel_port=2222, user_agent=None):
+           proxy_password=None, tunnel_port=22222, user_agent=None):
     """
         tunnel: Make localhost:<tunnel_port> mapped to <target>:<target_port> via an http proxy
                 works on cygwin.

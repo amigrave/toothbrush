@@ -1,6 +1,36 @@
+# vim: fdm=marker ft=sshconfig:
+
+# {{{ Global config
 Host *
-	HashKnownHosts no
-	CheckHostIP no
-	ForwardAgent yes
-	# ForwardX11 yes
-	# ForwardX11Trusted no
+    # HashKnownHosts no
+    # CheckHostIP no
+    ForwardAgent yes
+
+    # Sharing connections conflicts with midnight commander's fish
+    ControlMaster auto
+    ControlPath /tmp/ssh_mux_%h_%p_%r
+
+Host *.local
+    ForwardX11 yes
+    ForwardX11Trusted no
+# }}}
+
+# {{{ AGR
+Host tunnel-proxy
+    Hostname localhost
+    Port 22222
+    User agr
+    LocalForward 8888 127.0.0.1:8888
+    Protocol 2
+    TCPKeepAlive yes
+    ServerAliveInterval 60
+
+Host vagrant
+    User vagrant
+    Hostname localhost
+    Port 2222
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no
+    SendEnv http_proxy https_proxy
+    # ProxyCommand ssh jump-host -W %h:%p
+# }}}
