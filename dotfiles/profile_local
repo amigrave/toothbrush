@@ -1,23 +1,29 @@
 # vim: ft=sh:fdm=marker:
 # Place this in ~/.config for a local profile
 
-if [[ -n "$DISPLAY" ]]; then
-
-# export SHELL=/bin/zsh
 export PYTHONPATH=$AMIGRAVE:$PYTHONPATH
 
-# Linux stuff
-#############
-# xrdb -merge $DOTFILES/Xdefaults
-# setxkbmap us
-# setxkbmap -option apple:badmap
-# xmodmap $DOTFILES/Xmodmap
-# xbindkeys
-# echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode
-# xset r rate 200 50
 
-# TODO: find a solution for ssh keys
-# ssh-add ~/.ssh/id_rsa > /dev/null 2>&1
-# SSH_ASKPASS=ssh-askpass ssh-add ~/.ssh/id_rsa
+if [[ -n "$DISPLAY" && -z "$AGRLOCAL" ]]; then
 
+    # vmware-user
+    # export SHELL=/bin/zsh
+
+    # ipython notebook --no-browser --port=8889 --pylab --matplotlib
+
+    # Linux stuff
+    #############
+    # xrdb -merge $DOTFILES/Xdefaults
+    # setxkbmap us
+    # setxkbmap -option apple:badmap
+    # xmodmap $DOTFILES/Xmodmap
+    # xbindkeys
+    # echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode
+    # xset r rate 200 50
+
+    # TODO: find a solution for ssh keys
+    # SSH_ASKPASS=ssh-askpass ssh-add ~/.ssh/id_rsa
+    # ssh-add ~/.ssh/id_rsa > /dev/null 2>&1
+
+    export AGRLOCAL=1
 fi

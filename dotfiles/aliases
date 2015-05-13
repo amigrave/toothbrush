@@ -16,6 +16,7 @@ alias ag="ag --page=less"
 alias ack="ack --pager=less --color-match=red"
 alias cdiff='cdiff -s -w0'
 alias cal='ncal -bM'
+alias pip='pip --log /dev/null'
 # }}}
 
 # Application shortcuts {{{
