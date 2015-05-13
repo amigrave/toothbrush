@@ -230,7 +230,7 @@ if has("autocmd")
             \ if getline(1) =~ '^<DOCTYPE' | set filetype=html | endif |
         \endif
 
-    au BufRead *.txt,*.rst setlocal expandtab tw=78 colorcolumn=79
+    au BufRead *.txt,*.rst setlocal tw=78 colorcolumn=79
     au BufRead,BufNewFile *.xml,*.xsl  setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2 synmaxcol=300
     au BufRead,BufNewFile *.php,*.php3 setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.rb setlocal fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
@@ -299,6 +299,12 @@ nnoremap <Leader>. :lcd %:p:h<CR>
 " Reporoot
 nnoremap <silent> <Leader>/ :ProjectRootLCD<cr>
 
+" Prevent vim to automatically jump to first result on star search
+" http://stackoverflow.com/questions/4256697/vim-search-and-highlight-but-do-not-jump
+" nnoremap * :keepjumps normal *``<cr>
+" TODO: find good plugin for that as this doesn't work very well (cursor moved)
+nnoremap * *``<cr>
+
 " iPython macvim
 " https://github.com/jkitzes/ipyqtmacvim/
 if has("gui_macvim")
@@ -363,6 +369,9 @@ augroup qf
     autocmd FileType qf set nobuflisted
 augroup END
 
+" Commenting
+nnoremap <silent> \\ :TComment<CR>
+vnoremap <silent> \\ :TComment<CR>
 
 " Folding
 nnoremap <silent> <S-Up> zc
@@ -517,6 +526,8 @@ let g:gist_post_private = 1
 
 " SuperTab
 " let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
 
 " Session.vim
 let g:session_autosave = 'no'
@@ -548,9 +559,11 @@ let NERDTreeMapActivateNode='<Right>'
 let NERDTreeMapChangeRoot='<C-Right>'
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+if exists("*SyntasticStatuslineFlag")
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+endif
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args = '--config=' . $DOTFILES . '/flake8'
 let g:syntastic_error_symbol = '✗'
@@ -567,6 +580,7 @@ let g:localvimrc_persistence_file = $XDG_CACHE_HOME . '/vim/localvimrc_persisten
 " Jedi
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
+let g:jedi#popup_select_first = 0
 
 " Xmledit
 let g:xmledit_enable_html = 1
