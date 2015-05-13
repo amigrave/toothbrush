@@ -48,6 +48,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 mkdir -p $XDG_CONFIG_HOME
 
+export PYTHONSTARTUP=$DOTFILES/python/shell_startup.py
 export ZDOTDIR=$DOTFILES/zsh
 export MPLAYER_HOME=$DOTFILES/mplayer
 export MPV_HOME=$DOTFILES/mpv
