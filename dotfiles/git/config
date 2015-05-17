@@ -30,8 +30,7 @@
     noprefix = true # drops the annoying a/filename.foo b/filename.foo prefixes
 
 [difftool "vim-dirdiff"]
-  # cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax off'
-  cmd = vim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
+    cmd = vim -R -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax on'
 
 [format]
     pretty = fuller # more detail for "git show"
