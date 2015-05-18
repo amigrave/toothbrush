@@ -70,11 +70,10 @@ Plugin 'rking/ag.vim'
 " Plugin 'xolox/vim-session.git'
 " Plugin 'xolox/vim-misc.git'
 Plugin 'embear/vim-localvimrc.git'
-Plugin 'vim-scripts/SearchHighlighting'  " Allow to use * on visual selection -- Seems broken
+Plugin 'haya14busa/vim-asterisk'
 
 " Libs
 Plugin 'kana/vim-textobj-user.git'     " used by vim-textobj-python
-Plugin 'vim-scripts/ingo-library.git'  " used by SearchHighlighting
 " Plugin 'tomtom/tlib_vim.git'
 " Plugin 'MarcWeber/vim-addon-mw-utils.git'
 " Plugin 'mattn/webapi-vim.git' " used by gist-vim
@@ -463,6 +462,12 @@ vmap <Tab> >
 vmap <S-Tab> <LT>
 " http://vim.wikia.com/wiki/Selecting_your_pasted_text
 nnoremap gp `[v`]
+
+" Asterix
+map *  <Plug>(asterisk-z*)
+map #  <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
 
 " Don't wanna ex mode, prefer quick Quit
 map Q :qa<CR>
