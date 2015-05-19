@@ -10,7 +10,6 @@ alias flake8="flake8 --config=$DOTFILES/flake8"
 
 # Application shadowers {{{
 alias vim='vim -p '
-alias ssh="autossh -M 0"
 alias qmv='qmv --format=destination-only'
 alias ag="ag --page=less"
 alias ack="ack --pager=less --color-match=red"

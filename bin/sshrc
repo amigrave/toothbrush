@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# TODO: use autossh
+
+tar --exclude='dotfiles/vim/bundle/syntastic/*' \
+    --exclude='dotfiles/vim/bundle/jedi-vim/*' \
+    --exclude='dotfiles/vim/bundle/*/doc/*' \
+    --exclude='dotfiles/vim/bundle/*/*.gif' \
+    --exclude='*.pyc' \
+    --exclude='.git' \
+    -zcvf $AMIGRAVE/test.tgz $AMIGRAVE/*
