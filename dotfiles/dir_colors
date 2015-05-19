@@ -160,10 +160,10 @@ EXEC      01;31    # file with executable attribute set
 .ANS  01;33;42
 .ans  01;33;42
 
-.xml  01;32
-.yml  01;32
-.yaml 01;32
-.json 01;32
+.xml  00;33;40
+.yml  00;33;40
+.yaml 00;33;40
+.json 00;33;40
 
 .html 01;37;42
 .htm  01;37;42
