@@ -128,4 +128,4 @@
             mydate=\"%(prompt Enter new commit date: )\"; \
             export GIT_COMMITTER_DATE=\"$mydate\"; \
             export GIT_AUTHOR_DATE=\"$mydate\"; \
-        fi'"
+        fi' %(commit)~1..HEAD"
