@@ -22,61 +22,59 @@ call vundle#begin(expand('<sfile>:p:h') . '/bundle')
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'dbakker/vim-projectroot'  " Brings function to cd to the current repository root
-Plugin 'majutsushi/tagbar.git'
-Plugin 'moll/vim-bbye.git'  " provides :Bdelete
+Plugin 'majutsushi/tagbar'
+Plugin 'moll/vim-bbye'  " provides :Bdelete
 
 " Look
 Plugin 'bling/vim-airline'
 
 " Edition
 " Plugin 'ervandew/supertab'
-" Plugin 'garbas/vim-snipmate.git'
-" Plugin 'honza/vim-snippets.git'
+" Plugin 'garbas/vim-snipmate'
+" Plugin 'honza/vim-snippets'
 " Plugin 'tpope/vim-surround'
-" Plugin 'mattn/emmet-vim.git'
+" Plugin 'mattn/emmet-vim'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'godlygeek/tabular.git'
-Plugin 'terryma/vim-expand-region.git'
-Plugin 'bps/vim-textobj-python.git'            " Python function and class text objects
+Plugin 'godlygeek/tabular'
+Plugin 'terryma/vim-expand-region'
+Plugin 'bps/vim-textobj-python'            " Python function and class text objects
 
 " Languages
 Plugin 'scrooloose/syntastic'
-Plugin 'OrgaChem/JavaScript-syntax.git'
-Plugin 'vim-scripts/ASPJScript.git'
-Plugin 'dmitry-ilyashevich/vim-typescript.git'
-Plugin 'kchmck/vim-coffee-script.git'
-Plugin 'groenewege/vim-less.git'
-Plugin 'sukima/xmledit.git'
-Plugin 'rainux/vim-vala.git'
+Plugin 'OrgaChem/JavaScript-syntax'
+Plugin 'vim-scripts/ASPJScript'
+Plugin 'dmitry-ilyashevich/vim-typescript'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'groenewege/vim-less'
+Plugin 'sukima/xmledit'
+Plugin 'rainux/vim-vala'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'elzr/vim-json.git'
-Plugin 'wavded/vim-stylus.git'
-Plugin 'plasticboy/vim-markdown.git'
+Plugin 'elzr/vim-json'
+Plugin 'wavded/vim-stylus'
+Plugin 'plasticboy/vim-markdown'
 
 " Templating and special filetypes
-Plugin 'Glench/Vim-Jinja2-Syntax.git'
-" Plugin https://github.com/mitsuhiko/vim-jinja.git from Armin Ronacher (outdated?)
-Plugin 'sophacles/vim-bundle-mako.git'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+" Plugin https://github.com/mitsuhiko/vim-jinja from Armin Ronacher (outdated?)
+Plugin 'sophacles/vim-bundle-mako'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'ekalinin/Dockerfile.vim'
 
 " Misc Tools
 Plugin 'tpope/vim-fugitive'
 Plugin 'will133/vim-dirdiff'
-Plugin 'AndrewRadev/linediff.vim.git'
-" Plugin 'mattn/gist-vim.git'
-Plugin 'marzocchi/vim-color-picker-osx.git'
+Plugin 'AndrewRadev/linediff.vim'
+" Plugin 'mattn/gist-vim'
+Plugin 'marzocchi/vim-color-picker-osx'
 Plugin 'rking/ag.vim'
-" Plugin 'xolox/vim-session.git'
-" Plugin 'xolox/vim-misc.git'
-Plugin 'embear/vim-localvimrc.git'
+Plugin 'embear/vim-localvimrc'
 Plugin 'haya14busa/vim-asterisk'
 
 " Libs
-Plugin 'kana/vim-textobj-user.git'     " used by vim-textobj-python
-" Plugin 'tomtom/tlib_vim.git'
-" Plugin 'MarcWeber/vim-addon-mw-utils.git'
-" Plugin 'mattn/webapi-vim.git' " used by gist-vim
+Plugin 'kana/vim-textobj-user'     " used by vim-textobj-python
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'mattn/webapi-vim' " used by gist-vim
 
 call vundle#end()
 filetype plugin indent on
@@ -532,11 +530,7 @@ let g:gist_post_private = 1
 " SuperTab
 " let g:SuperTabDefaultCompletionType = "context"
 " let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
-
-" Session.vim
-let g:session_autosave = 'no'
-let g:session_autoload = 'no'
+" let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
 
 " SnipMate
 let g:snipMate = {}
