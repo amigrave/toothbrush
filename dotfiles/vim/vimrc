@@ -37,7 +37,7 @@ Plugin 'bling/vim-airline'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'godlygeek/tabular'
 Plugin 'terryma/vim-expand-region'
-Plugin 'bps/vim-textobj-python'            " Python function and class text objects
+Plugin 'bps/vim-textobj-python'  " Python function and class text objects
 
 " Languages
 Plugin 'scrooloose/syntastic'
@@ -47,6 +47,7 @@ Plugin 'dmitry-ilyashevich/vim-typescript'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'groenewege/vim-less'
 Plugin 'sukima/xmledit'
+Plugin 'stephpy/vim-yaml'  " Simplify yaml syntax for faster processing
 Plugin 'rainux/vim-vala'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'elzr/vim-json'
@@ -223,6 +224,7 @@ if has("autocmd")
 
     au BufRead *.txt,*.rst setlocal tw=78 colorcolumn=79
     au BufRead,BufNewFile *.xml,*.xsl  setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2 synmaxcol=300
+    au BufRead,BufNewFile *.yml,*.yaml setlocal sw=4
     au BufRead,BufNewFile *.php,*.php3 setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.rb setlocal fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.aspx setlocal syntax=cs
