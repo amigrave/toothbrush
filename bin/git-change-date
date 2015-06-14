@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function
+
+import argparse
+import subprocess
+import sys
+
+parser = argparse.ArgumentParser()
+parser.add_argument("commit", help="The commit to edit")
+args = parser.parse_args()
+
+commit = args.commit
+try:
+    date = subprocess.check_output(['git', 'show', '-s', '--format=%ci', commit])
+except subprocess.CalledProcessError:
+    sys.exit("Could not get date of commit %s" % commit)
+
+cmd = ['whiptail', '--inputbox', '--nocancel', 'New date', '7', '30', date]
+try:
+    p = subprocess.Popen(cmd, stderr=subprocess.PIPE)
+except Exception:
+    sys.exit("Could not launch whiptail")
+newdate = p.communicate()[1].strip()
+
+gitcmd = ['git', 'filter-branch', '-f', '--env-filter', """
+    if test $GIT_COMMIT = "{commit}"; then
+        export GIT_COMMITTER_DATE="{newdate}";
+        export GIT_AUTHOR_DATE="{newdate}";
+    fi""".format(**locals()), '%s~1..HEAD' % commit]
+
+subprocess.call(gitcmd)

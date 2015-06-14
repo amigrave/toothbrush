@@ -123,9 +123,4 @@
     generic = P !<tig --first-parent %(commit)
     generic = O !tig --first-parent %(commit)^2
     generic = <F1> !git dd %(commit)~1..%(commit)
-    generic = "<F2> !git filter-branch -f --env-filter \
-        'if test $GIT_COMMIT = \"%(commit)\"; then \
-            mydate=\"%(prompt Enter new commit date: )\"; \
-            export GIT_COMMITTER_DATE=\"$mydate\"; \
-            export GIT_AUTHOR_DATE=\"$mydate\"; \
-        fi' %(commit)~1..HEAD"
+    generic = <F2> !git change-date %(commit)
