@@ -587,6 +587,7 @@ let g:jedi#popup_select_first = 0
 let g:xmledit_enable_html = 1
 
 " }}}
+
 " Xml QWeb {{{
 function! XmlQweb()
     syn match   xmlAttribQWeb
@@ -606,6 +607,7 @@ function! XmlQweb()
     hi qwebVarDelim guifg=#D4C828 ctermfg=DarkYellow
 endfunction
 " }}}
+
 " Python Debug {{{
 if has('python')
 python << EOF
@@ -626,6 +628,23 @@ EOF
 endif
 imap <F8> from pudb import set_trace; set_trace()  # *** Breakpoint ***
 " }}}
+
+" VIM Profiling {{{
+" Found out that GetPythonFold() was slowing down vim thanks to this profiling hint:
+" http://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
+function! g:startVimProfiling()
+    profile start /tmp/vim-profile.log
+    profile func *
+    profile file *
+endfunction
+command! StartVimProfiling call g:startVimProfiling()
+function! g:stopVimProfiling()
+    profile pause
+    noautocmd qall!
+endfunction
+command! StopVimProfiling call g:stopVimProfiling()
+" }}}
+
 " IP Lookup {{{
 " Website: http://codeseekah.com/2012/03/04/vim-scripting-with-python-lookup-ip-country/
 " Lookup the country for an IP address under the current cursor
@@ -645,6 +664,7 @@ def lookupIPUnderCursor():
 EOF
 endif
 " }}}
+
 " CloseHiddenBuffers {{{
 " This one doesn't work with tab.
 " TODO: find another one
@@ -659,6 +679,7 @@ function! CloseHiddenBuffers()
     endwhile
 endfunction
 " }}}
+
 " TextEnableCodeSnip {{{
 " http://vim.wikia.com/wiki/Different_syntax_highlighting_within_regions_of_a_file
 function! TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
@@ -686,6 +707,7 @@ function! TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
   \ contains=@'.group
 endfunction
 " }}}
+
 " EnsureDirExists {{{
 " http://stackoverflow.com/questions/1549263/how-can-i-create-a-folder-if-it-doesnt-exist-from-vimrc
 function! EnsureDirExists (dir)
@@ -699,6 +721,7 @@ function! EnsureDirExists (dir)
   endif
 endfunction
 " }}}
+
 " Highlight_remove_attr {{{
 " The following removes bold from all highlighting
 " Steve Hall wrote this function for me on vim@vim.org
