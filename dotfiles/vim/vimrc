@@ -29,7 +29,7 @@ Plugin 'moll/vim-bbye'  " provides :Bdelete
 Plugin 'bling/vim-airline'
 
 " Edition
-" Plugin 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 " Plugin 'garbas/vim-snipmate'
 " Plugin 'honza/vim-snippets'
 " Plugin 'tpope/vim-surround'
