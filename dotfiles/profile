@@ -8,7 +8,9 @@
 # export DOTFILES=$HOME/amigrave
 # current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 # export DOTFILES=$( dirname "$current_dir" )
-export AMIGRAVE=$HOME/amigrave
+if [ -z "$AMIGRAVE" ]; then
+    export AMIGRAVE=$HOME/amigrave
+fi
 export DOTFILES=$AMIGRAVE/dotfiles
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
