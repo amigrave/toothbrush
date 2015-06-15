@@ -6,12 +6,11 @@ if [ $1 = '-u' ]; then
     shift
 fi
 
-args="$@"
+# TODO: afterall do not allow arbitrary switch forwarding to ssh
+#       just do a getopt switch
+sshargs="$@"
 
 function upload_config() {
-echo $(hostname)
-    cd $AMIGRAVE
-
     rsync \
         --exclude='dotfiles/vim/bundle/syntastic/*' \
         --exclude='dotfiles/vim/bundle/jedi-vim/*' \
@@ -19,16 +18,32 @@ echo $(hostname)
         --exclude='dotfiles/vim/bundle/*/*.gif' \
         --exclude='*.pyc' \
         --exclude='.git' \
-        -avz $AMIGRAVE/* "$args":.agr/
+        -avz $AMIGRAVE/* "$sshargs":.agr/
+
+    if [ $? -ne 0 ]; then
+        # probably rsync not installed on the other end
+        cd $AMIGRAVE
+        tmpfile=/tmp/agr.tgz
+        rm -f $tmpfile
+        tar --exclude='dotfiles/vim/bundle/syntastic/*' \
+            --exclude='dotfiles/vim/bundle/jedi-vim/*' \
+            --exclude='dotfiles/vim/bundle/*/doc/*' \
+            --exclude='dotfiles/vim/bundle/*/*.gif' \
+            --exclude='*.pyc' \
+            --exclude='.git' \
+            -zcvf $tmpfile .
+        scp $tmpfile "$sshargs":/tmp/
+        ssh "$sshargs" "mkdir -p ~/.agr; cd ~/.agr; mv /tmp/agr.tgz .; tar -xf agr.tgz"
+    fi
 }
 
 if [ $update = 1 ]; then
     upload_config
 fi
 
-ssh "$args" -t "~/.agr/start.sh"
+ssh "$sshargs" -t "~/.agr/start.sh"
 
 if [ $? -ne 0 ]; then
     upload_config
-    ssh "$args" -t "~/.agr/start.sh"
+    ssh "$sshargs" -t "~/.agr/start.sh"
 fi
