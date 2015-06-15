@@ -1,11 +1,34 @@
 #!/bin/bash
 
-# TODO: use autossh
+update=0
+if [ $1 = '-u' ]; then
+    update=1
+    shift
+fi
 
-tar --exclude='dotfiles/vim/bundle/syntastic/*' \
-    --exclude='dotfiles/vim/bundle/jedi-vim/*' \
-    --exclude='dotfiles/vim/bundle/*/doc/*' \
-    --exclude='dotfiles/vim/bundle/*/*.gif' \
-    --exclude='*.pyc' \
-    --exclude='.git' \
-    -zcvf $AMIGRAVE/test.tgz $AMIGRAVE/*
+args="$@"
+
+function upload_config() {
+echo $(hostname)
+    cd $AMIGRAVE
+
+    rsync \
+        --exclude='dotfiles/vim/bundle/syntastic/*' \
+        --exclude='dotfiles/vim/bundle/jedi-vim/*' \
+        --exclude='dotfiles/vim/bundle/*/doc/*' \
+        --exclude='dotfiles/vim/bundle/*/*.gif' \
+        --exclude='*.pyc' \
+        --exclude='.git' \
+        -avz $AMIGRAVE/* "$args":.agr/
+}
+
+if [ $update = 1 ]; then
+    upload_config
+fi
+
+ssh "$args" -t "~/.agr/start.sh"
+
+if [ $? -ne 0 ]; then
+    upload_config
+    ssh "$args" -t "~/.agr/start.sh"
+fi

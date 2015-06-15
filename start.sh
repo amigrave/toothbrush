@@ -1,7 +1,20 @@
 #!/bin/bash
 
-source config/profile
-zsh
+current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+# export AMIGRAVE=$( dirname "$current_dir" )
+export AMIGRAVE=$current_dir
+source $AMIGRAVE/dotfiles/profile
+
+SHELL=/bin/bash
+if [ -x "$(command -v zsh)" ]; then
+    SHELL=/bin/zsh
+fi
+export SHELL=$SHELL
+if [ -x "$(command -v tmux)" ]; then
+    tmux attach || $SHELL
+else
+    $SHELL
+fi
 
 # TODO: make installation mode
 # mv $HOME/.profile $HOME/.profile_old
