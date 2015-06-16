@@ -80,7 +80,7 @@ export BZR_LOG=/dev/null
 # Homebrew {{{
 if [ -d "/usr/local/Cellar/coreutils" ]; then
     MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    PATH="/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 # }}}
 
