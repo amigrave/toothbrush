@@ -632,17 +632,17 @@ imap <F8> from pudb import set_trace; set_trace()  # *** Breakpoint ***
 " VIM Profiling {{{
 " Found out that GetPythonFold() was slowing down vim thanks to this profiling hint:
 " http://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
-function! g:startVimProfiling()
+function! g:StartVimProfiling()
     profile start /tmp/vim-profile.log
     profile func *
     profile file *
 endfunction
-command! StartVimProfiling call g:startVimProfiling()
-function! g:stopVimProfiling()
+command! StartVimProfiling call g:StartVimProfiling()
+function! g:StopVimProfiling()
     profile pause
     noautocmd qall!
 endfunction
-command! StopVimProfiling call g:stopVimProfiling()
+command! StopVimProfiling call g:StopVimProfiling()
 " }}}
 
 " IP Lookup {{{
