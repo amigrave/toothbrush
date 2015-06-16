@@ -12,6 +12,8 @@ sshargs="$@"
 
 function upload_config() {
     rsync \
+        --exclude='avatars/*' \
+        --exclude='dotfiles/bazaar/plugins/*' \
         --exclude='dotfiles/vim/bundle/syntastic/*' \
         --exclude='dotfiles/vim/bundle/jedi-vim/*' \
         --exclude='dotfiles/vim/bundle/*/doc/*' \
@@ -25,7 +27,10 @@ function upload_config() {
         cd $AMIGRAVE
         tmpfile=/tmp/agr.tgz
         rm -f $tmpfile
-        tar --exclude='dotfiles/vim/bundle/syntastic/*' \
+        tar \
+            --exclude='avatars/*' \
+            --exclude='dotfiles/bazaar/plugins/*' \
+            --exclude='dotfiles/vim/bundle/syntastic/*' \
             --exclude='dotfiles/vim/bundle/jedi-vim/*' \
             --exclude='dotfiles/vim/bundle/*/doc/*' \
             --exclude='dotfiles/vim/bundle/*/*.gif' \
