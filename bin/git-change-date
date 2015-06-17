@@ -16,11 +16,16 @@ try:
 except subprocess.CalledProcessError:
     sys.exit("Could not get date of commit %s" % commit)
 
-cmd = ['whiptail', '--inputbox', '--nocancel', 'New date', '7', '30', date]
-try:
-    p = subprocess.Popen(cmd, stderr=subprocess.PIPE)
-except Exception:
-    sys.exit("Could not launch whiptail")
+args = ['--nocancel', '--inputbox', 'New date', '7', '40', date.strip()]
+p = None
+for prog in ('whiptail', 'dialog'):
+    try:
+        p = subprocess.Popen([prog] + args, stderr=subprocess.PIPE)
+        break
+    except Exception:
+        continue
+if p is None:
+    sys.exit("Could not execute whiptail or dialog")
 newdate = p.communicate()[1].strip()
 
 gitcmd = ['git', 'filter-branch', '-f', '--env-filter', """
