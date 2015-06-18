@@ -55,6 +55,7 @@ prompt_agr () {
     local atcol=${1:-'blue'}
     local date=${3:-'blue'}
 
+    [[ $PS1_PREFIX != '' ]] && PS1_PREFIX="%B%F{yellow}$PS1_PREFIX "
     [[ $USER != 'agr' ]] && usercol='green'
     [[ $USER == 'root' ]] && usercol='red'
     is_ssh && hostcol='green'
@@ -66,7 +67,7 @@ prompt_agr () {
 
     local GRAD1="$schars[333]$schars[262]$schars[261]$schars[260]"
     local GRAD2="$schars[333]$schars[262]$schars[261]$schars[260]"
-    PS1="%F{$usercol}%B%K{$usercol}$GRAD1%F{white}%K{$usercol}%B%n%K{$atcol}@%F{white}%K{$hostcol}%m%b%F{$hostcol}%K{black}$GRAD2%F{white}%K{black}%B %~ %F{$date}[%D{%H:%M:%S}]%F{$usercol}%K{black}%B%b%k%f "
+    PS1="$PS1_PREFIX%F{$usercol}%B%K{$usercol}$GRAD1%F{white}%K{$usercol}%B%n%K{$atcol}@%F{white}%K{$hostcol}%m%b%F{$hostcol}%K{black}$GRAD2%F{white}%K{black}%B %~ %F{$date}[%D{%H:%M:%S}]%F{$usercol}%K{black}%#%B%b%k%f "
 
     prompt_opts=(cr subst percent)
 }

@@ -250,15 +250,19 @@ function pclean() {
 #     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
 #     man "$@"
 # }
-activate() {
+function activate() {
+    # Activate a virtualenv by iterating parents folder in order to find '.env'
+    # then spawn a new shell with the environment. Default virtualenv's activate
+    # does not spawn a new shell and I don't like it
     local VIRTUALENV_DIRECTORY=".env"
     local PATH_TO_VIRTUALENV=$(pwd)
 
     while [ "$PATH_TO_VIRTUALENV" != '/' ]
     do
-        if [ -r "$PATH_TO_VIRTUALENV/$VIRTUALENV_DIRECTORY/bin/activate" ]
+        activate="$PATH_TO_VIRTUALENV/$VIRTUALENV_DIRECTORY/bin/activate"
+        if [ -r "$activate" ]
         then
-            source "$PATH_TO_VIRTUALENV/$VIRTUALENV_DIRECTORY/bin/activate"
+            $SHELL -c "source '$activate'; PS1_PREFIX='[.env]' $SHELL"
             return 0
         fi
 
