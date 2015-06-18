@@ -3,7 +3,7 @@
 current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 # export AMIGRAVE=$( dirname "$current_dir" )
 export AMIGRAVE=$current_dir
-source $AMIGRAVE/dotfiles/profile
+source $AMIGRAVE/config/profile
 
 SHELL=/bin/bash
 if [ -x "$(command -v zsh)" ]; then
@@ -18,17 +18,17 @@ fi
 
 # TODO: make installation mode
 # mv $HOME/.profile $HOME/.profile_old
-# ln -s dotfiles/profile $HOME/.profile
-# ln -s dotfiles/bash/bashrc $HOME/.bashrc
+# ln -s config/profile $HOME/.profile
+# ln -s config/bash/bashrc $HOME/.bashrc
 
 # Should be portable as much as possible, so get rid of this
-# ln -s dotfiles/mc $HOME/.config/mc
-# ln -s dotfiles/pudb $HOME/.config/pudb
-# ln -s dotfiles/mc/skins  $HOME/.local/share/mc/skins/
-# ln -s dotfiles/terminator $HOME/.config/terminator
-# ln -s dotfiles/bazaar $HOME/.config/bazaar
-# ln -s dotfiles/git $HOME/.config/git
-# ln -s dotfiles/kid3.sourceforge.net $HOME/.config/kid3.sourceforge.net
+# ln -s config/mc $HOME/.config/mc
+# ln -s config/pudb $HOME/.config/pudb
+# ln -s config/mc/skins  $HOME/.local/share/mc/skins/
+# ln -s config/terminator $HOME/.config/terminator
+# ln -s config/bazaar $HOME/.config/bazaar
+# ln -s config/git $HOME/.config/git
+# ln -s config/kid3.sourceforge.net $HOME/.config/kid3.sourceforge.net
 
 
 # Debian QTile

@@ -103,7 +103,7 @@
     # Fetch-Rebase: pure AWESOMEness.
     # Fetches 'origin' and rebases the current branch on top of origin/master.
     # Uses 'stash' intelligently to avoid blocking on trivial working-dir changes
-    # https://github.com/ddopson/dotfiles/blob/master/.gitconfig
+    # https://github.com/ddopson/config/blob/master/.gitconfig
     frb = "! \
         git fetch; \
         if git diff-index --quiet --ignore-submodules HEAD --; then \

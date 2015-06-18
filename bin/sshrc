@@ -8,16 +8,18 @@ fi
 
 # TODO: afterall do not allow arbitrary switch forwarding to ssh
 #       just do a getopt switch
+# TODO: -d option to delete config on logout
+# TODO: factorize excludes
 sshargs="$@"
 
 function upload_config() {
     rsync \
         --exclude='avatars/*' \
-        --exclude='dotfiles/bazaar/plugins/*' \
-        --exclude='dotfiles/vim/bundle/syntastic/*' \
-        --exclude='dotfiles/vim/bundle/jedi-vim/*' \
-        --exclude='dotfiles/vim/bundle/*/doc/*' \
-        --exclude='dotfiles/vim/bundle/*/*.gif' \
+        --exclude='config/bazaar/plugins/*' \
+        --exclude='config/vim/bundle/syntastic/*' \
+        --exclude='config/vim/bundle/jedi-vim/*' \
+        --exclude='config/vim/bundle/*/doc/*' \
+        --exclude='config/vim/bundle/*/*.gif' \
         --exclude='*.pyc' \
         --exclude='.git' \
         -avz $AMIGRAVE/* "$sshargs":.agr/
@@ -29,11 +31,11 @@ function upload_config() {
         rm -f $tmpfile
         tar \
             --exclude='avatars/*' \
-            --exclude='dotfiles/bazaar/plugins/*' \
-            --exclude='dotfiles/vim/bundle/syntastic/*' \
-            --exclude='dotfiles/vim/bundle/jedi-vim/*' \
-            --exclude='dotfiles/vim/bundle/*/doc/*' \
-            --exclude='dotfiles/vim/bundle/*/*.gif' \
+            --exclude='config/bazaar/plugins/*' \
+            --exclude='config/vim/bundle/syntastic/*' \
+            --exclude='config/vim/bundle/jedi-vim/*' \
+            --exclude='config/vim/bundle/*/doc/*' \
+            --exclude='config/vim/bundle/*/*.gif' \
             --exclude='*.pyc' \
             --exclude='.git' \
             -zcvf $tmpfile .

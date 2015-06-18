@@ -1,7 +1,7 @@
 # vim: ft=zsh:fdm=marker:
 
 if [ -z "$AMIGRAVE" ]; then
-    source ~/amigrave/dotfiles/profile
+    source ~/amigrave/config/profile
 fi
 
 source $DOTFILES/profile_interactive

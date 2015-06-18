@@ -81,7 +81,7 @@ http://www.google.com/chat/video
 [custom]
 # git clone amigrave.com:/git/home
 # bcrypt -d .ssh/id_rsa
-# copy dotfiles for user and root
+# copy config for user and root
 # copy .usr.lib.urxvt.perl.tabbed
 #
 # nautilus-script-manager enable ConvertAudioFile
