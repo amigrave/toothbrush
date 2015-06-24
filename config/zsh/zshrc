@@ -1,10 +1,6 @@
 # vim: ft=zsh:fdm=marker:
 
-if [ -z "$AMIGRAVE" ]; then
-    source ~/amigrave/config/profile
-fi
-
-source $DOTFILES/profile_interactive
+source $DOTFILES/profile
 setopt AUTO_CD
 # eval "$(dircolors -b)"
 

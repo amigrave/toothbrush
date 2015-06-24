@@ -1,17 +1,11 @@
 # vim: ft=sh:fdm=marker:
-# Non interactive profile
-
 
 # Global environment {{{
-
-# TODO: find a way to make it dynamic
-# export DOTFILES=$HOME/amigrave
-# current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-# export DOTFILES=$( dirname "$current_dir" )
 if [ -z "$AMIGRAVE" ]; then
-    export AMIGRAVE=$HOME/amigrave
+    echo "start.sh has not been executed or sourced as .profile, .bashrc or .zshrc"
+    echo "You can symlink start.sh to one of those files using 'start.sh -i'"
+    return
 fi
-export DOTFILES=$AMIGRAVE/config
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LC_CTYPE=$LANG
@@ -33,23 +27,22 @@ export GREP_OPTIONS='--color=auto'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Set up paths
-PATH=$AMIGRAVE/bin:$PATH
 if [ -d "$HOME/bin" ]; then
     PATH=$HOME/bin:$PATH
 fi
 if [ -d "$HOME/.local/bin" ]; then
     PATH=$HOME/.local/bin:$PATH
 fi
-if [ -f "$HOME/.local/lib/python2.7/site-packages/" ]; then
+python_site_package=$HOME/.local/lib/python2.7/site-packages/
+if [ -f "$python_site_package" ]; then
     # TODO: python version !!!
-    export PYTHONPATH=$HOME/.local/lib/python2.7/site-packages:$PYTHONPATH
+    export PYTHONPATH=$python_site_package:$PYTHONPATH
 fi
 
-export XDG_CONFIG_DIRS=$DOTFILES:$XDG_CONFIG_DIRS
-export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CONFIG_HOME=$DOTFILES
 export XDG_CACHE_HOME=$HOME/.cache
-mkdir -p $XDG_CONFIG_HOME
 
+# TODO: check if all of them are still mandatory now that XDG_CONFIG_DIR == DOTFILES
 export PYTHONSTARTUP=$DOTFILES/python/shell_startup.py
 export ZDOTDIR=$DOTFILES/zsh
 export MPLAYER_HOME=$DOTFILES/mplayer
@@ -63,7 +56,7 @@ export MPV_HOME=$DOTFILES/mpv
 export HTTPIE_CONFIG_DIR=$DOTFILES/httpie
 export PSQLRC=$DOTFILES/psqlrc
 export WGETRC=$DOTFILES/wgetrc
-export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"
+export GIMP2_DIRECTORY="$DOTFILES/gimp"
 
 export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
@@ -71,10 +64,10 @@ export ERRFILE=$XDG_CACHE_HOME/xsession-errors.log
 export BZR_LOG=/dev/null
 # }}}
 
-# Bash startup {{{
-#if [ -n "$BASH_VERSION" ]; then
-#    source $DOTFILES/bash/bashrc
-#fi
+# Node {{{
+if [ -d "/usr/local/lib/node_modules" ]; then
+    NODE_PATH="/usr/local/lib/node_modules"
+fi
 # }}}
 
 # Homebrew {{{
@@ -84,13 +77,62 @@ if [ -d "/usr/local/Cellar/coreutils" ]; then
 fi
 # }}}
 
-# Node {{{
-if [ -d "/usr/local/lib/node_modules" ]; then
-    NODE_PATH="/usr/local/lib/node_modules"
+# Load local profile {{{
+if [ -f "~/.config/profile_local" ]; then
+    . ~/.config/profile_local
 fi
 # }}}
 
-# Load local profile
-if [ -f "$XDG_CONFIG_HOME/profile_local" ]; then
-    . $XDG_CONFIG_HOME/profile_local
+# If not running interactively, don't do anything further
+[ -z "$PS1" ] && return
+
+# Misc Interactive mode stuff {{{
+source $DOTFILES/aliases
+eval `dircolors -b $DOTFILES/dir_colors `
+# }}}
+
+# Set up terminal emulation {{{
+if [[ "$COLORTERM" == "rxvt-xpm" ]]; then
+    export TERM="rxvt-256color"
+elif [[ "$COLORTERM" == "gnome-terminal" ]]; then
+    # TODO: check issues with S-F* keys
+    # export TERM="gnome-256color"
+    export TERM="xterm-256color"
+elif [[ "$TERM" == "screen" ]]; then
+    export TERM="screen-256color"
+elif [[ "$TERM" == "screen-bce" ]]; then
+    export TERM="screen-256color-bce-s"
+elif [[ "$KONSOLE_DBUS_SESSION" != "" ]]; then
+    export TERM="konsole-256color"
 fi
+# }}}
+
+# TODO: src-highlight {{{
+# LESSPIPE=`which src-hilite-lesspipe.sh`
+# alias src='LESSOPEN="| ${LESSPIPE} %s" less'
+# }}}
+
+# OS dependencies {{{
+if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
+
+    # Use xbindkeys if installed
+    if [ -x "$(command -v xbindkeys)" ]; then
+        xbindkeys -f $DOTFILES/xbindkeysrc
+    fi
+
+    # make less more friendly for non-text input files, see lesspipe(1)
+    [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+    # SDL Fullscreen second monitor
+    # export SDL_VIDEO_FULLSCREEN_HEAD=1
+    # export SDL_AUDIODRIVER=alsa
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+
+    termsetcolors
+
+elif [[ "$OSTYPE" =~ darwin* ]]; then
+
+    export BROWSER=safari
+
+fi
+# }}}

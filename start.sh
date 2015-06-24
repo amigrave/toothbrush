@@ -1,35 +1,62 @@
 #!/bin/bash
 
-current_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-# export AMIGRAVE=$( dirname "$current_dir" )
-export AMIGRAVE=$current_dir
-source $AMIGRAVE/config/profile
+# AMIGrAve's config startup
+###########################
 
-SHELL=/bin/bash
-if [ -x "$(command -v zsh)" ]; then
-    SHELL=/bin/zsh
-fi
-export SHELL=$SHELL
-if [ -x "$(command -v tmux)" ]; then
-    tmux attach || $SHELL
+# This startup script is the single entry point for both manual startup and
+# shell configuration. It means that this file can be symlinked to the
+# following file in order to permanently install the config:
+#
+#       ~/.profile
+#       ~/.bashrc
+#       ~/.zshrc
+
+use_bash=0
+install=0
+while getopts "bi" o; do
+    case "${o}" in
+        b) use_bash=1 ;;
+        i) install=1 ;;
+        *)
+            echo "Usage: $0 [-b 'use bash even if zsh is available'] [-i 'install']" 1>&2; exit 1;
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+# First get the current script directory location
+if [ "$ZSH_VERSION" != "" ]; then
+    # If sourced by zsh (eg: symlinked to ~/.zshrc)
+    current_script=${(%):-%N}
+    rcfile=zsh/zshrc
 else
-    $SHELL
+    current_script=${BASH_SOURCE[0]}
+    rcfile=bash/bashrc
 fi
 
-# TODO: make installation mode
-# mv $HOME/.profile $HOME/.profile_old
-# ln -s config/profile $HOME/.profile
-# ln -s config/bash/bashrc $HOME/.bashrc
+# resolve potential symlinks
+readlink=readlink
+command -v greadlink > /dev/null && readlink=greadlink  # OSX
+current_file=`$readlink -f $current_script`
+current_dir=$( cd "$( dirname "$current_file" )" && pwd )
+
+export AMIGRAVE=$current_dir
+export DOTFILES=$AMIGRAVE/config
+if [[ "$0" == "$current_script" ]]; then
+    # start.sh called explicitely
+    if [[ -x "$(command -v zsh)" && $use_bash != 1 ]]; then
+        ZDOTDIR=$DOTFILES/zsh zsh
+    else
+        bash --rcfile $DOTFILES/bash/bashrc -i
+    fi
+elif [[ "$0" == ".profile" ]]; then
+    source $DOTFILES/profile
+else
+    source $DOTFILES/$rcfile
+fi
 
 # Should be portable as much as possible, so get rid of this
-# ln -s config/mc $HOME/.config/mc
-# ln -s config/pudb $HOME/.config/pudb
 # ln -s config/mc/skins  $HOME/.local/share/mc/skins/
-# ln -s config/terminator $HOME/.config/terminator
-# ln -s config/bazaar $HOME/.config/bazaar
-# ln -s config/git $HOME/.config/git
-# ln -s config/kid3.sourceforge.net $HOME/.config/kid3.sourceforge.net
-
 
 # Debian QTile
 # git clone https://github.com/qtile/qtile.git ~/.local/qtile

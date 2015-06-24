@@ -1,9 +1,9 @@
 # vim: ft=sh:fdm=marker:
 
+source $DOTFILES/profile
+
 # If not running interactively, don't do anything further
 [ -z "$PS1" ] && return
-
-source $DOTFILES/profile_interactive
 
 export HISTFILE="$XDG_CACHE_HOME/bash_history"
 export HISTCONTROL=ignoreboth:erasedups  # no duplicate entries (ignorespace is for mc bug)
