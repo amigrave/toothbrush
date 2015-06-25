@@ -42,6 +42,7 @@ fi
 export XDG_CONFIG_HOME=$DOTFILES
 export XDG_CACHE_HOME=$HOME/.cache
 
+export MC_SKIN=$DOTFILES/mc/skins/agr.ini
 # TODO: check if all of them are still mandatory now that XDG_CONFIG_DIR == DOTFILES
 export PYTHONSTARTUP=$DOTFILES/python/shell_startup.py
 export ZDOTDIR=$DOTFILES/zsh
