@@ -11,19 +11,6 @@
 #       ~/.bashrc
 #       ~/.zshrc
 
-use_bash=0
-install=0
-while getopts "bi" o; do
-    case "${o}" in
-        b) use_bash=1 ;;
-        i) install=1 ;;
-        *)
-            echo "Usage: $0 [-b 'use bash even if zsh is available'] [-i 'install']" 1>&2; exit 1;
-            ;;
-    esac
-done
-shift $((OPTIND-1))
-
 # First get the current script directory location
 if [ "$ZSH_VERSION" != "" ]; then
     # If sourced by zsh (eg: symlinked to ~/.zshrc)
@@ -39,9 +26,33 @@ readlink=readlink
 command -v greadlink > /dev/null && readlink=greadlink  # OSX
 current_file=`$readlink -f $current_script`
 current_dir=$( cd "$( dirname "$current_file" )" && pwd )
-
 export AMIGRAVE=$current_dir
 export DOTFILES=$AMIGRAVE/config
+
+function safe_link() {
+    if [ -f $1 ]; then
+        mv $1 $1_$(date +%F-%T)
+    fi
+    ln -s $current_file $1
+}
+
+use_bash=0
+install=0
+while getopts "bi" o; do
+    case "${o}" in
+        b) use_bash=1 ;;
+        i) 
+            safe_link ~/.profile
+            safe_link ~/.bashrc
+            safe_link ~/.zshrc
+            ;;
+        *)
+            echo "Usage: $0 [-b 'use bash even if zsh is available'] [-i 'install']" 1>&2; exit 1;
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
 if [[ "$0" == "$current_script" ]]; then
     # start.sh called explicitely
     if [[ -x "$(command -v zsh)" && $use_bash != 1 ]]; then
