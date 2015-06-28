@@ -27,6 +27,7 @@ export GREP_OPTIONS='--color=auto'
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Set up paths
+PATH=$AMIGRAVE/bin:$PATH
 if [ -d "$HOME/bin" ]; then
     PATH=$HOME/bin:$PATH
 fi
