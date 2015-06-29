@@ -1,56 +1,78 @@
 #!/bin/bash
 
-update=0
-if [ $1 = '-u' ]; then
-    update=1
-    shift
+if [ -z "$AMIGRAVE" ]; then
+    echo "start.sh has not been executed or sourced as .profile, .bashrc or .zshrc"
+    echo "You can symlink start.sh to one of those files using 'start.sh -i'"
+    return
 fi
 
-# TODO: afterall do not allow arbitrary switch forwarding to ssh
-#       just do a getopt switch
-# TODO: -d option to delete config on logout
-# TODO: factorize excludes
+update=0
+use_bash=0
+delete_on_logout=0
+dest=".agr"
+
+function usage {
+    if [[ $1 != '' ]]; then
+        echo $1
+        echo
+    fi
+    echo "Usage: `basename $0` [-b 'use bash even if zsh is available'] [-u 'update config'] [-d 'delete config on logout'" 1>&2; exit 1;
+    exit
+}
+
+while getopts "bud" o; do
+    case "${o}" in
+        b) use_bash=1; echo "TODO" ;;  # if switch forwarded to remote start.sh, maybe setup some kind of persistance
+        u) update=1 ;;
+        d) delete_on_logout=1; echo "TODO" ;;
+        *) usage ;;
+    esac
+done
+shift $((OPTIND-1))
+
+EXCLUDES="
+    --exclude='avatars/*'
+    --exclude='config/bazaar/plugins/*'
+    --exclude='config/vim/bundle/syntastic/*'
+    --exclude='config/vim/bundle/jedi-vim/*'
+    --exclude='config/vim/bundle/*/doc/*'
+    --exclude='config/vim/bundle/*/*.gif'
+    --exclude='*.pyc'
+    --exclude='.git'
+"
 sshargs="$@"
 
+if [[ $sshargs == '' ]]; then
+    usage "ERROR: Please specify a host"
+fi
+
 function upload_config() {
-    rsync \
-        --exclude='avatars/*' \
-        --exclude='config/bazaar/plugins/*' \
-        --exclude='config/vim/bundle/syntastic/*' \
-        --exclude='config/vim/bundle/jedi-vim/*' \
-        --exclude='config/vim/bundle/*/doc/*' \
-        --exclude='config/vim/bundle/*/*.gif' \
-        --exclude='*.pyc' \
-        --exclude='.git' \
-        -avz $AMIGRAVE/* "$sshargs":.agr/
+    rsync $EXCLUDES -avz $AMIGRAVE/* "$sshargs":$dest/
 
     if [ $? -ne 0 ]; then
-        # probably rsync not installed on the other end
+        # probably rsync not installed on the other end will scp a tgz instead
         cd $AMIGRAVE
-        tmpfile=/tmp/agr.tgz
+        tmpfile=`mktemp`
         rm -f $tmpfile
-        tar \
-            --exclude='avatars/*' \
-            --exclude='config/bazaar/plugins/*' \
-            --exclude='config/vim/bundle/syntastic/*' \
-            --exclude='config/vim/bundle/jedi-vim/*' \
-            --exclude='config/vim/bundle/*/doc/*' \
-            --exclude='config/vim/bundle/*/*.gif' \
-            --exclude='*.pyc' \
-            --exclude='.git' \
-            -zcvf $tmpfile .
-        scp $tmpfile "$sshargs":/tmp/
-        ssh "$sshargs" "mkdir -p ~/.agr; cd ~/.agr; mv /tmp/agr.tgz .; tar -xf agr.tgz"
+        tar $EXCLUDES -zcvf $tmpfile .
+        scp $tmpfile "$sshargs":/tmp/agr.tgz
+        rm $tmpfile
+        ssh "$sshargs" "mkdir -p ~/$dest; cd ~/$dest; mv /tmp/agr.tgz .; tar -xf agr.tgz"
     fi
+}
+
+function connect() {
+    echo "$sshargs" -t "~/$dest/start.sh"
+    ssh "$sshargs" -t "~/$dest/start.sh"
 }
 
 if [ $update = 1 ]; then
     upload_config
 fi
 
-ssh "$sshargs" -t "~/.agr/start.sh"
+connect
 
-if [ $? -ne 0 ]; then
+if [ $? -eq  127 ]; then
     upload_config
-    ssh "$sshargs" -t "~/.agr/start.sh"
+    connect
 fi
