@@ -1,5 +1,6 @@
 *.pyc
 config/bazaar/plugins/*
+config/htop/*
 config/httpie/sessions
 config/ipython/profile_default/history.sqlite
 config/ipython/profile_default/security/
