@@ -47,10 +47,11 @@ if [[ $sshargs == '' ]]; then
 fi
 
 function upload_config() {
-    rsync $EXCLUDES -avz $AMIGRAVE/* "$sshargs":$dest/
+    rsync -avzC $EXCLUDES $AMIGRAVE/* "$sshargs":$dest/
 
     if [ $? -ne 0 ]; then
-        # probably rsync not installed on the other end will scp a tgz instead
+        echo "Could not RSYNC to the remote host (is rsync installed on the remote host?)"
+        echo "Will upload a tarball instead..."
         cd $AMIGRAVE
         tmpfile=`mktemp`
         rm -f $tmpfile
@@ -62,7 +63,6 @@ function upload_config() {
 }
 
 function connect() {
-    echo "$sshargs" -t "~/$dest/start.sh"
     ssh "$sshargs" -t "~/$dest/start.sh"
 }
 
