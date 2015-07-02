@@ -27,7 +27,7 @@ command -v greadlink > /dev/null && readlink=greadlink  # OSX
 current_file=`$readlink -f $current_script`
 current_dir=$( cd "$( dirname "$current_file" )" && pwd )
 export AMIGRAVE=$current_dir
-export DOTFILES=$AMIGRAVE/config
+export DOTFILES=$AMIGRAVE/config/.xdg
 
 function safe_link() {
     if [ -f $1 ]; then

@@ -1,0 +1,1 @@
+../../../bazaar/plugins/getplugins.sh

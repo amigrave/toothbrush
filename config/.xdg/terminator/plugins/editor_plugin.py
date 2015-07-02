@@ -1,0 +1,1 @@
+../../../terminator/plugins/editor_plugin.py

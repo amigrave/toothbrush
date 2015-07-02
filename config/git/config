@@ -54,7 +54,7 @@
     cp = cherry-pick
     st = status --short --branch --
     ls = ls-files
-    li = ls-files --other --ignored --exclude-standard # List ignored files
+    lsi = ls-files --other --ignored --exclude-standard # List ignored files
     lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"
     dd = difftool --dir-diff -t meld
     vdd = difftool --dir-diff -t vim-dirdiff

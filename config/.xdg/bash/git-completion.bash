@@ -1,0 +1,1 @@
+../../bash/git-completion.bash

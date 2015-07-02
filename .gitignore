@@ -1,14 +1,2 @@
 *.pyc
-config/bazaar/plugins/*
-config/htop/*
-config/httpie/sessions
-config/ipython/profile_default/history.sqlite
-config/ipython/profile_default/security/
-config/ipython/profile_default/startup/README
-config/ipython/README
-config/lftp/cwd_history
-config/lftp/rl_history
-config/mc/panels.ini
-config/pudb/saved-breakpoints*
-config/vim/bundle
-config/zsh/.zcompdump
+config/.xdg/*

@@ -1,0 +1,1 @@
+../../python/shell_startup.py
