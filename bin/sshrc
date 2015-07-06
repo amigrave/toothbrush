@@ -16,7 +16,7 @@ function usage {
         echo $1
         echo
     fi
-    echo "Usage: `basename $0` [-b 'use bash even if zsh is available'] [-u 'update config'] [-d 'delete config on logout'" 1>&2; exit 1;
+    echo "Usage: `basename $0` [-b 'force bash'] [-u 'update config'] [-d 'delete config on logout']" 1>&2; exit 1;
     exit
 }
 
@@ -47,19 +47,13 @@ if [[ $sshargs == '' ]]; then
 fi
 
 function upload_config() {
-    rsync -avzC $EXCLUDES $AMIGRAVE/* "$sshargs":$dest/
-
-    if [ $? -ne 0 ]; then
-        echo "Could not RSYNC to the remote host (is rsync installed on the remote host?)"
-        echo "Will upload a tarball instead..."
-        cd $AMIGRAVE
-        tmpfile=`mktemp`
-        rm -f $tmpfile
-        tar $EXCLUDES -zcvf $tmpfile .
-        scp $tmpfile "$sshargs":/tmp/agr.tgz
-        rm $tmpfile
-        ssh "$sshargs" "mkdir -p ~/$dest; cd ~/$dest; mv /tmp/agr.tgz .; tar -xf agr.tgz"
-    fi
+    cd $AMIGRAVE
+    tmpfile=$(mktemp).tgz
+    git archive -o $tmpfile master
+    # tar $EXCLUDES -zcvf $tmpfile .
+    scp $tmpfile "$sshargs":/tmp/agr.tgz
+    rm $tmpfile
+    ssh "$sshargs" "mkdir -p ~/$dest; cd ~/$dest; mv /tmp/agr.tgz .; tar -xf agr.tgz; rm agr.tgz"
 }
 
 function connect() {
