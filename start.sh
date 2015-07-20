@@ -55,7 +55,7 @@ shift $((OPTIND-1))
 
 if [[ "$0" == "$current_script" ]]; then
     # start.sh called explicitely
-    if [[ -x "$(command -v zsh)" && $(zsh --version | awk '{print $2}') > 5.0.0 && $use_bash != 1 ]]; then
+    if [[ -x "$(command -v zsh)" && $(zsh --version | awk '{print $2}') > 4.3.0 && $use_bash != 1 ]]; then
         ZDOTDIR=$DOTFILES/zsh zsh
     else
         bash --rcfile $DOTFILES/bash/bashrc -i
