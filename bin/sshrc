@@ -40,7 +40,8 @@ function upload_config() {
     cd $AMIGRAVE
     tmpfile=$(mktemp --suffix='-agr-config.tar')
     branch=master
-    if [ $1 = 'update' ]; then
+    git diff --exit-code --quiet
+    if [[ $1 = 'update' && $? != 0 ]]; then
         # make a stash in order to get unstaged changes
         # can be garbage collected with git gc --prune=now if needed
         branch=$(git stash create)
