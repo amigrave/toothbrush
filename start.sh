@@ -41,13 +41,13 @@ install=0
 while getopts "bi" o; do
     case "${o}" in
         b) use_bash=1 ;;
-        i) 
+        i)
             safe_link ~/.profile
             safe_link ~/.bashrc
             safe_link ~/.zshrc
             ;;
         *)
-            echo "Usage: $0 [-b 'use bash even if zsh is available'] [-i 'install']" 1>&2; exit 1;
+            echo "Usage: $0 [-b 'force bash'] [-i 'install']" 1>&2; exit 1;
             ;;
     esac
 done
