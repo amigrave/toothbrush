@@ -8,8 +8,8 @@ fi
 
 update=0
 use_bash=0
-delete_on_logout=0
-dest=".agr"
+on_logout=""
+dest="~/.agr"
 
 function usage {
     if [[ $1 != '' ]]; then
@@ -24,7 +24,7 @@ while getopts "bud" o; do
     case "${o}" in
         b) use_bash=1; echo "TODO" ;;  # if switch forwarded to remote start.sh, maybe setup some kind of persistance
         u) update=1 ;;
-        d) delete_on_logout=1; echo "TODO" ;;
+        d) on_logout="rm -rf $dest;" ;;
         *) usage ;;
     esac
 done
@@ -58,11 +58,11 @@ function upload_config() {
 
     scp -C $tmpfile "$sshargs":/tmp/agr.tgz
     rm $tmpfile
-    ssh "$sshargs" "mkdir -p ~/$dest; cd ~/$dest; mv /tmp/agr.tgz .; tar -xf agr.tgz; rm agr.tgz"
+    ssh "$sshargs" "mkdir -p $dest; cd $dest; mv /tmp/agr.tgz .; tar -xf agr.tgz; rm agr.tgz"
 }
 
 function connect() {
-    ssh "$sshargs" -t "~/$dest/start.sh"
+    ssh "$sshargs" -t "$dest/start.sh; $on_logout"
 }
 
 if [ $update = 1 ]; then
