@@ -3,6 +3,13 @@ import os, commands
 from os import system
 import curses
 
+# TODO: Really refactor all those installation memo fragmented everywhere and
+#       make an ansible or fabric script out of this.
+# Debian QTile
+# git clone https://github.com/qtile/qtile.git ~/.local/qtile
+# sudo apt-get install python-dev libffi-dev python-pip python-trollius python-cairocffi libpangocairo-1.0-0 sudo apt-get install libxcb-render0-dev
+# pip install --user xcffib
+
 """
 # vim: set ft=dosini: set nonu
 [core]

@@ -65,15 +65,3 @@ elif [[ "$0" == ".profile" ]]; then
 else
     source $DOTFILES/$rcfile
 fi
-
-# Should be portable as much as possible, so get rid of this
-# ln -s config/mc/skins  $HOME/.local/share/mc/skins/
-
-# Debian QTile
-# git clone https://github.com/qtile/qtile.git ~/.local/qtile
-# sudo apt-get install python-dev libffi-dev python-pip python-trollius python-cairocffi libpangocairo-1.0-0 sudo apt-get install libxcb-render0-dev
-# pip install --user xcffib
-
-
-# Odoo
-# sudo apt-get install postgresql
