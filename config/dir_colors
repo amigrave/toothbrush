@@ -1,7 +1,3 @@
-# /etc/DIR_COLORS $HOME/.dir_colors
-
-#COLOR {tty|all|none}
-COLOR tty
 #OPTIONS -F show '/', -T 0 don't trust tab
 OPTIONS -F -T 0
 EIGHTBIT 1
