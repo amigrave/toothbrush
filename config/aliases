@@ -25,7 +25,7 @@ alias dk='sudo docker'
 alias dkb='sudo docker build --force-rm=true --no-cache=true'
 
 alias tm="tmux attach || tmux"
-alias s='screen -RdU'
+alias s='screen -rx || screen -RdU'
 alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
 alias mpi="mp3info -x -F -r a"
 alias adlib='adplay -r -b 8192'
