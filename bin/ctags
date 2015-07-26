@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# temporary solution until XDG_CONFIG_HOME is supported in ctags
+# TODO: watch https://github.com/universal-ctags/ctags/issues/89
+
+orig=$(which -a ctags | tail -n1)
+current_script=${BASH_SOURCE[0]}
+
+if [[ $current_script == $orig ]]; then
+    echo "ctags was not found in \$PATH"
+    exit 1
+else
+    $orig --config=$XDG_CONFIG_HOME/ctags/ctagsrc $@
+fi
