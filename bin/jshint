@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# temporary solution until XDG_CONFIG_HOME is supported in jshint
+# TODO: make a PR for https://github.com/jshint/jshint/issues/2274
+
+orig=$(which -a jshint | tail -n1)
+current_script=${BASH_SOURCE[0]}
+
+if [[ $current_script == $orig ]]; then
+    echo "jshint was not found in \$PATH"
+    exit 1
+else
+    $orig --config $XDG_CONFIG_HOME/jshint/jshintrc $@
+fi
