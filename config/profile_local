@@ -1,5 +1,5 @@
 # vim: ft=sh:fdm=marker:
-# Place this in ~/.config for a local profile
+# Place this in ~/.config/ or ~/.agr/config/.xdg/ for a local profile
 
 export PYTHONPATH=$AMIGRAVE:$PYTHONPATH
 

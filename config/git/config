@@ -41,7 +41,7 @@
     # defaultToUpstream = true
 
 [include]
-    path = ~/.config/git/config.local
+    path = ~/.agr/config/.xdg/git/config.local
 
 [alias]
     s = status

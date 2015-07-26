@@ -64,6 +64,6 @@
 \set def '\\prompt \'Name of function: \' fname \\; CREATE OR REPLACE FUNCTION :fname(name text DEFAULT \'\') RETURNS text LANGUAGE plpythonu AS $function$\n\n_name = name or "Anonymous"\nreturn "Hello %s" % _name\n\n$function$; '
 
 \echo '\t:menu\t\t-- Show this Menu'
-\set menu '\\i ~/.config/psqlrc'
+\set menu '\\i ~/.agr/config/.xdg/psqlrc'
 
 -- vim:ft=plsql:

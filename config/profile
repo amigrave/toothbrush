@@ -80,7 +80,10 @@ fi
 # }}}
 
 # Load local profile {{{
-if [ -f "~/.config/profile_local" ]; then
+if [ -f "$XDG_CONFIG_HOME/profile_local" ]; then
+    # should point to ~/.agr/config/.xdg/profile_local
+    . $XDG_CONFIG_HOME/profile_local
+elif [ -f "~/.config/profile_local" ]; then
     . ~/.config/profile_local
 fi
 # }}}
