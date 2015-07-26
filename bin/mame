@@ -1,0 +1,14 @@
+#!/bin/bash
+
+orig=$(which -a mame | tail -n1)
+current_script=${BASH_SOURCE[0]}
+
+if [[ $current_script == $orig ]]; then
+    echo "mame was not found in \$PATH"
+    exit 1
+else
+    path=$XDG_CONFIG_HOME/mame
+    cd $path
+    $orig $@
+    cd -
+fi

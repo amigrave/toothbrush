@@ -1,0 +1,14 @@
+#!/bin/bash
+
+orig=$(which -a mess | tail -n1)
+current_script=${BASH_SOURCE[0]}
+
+if [[ $current_script == $orig ]]; then
+    echo "mess was not found in \$PATH"
+    exit 1
+else
+    path=$XDG_CONFIG_HOME/mess
+    cd $path
+    $orig $@
+    cd -
+fi
