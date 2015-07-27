@@ -97,6 +97,7 @@ eval `dircolors -b $DOTFILES/dir_colors `
 # }}}
 
 # Set up terminal emulation {{{
+export TERMINFO=$XDG_CONFIG_HOME/terminfo
 if [[ "$COLORTERM" == "rxvt-xpm" ]]; then
     export TERM="rxvt-256color"
 elif [[ "$COLORTERM" == "gnome-terminal" ]]; then
