@@ -121,10 +121,11 @@ fi
 # OS dependencies {{{
 if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
+    # TODO: do it only once under X session and not in remote session
     # Use xbindkeys if installed
-    if [ -x "$(command -v xbindkeys)" ]; then
-        xbindkeys -f $DOTFILES/xbindkeysrc
-    fi
+    # if [ -x "$(command -v xbindkeys)" ]; then
+    #     xbindkeys -f $DOTFILES/xbindkeysrc
+    # fi
 
     # make less more friendly for non-text input files, see lesspipe(1)
     [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
