@@ -15,70 +15,72 @@ let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable
 " #################################### VUNDLE ################################### {{{
 set nocompatible        " do not use vi compatible mode
 filetype off
-" set the runtime path to include Vundle and initialize
-call vundle#begin(expand('<sfile>:p:h') . '/bundle')
+if v:version > 701
+    " set the runtime path to include Vundle and initialize
+    call vundle#begin(expand('<sfile>:p:h') . '/bundle')
 
-" Navigation
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'dbakker/vim-projectroot'  " Brings function to cd to the current repository root
-Plugin 'majutsushi/tagbar'
-Plugin 'moll/vim-bbye'  " provides :Bdelete
+    " Navigation
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'kien/ctrlp.vim'
+    Plugin 'dbakker/vim-projectroot'  " Brings function to cd to the current repository root
+    Plugin 'majutsushi/tagbar'
+    Plugin 'moll/vim-bbye'  " provides :Bdelete
 
-" Look
-Plugin 'bling/vim-airline'
+    " Look
+    Plugin 'bling/vim-airline'
 
-" Edition
-Plugin 'ervandew/supertab'
-" Plugin 'garbas/vim-snipmate'
-" Plugin 'honza/vim-snippets'
-" Plugin 'tpope/vim-surround'
-" Plugin 'mattn/emmet-vim'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'godlygeek/tabular'
-Plugin 'terryma/vim-expand-region'
-Plugin 'bps/vim-textobj-python'  " Python function and class text objects
+    " Edition
+    Plugin 'ervandew/supertab'
+    " Plugin 'garbas/vim-snipmate'
+    " Plugin 'honza/vim-snippets'
+    " Plugin 'tpope/vim-surround'
+    " Plugin 'mattn/emmet-vim'
+    Plugin 'tomtom/tcomment_vim'
+    Plugin 'godlygeek/tabular'
+    Plugin 'terryma/vim-expand-region'
+    Plugin 'bps/vim-textobj-python'  " Python function and class text objects
 
-" Languages
-Plugin 'scrooloose/syntastic'
-Plugin 'OrgaChem/JavaScript-syntax'
-Plugin 'vim-scripts/ASPJScript'
-Plugin 'dmitry-ilyashevich/vim-typescript'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'groenewege/vim-less'
-Plugin 'sukima/xmledit'
-Plugin 'stephpy/vim-yaml'  " Simplify yaml syntax for faster processing
-Plugin 'rainux/vim-vala'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'elzr/vim-json'
-Plugin 'wavded/vim-stylus'
-Plugin 'plasticboy/vim-markdown'
+    " Languages
+    Plugin 'scrooloose/syntastic'
+    Plugin 'OrgaChem/JavaScript-syntax'
+    Plugin 'vim-scripts/ASPJScript'
+    Plugin 'dmitry-ilyashevich/vim-typescript'
+    Plugin 'kchmck/vim-coffee-script'
+    Plugin 'groenewege/vim-less'
+    Plugin 'sukima/xmledit'
+    Plugin 'stephpy/vim-yaml'  " Simplify yaml syntax for faster processing
+    Plugin 'rainux/vim-vala'
+    Plugin 'davidhalter/jedi-vim'
+    Plugin 'elzr/vim-json'
+    Plugin 'wavded/vim-stylus'
+    Plugin 'plasticboy/vim-markdown'
 
-" Templating and special filetypes
-Plugin 'Glench/Vim-Jinja2-Syntax'
-" Plugin https://github.com/mitsuhiko/vim-jinja from Armin Ronacher (outdated?)
-Plugin 'sophacles/vim-bundle-mako'
-Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'ekalinin/Dockerfile.vim'
+    " Templating and special filetypes
+    Plugin 'Glench/Vim-Jinja2-Syntax'
+    " Plugin https://github.com/mitsuhiko/vim-jinja from Armin Ronacher (outdated?)
+    Plugin 'sophacles/vim-bundle-mako'
+    Plugin 'evanmiller/nginx-vim-syntax'
+    Plugin 'ekalinin/Dockerfile.vim'
 
-" Misc Tools
-Plugin 'tpope/vim-fugitive'
-Plugin 'will133/vim-dirdiff'
-Plugin 'AndrewRadev/linediff.vim'
-" Plugin 'mattn/gist-vim'
-Plugin 'marzocchi/vim-color-picker-osx'
-Plugin 'rking/ag.vim'
-Plugin 'embear/vim-localvimrc'
-Plugin 'haya14busa/vim-asterisk'
+    " Misc Tools
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'will133/vim-dirdiff'
+    Plugin 'AndrewRadev/linediff.vim'
+    " Plugin 'mattn/gist-vim'
+    Plugin 'marzocchi/vim-color-picker-osx'
+    Plugin 'rking/ag.vim'
+    Plugin 'embear/vim-localvimrc'
+    Plugin 'haya14busa/vim-asterisk'
 
-" Libs
-Plugin 'kana/vim-textobj-user'     " used by vim-textobj-python
-" Plugin 'tomtom/tlib_vim'
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'mattn/webapi-vim' " used by gist-vim
+    " Libs
+    Plugin 'kana/vim-textobj-user'     " used by vim-textobj-python
+    " Plugin 'tomtom/tlib_vim'
+    " Plugin 'MarcWeber/vim-addon-mw-utils'
+    " Plugin 'mattn/webapi-vim' " used by gist-vim
 
-call vundle#end()
-filetype plugin indent on
+    call vundle#end()
+    filetype plugin indent on
+endif
 "}}}
 
 " ################################### OPTIONS ################################### {{{
