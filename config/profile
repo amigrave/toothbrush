@@ -49,6 +49,7 @@ export PYTHONSTARTUP=$DOTFILES/python/shell_startup.py
 export ZDOTDIR=$DOTFILES/zsh
 export MPLAYER_HOME=$DOTFILES/mplayer
 export MPV_HOME=$DOTFILES/mpv
+export CMUS_HOME=$DOTFILES/cmus
 export IPYTHONDIR=$DOTFILES/ipython
 export INPUTRC=$DOTFILES/inputrc
 export SCREENRC=$DOTFILES/screenrc

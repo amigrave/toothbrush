@@ -1,0 +1,3 @@
+bind -f browser left browser-up
+bind -f browser right win-activate
+bind -f common q quit
