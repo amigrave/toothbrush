@@ -9,7 +9,7 @@ fi
 update=0
 start_opts=""
 on_logout=""
-dest="~/.agr"
+dest=${SSHRC_LOCATION:-$(basename $AMIGRAVE)}
 
 function usage {
     if [[ $1 != '' ]]; then
@@ -72,6 +72,12 @@ fi
 connect
 
 if [ $? -eq  127 ]; then
-    upload_config
-    connect
+    read -p "Upload configuration on remote server in '$dest' ? [y/N]" prompt
+    if [[ $prompt =~ [yY](es)* ]]; then
+        upload_config
+        connect
+    else
+        echo "User aborted."
+        exit 1
+    fi
 fi
