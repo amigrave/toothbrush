@@ -41,7 +41,8 @@ alias l="LC_ALL=C ls -lAh | less -r -E -X"
 alias ll=l
 # }}}
 
-# Misc utils {{{
+# Misc {{{
+alias profile="e $XDG_CONFIG_HOME/profile_local"
 alias please='sudo -E $(fc -ln -1)'
 alias src='source-highlight --out-format=esc -o STDOUT'
 alias C='LANG=C'

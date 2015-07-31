@@ -1,7 +1,15 @@
 # vim: ft=sh:fdm=marker:
-# Place this in ~/.config/ or ~/.agr/config/.xdg/ for a local profile
+
+# LOCAL PROFILE
+###############
 
 export PYTHONPATH=$AMIGRAVE:$PYTHONPATH
+# export SSHRC_LOCATION="~/custom_location"
+
+if [ "$ZSH_VERSION" != "" ]; then
+    # Zsh specific
+    hash -d ~agr=$AMIGRAVE
+fi
 
 
 if [[ -n "$DISPLAY" && -z "$AGRLOCAL" ]]; then

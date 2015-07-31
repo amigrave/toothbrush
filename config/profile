@@ -80,12 +80,9 @@ if [ -d "/usr/local/Cellar/coreutils" ]; then
 fi
 # }}}
 
-# Load local profile {{{
+# Load local profile if any {{{
 if [ -f "$XDG_CONFIG_HOME/profile_local" ]; then
-    # should point to ~/.agr/config/.xdg/profile_local
     . $XDG_CONFIG_HOME/profile_local
-elif [ -f "~/.config/profile_local" ]; then
-    . ~/.config/profile_local
 fi
 # }}}
 
