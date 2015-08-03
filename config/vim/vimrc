@@ -31,8 +31,9 @@ if v:version > 701
 
     " Edition
     Plugin 'ervandew/supertab'
-    " Plugin 'garbas/vim-snipmate'
-    " Plugin 'honza/vim-snippets'
+    Plugin 'garbas/vim-snipmate'
+    Plugin 'honza/vim-snippets'
+    Plugin 'bonsaiben/bootstrap-snippets'
     " Plugin 'tpope/vim-surround'
     " Plugin 'mattn/emmet-vim'
     Plugin 'tomtom/tcomment_vim'
@@ -73,9 +74,9 @@ if v:version > 701
     Plugin 'haya14busa/vim-asterisk'
 
     " Libs
-    Plugin 'kana/vim-textobj-user'     " used by vim-textobj-python
-    " Plugin 'tomtom/tlib_vim'
-    " Plugin 'MarcWeber/vim-addon-mw-utils'
+    Plugin 'kana/vim-textobj-user'         " required by vim-textobj-python
+    Plugin 'tomtom/tlib_vim'               " required by snipmate
+    Plugin 'MarcWeber/vim-addon-mw-utils'  " required by snipmate
     " Plugin 'mattn/webapi-vim' " used by gist-vim
 
     call vundle#end()
@@ -543,6 +544,7 @@ let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-agr'
 let g:snipMate.scope_aliases['xml'] = 'xml,xml-agr,html'
 let g:snipMate.scope_aliases['_'] = '_,_-agr'
 let g:snipMate.scope_aliases['python'] = 'python,python-agr'
+let g:snipMate.scope_aliases['jinja'] = 'jinja,html'
 
 " CtrlP
 let g:ctrlp_max_files = 0
