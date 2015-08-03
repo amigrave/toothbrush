@@ -32,6 +32,7 @@ if v:version > 701
     " Edition
     Plugin 'ervandew/supertab'
     Plugin 'garbas/vim-snipmate'
+    " Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
     Plugin 'bonsaiben/bootstrap-snippets'
     " Plugin 'tpope/vim-surround'
@@ -543,6 +544,14 @@ let g:snipMate.scope_aliases['xml'] = 'xml,xml-agr,html'
 let g:snipMate.scope_aliases['_'] = '_,_-agr'
 let g:snipMate.scope_aliases['python'] = 'python,python-agr'
 let g:snipMate.scope_aliases['jinja'] = 'jinja,html'
+
+" Ultisnip
+" let g:UltiSnipsExpandTrigger="<tab>"  " Do not use <tab> if you use YouCompleteMe
+" let g:UltiSnipsListSnippets="<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsEditSplit="vertical"  " If you want :UltiSnipsEdit to split your window.
+
 
 " CtrlP
 let g:ctrlp_max_files = 0
