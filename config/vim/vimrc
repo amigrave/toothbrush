@@ -50,6 +50,7 @@ if v:version > 701
     Plugin 'kchmck/vim-coffee-script'
     Plugin 'groenewege/vim-less'
     Plugin 'sukima/xmledit'
+    Plugin 'actionshrimp/vim-xpath'
     Plugin 'stephpy/vim-yaml'  " Simplify yaml syntax for faster processing
     Plugin 'rainux/vim-vala'
     Plugin 'davidhalter/jedi-vim'
