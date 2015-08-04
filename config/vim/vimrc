@@ -230,10 +230,9 @@ if has("autocmd")
     au BufRead *.txt,*.rst setlocal tw=78 colorcolumn=79
     au BufRead,BufNewFile *.xml,*.xsl  setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2 synmaxcol=300
     au BufRead,BufNewFile *.yml,*.yaml setlocal sw=4
-    au BufRead,BufNewFile *.php,*.php3 setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.php,*.php3 setlocal ft=php.html foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.rb setlocal fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.aspx setlocal syntax=cs
-    au BufRead,BufNewFile *.mako setlocal ft=html
     au BufRead,BufNewFile *.asp setlocal ft=javascript
     au BufRead,BufNewFile *.coffee setlocal fdm=indent
     au BufRead,BufNewFile .vimrc setlocal fdm=marker
@@ -545,6 +544,7 @@ let g:snipMate.scope_aliases['xml'] = 'xml,xml-agr,html'
 let g:snipMate.scope_aliases['_'] = '_,_-agr'
 let g:snipMate.scope_aliases['python'] = 'python,python-agr'
 let g:snipMate.scope_aliases['jinja'] = 'jinja,html'
+let g:snipMate.scope_aliases['mako'] = 'mako,html'
 
 " Ultisnip
 " let g:UltiSnipsExpandTrigger="<tab>"  " Do not use <tab> if you use YouCompleteMe
