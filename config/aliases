@@ -43,6 +43,7 @@ alias ll=l
 
 # Misc {{{
 alias profile="e $XDG_CONFIG_HOME/profile_local"
+alias root='sudo -E'
 alias please='sudo -E $(fc -ln -1)'
 alias src='source-highlight --out-format=esc -o STDOUT'
 alias C='LANG=C'
