@@ -44,7 +44,10 @@ if v:version > 701
 
     " Languages
     Plugin 'scrooloose/syntastic'
-    Plugin 'OrgaChem/JavaScript-syntax'
+    " Plugin 'OrgaChem/JavaScript-syntax'  " this one is fast, will probably go back
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'mxw/vim-jsx'
+
     Plugin 'vim-scripts/ASPJScript'
     Plugin 'dmitry-ilyashevich/vim-typescript'
     Plugin 'kchmck/vim-coffee-script'
@@ -246,6 +249,8 @@ if has("autocmd")
     "     \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
     " au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
 
+    au FileType javascript set foldmethod=syntax
+
     " Disable syntax hightlighting for big files
     au Filetype xml if getfsize(@%) > 1000000 | setlocal syntax=off | endif
 
@@ -271,11 +276,11 @@ if has("autocmd")
     let php_sync_method=0
     let php_folding=1
     let php_asp_tags = 1
-    let g:xml_syntax_folding=1
+    " Temporary disable because it conflicts with 'pangloss/vim-javascript'
+    " let g:xml_syntax_folding=1
     let python_highlight_all = 1
     let coffee_folding = 1
-    " let g:javaScript_fold = 1
-    " let g:javascript_fold = 1
+
 endif
 "}}}
 
