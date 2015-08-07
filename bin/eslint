@@ -1,0 +1,11 @@
+#!/bin/bash
+
+orig=$(which -a eslint | tail -n1)
+current_script=${BASH_SOURCE[0]}
+
+if [[ $current_script == $orig ]]; then
+    echo "eslint was not found in \$PATH"
+    exit 1
+else
+    $orig --config $XDG_CONFIG_HOME/eslint/eslintrc $@
+fi
