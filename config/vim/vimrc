@@ -35,6 +35,7 @@ if v:version > 701
     " Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
     Plugin 'bonsaiben/bootstrap-snippets'
+    Plugin 'amigrave/vim-react-snippets'  " waiting pull request on justinj/vim-react-snippets
     " Plugin 'tpope/vim-surround'
     Plugin 'mattn/emmet-vim'  " (used to be Zen coding)
     Plugin 'tomtom/tcomment_vim'
