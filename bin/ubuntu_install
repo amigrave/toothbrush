@@ -42,7 +42,7 @@ libsdl-net1.2-dev libsdl-sound1.2-dev libsdl-ttf2.0-dev libgconf2-dev libao-dev 
 
 [dev-web]
 sudo apt-get install apache2.2-bin libapache2-mod-dnssd gmysqlcc
-sudo -E npm install -g jshint react-tools eslint babel-eslint eslint-plugin-react
+sudo -E npm install -g jshint react-tools eslint eslint-plugin-react js-yaml
 
 [openerp]
 sudo apt-get install postgresql python-keyring-gnome fabric rst2pdf python-wordaxe bzr bzr-gtk bzr-rewrite qbzr python-mako python-cherrypy3 \
