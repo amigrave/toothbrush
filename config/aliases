@@ -43,7 +43,6 @@ alias ll=l
 # }}}
 
 # Misc {{{
-alias profile="e $XDG_CONFIG_HOME/profile_local"
 alias root='sudo -E'
 alias please='sudo -E $(fc -ln -1)'
 alias src='source-highlight --out-format=esc -o STDOUT'
@@ -176,6 +175,23 @@ function vless() {
             cat "$@"
         fi
     fi
+}
+
+function profile() {
+    local_profile=$XDG_CONFIG_HOME/profile_local
+
+    if [ ! -f $local_profile ]; then
+        printf '%s ' "No '$local_profile' found. Create a new one from a template ? [y/N]"
+        read answer
+        if [[ $answer =~ [yY](es)* ]]; then
+            cp $AMIGRAVE/config/profile_local $local_profile
+        else
+            echo "User aborted."
+            return
+        fi
+    fi
+
+    $EDITOR $local_profile
 }
 
 function ccat() {
