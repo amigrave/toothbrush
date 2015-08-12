@@ -72,8 +72,9 @@ fi
 connect
 
 if [ $? -eq  127 ]; then
-    read -p "Upload configuration on remote server in '$dest' ? [y/N]" prompt
-    if [[ $prompt =~ [yY](es)* ]]; then
+    printf '%s ' "Upload configuration on remote server in '$dest' ? [y/N]"
+    read answer
+    if [[ $answer =~ [yY](es)* ]]; then
         upload_config
         connect
     else
