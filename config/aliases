@@ -16,6 +16,7 @@ alias ack="ack --pager=less --color-match=red"
 alias cdiff='cdiff -s'
 alias cal='ncal -bM'
 alias pip='pip --log /dev/null'
+alias invoke='PYTHONDONTWRITEBYTECODE=1 invoke'
 # }}}
 
 # Application shortcuts {{{
