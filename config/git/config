@@ -75,10 +75,10 @@
     force-ignore = update-index --assume-unchanged  # eg: when added to .git/info/exclude but was changed before
     undo-ignore = update-index --no-assume-unchanged
 
-    ll      = !git log --color=always --date=relative --pretty=hist
+    ll      = log --color=always --date=relative --pretty=hist
     l       = !git --no-pager ll -20
 
-    hlog    = !git log --color=always --date=relative --pretty=hist
+    hlog    = log --color=always --date=relative --pretty=hist
     ghist   = !git hlog -g --pretty=ghist
 
     hist    = !git hlog --graph --date-order
