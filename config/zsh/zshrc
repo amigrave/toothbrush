@@ -103,6 +103,7 @@ source $DOTFILES/zsh/opp.zsh
 
 # Location aliases {{{
 hash -d dpkg=/var/lib/dpkg/info
+hash -d node=/usr/local/lib/node_modules
 # }}}
 
 # Zsh aliases {{{

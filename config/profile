@@ -68,9 +68,14 @@ export BZR_LOG=/dev/null
 # }}}
 
 # Node {{{
-if [ -d "/usr/local/lib/node_modules" ]; then
-    NODE_PATH="/usr/local/lib/node_modules"
+NODE_PATH=''
+if [ -d "/usr/lib/node_modules" ]; then
+    NODE_PATH=/usr/lib/node_modules
 fi
+if [ -d "/usr/local/lib/node_modules" ]; then
+    NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+fi
+export NODE_PATH
 # }}}
 
 # Homebrew {{{
