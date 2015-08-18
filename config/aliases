@@ -11,7 +11,7 @@ alias flake8="flake8 --config=$DOTFILES/flake8"
 # Application shadowers {{{
 alias vim='vim -p '
 alias qmv='qmv --format=destination-only'
-alias ag="ag --page=less"
+alias ag="ag --page=less --ignore=node_modules"
 alias ack="ack --pager=less --color-match=red"
 alias cdiff='cdiff -s'
 alias cal='ncal -bM'
