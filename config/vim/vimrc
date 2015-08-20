@@ -31,7 +31,7 @@ if v:version > 701
 
     " Edition
     Plugin 'ervandew/supertab'
-    Plugin 'garbas/vim-snipmate'
+    " Plugin 'garbas/vim-snipmate'
     " Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
     Plugin 'bonsaiben/bootstrap-snippets'
@@ -81,8 +81,8 @@ if v:version > 701
 
     " Libs
     Plugin 'kana/vim-textobj-user'         " required by vim-textobj-python
-    Plugin 'tomtom/tlib_vim'               " required by snipmate
-    Plugin 'MarcWeber/vim-addon-mw-utils'  " required by snipmate
+    " Plugin 'tomtom/tlib_vim'               " required by snipmate
+    " Plugin 'MarcWeber/vim-addon-mw-utils'  " required by snipmate
     " Plugin 'mattn/webapi-vim' " used by gist-vim
 
     call vundle#end()
