@@ -42,6 +42,7 @@ if v:version > 701
     Plugin 'godlygeek/tabular'
     Plugin 'terryma/vim-expand-region'
     Plugin 'bps/vim-textobj-python'  " Python function and class text objects
+    Plugin 'ciaranm/detectindent'
 
     " Languages
     Plugin 'scrooloose/syntastic'
