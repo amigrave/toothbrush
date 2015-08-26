@@ -52,6 +52,7 @@ function upload_config() {
     tar -u --file=$tmpfile config/.xdg/vim \
         --exclude='config/.xdg/vim/bundle/syntastic/*' \
         --exclude='config/.xdg/vim/bundle/jedi-vim/*' \
+        --exclude='config/.xdg/vim/bundle/tern_for_vim/*' \
         --exclude='config/.xdg/vim/bundle/*/doc/*' \
         --exclude='config/.xdg/vim/bundle/*/*.gif' \
         --exclude='.git'
