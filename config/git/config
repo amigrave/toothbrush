@@ -95,6 +95,17 @@
     hhstats = !git hh --shortstat --dirstat=changes,10
     hhhstats= !git hhh--shortstat --dirstat=changes,10
 
+    fix-history = "! \
+        export NAME=\"Fabien Meghazi\"; \
+        export EMAIL=\"agr@amigrave.com\"; \
+        git filter-branch -f --env-filter ' \
+            export GIT_AUTHOR_EMAIL=\"$EMAIL\"; \
+            export GIT_COMMITTER_EMAIL=\"$EMAIL\"; \
+            export GIT_AUTHOR_NAME=\"$NAME\"; \
+            export GIT_COMMITER_NAME=\"$NAME\"; \
+            export GIT_COMMITTER_DATE=\"$GIT_AUTHOR_DATE\"; \
+        '"
+
     remove-history = "! \
         files=$@ \
         git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch $files' HEAD \
