@@ -96,9 +96,9 @@
     hhhstats= !git hhh--shortstat --dirstat=changes,10
 
     fix-history = "! \
-        export NAME=\"$(whiptail --inputbox \"Author's name\" 10 60 3>&1 1>&2 2>&3)\"; \
+        export NAME=\"$(whiptail --nocancel --inputbox \"Author's name\" 10 60 3>&1 1>&2 2>&3)\"; \
         [ -z \"$NAME\" ] && exit; \
-        export EMAIL=\"$(whiptail --inputbox \"Author's email\" 10 60 3>&1 1>&2 2>&3)\"; \
+        export EMAIL=\"$(whiptail --nocancel --inputbox \"Author's email\" 10 60 3>&1 1>&2 2>&3)\"; \
         [ -z \"$EMAIL\" ] && exit; \
         git filter-branch -f --env-filter ' \
             export GIT_AUTHOR_EMAIL=\"$EMAIL\"; \
