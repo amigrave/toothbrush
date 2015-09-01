@@ -28,6 +28,10 @@ if p is None:
     sys.exit("Could not execute whiptail or dialog")
 newdate = p.communicate()[1].strip()
 
+if date.strip() == newdate.strip():
+    print("Nothing to do.")
+    sys.exit()
+
 gitcmd = ['git', 'filter-branch', '-f', '--env-filter', """
     if test $GIT_COMMIT = "{commit}"; then
         export GIT_COMMITTER_DATE="{newdate}";
