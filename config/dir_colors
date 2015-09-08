@@ -108,6 +108,7 @@ EXEC      01;31    # file with executable attribute set
 .asp  32
 .aspx 32
 .js   32
+.jsx  32
 .sh   32
 .cgi  32
 .fcgi 32
@@ -163,6 +164,9 @@ EXEC      01;31    # file with executable attribute set
 .html 01;37;42
 .htm  01;37;42
 .HTM  01;37;42
+.scss  01;37;43
+.sass  01;37;43
+.less  01;37;43
 .css  01;37;43
 .CSS  01;37;43
 *ME   33
