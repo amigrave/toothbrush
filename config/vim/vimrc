@@ -613,6 +613,9 @@ let g:jedi#popup_select_first = 0
 " Xmledit
 let g:xmledit_enable_html = 1
 
+" Go to parent node
+nmap <leader>xp vatatov
+
 " }}}
 
 " Xml QWeb {{{
