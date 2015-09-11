@@ -62,7 +62,7 @@ if v:version > 701
     Plugin 'marijnh/tern_for_vim'
     Plugin 'elzr/vim-json'
     Plugin 'wavded/vim-stylus'
-    Plugin 'plasticboy/vim-markdown'
+    Plugin 'tpope/vim-markdown'
 
     " Templating and special filetypes
     Plugin 'Glench/Vim-Jinja2-Syntax'
@@ -80,12 +80,14 @@ if v:version > 701
     Plugin 'rking/ag.vim'
     Plugin 'embear/vim-localvimrc'
     Plugin 'haya14busa/vim-asterisk'
+    Plugin 'xolox/vim-notes'
 
     " Libs
     Plugin 'kana/vim-textobj-user'         " required by vim-textobj-python
     " Plugin 'tomtom/tlib_vim'               " required by snipmate
     " Plugin 'MarcWeber/vim-addon-mw-utils'  " required by snipmate
     " Plugin 'mattn/webapi-vim' " used by gist-vim
+    Plugin 'xolox/vim-misc'                " required by vim-notes
 
     call vundle#end()
     filetype plugin indent on
@@ -460,6 +462,13 @@ let g:user_emmet_expandabbr_key = '<S-CR>'
 let g:user_emmet_settings = {
     \  'indentation' : '    '
 \}
+
+" vim-notes
+let g:notes_directories = ['~/Documents/Notes']
+nnoremap <leader>on :tabnew<CR>:Note<Space>
+
+" vim-markdown
+let g:markdown_fenced_languages = ['python', 'javascript', 'html', 'xml']
 
 imap <c-e> <c-o>:lnext<cr>
 nmap <c-e> :lnext<cr>
