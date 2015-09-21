@@ -99,7 +99,9 @@ source $DOTFILES/aliases
 eval `dircolors -b $DOTFILES/dir_colors `
 # }}}
 
-# UTILITY FUNCTIONS {{{
+# Functions {{{
+
+# vless: make vim behave like `less` {{{
 function vless() {
     # /usr/share/vim/vim74/macros/less.sh
     # Shell script to start Vim with less.vim.
@@ -127,7 +129,9 @@ function vless() {
         fi
     fi
 }
+# }}}
 
+# Edit local profile (creates one if not exist) {{{
 function profile() {
     local_profile=$XDG_CONFIG_HOME/profile_local
 
@@ -144,11 +148,15 @@ function profile() {
 
     $EDITOR $local_profile
 }
+# }}}
 
+# Colorized cat using pygmentize {{{
 function ccat() {
     pygmentize -g "$@" | less
 }
+# }}}
 
+# Launch mc and `cd` to last visited directory {{{
 function mc() {
     cwd_file=/tmp/mc-$USER-$$-dir
     env mc -c --printwd=$cwd_file "$@"
@@ -157,11 +165,15 @@ function mc() {
         rm -f "/tmp/mc-$USER-$$-dir"
     fi
 }
+# }}}
 
+# Launch mc and `sh` connect to a remote host {{{
 function sshmc() {
     mc ./ sh://$1
 }
+# }}}
 
+# Dump `ping` packets received on a given network interface {{{
 function check_pings() {
     if [ -z "$1" ]; then
         check_pings 'eth0'
@@ -170,7 +182,9 @@ function check_pings() {
         tcpdump -i $1 icmp and icmp[icmptype]=icmp-echo
     fi
 }
+# }}}
 
+# Check shellshock vulnerability {{{
 function shellshock() {
     if [ -z "$1" ]; then
         shellshock 'bash'
@@ -191,15 +205,21 @@ function shellshock() {
         fi
     fi
 }
+# }}}
 
+# Find files sorted more recent first {{{
 function findrecent() {
     find $1 -type f -printf '%TY-%Tm-%Td %TT %p\n' | sort -r | less
 }
+# }}}
 
+# autossh then screen {{{
 function assh() {
     autossh -x "$*" 'screen -RdU'
 }
+# }}}
 
+# Check if we are in an ssh connection {{{
 function is_ssh() {
     # TODO: better ssh detection
     if [ -z "$SSH_TTY" ]; then
@@ -207,7 +227,9 @@ function is_ssh() {
     fi
     return 0
 }
+# }}}
 
+# Clean project directory {{{
 function pclean() {
     find . -name "*.pyc" -delete
     find . -name "*.THIS" -delete
@@ -219,6 +241,7 @@ function pclean() {
     find . -name "*.moved" -delete
     # find . -type d -empty ! -path '*/.bzr/*' -delete
 }
+# }}}
 
 # man() {
 #     env LESS_TERMCAP_mb=$'\E[01;31m' \
@@ -229,6 +252,9 @@ function pclean() {
 #     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
 #     man "$@"
 # }
+
+
+# Activate a virtualenv by opening a new shell {{{
 function activate() {
     # Activate a virtualenv by iterating parents folder in order to find '.env'
     # then spawn a new shell with the environment. Default virtualenv's activate
@@ -251,6 +277,8 @@ function activate() {
     echo "Could not find a virtualenv"
     return 1
 }
+# }}}
+
 # }}}
 
 # Set up terminal emulation {{{
