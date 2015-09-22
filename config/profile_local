@@ -9,6 +9,8 @@ export PYTHONPATH=$AMIGRAVE:$PYTHONPATH
 if [ "$ZSH_VERSION" != "" ]; then
     # Zsh specific
     hash -d ~agr=$AMIGRAVE
+    hash -d ~Projects=~/Projects
+    hash -d ~Music=~/Music
 fi
 
 

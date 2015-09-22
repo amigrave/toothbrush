@@ -110,3 +110,24 @@ hash -d node=/usr/local/lib/node_modules
 alias zshrehash="rehash" # more a reminder than anything else
 alias -g NUL="> /dev/null 2>&1"
 # }}}
+
+# Display zsh static alias locations in terminal title {{{
+function display_alias_location() {
+    # TODO: seperate alias location in order to make them
+    #       terminal independant for the tab display
+    current=${(%):-%~}
+    if [[ $current == ~* ]]; then
+        set_term_title \[${current[(ws:/:)1]##*~}\] # take first fragment without ~
+    else
+        set_term_title ${current[(ws:/:)-1]} # take last
+    fi
+}
+# }}}
+
+# chpwd() executed everytime we change current directory {{{
+function chpwd {
+    display_alias_location
+}
+chpwd # initial run
+# }}}
+
