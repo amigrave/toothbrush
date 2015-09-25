@@ -55,7 +55,7 @@ if v:version > 701
     Plugin 'kchmck/vim-coffee-script'
     Plugin 'groenewege/vim-less'
     Plugin 'sukima/xmledit'
-    Plugin 'actionshrimp/vim-xpath'
+    Plugin 'amigrave/vim-xpath' " waiting pull request on 'actionshrimp/vim-xpath'
     Plugin 'stephpy/vim-yaml'  " Simplify yaml syntax for faster processing
     Plugin 'rainux/vim-vala'
     Plugin 'davidhalter/jedi-vim'
@@ -465,6 +465,9 @@ let g:user_emmet_expandabbr_key = '<S-CR>'
 let g:user_emmet_settings = {
     \  'indentation' : '    '
 \}
+
+" vim-xpath
+let g:quiet_xpath = 1
 
 " vim-notes
 let g:notes_directories = ['~/Documents/Notes']
