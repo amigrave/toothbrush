@@ -50,6 +50,8 @@ function upload_config() {
 
     # take vim config in my luggages
     tar -u --file=$tmpfile config/.xdg/vim \
+        --exclude='config/.xdg/vim/bundle/vim-xpath/*' \
+        --exclude='config/.xdg/vim/bundle/vim-notes/*' \
         --exclude='config/.xdg/vim/bundle/syntastic/*' \
         --exclude='config/.xdg/vim/bundle/jedi-vim/*' \
         --exclude='config/.xdg/vim/bundle/tern_for_vim/*' \
