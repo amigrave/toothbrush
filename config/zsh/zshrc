@@ -9,7 +9,7 @@ setopt AUTO_CD
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$XDG_CACHE_HOME/zsh_history"
-setopt histignorealldups sharehistory
+setopt histignorealldups
 # }}}
 
 # Setup Completion {{{
@@ -130,4 +130,3 @@ function chpwd {
 }
 chpwd # initial run
 # }}}
-
