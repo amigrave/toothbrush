@@ -400,19 +400,17 @@ inoremap <silent> <F5> <C-O>zM
 " Insert marker folds
 vmap <leader>zf d<S-o><cr><up><esc>v<down>zf<down><end>2<left>i<space><up><esc>p<up><end>2<left>i<space><space><left>
 
+" Column marker
 nnoremap <F6> :call ToggleMarkers()<CR>
 vnoremap <F6> :call ToggleMarkers()<CR>gv
 inoremap <F6> <C-O>:call ToggleMarkers()<CR>
-let g:agr_markers = 0
 function! ToggleMarkers()
-    if g:agr_markers
+    if &colorcolumn
         set colorcolumn=0
         set nocursorline nocursorcolumn
-        let g:agr_markers = 0
     else
         set colorcolumn=79
         set cursorline cursorcolumn
-        let g:agr_markers = 1
     endif
 endfunction
 
