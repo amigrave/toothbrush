@@ -39,6 +39,8 @@ compdef mosh=ssh
 compdef autossh=ssh
 compdef sshrc=ssh
 compdef sshmc=ssh
+compdef sshfs=scp
+compdef vimdiff=scp
 
 # }}}
 
