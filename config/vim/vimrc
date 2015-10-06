@@ -622,6 +622,7 @@ let g:localvimrc_persistence_file = $XDG_CACHE_HOME . '/vim/localvimrc_persisten
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
 let g:jedi#popup_select_first = 0
+let g:jedi#smart_auto_mappings = 0
 
 " Xmledit
 let g:xmledit_enable_html = 1
