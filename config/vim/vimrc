@@ -46,9 +46,13 @@ if v:version > 701
 
     " Languages
     Plugin 'scrooloose/syntastic'
+    " Plugin 'hdima/python-syntax'  " Supports python3 but no folding
+    Plugin 'vim-scripts/Python-Syntax-Folding'
+    Plugin 'hynek/vim-python-pep8-indent'
+    Plugin 'rmartinho/vim-boo'
     " Plugin 'OrgaChem/JavaScript-syntax'  " this one is fast, will probably go back
     Plugin 'pangloss/vim-javascript'
-    Plugin 'mxw/vim-jsx'
+    Plugin 'mxw/vim-jsx'  " requires pangloss vim-javascript
 
     Plugin 'vim-scripts/ASPJScript'
     Plugin 'dmitry-ilyashevich/vim-typescript'
