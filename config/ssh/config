@@ -8,7 +8,7 @@ Host *
 
     # Sharing connections conflicts with midnight commander's fish
     ControlMaster auto
-    ControlPath /tmp/ssh_mux_%h_%p_%r
+    ControlPath ~/.ssh/cm-socket-%r@%h:%p
 
 Host *.local
     ForwardX11 yes
