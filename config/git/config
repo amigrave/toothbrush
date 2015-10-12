@@ -68,6 +68,7 @@
     sl = stash list --pretty=format:'%gd %Cblue%h %Cred* %C(yellow)%s'
     sp = stash pop
     ss = stash save
+    ski = stash --keep-index
     sa = "!sh -c 'git stash apply stash@{$1}' -"
     sd = "!sh -c 'git stash drop stash@{$1}' -"
     sh = "!sh -c 'git stash show -p stash@{$1}' -"
@@ -75,8 +76,9 @@
     force-ignore = update-index --assume-unchanged  # eg: when added to .git/info/exclude but was changed before
     undo-ignore = update-index --no-assume-unchanged
 
-    ll      = log --color=always --date=relative --pretty=hist
-    l       = !git --no-pager ll -20
+    l       = log --date=relative --pretty=hist -20
+    ll      = log --date=relative --pretty=hist
+    l1      = log --pretty=oneline --abbrev-commit --color=never --format=format:"%an%x09%s"
 
     hlog    = log --color=always --date=relative --pretty=hist
     ghist   = !git hlog -g --pretty=ghist
