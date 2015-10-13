@@ -40,6 +40,7 @@ compdef autossh=ssh
 compdef sshrc=ssh
 compdef sshmc=ssh
 compdef sshfs=scp
+compdef sshmount=scp
 compdef vimdiff=scp
 
 # }}}
