@@ -39,6 +39,7 @@ keys = [
     # Screenshot stuff
     Key([mod, "shift"], "3", lazy.spawn("scrot" + SCROT_ARGS)),
     Key([mod, "shift"], "4", lazy.spawn("scrot -s" + SCROT_ARGS)),
+    Key([mod, "shift", "control"], "4", lazy.spawn("linux-screenshot")),
 
     # Win+c/v == copy/paste
     # Key([mod], "c", lazy.fake_keypress("XF86Copy")),
