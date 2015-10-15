@@ -25,6 +25,7 @@ fi
 readlink=readlink
 command -v greadlink > /dev/null && readlink=greadlink  # OSX
 current_file=`$readlink -f $current_script`
+export SHELL=$current_file
 current_dir=$( cd "$( dirname "$current_file" )" && pwd )
 export AMIGRAVE=$current_dir
 export DOTFILES=$AMIGRAVE/config/.xdg
@@ -56,9 +57,9 @@ shift $((OPTIND-1))
 if [[ "$0" == "$current_script" ]]; then
     # start.sh called explicitely
     if [[ -x "$(command -v zsh)" && $(zsh --version | awk '{print $2}') > 4.3.0 && $use_bash != 1 ]]; then
-        SHELL=$(which zsh) ZDOTDIR=$DOTFILES/zsh zsh
+        ZDOTDIR=$DOTFILES/zsh zsh
     else
-        SHELL=$(which bash) bash --rcfile $DOTFILES/bash/bashrc -i
+        bash --rcfile $DOTFILES/bash/bashrc -i
     fi
 elif [[ "$0" == ".profile" ]]; then
     source $DOTFILES/profile
