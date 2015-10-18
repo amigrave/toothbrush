@@ -116,14 +116,17 @@ alias -g NUL="> /dev/null 2>&1"
 
 # Display zsh static alias locations in terminal title {{{
 function display_alias_location() {
-    # TODO: seperate alias location in order to make them
-    #       terminal independant for the tab display
+    # TODO: trigger the term display trough the PROMPT in
+    #       a cross shell way
     current=${(%):-%~}
-    if [[ $current == ~* ]]; then
-        set_term_title \[${current[(ws:/:)1]##*~}\] # take first fragment without ~
+    if [[ $current == "~/"* ]]; then
+        export TERM_TITLE=\[${current[(ws:/:)2]}\] # take second fragment
+    elif [[ $current == ~* ]]; then
+        export TERM_TITLE=\[${current[(ws:/:)1]}\] # take first fragment
     else
-        set_term_title ${current[(ws:/:)-1]} # take last
+        export TERM_TITLE=${current[(ws:/:)-1]} # take last
     fi
+    term_title
 }
 # }}}
 

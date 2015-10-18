@@ -9,9 +9,11 @@ fi
 tmpdir=$(mktemp -d --suffix='-sshmount')
 if sshfs $@ $tmpdir; then
     # TODO: remake pompt in bash and zsh, allow to override local path for those cases
-    $SHELL -c "cd $tmpdir; PS1_PREFIX='[$@]' $SHELL"
+    term_title "MOUNT <$@>"
+    TERM_TITLE_FROZEN=1 $SHELL -c "cd $tmpdir; PS1_PREFIX='[$@]' $SHELL"
     fusermount -u $tmpdir
     rmdir $tmpdir
+    term_title
 else
     rmdir $tmpdir
     echo "Could not mount $@"

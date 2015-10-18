@@ -65,7 +65,9 @@ function upload_config() {
 }
 
 function connect() {
+    term_title "SSH <$sshargs>"
     ssh "$sshargs" -t "$dest/start.sh $start_opts; $on_logout"
+    term_title
 }
 
 if [ $update = 1 ]; then

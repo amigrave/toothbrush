@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Change virtual terminal title trough ansi (if supported)
+# If no parameter given, set the title using the $TERM_TITLE env variable
+# otherwise, just use the arguments as title.
+
+if [[ $TERM_TITLE_FROZEN == 1 ]]; then
+    exit
+fi
+
+if [ $# -eq 0 ]; then
+    echo -ne "\033]0;"$TERM_TITLE"\007"
+else
+    echo -ne "\033]0;"$*"\007"
+fi
