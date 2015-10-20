@@ -7,6 +7,7 @@ if [ -z "$AMIGRAVE" ]; then
 fi
 
 update=0
+verbose=0
 start_opts=""
 on_logout=""
 dest=${SSHRC_LOCATION:-$(basename $AMIGRAVE)}
@@ -16,19 +17,22 @@ function usage {
         echo $1
         echo
     fi
-    echo "Usage: `basename $0` [-b 'force bash'] [-u 'update config'] [-d 'delete config on logout']" 1>&2; exit 1;
+    echo "Usage: `basename $0` [-b 'force bash'] [-u 'update config'] [-d 'delete config on logout'] [-v --verbose]" 1>&2; exit 1;
     exit
 }
 
-while getopts "bud" o; do
+while getopts "budv" o; do
     case "${o}" in
         b) start_opts="$start_opts -b" ;;
         u) update=1 ;;
+        v) verbose=1 ;;
         d) on_logout="rm -rf $dest;" ;;
         *) usage ;;
     esac
 done
 shift $((OPTIND-1))
+
+[[ $verbose == 1 ]] && set -x
 
 sshargs="$@"
 
