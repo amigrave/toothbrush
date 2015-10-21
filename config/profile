@@ -219,6 +219,16 @@ function assh() {
 }
 # }}}
 
+# sudo with same configuration shell {{{
+function sush() {
+    if [ -z "$1" ]; then
+        sudo -E $AMIGRAVE/start.sh
+    else
+        sudo -E -u $1 $AMIGRAVE/start.sh
+    fi
+}
+# }}}
+
 # Check if we are in an ssh connection {{{
 function is_ssh() {
     # TODO: better ssh detection
