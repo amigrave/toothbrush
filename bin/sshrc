@@ -59,19 +59,19 @@ function upload_config() {
         --exclude='config/.xdg/vim/bundle/syntastic/*' \
         --exclude='config/.xdg/vim/bundle/jedi-vim/*' \
         --exclude='config/.xdg/vim/bundle/tern_for_vim/*' \
+        --exclude='config/.xdg/vim/bundle/vim-color-picker-osx/*' \
         --exclude='config/.xdg/vim/bundle/*/doc/*' \
         --exclude='config/.xdg/vim/bundle/*/*.gif' \
         --exclude='.git'
 
-    scp -C $tmpfile "$sshargs":/tmp/agr.tgz
+    scp -C $tmpfile "$sshargs":.agr.tgz
     rm $tmpfile
-    ssh "$sshargs" "mkdir -p $dest; cd $dest; mv /tmp/agr.tgz .; tar -xf agr.tgz; rm agr.tgz"
+    ssh "$sshargs" "mkdir -p $dest; cd $dest; tar -xf ~/.agr.tgz; rm ~/.agr.tgz"
 }
 
 function connect() {
     term_title "SSH <$sshargs>"
     ssh "$sshargs" -t "$dest/start.sh $start_opts; $on_logout"
-    term_title
 }
 
 if [ $update = 1 ]; then
@@ -86,8 +86,10 @@ if [ $? -eq  127 ]; then
     if [[ $answer =~ [yY](es)* ]]; then
         upload_config
         connect
+        term_title
     else
         echo "User aborted."
+        term_title
         exit 1
     fi
 fi
