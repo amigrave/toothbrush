@@ -119,6 +119,7 @@ screens = [
                 # widget.TextBox(u"\U0001F50B", **symbol_font),
 
                 widget.Sep(),
+                widget.MemoryGraph(fill_color='009933', graph_color='339966'),
                 widget.CPUGraph(),
 
                 widget.Sep(),
