@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -x "$(command -v zsh)" && $(zsh --version | awk '{print $2}') > 4.3.0 && $FORCE_BASH != 1 ]]; then
+    ZDOTDIR=$DOTFILES/zsh zsh $@
+else
+    # bash --rcfile $DOTFILES/bash/bashrc -i
+    bash --rcfile $DOTFILES/bash/bashrc $@
+fi
