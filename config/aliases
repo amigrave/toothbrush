@@ -25,7 +25,7 @@ alias i="ipython"
 alias dk='sudo docker'
 alias dkb='sudo docker build --force-rm=true --no-cache=true'
 alias npml='npm list --depth=0'
-alias tm="tmux attach || tmux"
+alias tm="SHELL=$AMIGRAVE/bin/shell tmux attach || SHELL=$AMIGRAVE/bin/shell tmux"
 alias s='screen -rx || screen -RdU'
 alias mp3="find . -iname \*.mp3 | mpg123 -z -@ - -b 4096"
 alias mpi="mp3info -x -F -r a"
@@ -43,7 +43,6 @@ alias ll=l
 # }}}
 
 # Misc {{{
-alias root='sudo -E'
 alias please='sudo -E $(fc -ln -1)'
 alias src='source-highlight --out-format=esc -o STDOUT'
 alias C='LANG=C'

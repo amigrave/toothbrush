@@ -3,6 +3,10 @@
 # LOCAL PROFILE
 ###############
 
+alias root='SUDO_SHELL=root $AMIGRAVE/bin/shell'
+# Put your custom sudo users here, eg:
+# alias foouser='SUDO_SHELL=foouser $AMIGRAVE/bin/shell'
+
 export PYTHONPATH=$AMIGRAVE:$PYTHONPATH
 # export SSHRC_LOCATION="~/custom_location"
 

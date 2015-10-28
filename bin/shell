@@ -1,8 +1,14 @@
 #!/bin/bash
 
+if [[ "$SUDO_SHELL" != "" ]]; then
+    SUDO_SHELL="sudo -E -u $SUDO_SHELL"
+fi
+
 if [[ -x "$(command -v zsh)" && $(zsh --version | awk '{print $2}') > 4.3.0 && $FORCE_BASH != 1 ]]; then
-    ZDOTDIR=$DOTFILES/zsh zsh $@
+    export SHELL=$(which zsh)
+    export ZDOTDIR=$DOTFILES/zsh
+    $SUDO_SHELL zsh $@
 else
-    # bash --rcfile $DOTFILES/bash/bashrc -i
-    bash --rcfile $DOTFILES/bash/bashrc $@
+    export SHELL=$(which bash)
+    $SUDO_SHELL bash --rcfile $DOTFILES/bash/bashrc $@
 fi
