@@ -1,5 +1,19 @@
 #!/usr/bin/python
-import inspect
+"""SSH Tunneling
+
+Usage:
+    tunnel-https.py <target-host> [--target-port=<port>] [--tunnel-port=<port>]
+                                  [--proxy-ip=<ip>] [--proxy-port=<port>]
+
+Options:
+    -h --help                 Show this screen.
+    --target-port=<port>      Target port [default: 8080].
+    --tunnel-port=<port>      Local mapped port for ssh tunnel [default: 2222]
+    --proxy-ip=<ip>           Http proxy to use [default: 127.0.0.1]
+    --proxy-port=<port>       Http proxy port to use [default: 3128]
+"""
+
+from docopt import docopt
 import select
 import socket
 import sys
@@ -63,13 +77,13 @@ def tunnel(target_host, target_port=8080, proxy_ip='127.0.0.1', proxy_port=3128,
                     print "in:", c_in, " out:", c_out, " last-in:", len(data)
         s.close()
 
+
 if __name__ == '__main__':
-    fnargs = inspect.getargspec(tunnel).args
-    args = sys.argv[1:]
-    if not args:
-        sys.exit("tunnel <host>")
-    host = args.pop(0)
-    if args:
-        # TODO: map to fnargs
-        pass
-    tunnel(host)
+    args = docopt(__doc__)
+    tunnel(
+        target_host=args['<target-host>'],
+        target_port=int(args['--target-port']),
+        proxy_ip=args['--proxy-ip'],
+        proxy_port=int(args['--proxy-port']),
+        tunnel_port=int(args['--tunnel-port']),
+    )
