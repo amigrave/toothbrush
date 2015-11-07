@@ -39,7 +39,10 @@ keys = [
     # Screenshot stuff
     Key([mod, "shift"], "3", lazy.spawn("scrot" + SCROT_ARGS)),
     Key([mod, "shift"], "4", lazy.spawn("scrot -s" + SCROT_ARGS)),
-    Key([mod, "shift", "control"], "4", lazy.spawn("linux-screenshot")),
+    Key([mod, "shift", "control"], "4", lazy.spawn("escrotum -sC")),
+
+    # Multimedia keys
+    Key([], "XF86AudioMute", lazy.spawn("amixer sset Master toggle")),
 
     # Win+c/v == copy/paste
     # Key([mod], "c", lazy.fake_keypress("XF86Copy")),
@@ -51,6 +54,8 @@ keys = [
     # Key([mod], "j", lazy.fake_keypress("XF86Paste")),
     # Key([win, alt], "Right", lazy.simulate_keypress(["control"], "Tab")),
     # Key([win, alt], "Left", lazy.simulate_keypress(["control", "Shift"], "Tab")),
+    # Key([win, alt], "Right", lazy.spawn('xdotool key "Alt_L+Super_L+Right"')),
+    # Key([win, alt], "Left", lazy.spawn('xdotool key "Alt_L+Super_L+Left"')),
 ]
 
 
@@ -108,10 +113,11 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
 
-                widget.TextBox(u"\u2620", name="mood", **symbol_font),
+                # widget.TextBox(u"Ambiance"),
+                # widget.TextBox(u"\u2192 \u2620", name="mood", **symbol_font),
 
                 widget.Sep(),
-                widget.TextBox(u"\U0001F3B5", **symbol_font),
+                # widget.TextBox(u"\U0001F3B5", **symbol_font),
                 widget.Volume(emoji=True, **symbol_font),
 
                 # widget.Sep(),
