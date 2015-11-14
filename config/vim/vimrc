@@ -67,6 +67,7 @@ if v:version > 701
     Plugin 'elzr/vim-json'
     Plugin 'wavded/vim-stylus'
     Plugin 'tpope/vim-markdown'
+    Plugin 'maxbane/vim-asm_ca65'
 
     " Templating and special filetypes
     Plugin 'Glench/Vim-Jinja2-Syntax'
