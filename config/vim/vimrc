@@ -77,6 +77,7 @@ if v:version > 701
     Plugin 'ekalinin/Dockerfile.vim'
 
     " Misc Tools
+    Plugin 'eiginn/netrw'
     Plugin 'tpope/vim-fugitive'
     Plugin 'will133/vim-dirdiff'
     Plugin 'AndrewRadev/linediff.vim'
