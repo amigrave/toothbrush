@@ -73,8 +73,8 @@
     sd = "!sh -c 'git stash drop stash@{$1}' -"
     sh = "!sh -c 'git stash show -p stash@{$1}' -"
 
-    spush = !git stash save && git svn dcommit && git stash pop
-    spull = !git stash save && git svn rebase && git stash pop
+    # spush = !git stash save && git svn dcommit && git stash pop
+    # spull = !git stash save && git svn rebase && git stash pop
 
     force-ignore = update-index --assume-unchanged  # eg: when added to .git/info/exclude but was changed before
     undo-ignore = update-index --no-assume-unchanged

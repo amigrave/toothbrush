@@ -38,6 +38,6 @@ gitcmd = ['git', 'filter-branch', '-f', '--env-filter', """
         export GIT_AUTHOR_DATE="{newdate}";
     fi""".format(**locals()), '%s~1..HEAD' % commit]
 
-subprocess.call(['git', 'stash', 'save'])
+# subprocess.call(['git', 'stash', 'save'])
 subprocess.call(gitcmd)
-subprocess.call(['git', 'stash', 'pop'])
+# subprocess.call(['git', 'stash', 'pop'])
