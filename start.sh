@@ -11,14 +11,30 @@
 #       ~/.bashrc
 #       ~/.zshrc
 
+# We should be careful about the case we should load .profile
+# because xsession init and login shells are a pain to debug!
+load_profile=0
+
 # First get the current script directory location
 if [ "$ZSH_VERSION" != "" ]; then
-    # If sourced by zsh (eg: symlinked to ~/.zshrc)
+    # In zsh context we can get the current file for sure
     current_script=${(%):-%N}
+    # TODO: check if we could get a zsh env for ~/.profile
     rcfile=zsh/zshrc
-else
+elif [ "$BASH_SOURCE" != "" ]; then
+    # In bash, try to get current file. Not always set unfortunately
     current_script=${BASH_SOURCE[0]}
     rcfile=bash/bashrc
+else
+    # Fallback if previous method fails we can't get the current script
+    # path so we assume it's installed and linked to $AMIGRAVE/start.sh
+    current_script="$HOME/.profile"
+    load_profile=1
+fi
+
+if [ "$0" = ".profile" ]; then
+    # Handle explicit case for .profile
+    load_profile=1
 fi
 
 # resolve potential symlinks
@@ -28,12 +44,20 @@ current_file=`$readlink -f $current_script`
 current_dir=$( cd "$( dirname "$current_file" )" && pwd )
 export AMIGRAVE=$current_dir
 export DOTFILES=$AMIGRAVE/config/.xdg
+export XDG_CONFIG_HOME=$DOTFILES
+
+# echo "AMIGRAVE($AMIGRAVE) - DOTFILES($DOTFILES)" >> /tmp/debug.log
+
+if [ $load_profile -eq 1 ]; then
+    source $DOTFILES/profile
+    return
+fi
 
 function safe_link() {
-    if [ -f $1 ]; then
-        mv $1 $1_$(date +%F-%T)
-    fi
-    ln -s $current_file $1
+   if [ -f $1 ]; then
+       mv $1 $1_$(date +%F-%T)
+   fi
+   ln -s $current_file $1
 }
 
 use_bash=0
@@ -57,8 +81,8 @@ if [[ "$0" == "$current_script" ]]; then
     # start.sh called explicitely
     [[ "$use_bash" == 1 ]] && export FORCE_BASH=1
     $AMIGRAVE/bin/shell
-elif [[ "$0" == ".profile" ]]; then
-    source $DOTFILES/profile
-else
+elif [ "$rcfile" != "" ]; then
     source $DOTFILES/$rcfile
+else
+    echo "We really want to debug this case: 0($0)" >> /tmp/debug.log
 fi
