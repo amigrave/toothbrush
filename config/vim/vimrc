@@ -53,6 +53,7 @@ if v:version > 701
     " Plugin 'OrgaChem/JavaScript-syntax'  " this one is fast, will probably go back
     Plugin 'pangloss/vim-javascript'
     Plugin 'mxw/vim-jsx'  " requires pangloss vim-javascript
+    Plugin 'atsepkov/vim-rapydscript'
 
     Plugin 'vim-scripts/ASPJScript'
     Plugin 'dmitry-ilyashevich/vim-typescript'
@@ -251,11 +252,14 @@ if has("autocmd")
     au BufRead,BufNewFile *.coffee setlocal fdm=indent
     au BufRead,BufNewFile .vimrc setlocal fdm=marker
     au BufRead,BufNewFile *.iced setlocal filetype=coffee
-    au BufNewFile,BufRead *.boo setlocal filetype=boo
+    au BufRead,BufNewFile *.boo setlocal filetype=boo
     au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
-    "au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
+    " au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
     " au BufWritePost,FileWritePost *.sass :silent !sass --compass --style expanded <afile> > "%:p:r.css"
     au BufWritePost,FileWritePost *.sass setlocal sw=4
+
+    au BufRead,BufNewFile *.pyj set filetype=rapydscript
+    au BufWritePost,FileWritePost *.pyj :silent !rapydscript <afile> -p --comments > "%:p:r.js"
 
     " au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
     "     \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
