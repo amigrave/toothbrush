@@ -482,7 +482,7 @@ let g:notes_directories = ['~/Documents/Notes']
 nnoremap <leader>on :tabnew<CR>:Note<Space>
 
 " vim-markdown
-let g:markdown_fenced_languages = ['python', 'javascript', 'html', 'xml', 'yaml', 'sql']
+let g:markdown_fenced_languages = ['python', 'javascript', 'html', 'xml', 'yaml', 'sql', 'bash']
 
 imap <c-e> <c-o>:lnext<cr>
 nmap <c-e> :lnext<cr>
