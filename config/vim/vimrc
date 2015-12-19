@@ -463,7 +463,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'    " Show just the filename
 let g:airline#extensions#tabline#show_tabs = 0
 
 " Ag
-let g:agprg = 'ag --nogroup --nocolor --column'
+let g:ag_prg = 'ag --nogroup --nocolor --column'
 noremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 
