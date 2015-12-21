@@ -9,7 +9,7 @@ Usage: mdk provisioning.md (--dektop | --server) <host>
 
 ## Install vmware tools if in a vmware box
 
-```bash
+```sh
 # TODO: check if we're in a vmware box
 cd /tmp
 git clone https://github.com/rasa/vmware-tools-patches.git
@@ -19,7 +19,7 @@ cd vmware-tools-patches
 
 ## Fix Edimax wifi dongle driver
 
-```bash
+```sh
 cd /usr/local/src
 apt-get install build-essential dkms
 git clone https://github.com/pvaret/rtl8192cu-fixes.git
@@ -33,7 +33,7 @@ cp ./rtl8192cu-fixes/blacklist-native-rtl8192.conf /etc/modprobe.d/
 
 ### Install miniconda
 
-```bash
+```sh
 # export MINICONDA=~/miniconda2
 cd /tmp
 wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
@@ -53,7 +53,7 @@ Check that for linux:
 
 ### Common debian
 
-```bash
+```sh
 apt-get -y install zsh mc screen tmux htop rsync vim telnet strace less netcat \
            ncurses-term openssh-server dtrx multitail htop silversearcher-ag \
            git tig
@@ -69,7 +69,7 @@ apt-get install ttf-dejavu terminator
 
 Install powerline fonts
 
-```bash
+```sh
 cd /tmp
 git clone https://github.com/powerline/fonts.git
 cd fonts
@@ -78,7 +78,7 @@ cd fonts
 
 ### Install QTile
 
-```bash
+```sh
 apt-get install libxcb-render0-dev libffi-dev libcairo2-dev
 
 conda create -y -n qtile pip
@@ -90,7 +90,7 @@ pip install escrotum
 
 ### Install global python packages ?
 
-```bash
+```sh
 pip install grip Baker bzr cdiff fabric fabtools flake8 git-qdiff httpie ipython \
             jedi pudb pyquery pythonpy requests virtualenv pyrasite
 
@@ -102,7 +102,7 @@ pip install grip Baker bzr cdiff fabric fabtools flake8 git-qdiff httpie ipython
 ## OSX
 
 ### Some symlinks
-```bash
+```sh
 ln -s ~/.dosbox/dosbox-0.74.conf Library/Preferences/DOSBox\ 0.74\ Preferences
 ```
 
