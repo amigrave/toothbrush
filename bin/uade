@@ -21,10 +21,11 @@ pargs = ['uade123']
 for line in content.splitlines():
     if not line.startswith('#'):
         pargs += ['--%s' % line]
-pargs += sys.argv[1:]
+# pargs += sys.argv[1:]
 
 try:
-    proc = subprocess.Popen(pargs)
-    proc.communicate()
+    for song in sys.argv[1:]:
+        proc = subprocess.Popen(pargs + [song])
+        proc.communicate()
 except KeyboardInterrupt:
     proc.terminate()
