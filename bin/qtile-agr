@@ -1,7 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import argparse
+import glob
+import os
 import sys
+
+# Add miniconda qtile env to python path if found
+qtile_conda_glob = os.path.expanduser('~/miniconda*/envs/qtile/lib/python*/site-packages/')
+qtile_path = glob.glob(qtile_conda_glob)
+if qtile_path:
+    sys.path.insert(0, qtile_path[0])
 
 client = None
 
