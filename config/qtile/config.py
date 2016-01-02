@@ -17,7 +17,7 @@ keys = [
     Key([mod], "Tab", lazy.layout.down()),
 
     # Toggle between different layouts as defined below
-    Key([mod], "j", lazy.nextlayout()),
+    Key([mod], "j", lazy.next_layout()),
 
     # Swap panes of split stack
     Key([mod, "shift"], "j", lazy.layout.rotate()),
