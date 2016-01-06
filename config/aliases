@@ -64,6 +64,7 @@ alias bfg='java -jar ~/bin/java/bfg*'
 alias ssh-nokey="ssh -o PreferredAuthentications=keyboard-interactive,password -o PubkeyAuthentication=no"
 
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
+alias python_dependencies='sfood -fuq . | sfood-filter-stdlib | sfood-target-files | xargs dirname | sort | uniq'
 alias webserve='python -m SimpleHTTPServer'
 alias ftpserve='python -m pyftpdlib'
 alias vlc_stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
