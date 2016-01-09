@@ -88,6 +88,11 @@ keys.append(
     Key([mod, alt], "Return", lazy.group['iPython'].toscreen()),
 )
 
+groups.append(Group('gimp'))
+keys.append(
+    Key([mod], "g", lazy.group['gimp'].toscreen()),
+)
+
 layouts = [
     layout.Max(),
     layout.Stack(num_stacks=2)

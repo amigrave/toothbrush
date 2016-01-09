@@ -86,6 +86,7 @@ alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]
 if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
 alias e="gvim-agr --remote-tab-silent"
+alias g="gimp-agr"
 alias ack="ack-grep --pager=less --color-match=red"
 alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'

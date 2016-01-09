@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ $DESKTOP_SESSION == 'qtile' ]]; then
+    qtile-agr --silent switch_group gimp
+fi
+
+gimp $@ &
