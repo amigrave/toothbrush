@@ -415,13 +415,17 @@ vnoremap <F6> :call ToggleMarkers()<CR>gv
 inoremap <F6> <C-O>:call ToggleMarkers()<CR>
 function! ToggleMarkers()
     if &colorcolumn
-        set colorcolumn=0
-        set nocursorline nocursorcolumn
+        setlocal colorcolumn=0
+        setlocal nocursorline nocursorcolumn
     else
-        set colorcolumn=79
-        set cursorline cursorcolumn
+        setlocal colorcolumn=79
+        setlocal cursorline cursorcolumn
     endif
 endfunction
+
+nnoremap <S-F6> :setlocal spell! spelllang=en<CR>
+vnoremap <S-F6> :setlocal spell! spelllang=en<CR>
+inoremap <S-F6> <C-O>:setlocal spell! spelllang=en<CR>
 
 " Quit using vim-bbye
 nnoremap <silent> <F10> :Bdelete<CR>
