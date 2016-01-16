@@ -119,6 +119,10 @@ EXEC      01;31    # file with executable attribute set
 .tex  32
 .asm  32
 .ASM  32
+.s    32
+.S    32
+.s65  32
+.S65  32
 .pas  32
 .PAS  32
 .php  32
