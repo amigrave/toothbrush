@@ -52,6 +52,7 @@
     inf = "!for i in $(git remote); do git remote show $i -n; done"
     co = checkout
     cp = cherry-pick
+    fp = format-patch
     st = status --short --branch --
     ls = ls-files
     lsi = ls-files --other --ignored --exclude-standard # List ignored files
