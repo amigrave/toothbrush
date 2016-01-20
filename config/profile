@@ -34,6 +34,7 @@ fi
 if [ -d "$HOME/.local/bin" ]; then
     PATH=$HOME/.local/bin:$PATH
 fi
+[[ ":$PATH:" != *":/sbin:"* ]] && PATH="/sbin:${PATH}"
 python_site_package=$HOME/.local/lib/python2.7/site-packages/
 if [ -f "$python_site_package" ]; then
     # TODO: python version !!!
