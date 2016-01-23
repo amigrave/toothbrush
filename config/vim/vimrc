@@ -41,19 +41,18 @@ if v:version > 701
     Plugin 'tomtom/tcomment_vim'
     Plugin 'godlygeek/tabular'
     Plugin 'terryma/vim-expand-region'
-    Plugin 'bps/vim-textobj-python'  " Python function and class text objects
     Plugin 'ciaranm/detectindent'
 
     " Languages
     Plugin 'scrooloose/syntastic'
     " Plugin 'hdima/python-syntax'  " Supports python3 but no folding
     Plugin 'vim-scripts/Python-Syntax-Folding'
-    Plugin 'hynek/vim-python-pep8-indent'
     Plugin 'rmartinho/vim-boo'
     Plugin 'atsepkov/vim-rapydscript'
     Plugin 'amigrave/JavaScript-syntax'
     " Plugin 'pangloss/vim-javascript' " modern but slow and indent fucks up
     " Plugin 'mxw/vim-jsx'  " requires pangloss vim-javascript, conflicts with xml_syntax_folding
+    Plugin 'tweekmonster/braceless.vim'
 
     Plugin 'vim-scripts/ASPJScript'
     Plugin 'dmitry-ilyashevich/vim-typescript'
@@ -90,7 +89,6 @@ if v:version > 701
     Plugin 'xolox/vim-notes'
 
     " Libs
-    Plugin 'kana/vim-textobj-user'         " required by vim-textobj-python
     " Plugin 'tomtom/tlib_vim'               " required by snipmate
     " Plugin 'MarcWeber/vim-addon-mw-utils'  " required by snipmate
     " Plugin 'mattn/webapi-vim' " used by gist-vim
@@ -274,6 +272,8 @@ if has("autocmd")
 
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=darkcyan guifg=darkcyan
+
+    autocmd FileType python BracelessEnable +indent -fold -highlight
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
