@@ -61,6 +61,7 @@
     vdd = difftool --dir-diff -t vim-dirdiff
     subs = submodule foreach git
     upstream = remote add --track master upstream
+    stats = shortlog -s -n --all
 
     qshow = "!git show $1 --quiet; git qdiff $1~1...$1"
 
