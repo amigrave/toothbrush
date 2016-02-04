@@ -86,13 +86,11 @@ if v:version > 701
     Plugin 'rking/ag.vim'
     Plugin 'embear/vim-localvimrc'
     Plugin 'haya14busa/vim-asterisk'
-    Plugin 'xolox/vim-notes'
 
     " Libs
     " Plugin 'tomtom/tlib_vim'               " required by snipmate
     " Plugin 'MarcWeber/vim-addon-mw-utils'  " required by snipmate
     " Plugin 'mattn/webapi-vim' " used by gist-vim
-    Plugin 'xolox/vim-misc'                " required by vim-notes
 
     call vundle#end()
     filetype plugin indent on
