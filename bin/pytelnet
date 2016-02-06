@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import, division, print_function
+
+import select
+import socket
+import sys
+
+__author__ = "Fabien Meghazi <agr@amigrave.com>"
+__copyright__ = "Copyright 2016, Fabien Meghazi"
+__license__ = "MIT"
+__version__ = "0.1"
+
+
+if len(sys.argv) < 3:
+    print('Usage: pytelnet <hostname> <port>')
+    sys.exit()
+
+host = sys.argv[1]
+port = int(sys.argv[2])
+conn = '%s:%s' % (host, port)
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.settimeout(1)
+
+try:
+    sock.connect((host, port))
+except:
+    print("pytelnet: Unable to connect to remote host: Connection refused")
+    sys.exit()
+
+print("Connected to %s" % conn)
+
+while True:
+    rfd, wfd, xfd = select.select([sys.stdin, sock], [], [])
+
+    if sock in rfd:
+        data = sock.recv(4096)
+        if not data:
+            print("Connection closed by foreign host.")
+            sys.exit()
+        else:
+            sys.stdout.write(data)
+            sys.stdout.flush()
+
+    if sys.stdin in rfd:
+        msg = sys.stdin.readline()
+        sock.send(msg)
