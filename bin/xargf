@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Like xargs but with a temporary file from stdin instead of the arguments
+themselves.  Read a file from stdin, copy it to a temporary file and call the
+given command line with the temporary filename as an argument.
+
+For example, you can use this to view PDF files read from stdin::
+
+  dot -Tps file.dot | ps2pdf - | xargf acroread
+
+"""
+
+import sys
+import shutil
+import tempfile
+from subprocess import Popen
+
+
+def main():
+    f = tempfile.NamedTemporaryFile('w', suffix='.pdf')
+    shutil.copyfileobj(sys.stdin, f)
+    f.flush()
+    p = Popen(" ".join(sys.argv[1:] + [f.name]), shell=True)
+    p.wait()
+    f.close()
+
+if __name__ == '__main__':
+    main()
