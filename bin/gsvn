@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+git/svn interoperability tools
+"""
+from __future__ import absolute_import, division, print_function
+
+import commands
+import tempfile
+import os
+import shutil
+import urlparse
+
+import baker
+
+__author__ = "Fabien Meghazi <agr@amigrave.com>"
+__copyright__ = "Copyright 2016, Fabien Meghazi"
+__license__ = "MIT"
+__version__ = "0.1"
+
+
+@baker.command
+def co(location='.', destination=None):
+    """
+    Checkout git-svn relative location to svn in a temporary folder.
+    """
+    old_cwd = os.getcwd()
+    svn_infos = commands.getoutput('git svn info %s' % location).splitlines()
+    url = filter(lambda l: l.startswith('URL:'), svn_infos)[0][5:]
+    if destination is None:
+        suffix = urlparse.urlparse(url).path.replace('/', '-')
+        destination = tempfile.mkdtemp(suffix=suffix)
+    os.chdir(destination)
+    os.system('svn co "%s" "%s"' % (url, destination))
+    # if 'zsh' in os.environ['SHELL']:
+    #     raise NotImplementedError("Unsupported shell")
+    shell = """PROMPT_COMMAND='PS1="%s $PS1"; unset PROMPT_COMMAND' bash -i"""
+    os.system(shell % "(Temporary svn checkout)")
+    os.chdir(old_cwd)
+    choice = raw_input("Delete temporary svn checkout ? (Y/n)").lower()
+    if choice in ('', 'y', 'yes'):
+        shutil.rmtree(destination)
+
+
+# @baker.command
+# def clone(location, destination):
+#     """
+#     TODO: git svn clone --stdlayout --authors-file=authors.txt <svn-repo>/<project> <git-repo-name>
+#     """
+#     pass
+
+if __name__ == '__main__':
+    baker.run()
