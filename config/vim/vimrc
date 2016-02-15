@@ -27,7 +27,8 @@ if v:version > 701
     Plugin 'moll/vim-bbye'  " provides :Bdelete
 
     " Look
-    Plugin 'bling/vim-airline'
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
 
     " Edition
     Plugin 'ervandew/supertab'
