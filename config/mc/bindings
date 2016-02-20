@@ -20,6 +20,9 @@ regex/\.([aA][mM][dD]|[rR][aA][dD]|[hH][sS][cC]|[sS][aA]2)$
 regex/\.([sS][iI][dD])$
        Open=killall xsidplay; xsidplay %f &
 
+regex/\.([nN][eE][sS])$
+       Open=mednafen %f &
+
 # Midnight Commander 3.0 extension file
 # Warning: Structure of this file has changed completely with version 3.0
 #
