@@ -251,7 +251,6 @@ if has("autocmd")
     au BufRead,BufNewFile *.iced setlocal filetype=coffee
     au BufRead,BufNewFile *.boo setlocal filetype=boo
     au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
-    " au BufWritePost,FileWritePost *.md,*.mkd :!markdown "<afile>" > "%:p:r.html"
     " au BufWritePost,FileWritePost *.sass :silent !sass --compass --style expanded <afile> > "%:p:r.css"
     au BufWritePost,FileWritePost *.sass setlocal sw=4
     au BufRead,BufNewFile *.s65 setlocal ft=asm_ca65
@@ -275,6 +274,14 @@ if has("autocmd")
     autocmd FileType python BracelessEnable +indent -fold -highlight
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+
+    " Markdown
+    au FileType markdown setlocal foldmethod=syntax
+    au FileType markdown syn region mkdHeaderFold
+                              \ start="^\s*\z(#\+\)"
+                              \ skip="^\s*\z1#\+"
+                              \ end="^\(\s*#\)\@="
+                              \ fold contains=TOP
 
     " Don't screw up folds when inserting text that might affect them, until
     " leaving insert mode. Foldmethod is local to the window. Protect against
@@ -486,6 +493,7 @@ nnoremap <leader>on :tabnew<CR>:Note<Space>
 
 " vim-markdown
 let g:markdown_fenced_languages = ['python', 'javascript', 'html', 'xml', 'yaml', 'sql', 'sh']
+let g:markdown_folding = 1
 
 imap <c-e> <c-o>:lnext<cr>
 nmap <c-e> :lnext<cr>
