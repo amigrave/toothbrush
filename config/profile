@@ -102,6 +102,10 @@ eval `dircolors -b $DOTFILES/dir_colors `
 
 # Functions {{{
 
+function ansible-facts() {
+    ansible all -i "$1," -m setup
+}
+
 # vless: make vim behave like `less` {{{
 function vless() {
     # /usr/share/vim/vim74/macros/less.sh

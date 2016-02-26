@@ -39,6 +39,7 @@ compdef mosh=ssh
 compdef autossh=ssh
 compdef sshrc=ssh
 compdef sshmc=ssh
+compdef ansible-facts=ssh
 compdef sshfs=scp
 compdef sshmount=scp
 compdef vimdiff=scp

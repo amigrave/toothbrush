@@ -76,6 +76,7 @@ if v:version > 701
     Plugin 'sophacles/vim-bundle-mako'
     Plugin 'evanmiller/nginx-vim-syntax'
     Plugin 'ekalinin/Dockerfile.vim'
+    Plugin 'pearofducks/ansible-vim'
 
     " Misc Tools
     Plugin 'eiginn/netrw'
