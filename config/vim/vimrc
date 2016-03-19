@@ -272,7 +272,7 @@ if has("autocmd")
     au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=darkcyan guifg=darkcyan
 
-    autocmd FileType python BracelessEnable +indent -fold -highlight
+    autocmd FileType python BracelessEnable -indent -fold -highlight
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
