@@ -28,7 +28,7 @@ if p is None:
     sys.exit("Could not execute whiptail or dialog")
 newdate = p.communicate()[1].strip()
 
-if date.strip() == newdate.strip():
+if not newdate or date.strip() == newdate:
     print("Nothing to do.")
     sys.exit()
 
