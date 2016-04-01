@@ -321,6 +321,9 @@ vnoremap J J`<
 " gt open file in new tab
 nnoremap gt <C-w>gf
 
+" make gf works like gF (search with line number)
+nnoremap gf gF
+
 " Find non-ascii characters
 nnoremap <Leader>§ /[^\x00-\x7F]<CR>
 
