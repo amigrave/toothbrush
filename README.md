@@ -40,3 +40,7 @@ Single line installation:
     $ wget -O- https://raw.githubusercontent.com/amigrave/dotlessfiles/master/start.sh | bash
 
 
+Note
+----
+
+On OSX it is assumed that you use the GNU tools and not their BSD
