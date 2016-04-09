@@ -1,11 +1,22 @@
 # AMIGrAve's Debian / Kali provisioning
 
-Provisionning on Debian 8.0+ or Kali2
-
+My personal environment provisionning on Debian 8.0+ or Kali 2.
 
 ```docopt
-Usage: mdk provisioning.md (--dektop | --server) <host>
+Usage: mdk provisioning.md (--dektop | --server) [--python2] [--miniconda-location=PATH] <host>
+
+Options:
+
+--desktop               Setup a desktop machine
+--server                Setup a 
+--miniconda-location   Path to the miniconda installation (Defaults: ~/miniconda)
 ```
+
+## Install miniconda
+
+In both cases (server or desktop) I'll use a miniconda installation.
+Everything I need is in the official [miniconda mdk](https://mdk.sh/mdks/miniconda.md)
+
 
 ## Install vmware tools if in a vmware box
 
