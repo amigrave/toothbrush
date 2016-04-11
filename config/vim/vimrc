@@ -81,6 +81,7 @@ if v:version > 701
     " Misc Tools
     Plugin 'eiginn/netrw'
     Plugin 'tpope/vim-fugitive'
+    Plugin 'airblade/vim-gitgutter'
     Plugin 'will133/vim-dirdiff'
     Plugin 'AndrewRadev/linediff.vim'
     " Plugin 'mattn/gist-vim'
