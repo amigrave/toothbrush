@@ -447,6 +447,9 @@ inoremap <silent> <S-F10> <C-O>:bde!<CR>
 
 set pastetoggle=<F11>
 
+" Copy to system clipboard
+vmap <C-C> "+y
+
 " Temporary stop displaying search results on Ctrl+L
 " http://blog.sanctum.geek.nz/vim-search-highlighting/
 nnoremap <C-l> :nohlsearch<CR><C-l>
