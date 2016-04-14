@@ -450,6 +450,9 @@ set pastetoggle=<F11>
 " Copy to system clipboard
 vmap <C-C> "+y
 
+" Number toggling
+nnoremap <S-F11> :set nonumber!<CR>
+
 " Temporary stop displaying search results on Ctrl+L
 " http://blog.sanctum.geek.nz/vim-search-highlighting/
 nnoremap <C-l> :nohlsearch<CR><C-l>
