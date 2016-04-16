@@ -506,8 +506,8 @@ nnoremap <leader>on :tabnew<CR>:Note<Space>
 let g:markdown_fenced_languages = ['python', 'javascript', 'html', 'xml', 'yaml', 'sql', 'sh']
 let g:markdown_folding = 1
 
-imap <c-e> <c-o>:lnext<cr>
-nmap <c-e> :lnext<cr>
+" imap <c-e> <c-o>:lnext<cr>
+" nmap <c-e> :lnext<cr>
 nmap <leader>m :make<cr>
 
 " vim-dirdiff
@@ -644,7 +644,7 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '⚠'
 let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 
 " localvimrmc
 let g:localvimrc_sandbox=0
