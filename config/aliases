@@ -128,6 +128,7 @@ alias pixelmator="/Applications/Pixelmator.app/Contents/MacOS/Pixelmator"
 alias ggx2="cd ~/.wine/drive_c/Program\ Files/ZOO\ Digital\ Publishing/GUILTY\ GEAR\ X2\ #RELOAD/; wine ggx2.exe"
 alias bitcoin="/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -conf=$DOTFILES/bitcoin/bitcoin.conf -datadir=$XDG_CONFIG_HOME/bitcoin/ &"
 alias retroarch="/Applications/RetroArch.app/Contents/MacOS/RetroArch"
+alias kill_card_reader="sudo pkill -9 com.apple.ifdreader"
 
 fi
 # }}}
