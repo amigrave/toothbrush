@@ -329,7 +329,9 @@ nnoremap gf gF
 " Find non-ascii characters
 nnoremap <Leader>§ /[^\x00-\x7F]<CR>
 
+" Set cwd to current file's directory
 nnoremap <Leader>. :lcd %:p:h<CR>
+
 " Reporoot
 nnoremap <silent> <Leader>/ :ProjectRootLCD<cr>
 
@@ -343,6 +345,7 @@ endif
 " nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
 nnoremap <Leader>gl :execute ":silent !git gui blame --line=" . line('.') . " %"<CR>
 nnoremap <Leader>gg :Gblame<CR>
+nnoremap <Leader>gt :Gstatus<CR>
 vnoremap <Leader>gb :Gbrowse<CR>
 if has("gui_macvim")
     nnoremap <Leader>gb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
