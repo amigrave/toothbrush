@@ -81,6 +81,7 @@ if v:version > 701
 
     " Misc Tools
     Plugin 'eiginn/netrw'
+    Plugin 'tpope/vim-unimpaired'
     Plugin 'tpope/vim-fugitive'
     Plugin 'airblade/vim-gitgutter'
     Plugin 'will133/vim-dirdiff'
@@ -381,13 +382,7 @@ imap <C-t> <Esc>:tabnew<CR>
 " command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
 " cabbrev e <c-R>=(getcmdtype()==':' && getcmdpos()==1 ? 'E' : 'e')<cr>
 
-" Tab switching
-nnoremap <silent> <S-F2> :tabprevious<CR>
-inoremap <silent> <S-F2> <C-O>:tabprevious<CR>
-nnoremap <silent> <S-F3> :tabnext<CR>
-inoremap <silent> <S-F3> <C-O>:tabnext<CR>
-
-" 2 space tabs to 4
+" Convert 2 space indentations to 4
 nnoremap <Leader>4 :set ts=2 sts=2 noet<CR>:retab!<CR>:set ts=4 sts=4 et<CR>:retab<CR>
 vnoremap <Leader>4 <esc>:set ts=2 sts=2 noet<CR>gv:retab!<CR>:set ts=4 sts=4 et<CR>gv:retab<CR>
 
@@ -649,6 +644,7 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '⚠'
 let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_always_populate_loc_list = 1  " needed for :lnext :prev to work
 let g:syntastic_auto_loc_list = 0
 
 " localvimrmc
