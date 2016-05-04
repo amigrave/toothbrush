@@ -80,7 +80,9 @@ if v:version > 701
     Plugin 'pearofducks/ansible-vim'
 
     " Misc Tools
-    Plugin 'eiginn/netrw'
+    if v:version >= 740
+        Plugin 'eiginn/netrw'
+    endif
     Plugin 'tpope/vim-unimpaired'
     Plugin 'tpope/vim-fugitive'
     Plugin 'airblade/vim-gitgutter'
@@ -445,7 +447,6 @@ nnoremap <silent> <S-F10> :bde!<CR>
 inoremap <silent> <S-F10> <C-O>:bde!<CR>
 
 set pastetoggle=<F11>
-
 " Copy to system clipboard
 vmap <C-C> "+y
 
