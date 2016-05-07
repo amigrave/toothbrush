@@ -61,6 +61,7 @@ export HTTPIE_CONFIG_DIR=$DOTFILES/httpie
 export PSQLRC=$DOTFILES/psqlrc
 export WGETRC=$DOTFILES/wgetrc
 export GIMP2_DIRECTORY="$DOTFILES/gimp"
+export ATOM_HOME="$DOTFILES/atom"
 
 export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history

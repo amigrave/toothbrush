@@ -1,0 +1,21 @@
+"*":
+  core:
+    disabledPackages: [
+      "emmet"
+    ]
+  editor:
+    fontFamily: "DejaVu Sans Mono for Powerline"
+    fontSize: 12
+    invisibles: {}
+    showInvisibles: true
+    tabLength: 4
+  emmet: {}
+  "exception-reporting":
+    userId: "6a3522a5-1e1e-2e6c-82b1-9ad35c9e2a7c"
+  "markdown-preview":
+    useGitHubStyle: true
+  "one-dark-ui": {}
+  "spell-check": {}
+  "vim-mode": {}
+  welcome:
+    showOnStartup: false
