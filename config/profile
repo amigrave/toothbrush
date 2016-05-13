@@ -28,16 +28,28 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Set up paths
 PATH=$AMIGRAVE/bin:$PATH
+
 if [ -d "$HOME/bin" ]; then
     PATH=$HOME/bin:$PATH
 fi
+
 if [ -d "$HOME/.local/bin" ]; then
     PATH=$HOME/.local/bin:$PATH
 fi
-[[ ":$PATH:" != *":/sbin:"* ]] && PATH="/sbin:${PATH}"
+
+# TODO: do the following properly for all python versions
+if [ -d "$HOME/Library/Python/2.7/bin" ]; then
+    PATH=$HOME/Library/Python/2.7/bin:$PATH
+fi
+
 python_site_package=$HOME/.local/lib/python2.7/site-packages/
+
+if [ -d "$HOME/Library/Python/2.7/lib/python/site-packages" ]; then
+    python_site_package=$HOME/Library/Python/2.7/lib/python/site-packages
+fi
+
+[[ ":$PATH:" != *":/sbin:"* ]] && PATH="/sbin:${PATH}"
 if [ -f "$python_site_package" ]; then
-    # TODO: python version !!!
     export PYTHONPATH=$python_site_package:$PYTHONPATH
 fi
 
