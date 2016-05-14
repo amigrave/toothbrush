@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""CD Toolkit for Linux and OSX
+
+Usage:
+  cdtk -A <files>...
+  cdtk -D <files>...
+  cdtk (-h | --help)
+  cdtk --version
+
+Options:
+  -h --help     Show this screen.
+  -A            Burn audio CD
+  -D            Burn Data-CD/DVD
+"""
+# Use same option names as http://www.bigpaul.org/burn/
+from __future__ import absolute_import, division, print_function
+
+from docopt import docopt
+import tempfile
+import os
+import shutil
+import subprocess
+
+__VERSION__ = "0.0.1"
+
+
+args = docopt(__doc__, version='cdtk %s' % __VERSION__)
+# TODO: check if ffmpeg is present
+if args['-A']:
+    tmpdir = tempfile.mkdtemp()
+    toconvert = sorted(args['<files>'])
+    toburn = []
+    try:
+        for filename in toconvert:
+            if not os.path.isfile(filename):
+                # TODO: os walk in case of directories
+                raise Exception("Can't read file '%s'" % filename)
+            burnfile = os.path.join(tmpdir, filename + '.wav')
+            print("Converting %s to wav..." % filename)
+            p = subprocess.Popen(['ffmpeg', '-i', filename, burnfile],
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            out, err = p.communicate()
+            if p.returncode:
+                raise Exception("Can't convert file '%s' to wav." % filename)
+            toburn.append(burnfile)
+        print("BURNING...")
+        # TODO: linux
+        subprocess.check_call(['drutil', 'burn', '-audio', tmpdir])
+    except Exception as e:
+        print("ERROR: %s" % e)
+    shutil.rmtree(tmpdir)
+
+elif args['-D']:
+    raise NotImplementedError("TODO")
