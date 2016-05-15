@@ -66,8 +66,9 @@ while getopts "bi" o; do
     case "${o}" in
         b) use_bash=1 ;;
         i)
-            safe_link ~/.profile
             safe_link ~/.bashrc
+            safe_link ~/.profile
+            safe_link ~/.xsessionrc
             safe_link ~/.zshrc
             ;;
         *)
