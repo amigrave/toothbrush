@@ -147,6 +147,7 @@ set wildmode=longest:full,full " Improve autocompletion on command line
 set wildignore=*.o,*~,*.pyc
 set splitbelow            " Invert horizontal split order
 set splitright            " Invert vertical split order
+set diffopt+=vertical     " Force vertical diff
 
 set laststatus=2
 set statusline=   " clear the statusline for when vimrc is reloaded
