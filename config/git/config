@@ -36,9 +36,14 @@
     pretty = fuller # more detail for "git show"
 
 [merge]
+    commit = no  # do not autocommit after merge
+    ff = no
     tool = meld
     # conflictstyle = diff3
     # defaultToUpstream = true
+
+[pull]
+    ff = only  # only pull if merge can be done as fast-forward
 
 [include]
     path = ~/.agr/config/.xdg/git/config.local
