@@ -454,9 +454,16 @@ vmap <C-C> "+y
 " Number toggling
 nnoremap <S-F11> :set nonumber!<CR>
 
-" Temporary stop displaying search results on Ctrl+L
-" http://blog.sanctum.geek.nz/vim-search-highlighting/
-nnoremap <C-l> :nohlsearch<CR><C-l>
+" Ctrl+L removes highlighting and triggers GitGutterAll
+" then calls normal C-L (redraw)
+autocmd VimEnter *
+    \ if exists(":GitGutterAll") |
+        \ echo "ONE" |
+        \ exe "nnoremap <C-l> :nohlsearch<CR>:GitGutterAll<CR><C-l>" |
+    \ else |
+        \ echo "TWO" |
+        \ exe "nnoremap <C-l> :nohlsearch<CR><C-l>" |
+    \ endif
 
 " NERD Tree
 nnoremap <F12> :NERDTreeFind<CR>
