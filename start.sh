@@ -35,6 +35,13 @@ fi
 if [ "$0" = ".profile" ]; then
     # Handle explicit case for .profile
     load_profile=1
+elif [ "$0" = "/etc/X11/Xsession" ]; then
+    # All X Display managers should source profile.
+    # Watch out, the sheebang on Xsession is /bin/sh so we
+    # must keep sh compatibility ! (eg: no [[ tests)
+    # Of course, in case of DM we don't source the profile_interactive
+    NOT_INTERACTIVE=1
+    load_profile=1
 fi
 
 # resolve potential symlinks
@@ -49,7 +56,7 @@ export XDG_CONFIG_HOME=$DOTFILES
 # echo "AMIGRAVE($AMIGRAVE) - DOTFILES($DOTFILES)" >> /tmp/debug.log
 
 if [ $load_profile -eq 1 ]; then
-    source $DOTFILES/profile
+    . $DOTFILES/profile
     return
 fi
 
@@ -83,7 +90,7 @@ if [[ "$0" == "$current_script" ]]; then
     [[ "$use_bash" == 1 ]] && export FORCE_BASH=1
     $AMIGRAVE/bin/shell
 elif [ "$rcfile" != "" ]; then
-    source $DOTFILES/$rcfile
+    . $DOTFILES/$rcfile
 else
     echo "We really want to debug this case: 0($0)" >> /tmp/debug.log
 fi

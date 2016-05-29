@@ -1,0 +1,255 @@
+# vim: ft=sh:fdm=marker:
+
+# This file is kept seperated from the main profile file because
+# the later should be kept restricted for /bin/sh compatibility
+
+# I want sbin even if I'm not root
+[[ ":$PATH:" != *":/sbin:"* ]] && PATH="/sbin:${PATH}"
+
+# Misc Interactive mode stuff {{{
+source $DOTFILES/aliases
+eval `dircolors -b $DOTFILES/dir_colors `
+# }}}
+
+# Functions {{{
+
+function ansible-facts() {
+    ansible all -i "$1," -m setup
+}
+
+# vless: make vim behave like `less` {{{
+function vless() {
+    # /usr/share/vim/vim74/macros/less.sh
+    # Shell script to start Vim with less.vim.
+    # Read stdin if no arguments were given and stdin was redirected.
+    if test -t 1; then
+        if test $# = 0; then
+            if test -t 0; then
+                echo "Missing filename" 1>&2
+                exit
+            fi
+            vim -R --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim' -
+        else
+            vim -R --cmd 'let no_plugin_maps = 1' -c 'runtime! macros/less.vim' "$@"
+        fi
+    else
+        # Output is not a terminal, cat arguments or stdin
+        if test $# = 0; then
+            if test -t 0; then
+                echo "Missing filename" 1>&2
+                exit
+            fi
+            cat
+        else
+            cat "$@"
+        fi
+    fi
+}
+# }}}
+
+# Edit local profile (creates one if not exist) {{{
+function profile() {
+    local_profile=$XDG_CONFIG_HOME/profile_local
+
+    if [ ! -f $local_profile ]; then
+        printf '%s ' "No '$local_profile' found. Create a new one from a template ? [y/N]"
+        read answer
+        if [[ $answer =~ [yY](es)* ]]; then
+            cp $AMIGRAVE/config/profile_local $local_profile
+        else
+            echo "User aborted."
+            return
+        fi
+    fi
+
+    $EDITOR $local_profile
+}
+# }}}
+
+# Colorized cat using pygmentize {{{
+function ccat() {
+    pygmentize -g "$@" | less
+}
+# }}}
+
+# Launch mc and `cd` to last visited directory {{{
+function mc() {
+    cwd_file=/tmp/mc-$USER-$$-dir
+    env mc -c --printwd=$cwd_file "$@"
+    if [ -f $cwd_file ]; then
+        cd "`cat /tmp/mc-$USER-$$-dir`"
+        rm -f "/tmp/mc-$USER-$$-dir"
+    fi
+}
+# }}}
+
+# Launch mc and `sh` connect to a remote host {{{
+function sshmc() {
+    mc ./ sh://$1
+}
+# }}}
+
+# Dump `ping` packets received on a given network interface {{{
+function check_pings() {
+    if [ -z "$1" ]; then
+        check_pings 'eth0'
+    else
+        echo "Checking pings on interface $1"
+        tcpdump -i $1 icmp and icmp[icmptype]=icmp-echo
+    fi
+}
+# }}}
+
+# Check shellshock vulnerability {{{
+function shellshock() {
+    if [ -z "$1" ]; then
+        shellshock 'bash'
+        echo
+        echo "----------------------------------------------------------------"
+        echo "You should also check with other values, eg:  /bin/bash, /bin/sh"
+    else
+        # Checks it you are vulnerable to shellshock
+        # http://serverfault.com/questions/631257/how-to-test-if-my-server-is-vulnerable-to-the-shellshock-bug
+        echo "************************* Checking $1"
+        env X="() { :;} ; echo YOU_ARE_VULNERABLE_TO_SHELLSHOCK" $1 -c "echo ' '"
+        echo "************************* Checking $1 (/tmp/echo should not exist)"
+        cd /tmp
+        env X='() { (a)=>\' $1 -c "echo date"
+        if [ -f echo ]; then
+            echo "YOU_ARE_VULNERABLE_TO_SHELLSHOCK"
+            rm echo
+        fi
+    fi
+}
+# }}}
+
+# Find files sorted more recent first {{{
+function findrecent() {
+    find $1 -type f -printf '%TY-%Tm-%Td %TT %p\n' | sort -r | less
+}
+# }}}
+
+# autossh then screen {{{
+function assh() {
+    autossh -x "$*" 'screen -RdU'
+}
+# }}}
+
+# sudo with same configuration shell {{{
+function sush() {
+    if [ -z "$1" ]; then
+        sudo -E $AMIGRAVE/start.sh
+    else
+        sudo -E -u $1 $AMIGRAVE/start.sh
+    fi
+}
+# }}}
+
+# Check if we are in an ssh connection {{{
+function is_ssh() {
+    # TODO: better ssh detection
+    if [ -z "$SSH_TTY" ]; then
+        return 1
+    fi
+    return 0
+}
+# }}}
+
+# Clean project directory {{{
+function pclean() {
+    find . -name "*.pyc" -delete
+    find . -name "*.THIS" -delete
+    find . -name "*.BASE" -delete
+    find . -name "*.OTHER" -delete
+    find . -name "*.~*~" -delete
+    find . -name ".DS_Store" -delete
+    find . -name '.sass-cache' -type d | xargs rm -rf
+    find . -name "*.moved" -delete
+    # find . -type d -empty ! -path '*/.bzr/*' -delete
+}
+# }}}
+
+# man() {
+#     env LESS_TERMCAP_mb=$'\E[01;31m' \
+#     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+#     LESS_TERMCAP_me=$'\E[0m' \
+#     LESS_TERMCAP_se=$'\E[0m' \
+#     LESS_TERMCAP_ue=$'\E[0m' \
+#     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+#     man "$@"
+# }
+
+# Activate a virtualenv by opening a new shell {{{
+function activate() {
+    # Activate a virtualenv by iterating parents folder in order to find '.env'
+    # then spawn a new shell with the environment. Default virtualenv's activate
+    # does not spawn a new shell and I don't like it
+    local VIRTUALENV_DIRECTORY=".env"
+    local PATH_TO_VIRTUALENV=$(pwd)
+
+    while [ "$PATH_TO_VIRTUALENV" != '/' ]
+    do
+        activate="$PATH_TO_VIRTUALENV/$VIRTUALENV_DIRECTORY/bin/activate"
+        if [ -r "$activate" ]
+        then
+            $SHELL -c "source '$activate'; PS1_PREFIX='[.env]' $SHELL"
+            return 0
+        fi
+
+        PATH_TO_VIRTUALENV=$(dirname "$PATH_TO_VIRTUALENV")
+    done
+
+    echo "Could not find a virtualenv"
+    return 1
+}
+# }}}
+
+# }}}
+
+# Set up terminal emulation {{{
+export TERMINFO=$XDG_CONFIG_HOME/terminfo
+if [[ "$COLORTERM" == "rxvt-xpm" ]]; then
+    export TERM="rxvt-256color"
+elif [[ "$COLORTERM" == "gnome-terminal" ]]; then
+    # TODO: check issues with S-F* keys
+    # export TERM="gnome-256color"
+    export TERM="xterm-256color"
+elif [[ "$TERM" == "screen" ]]; then
+    export TERM="screen-256color"
+elif [[ "$TERM" == "screen-bce" ]]; then
+    export TERM="screen-256color-bce-s"
+elif [[ "$KONSOLE_DBUS_SESSION" != "" ]]; then
+    export TERM="konsole-256color"
+fi
+# }}}
+
+# TODO: src-highlight {{{
+# LESSPIPE=`which src-hilite-lesspipe.sh`
+# alias src='LESSOPEN="| ${LESSPIPE} %s" less'
+# }}}
+
+# OS dependencies {{{
+if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
+
+    # TODO: do it only once under X session and not in remote session
+    # Use xbindkeys if installed
+    # if [ -x "$(command -v xbindkeys)" ]; then
+    #     xbindkeys -f $DOTFILES/xbindkeysrc
+    # fi
+
+    # make less more friendly for non-text input files, see lesspipe(1)
+    [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+    # SDL Fullscreen second monitor
+    # export SDL_VIDEO_FULLSCREEN_HEAD=1
+    # export SDL_AUDIODRIVER=alsa
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+
+    termsetcolors
+
+elif [[ "$OSTYPE" =~ darwin* ]]; then
+
+    export BROWSER=safari
+
+fi
+# }}}
