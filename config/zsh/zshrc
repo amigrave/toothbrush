@@ -15,6 +15,7 @@ setopt histignorealldups
 # Setup Completion {{{
 # Use modern completion system
 autoload -Uz compinit
+fpath=($XDG_CONFIG_HOME/zsh/zsh-completions/src $fpath)
 compinit -i -d "$XDG_CACHE_HOME/zcompdump"
 
 zstyle ':completion:*' auto-description 'specify: %d'
