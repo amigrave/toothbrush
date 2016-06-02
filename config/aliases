@@ -38,11 +38,12 @@ alias ff="find . -type d | egrep -i"
 alias v='DISPLAY=:0 mpv -cache 4096 -fs'
 # }}}
 
-# Path naviguation {{{
+# Path navigation {{{
 alias ls="ls --color=yes"
 alias d="LC_ALL=C ls -lh"
 alias l="LC_ALL=C ls -lAh | less -r -E -X"
 alias ll=l
+alias cdr='cd $(git rev-parse --show-cdup)'
 # }}}
 
 # Misc {{{
