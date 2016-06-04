@@ -56,6 +56,7 @@ alias chmodx="find . -type d -exec chmod 0755 '{}' ';'; find . -type f -exec chm
 alias chownx="sudo chown -R $USER:$(id -g -n $USER)"
 alias dusage="du -sk * | sort -nr | cut -f2 | xargs -d '\n' du -sh"
 alias pst="pstree -hanUul $USER | less"
+alias find_non_ascii="ag '[^\x00-\x7F]'"
 # Make a function out of this or even consider to put it in agr.py
 # alias setdate="sudo date -s \"$(curl -sD - google.com | grep ^Date: | cut -d' ' -f3-6)Z\""
 
