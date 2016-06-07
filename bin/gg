@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Search on google
+#
+
+if [[ $DESKTOP_SESSION == 'qtile' ]]; then
+    qtile-agr --silent switch_group web1
+fi
+
+query=`urlencode "$@"`
+chromium "https://www.google.com/search?q=$query"
+
