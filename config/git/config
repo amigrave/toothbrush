@@ -51,10 +51,11 @@
 [alias]
     s = status
     b = branch -vv
+    p = "!git fetch --prune; git rebase --autostash"
     bb = branch -vva
     ci = commit
     fa = fetch --all -p
-    inf = "!for i in $(git remote); do git remote show $i -n; done"
+    info = "!for i in $(git remote); do git remote show $i -n; done"
     co = checkout
     cp = cherry-pick
     fp = format-patch
