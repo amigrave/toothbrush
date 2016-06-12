@@ -66,6 +66,7 @@ alias svnupdry='svn merge --dry-run -r BASE:HEAD .'
 alias bfg='java -jar ~/bin/java/bfg*'
 
 alias ssh-nokey="ssh -o PreferredAuthentications=keyboard-interactive,password -o PubkeyAuthentication=no"
+alias ssh-nocheck="ssh -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 alias python_dependencies='sfood -fuq . | sfood-filter-stdlib | sfood-target-files | xargs dirname | sort | uniq'
@@ -75,6 +76,7 @@ alias vlc_stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --
 alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
 alias termkey='tput smkx; cat; tput rmkx'
 alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
+alias reverse_ip_lookup="dig +noall +answer -x"
 # }}}
 
 # Emulation {{{
