@@ -19,6 +19,9 @@ if v:version > 701
     " set the runtime path to include Vundle and initialize
     call vundle#begin(expand('<sfile>:p:h') . '/bundle')
 
+    " Called first
+    Plugin 'embear/vim-localvimrc'
+
     " Navigation
     Plugin 'scrooloose/nerdtree'
     Plugin 'kien/ctrlp.vim'
@@ -91,7 +94,6 @@ if v:version > 701
     " Plugin 'mattn/gist-vim'
     Plugin 'marzocchi/vim-color-picker-osx'
     Plugin 'rking/ag.vim'
-    Plugin 'embear/vim-localvimrc'
     Plugin 'haya14busa/vim-asterisk'
 
     " Libs
