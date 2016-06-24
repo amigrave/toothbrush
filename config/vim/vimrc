@@ -67,7 +67,7 @@ if v:version > 701
     Plugin 'stephpy/vim-yaml'  " Simplify yaml syntax for faster processing
     Plugin 'rainux/vim-vala'
     Plugin 'davidhalter/jedi-vim'
-    Plugin 'marijnh/tern_for_vim'
+    " Plugin 'marijnh/tern_for_vim'
     Plugin 'elzr/vim-json'
     Plugin 'wavded/vim-stylus'
     Plugin 'tpope/vim-markdown'
