@@ -183,7 +183,7 @@ if has('gui')
     set guioptions-=T           " hide toolbar
     " set guioptions-=m           " Remove menu bar
     " set lines=999 columns=999   " Hack: maximize gvim
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
 
     " Windows handling
     nnoremap <silent> <C-H> :vne<CR>
