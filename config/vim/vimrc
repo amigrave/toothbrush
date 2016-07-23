@@ -451,9 +451,13 @@ inoremap <silent> <F10> <C-O>:Bdelete<CR>
 nnoremap <silent> <S-F10> :bde!<CR>
 inoremap <silent> <S-F10> <C-O>:bde!<CR>
 
-set pastetoggle=<F11>
-" Copy to system clipboard
+" Clipboard stuff
+set pastetoggle=<S-F11>
+nmap <F11> :set paste<CR>"+p:set nopaste<CR>
+imap <F11> <C-O>:set paste<CR><C-O>"+p<C-O>:set nopaste<CR>
 vmap <C-C> "+y
+vmap <leader>y "+y
+nmap <leader>p "+p
 
 " Number toggling
 nnoremap <S-F11> :set nonumber!<CR>
