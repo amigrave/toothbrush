@@ -1,51 +1,51 @@
 [global_config]
-  enabled_plugins = EditorPlugin
   close_button_on_tab = False
+  enabled_plugins = EditorPlugin
 [keybindings]
-  switch_to_tab_10 = <Alt><Super>KP_0
-  reset_clear = <Super>k
-  go_right = <Super>Right
-  go_left = <Super>Left
-  toggle_zoom = <Shift><Super>Return
+  copy = <Super>c
+  edit_window_title = <Alt><Super>i
   full_screen = <Primary><Super>f
+  go_down = <Super>Down
+  go_left = <Super>Left
+  go_right = <Super>Right
+  go_up = <Super>Up
+  group_tab = None
+  new_tab = <Super>t
+  next_tab = <Alt><Super>Right
+  paste = <Super>v
   prev_tab = <Alt><Super>Left
-  switch_to_tab_6 = <Alt><Super>KP_6
-  switch_to_tab_7 = <Alt><Super>KP_7
-  switch_to_tab_4 = <Alt><Super>KP_4
-  switch_to_tab_5 = <Alt><Super>KP_5
+  reset_clear = <Super>k
+  split_horiz = <Shift><Super>d
+  split_vert = <Super>d
+  switch_to_tab_1 = <Alt><Super>KP_1
+  switch_to_tab_10 = <Alt><Super>KP_0
   switch_to_tab_2 = <Alt><Super>KP_2
   switch_to_tab_3 = <Alt><Super>KP_3
-  switch_to_tab_1 = <Alt><Super>KP_1
-  split_vert = <Super>d
-  group_tab = None
+  switch_to_tab_4 = <Alt><Super>KP_4
+  switch_to_tab_5 = <Alt><Super>KP_5
+  switch_to_tab_6 = <Alt><Super>KP_6
+  switch_to_tab_7 = <Alt><Super>KP_7
   switch_to_tab_8 = <Alt><Super>KP_8
   switch_to_tab_9 = <Alt><Super>KP_9
-  new_tab = <Super>t
-  copy = <Super>c
-  paste = <Super>v
-  go_up = <Super>Up
-  next_tab = <Alt><Super>Right
-  split_horiz = <Shift><Super>d
-  go_down = <Super>Down
-  edit_window_title = <Alt><Super>i
-[profiles]
-  [[default]]
-    use_system_font = False
-    font = DejaVu Sans Mono for Powerline 9
-    background_darkness = 0.91
-    scrollback_lines = 1000
-    background_image = None
-    copy_on_selection = True
-    scrollback_infinite = True
+  toggle_zoom = <Shift><Super>Return
 [layouts]
   [[default]]
     [[[child1]]]
-      type = Terminal
       parent = window0
+      type = Terminal
     [[[window0]]]
-      type = Window
       parent = ""
+      type = Window
 [plugins]
   [[EditorPlugin]]
     command = gvim-agr --remote-silent +{line} {filepath}
     match = '''([^ \t\n\r\f\v:"']+[\.\/][^ \t\n\r\f\v:"']+)?((:|(". line ))([0-9]+))?'''
+[profiles]
+  [[default]]
+    background_darkness = 0.91
+    background_image = None
+    copy_on_selection = True
+    font = DejaVu Sans Mono for Powerline 9
+    scrollback_infinite = True
+    scrollback_lines = 1000
+    use_system_font = False
