@@ -11,10 +11,11 @@
   go_up = <Super>Up
   group_tab = None
   new_tab = <Super>t
-  next_tab = <Alt><Super>Right
+  next_tab = <Primary>Tab
   paste = <Super>v
-  prev_tab = <Alt><Super>Left
+  prev_tab = <Primary><Shift>Tab
   reset_clear = <Super>k
+  search = <Super>f
   split_horiz = <Shift><Super>d
   split_vert = <Super>d
   switch_to_tab_1 = <Alt><Super>KP_1
