@@ -1,0 +1,2 @@
+#!/bin/bash
+chromium --user-data-dir=$XDG_CONFIG_HOME/chromium/dev-profile
