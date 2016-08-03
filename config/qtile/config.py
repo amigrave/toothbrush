@@ -12,6 +12,18 @@ win = "mod4"
 
 SCROT_ARGS = " -e 'mv $f ~/Downloads/'"
 
+SYMBOL_FONT = {
+    # http://www.iemoji.com/view
+    'font': 'Symbola',
+    'fontsize': 20,
+}
+
+
+def debug(text):
+    debug_widget.text = "[%s]" % text
+debug_widget = widget.TextBox(u"\u2620", name="coucou", **SYMBOL_FONT)
+
+
 keys = [
     # Switch between windows in current stack pane
     Key([mod], "Tab", lazy.layout.down()),
@@ -104,12 +116,6 @@ widget_defaults = dict(
     padding=3,
 )
 
-symbol_font = {
-    # http://www.iemoji.com/view
-    'font': 'Symbola',
-    'fontsize': 20,
-}
-
 screens = [
     Screen(
         bottom=bar.Bar(
@@ -118,16 +124,14 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
 
-                # widget.TextBox(u"Ambiance"),
-                # widget.TextBox(u"\u2192 \u2620", name="mood", **symbol_font),
+                debug_widget,
 
                 widget.Sep(),
-                # widget.TextBox(u"\U0001F3B5", **symbol_font),
-                widget.Volume(emoji=True, **symbol_font),
+                widget.Volume(emoji=True, **SYMBOL_FONT),
 
                 # widget.Sep(),
                 # widget.Battery(),
-                # widget.TextBox(u"\U0001F50B", **symbol_font),
+                # widget.TextBox(u"\U0001F50B", **SYMBOL_FONT),
 
                 widget.Sep(),
                 widget.MemoryGraph(fill_color='009933', graph_color='339966'),
