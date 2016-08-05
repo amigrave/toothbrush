@@ -1,4 +1,6 @@
 import logging
+import random
+import os
 
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
@@ -22,6 +24,11 @@ SYMBOL_FONT = {
 def debug(text):
     debug_widget.text = "[%s]" % text
 debug_widget = widget.TextBox(u"\u2620", name="coucou", **SYMBOL_FONT)
+
+
+def set_random_wallpaper(*a):
+    nimg = random.randrange(1701, 2199)
+    os.system('feh --bg-fill https://www.gstatic.com/prettyearth/assets/full/%s.jpg' % nimg)
 
 
 keys = [
@@ -59,17 +66,12 @@ keys = [
     # Win+c/v == copy/paste
     # Key([mod], "c", lazy.fake_keypress("XF86Copy")),
     # Key([mod], "v", lazy.fake_keypress("XF86Paste")),
-    # Key([mod], "m", lazy.simulate_keypress(["control"], "l")),
-    # Key([mod], "m", lazy.simulate_keypress([], "l")),
-    # Key([mod], "j", lazy.fake_keypress("d")),
-    # Key([mod], "j", lazy.simulate_keypress([], "l")),
-    # Key([mod], "j", lazy.fake_keypress("XF86Paste")),
-    # Key([win, alt], "Right", lazy.simulate_keypress(["control"], "Tab")),
-    # Key([win, alt], "Left", lazy.simulate_keypress(["control", "Shift"], "Tab")),
-    # Key([win, alt], "Right", lazy.spawn('xdotool key "Alt_L+Super_L+Right"')),
-    # Key([win, alt], "Left", lazy.spawn('xdotool key "Alt_L+Super_L+Left"')),
-]
 
+    # Key([win, alt], "Right", lazy.function(next_ta)),
+    # Key([win, 'shift'], "Right", lazy.spawn("xdotool key Ctrl+Tab")),
+
+    Key([win], "l", lazy.function(set_random_wallpaper)),
+]
 
 groups = [Group(i) for i in "12345"]
 
@@ -165,3 +167,6 @@ cursor_warp = False
 floating_layout = layout.Floating()
 auto_fullscreen = True
 wmname = "qtile"
+
+# Set initial wallpaper
+os.system('feh --bg-fill /usr/share/images/desktop-base/kali-wallpaper_1920x1080.png')
