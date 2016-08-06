@@ -73,39 +73,23 @@ keys = [
     Key([win], "l", lazy.function(set_random_wallpaper)),
 ]
 
-groups = [Group(i) for i in "12345"]
+groups = [
+    ('web1', [mod], '1', {'spawn': 'chromium'}),
+    ('web2', [mod], '2', {'spawn': 'chromium-dev'}),
+    ('chat', [mod], '3', {}),
+    ('gvim', [mod], 'e', {}),
+    ('term', [mod], 'Return', {'spawn': 'terminator'}),
+    ('ipy', [mod, alt], 'Return', {}),
+    ('gimp', [mod], 'g', {}),
+]
 
-for i in groups:
-    # mod1 + letter of group = switch to group
+for i, group in enumerate(groups):
+    groups[i] = Group(group[0], **group[3])
+    # if group[0] == 'term':
+    #     groups[i].toscreen()
     keys.append(
-        Key([mod], i.name, lazy.group[i.name].toscreen())
+        Key(group[1], group[2], lazy.group[group[0]].toscreen()),
     )
-
-    # TODO: find better way to move window (eg move to the left or right, that's all)
-    # mod1 + shift + letter of group = switch to & move focused window to group
-    # keys.append(
-    #     Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
-    # )
-
-groups.append(Group('term'))
-keys.append(
-    Key([mod], "Return", lazy.group['term'].toscreen()),
-)
-
-groups.append(Group('gvim'))
-keys.append(
-    Key([mod], "e", lazy.group['gvim'].toscreen()),
-)
-
-groups.append(Group('iPython'))
-keys.append(
-    Key([mod, alt], "Return", lazy.group['iPython'].toscreen()),
-)
-
-groups.append(Group('gimp'))
-keys.append(
-    Key([mod], "g", lazy.group['gimp'].toscreen()),
-)
 
 layouts = [
     layout.Max(),
