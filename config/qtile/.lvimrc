@@ -1,0 +1,7 @@
+python << EOF
+import os
+import sys
+
+libdir = "~/miniconda/envs/qtile/lib/python3.5/site-packages/"
+sys.path.insert(0, os.path.expanduser(libdir))
+EOF

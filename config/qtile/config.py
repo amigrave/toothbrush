@@ -31,6 +31,12 @@ def set_random_wallpaper(*a):
     os.system('feh --bg-fill https://www.gstatic.com/prettyearth/assets/full/%s.jpg' % nimg)
 
 
+def next_tab(qtile):
+    # subprocess.call(['/usr/bin/xte', 'keyup Super_L', 'keyup Alt_L',
+    #                  'keydown Control_L', 'key Tab', 'keyup Control_L'])
+    debug('next_tab')
+
+
 keys = [
     # Switch between windows in current stack pane
     Key([mod], "Tab", lazy.layout.down()),
@@ -74,11 +80,11 @@ keys = [
 ]
 
 groups = [
-    ('web1', [mod], '1', {'spawn': 'chromium'}),
-    ('web2', [mod], '2', {'spawn': 'chromium-dev'}),
+    ('web1', [mod], '1', {}),
+    ('web2', [mod], '2', {}),
     ('chat', [mod], '3', {}),
-    ('gvim', [mod], 'e', {}),
     ('term', [mod], 'Return', {'spawn': 'terminator'}),
+    ('gvim', [mod], 'e', {}),
     ('ipy', [mod, alt], 'Return', {}),
     ('gimp', [mod], 'g', {}),
 ]
