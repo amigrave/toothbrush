@@ -54,6 +54,7 @@
     p = "!git fetch --prune; git rebase --autostash"
     bb = branch -vva
     ci = commit
+    cia = commit --amend
     fa = fetch --all -p
     info = "!for i in $(git remote); do git remote show $i -n; done"
     co = checkout

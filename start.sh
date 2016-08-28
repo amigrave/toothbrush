@@ -9,6 +9,7 @@
 #
 #       ~/.profile
 #       ~/.bashrc
+#       ~/.xsessionrc
 #       ~/.zshrc
 
 # We should be careful about the case we should load .profile
