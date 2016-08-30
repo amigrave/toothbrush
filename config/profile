@@ -57,9 +57,10 @@ fi
 
 export XDG_CONFIG_HOME=$DOTFILES
 export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local
 
+# Programs that does not conform to the XDG directory specification
 export MC_SKIN=$DOTFILES/mc/skins/agr.ini
-# TODO: check if all of them are still mandatory now that XDG_CONFIG_DIR == DOTFILES
 export PYTHONSTARTUP=$DOTFILES/python/shell_startup.py
 export ZDOTDIR=$DOTFILES/zsh
 export MPLAYER_HOME=$DOTFILES/mplayer
@@ -72,10 +73,11 @@ export IRBRC=$DOTFILES/irbrc
 export LFTP_HOME=$DOTFILES/lftp
 export MPV_HOME=$DOTFILES/mpv
 export HTTPIE_CONFIG_DIR=$DOTFILES/httpie
-export PSQLRC=$DOTFILES/psqlrc
+export PSQLRC=$DOTFILES/postgresql/psqlrc
 export WGETRC=$DOTFILES/wgetrc
 export GIMP2_DIRECTORY="$DOTFILES/gimp"
 export ATOM_HOME="$DOTFILES/atom"
+export NPM_CONFIG_USERCONFIG=$DOTFILES/npm/npmrc
 
 export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
