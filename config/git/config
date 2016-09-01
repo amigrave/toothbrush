@@ -5,7 +5,6 @@
 
 [core]
     filemode = false
-    excludesfile = .gitignore.local
     editor = vim
 
 [color]
@@ -17,20 +16,22 @@
 [pretty]
     hist  = "%C(bold yellow)%h %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)"
     histp = "%C(bold yellow)%h %C(reset)%C(yellow)%p %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)" # with parents
-    ghist = "%C(bold red)%d %C(bold yellow)%gD %C(reset)%C(yellow)%h %C(reset)%aD %C(red)[%an] %C(green)%gs %C(reset)%s"
 
-[http]
-    sslVerify = false
+# [http]
+#     sslVerify = false
 
 [status]
     submodulesummary = true
 
 [diff]
     renames = true
-    noprefix = true # drops the annoying a/filename.foo b/filename.foo prefixes
+    noprefix = true # drops the a/filename.foo b/filename.foo prefixes
 
 [difftool "vim-dirdiff"]
     cmd = vim -R -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax on'
+
+[diff-so-fancy]
+    stripLeadingSymbols = false
 
 [format]
     pretty = fuller # more detail for "git show"
@@ -39,75 +40,49 @@
     commit = no  # do not autocommit after merge
     ff = no
     tool = meld
-    # conflictstyle = diff3
     # defaultToUpstream = true
 
 [pull]
     ff = only  # only pull if merge can be done as fast-forward
 
-[include]
-    path = ~/.agr/config/.xdg/git/config.local
-
 [alias]
-    s = status
-    b = branch -vv
-    p = "!git fetch --prune; git rebase --autostash"
-    bb = branch -vva
-    ci = commit
+    b   = branch -vv
+    bb  = branch -vva
+    bc  = branch -r --contains
+    ci  = commit
     cia = commit --amend
-    fa = fetch --all -p
-    info = "!for i in $(git remote); do git remote show $i -n; done"
-    co = checkout
-    cp = cherry-pick
-    fp = format-patch
-    st = status --short --branch --
-    ls = ls-files
-    lsi = ls-files --other --ignored --exclude-standard # List ignored files
-    lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"
-    dd = difftool --dir-diff -t meld
-    vdd = difftool --dir-diff -t vim-dirdiff
-    subs = submodule foreach git
-    upstream = remote add --track master upstream
-    stats = shortlog -s -n --all
-
-    qshow = "!git show $1 --quiet; git qdiff $1~1...$1"
-
-    mm = "!f() { git merge --no-ff -mm $1 && git reset HEAD^; }; f"
-
-    sl = stash list --pretty=format:'%gd %Cblue%h %Cred* %C(yellow)%s'
-    sp = stash pop
-    ss = stash save
+    co  = checkout
+    cp  = cherry-pick
+    d   = "!f() { git diff --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '; }; f"
+    dc  = "!f() { git diff --color \"$@\" | cdiff -s -w0 | less --tabs=4 -RFX; }; f"
+    dd  = difftool --dir-diff -t meld
+    ddv = difftool --dir-diff -t vim-dirdiff
+    fa  = fetch --all -p
+    h   = "!git hh -10"
+    hh  = "!git ll --stat"
+    l   = "!git ll -20"
+    l1  = log --pretty=oneline --abbrev-commit --color=never --format=format:"%an%x09%s"
+    ll  = log --date=relative --pretty=hist
+    ls  = ls-files
+    lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"  # list deleted files
+    lsi = ls-files --other --ignored --exclude-standard # list ignored files
+    p   = "!git fetch --prune; git rebase --autostash"
+    sa  = "!sh -c 'git stash apply stash@{$1}' -"
+    sd  = "!sh -c 'git stash drop stash@{$1}' -"
+    sh  = "!sh -c 'git stash show -p stash@{$1}' -"
     ski = stash --keep-index
-    sa = "!sh -c 'git stash apply stash@{$1}' -"
-    sd = "!sh -c 'git stash drop stash@{$1}' -"
-    sh = "!sh -c 'git stash show -p stash@{$1}' -"
+    sl  = stash list --pretty=format:'%gd %Cblue%h %Cred* %C(yellow)%s'
+    sp  = stash pop
+    ss  = stash save
+    s   = status --short --branch
+    st  = status
 
-    # spush = !git stash save && git svn dcommit && git stash pop
-    # spull = !git stash save && git svn rebase && git stash pop
+    auth = shortlog -s -n --all  # author statistics
+    info = "!for i in $(git remote); do git remote show $i -n; done"
+    subs = submodule foreach git
 
     force-ignore = update-index --assume-unchanged  # eg: when added to .git/info/exclude but was changed before
     undo-ignore = update-index --no-assume-unchanged
-
-    l       = log --date=relative --pretty=hist -20
-    ll      = log --date=relative --pretty=hist
-    l1      = log --pretty=oneline --abbrev-commit --color=never --format=format:"%an%x09%s"
-
-    hlog    = log --color=always --date=relative --pretty=hist
-    ghist   = !git hlog -g --pretty=ghist
-
-    hist    = !git hlog --graph --date-order
-    h       = !git --no-pager hist -10
-    hh      = !git --no-pager hist -20
-    hhh     = !git --no-pager hist
-
-    histstat= "!git h --stat=160,160 \"$@\" | perl -ne '/([|*])/; if($1 eq \"*\") { print } else { m/[|] *[0-9]/ and print }'; true"
-    hstat   = !git --no-pager histstat -10
-    hhstat  = !git --no-pager histstat -20
-    hhhstat = !git --no-pager histstat
-
-    hstats  = !git h --shortstat --dirstat=changes,10
-    hhstats = !git hh --shortstat --dirstat=changes,10
-    hhhstats= !git hhh--shortstat --dirstat=changes,10
 
     fix-history = "! \
         export NAME=\"$(whiptail --nocancel --inputbox \"Author's name\" 10 60 3>&1 1>&2 2>&3)\"; \
@@ -127,19 +102,6 @@
         git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch $files' HEAD \
         rm -rf .git/refs/original/ && git reflog expire --all &&  git gc --aggressive --prune"
 
-    # Fetch-Rebase: pure AWESOMEness.
-    # Fetches 'origin' and rebases the current branch on top of origin/master.
-    # Uses 'stash' intelligently to avoid blocking on trivial working-dir changes
-    # https://github.com/ddopson/config/blob/master/.gitconfig
-    frb = "! \
-        git fetch; \
-        if git diff-index --quiet --ignore-submodules HEAD --; then \
-            git rebase origin/master \"$@\"; \
-        else \
-            git stash save -q 'Fetch-Rebase Stashed Changes'; \
-            git rebase origin/master \"$@\"; \
-            git stash pop -q; \
-        fi; true"
 [push]
     default = simple
 
