@@ -1,0 +1,69 @@
+\set QUIET ON
+\set HISTFILE ~/.cache/psql_history- :DBNAME
+\set HISTSIZE 2000
+\set HISTCONTROL ignoredups
+\setenv PAGER less
+\setenv LESS '-iMSx4 -FX'
+
+\set PROMPT1 '%[%033[0;33;32m%]%/%[%033[0m%] on %[%033[0;33;33m%]%n%@%M%[%033[0m%] %[%033[37;1m%]%x%[%033[0m%]%R> '
+\set PROMPT2 '%R> '
+
+-- \pset null '∅'
+\pset null 'NULL'
+-- \pset linestyle unicode
+\pset border 1
+\x auto
+\set COMP_KEYWORD_CASE upper
+\timing
+
+
+\set QUIET OFF
+
+\echo 'Administrative queries:\n'
+-- Taken from http://opensourcedbms.com/dbms/psqlrc-psql-startup-file-for-postgres/
+
+\echo '\t:settings\t-- Server Settings'
+\set settings 'select name, setting,unit,context from pg_settings;'
+
+\echo '\t:conninfo\t-- Server connections'
+\set conninfo 'select usename, count(*) from pg_stat_activity group by usename;'
+
+\echo '\t:activity\t-- Server activity'
+\set activity 'select datname, pid, usename, application_name,client_addr, client_hostname, client_port, query, state from pg_stat_activity;'
+
+\echo '\t:locks\t\t-- Lock info'
+\set locks  'SELECT bl.pid AS blocked_pid, a.usename AS blocked_user, kl.pid AS blocking_pid, ka.usename AS blocking_user, a.query AS blocked_statement FROM pg_catalog.pg_locks bl JOIN pg_catalog.pg_stat_activity a ON bl.pid = a.pid JOIN pg_catalog.pg_locks kl JOIN pg_catalog.pg_stat_activity ka ON kl.pid = ka.pid ON bl.transactionid = kl.transactionid AND bl.pid != kl.pid WHERE NOT bl.granted;'
+
+\echo '\t:waits\t\t-- Waiting queries'
+\set waits 'SELECT pg_stat_activity.pid, pg_stat_activity.query, pg_stat_activity.waiting, now() - pg_stat_activity.query_start AS \"totaltime\", pg_stat_activity.backend_start FROM pg_stat_activity WHERE pg_stat_activity.query !~ \'%IDLE%\'::text AND pg_stat_activity.waiting = true;'
+
+\echo '\t:slowqueries\t\t-- Show slow queries'
+\set slowqueries 'CREATE extension if not exists pg_stat_statements; SELECT (total_time / 1000 / 60) as total_minutes, (total_time/calls) as average_time, query FROM pg_stat_statements ORDER BY 1 DESC LIMIT 100;'
+
+\echo '\t:dbsize\t\t-- Database Size'
+\set dbsize 'SELECT datname, pg_size_pretty(pg_database_size(datname)) db_size FROM pg_database ORDER BY pg_database_size(datname) DESC;'
+
+\echo '\t:tablesize\t-- Tables Size'
+\set rtsize '(select table_schema, table_name, pg_relation_size( quote_ident( table_schema ) || \'.\' || quote_ident( table_name ) ) as size, pg_total_relation_size( quote_ident( table_schema ) || \'.\' || quote_ident( table_name ) ) as total_size  from information_schema.tables where table_type = \'BASE TABLE\' and table_schema not in (\'information_schema\', \'pg_catalog\') order by pg_relation_size( quote_ident( table_schema ) || \'.\' || quote_ident( table_name ) ) desc, table_schema, table_name)'
+\set tablesize 'select table_schema, table_name, pg_size_pretty(size) as size, pg_size_pretty(total_size) as total_size from (:rtsize) x order by x.size desc, x.total_size desc, table_schema, table_name;'
+
+\echo '\t:uselesscol\t-- Useless columns'
+\set uselesscol 'SELECT nspname, relname, attname, typname, (stanullfrac*100)::int AS null_percent, case when stadistinct >= 0 then stadistinct else abs(stadistinct)*reltuples end AS \"distinct\", case 1 when stakind1 then stavalues1 when stakind2 then stavalues2 end AS \"values\" FROM pg_class c JOIN pg_namespace ns ON (ns.oid=relnamespace) JOIN pg_attribute ON (c.oid=attrelid) JOIN pg_type t ON (t.oid=atttypid) JOIN pg_statistic ON (c.oid=starelid AND staattnum=attnum) WHERE nspname NOT LIKE E\'pg\\\\_%\' AND nspname != \'information_schema\' AND relkind=\'r\' AND NOT attisdropped AND attstattarget != 0 AND reltuples >= 100 AND stadistinct BETWEEN 0 AND 1 ORDER BY nspname, relname, attname;'
+
+\echo '\t:uptime\t\t-- Server uptime'
+\set uptime 'select now() - pg_postmaster_start_time() AS uptime;'
+
+\echo '\t:functions\t\t-- Custom PL functions'
+\set functions 'SELECT proname as name, proargnames as arguments, prosrc as source FROM pg_catalog.pg_namespace n JOIN pg_catalog.pg_proc p ON pronamespace = n.oid WHERE nspname = \'public\';'
+
+\echo '\t:dropfunctions\t\t-- Drop Custom PL functions'
+\set dropfunctions 'SELECT \'DROP FUNCTION \' || ns.nspname || \'.\' || proname || \'(\' || oidvectortypes(proargtypes) || \');\' as agr FROM pg_proc INNER JOIN pg_namespace ns ON (pg_proc.pronamespace = ns.oid) WHERE ns.nspname = \'public\'  order by proname;'
+
+-- CREATE LANGUAGE plpythonu;
+\echo '\t:def\t\t-- Define a new pl/python function'
+\set def '\\prompt \'Name of function: \' fname \\; CREATE OR REPLACE FUNCTION :fname(name text DEFAULT \'\') RETURNS text LANGUAGE plpythonu AS $function$\n\n_name = name or "Anonymous"\nreturn "Hello %s" % _name\n\n$function$; '
+
+\echo '\t:menu\t\t-- Show this Menu'
+\set menu '\\i ~/amigrave/config/.xdg/postgresql/psqlrc'
+
+-- vim:ft=plsql:

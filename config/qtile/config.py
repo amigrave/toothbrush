@@ -21,20 +21,25 @@ SYMBOL_FONT = {
 }
 
 
-def debug(text):
-    debug_widget.text = "[%s]" % text
+def debug(*args):
+    text = ', '.join(['[%s]' % arg for arg in args])
+    debug_widget.text = text
 debug_widget = widget.TextBox(u"\u2620", name="coucou", **SYMBOL_FONT)
 
 
 def set_random_wallpaper(*a):
     nimg = random.randrange(1701, 2199)
-    os.system('feh --bg-fill https://www.gstatic.com/prettyearth/assets/full/%s.jpg' % nimg)
+    set_wallpaper('https://www.gstatic.com/prettyearth/assets/full/%s.jpg' % nimg)
 
 
 def next_tab(qtile):
     # subprocess.call(['/usr/bin/xte', 'keyup Super_L', 'keyup Alt_L',
     #                  'keydown Control_L', 'key Tab', 'keyup Control_L'])
     debug('next_tab')
+
+
+def set_wallpaper(img):
+    os.system('feh --bg-fill "%s" --no-fehbg' % img)
 
 
 keys = [
@@ -159,4 +164,4 @@ auto_fullscreen = True
 wmname = "qtile"
 
 # Set initial wallpaper
-os.system('feh --bg-fill /usr/share/images/desktop-base/kali-wallpaper_1920x1080.png')
+set_wallpaper('/usr/share/images/desktop-base/kali-wallpaper_1920x1080.png')
