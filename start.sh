@@ -51,8 +51,8 @@ command -v greadlink > /dev/null && readlink=greadlink  # OSX
 current_file=`$readlink -f $current_script`
 current_dir=$( cd "$( dirname "$current_file" )" && pwd )
 export AMIGRAVE=$current_dir
-export DOTFILES=$AMIGRAVE/config/.xdg
-export XDG_CONFIG_HOME=$DOTFILES
+export DOTFILES=$AMIGRAVE/config/.xdg  # TODO: now that $DOTFILES == $XDG_CONFIG_HOME maybe
+export XDG_CONFIG_HOME=$DOTFILES       #       I should get rid of $DOTFILES
 
 # echo "AMIGRAVE($AMIGRAVE) - DOTFILES($DOTFILES)" >> /tmp/debug.log
 
