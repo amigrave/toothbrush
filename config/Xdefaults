@@ -49,15 +49,14 @@ URxvt.color7  : #D3D7CF
 URxvt.color15 : #EEEEEC
 
 URxvt*xftAntialias: true
-URxvt*font: xft:Monospace:pixelsize=12:antialias=false
-URxvt*boldFont: xft:Monospace:bold:pixelsize=12:antialias=false
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=false
+URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=12:antialias=false
 URxvt*letterSpace: -1
 !URxvt.font: -misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
 !xterm*font:-bitstream-terminal-bold-r-*-*-*-140-100-100-*-*-iso8859-1
-!URxvt*font: -*-terminus-*-*-*-*-14-*-*-*-*-*-*-*
 
-URxvt.perl-ext: default,matcher,tabbedex,-searchable-scrollback,-readline
-URxvt.urlLauncher: google-chrome
+URxvt.perl-ext: default,matcher,tabbed,-searchable-scrollback,-readline
+URxvt.urlLauncher: chromium
 URxvt.matcher.button: 1
 
 URxvt.tabbed.tabbar-fg: 7
