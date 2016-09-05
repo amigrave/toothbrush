@@ -24,7 +24,7 @@ alias invoke='PYTHONDONTWRITEBYTECODE=1 invoke'
 
 # Application shortcuts {{{
 alias i="ipython"
-
+alias g="git"
 alias dk='sudo docker'
 alias dkb='sudo docker build --force-rm=true --no-cache=true'
 alias npml='npm list --depth=0'
@@ -47,7 +47,8 @@ alias cdr='cd $(git rev-parse --show-cdup)'
 # }}}
 
 # Sysadmin {{{
-alias dropdbs='psql -lX | tail -n +4 | head -n -2 | cut -d\| -f1 | tr -d " " | grep -v -E "^(|postgres|template[01])$" | sort | iselect -am | xargs -n1 dropdb'
+alias dblist='psql -lX | tail -n +4 | head -n -2 | cut -d\| -f1 | tr -d " " | grep -v -E "^(|postgres|template[01])$" | sort'
+alias dropdbs='dblist | iselect -am | xargs -n1 dropdb -i'
 # }}}
 
 # Misc {{{
@@ -96,7 +97,6 @@ alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]
 if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
 alias e="gvim-agr --remote-tab-silent"
-alias g="gimp-agr"
 alias ack="ack-grep --pager=less --color-match=red"
 alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
