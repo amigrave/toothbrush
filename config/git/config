@@ -25,7 +25,8 @@
 
 [diff]
     renames = true
-    noprefix = true # drops the a/filename.foo b/filename.foo prefixes
+    # noprefix = true # drops the a/filename.foo b/filename.foo prefixes
+                      # disabled because it conflicts with gitgutter hunk stash
 
 [difftool "vim-dirdiff"]
     cmd = vim -R -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax on'
