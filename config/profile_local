@@ -6,9 +6,13 @@
 alias root='SUDO_SHELL=root $AMIGRAVE/bin/shell'
 # Put your custom sudo users here, eg:
 # alias foouser='SUDO_SHELL=foouser $AMIGRAVE/bin/shell'
+# export SHELL=/bin/zsh
 
 export PYTHONPATH=$AMIGRAVE:$PYTHONPATH
-# export SSHRC_LOCATION="~/custom_location"
+
+# Customize The location where the dotfiles should be remotely
+# placed when using `sshrc` (defaults to the same directory name as locally)
+# export SSHRC_LOCATION="~/.cache/$USER"
 
 if [ "$ZSH_VERSION" != "" ]; then
     # Zsh specific
@@ -17,17 +21,22 @@ if [ "$ZSH_VERSION" != "" ]; then
     hash -d Music=~/Music
 fi
 
+# proxy='http://localhost:3128'
+# export http_proxy=$proxy
+# export https_proxy=$proxy
 
 if [[ -n "$DISPLAY" && -z "$AGRLOCAL" ]]; then
 
     # vmware-user
-    # export SHELL=/bin/zsh
 
     # ipython notebook --no-browser --port=8889 --pylab --matplotlib
 
-    # Linux stuff
-    #############
+    # Linux specific
+    ################
     # xrdb -merge $DOTFILES/Xdefaults
+
+    # Keyboard stuff
+    ################
     # setxkbmap us
     # setxkbmap -option apple:badmap
     # xmodmap $DOTFILES/Xmodmap
