@@ -32,14 +32,15 @@ def set_random_wallpaper(*a):
     set_wallpaper('https://www.gstatic.com/prettyearth/assets/full/%s.jpg' % nimg)
 
 
-def next_tab(qtile):
-    # subprocess.call(['/usr/bin/xte', 'keyup Super_L', 'keyup Alt_L',
-    #                  'keydown Control_L', 'key Tab', 'keyup Control_L'])
-    debug('next_tab')
-
-
 def set_wallpaper(img):
     os.system('feh --bg-fill "%s" --no-fehbg' % img)
+
+
+def move_window_to_adjacent_group(qtile, offset=1):
+    idx = (qtile.groups.index(qtile.currentGroup) + offset) % len(qtile.groups)
+    group = qtile.groups[idx]
+    qtile.currentWindow.togroup(group.name)
+    group.cmd_toscreen()
 
 
 keys = [
@@ -82,6 +83,9 @@ keys = [
     # Key([win, 'shift'], "Right", lazy.spawn("xdotool key Ctrl+Tab")),
 
     Key([win], "l", lazy.function(set_random_wallpaper)),
+
+    Key([win, alt], "Prior", lazy.function(move_window_to_adjacent_group, -1)),
+    Key([win, alt], "Next", lazy.function(move_window_to_adjacent_group)),
 ]
 
 groups = [
