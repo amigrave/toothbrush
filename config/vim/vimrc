@@ -24,7 +24,7 @@ if v:version > 701
 
     " Navigation
     Plugin 'scrooloose/nerdtree'
-    Plugin 'kien/ctrlp.vim'
+    Plugin 'ctrlpvim/ctrlp.vim'
     Plugin 'dbakker/vim-projectroot'  " Brings function to cd to the current repository root
     Plugin 'majutsushi/tagbar'
     Plugin 'moll/vim-bbye'  " provides :Bdelete
