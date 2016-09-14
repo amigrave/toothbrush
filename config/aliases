@@ -9,6 +9,7 @@ alias flake8="flake8 --config=$DOTFILES/flake8"
 # }}}
 
 # Application shadowers {{{
+alias sudo='sudo -E'
 alias vim='vim -p '
 alias qmv='qmv --format=destination-only'
 alias ag="ag --page=less"
