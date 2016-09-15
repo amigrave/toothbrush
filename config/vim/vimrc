@@ -144,7 +144,6 @@ set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/viminfo nowrap
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
 set backupdir=$XDG_CACHE_HOME/vim/backup
 set directory=$XDG_CACHE_HOME/vim/swap
-set autoread              " auto read disk changes
 set shortmess+=I          " do not display welcome message
 set wildmenu
 set wildmode=longest:full,full " Improve autocompletion on command line
