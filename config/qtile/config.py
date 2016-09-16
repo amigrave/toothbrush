@@ -108,7 +108,8 @@ for i, group in enumerate(groups):
 
 layouts = [
     layout.Max(),
-    layout.Stack(num_stacks=2)
+    layout.Stack(num_stacks=2),
+    layout.verticaltile.VerticalTile(),
 ]
 
 widget_defaults = dict(
