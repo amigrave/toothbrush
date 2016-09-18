@@ -57,7 +57,6 @@ fi
 
 export XDG_CONFIG_HOME=$DOTFILES
 export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local
 
 # Programs that does not conform to the XDG directory specification
 export MC_SKIN=$DOTFILES/mc/skins/agr.ini
