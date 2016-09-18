@@ -1,6 +1,16 @@
 ! keycode 49 = F13
 
 ! Remap Caps_Lock: http://c2.com/cgi/wiki?RemapCapsLock
+! ===============
 clear Lock
 keycode 66 = Control_R
 add Control = Control_R
+
+! Switch Alt and Win
+! ==================
+! keycode 14 = Alt_L
+! keycode 93 = Super_L
+! remove Mod1 = Alt_L
+! remove Mod4 = Super_L
+! add Mod1 = Super_L
+! add Mod4 = Alt_L

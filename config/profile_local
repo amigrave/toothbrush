@@ -37,12 +37,12 @@ if [[ -n "$DISPLAY" && -z "$AGRLOCAL" ]]; then
 
     # Keyboard stuff
     ################
-    # setxkbmap us
-    # setxkbmap -option apple:badmap
+    # setxkbmap -option                              # clear config
+    # setxkbmap us -variant mac -option ctrl:nocaps  # make Caps Lock a ctrl key
+    # xset r rate 200 50
+
     # xmodmap $DOTFILES/Xmodmap
     # xbindkeys
-    # echo "sudo echo 2 > /sys/module/hid_apple/parameters/fnmode
-    # xset r rate 200 50
 
     # TODO: find a solution for ssh keys
     # SSH_ASKPASS=ssh-askpass ssh-add ~/.ssh/id_rsa
