@@ -74,6 +74,9 @@ keys = [
 
     # Multimedia keys
     Key([], "XF86AudioMute", lazy.spawn("amixer sset Master toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 5%-")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 5%+")),
+    # Key([], "XF86AudioPlay", lazy.function(audio_play)),
 
     # Win+c/v == copy/paste
     # Key([mod], "c", lazy.fake_keypress("XF86Copy")),
