@@ -109,7 +109,9 @@ bindkey '^[[5D' backward-word
 # zle -N zle-keymap-select
 # export KEYTIMEOUT=1
 
-source $DOTFILES/zsh/opp.zsh
+if [[ $ZSH_VERSION  < '5.1' ]]; then
+    source $DOTFILES/zsh/opp.zsh
+fi
 # }}}
 
 # Location aliases {{{
