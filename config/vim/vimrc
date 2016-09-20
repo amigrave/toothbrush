@@ -287,7 +287,7 @@ if has("autocmd")
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
 
-    " Markdown
+    " Markdown: https://github.com/tpope/vim-markdown/issues/90
     au FileType markdown setlocal foldmethod=syntax
     au FileType markdown syn region mkdHeaderFold
                               \ start="^\s*\z(#\+\)"
@@ -351,18 +351,18 @@ if has("gui_macvim")
     vmap <C-S> "+y:execute "silent !osascript ~/bin/osx/ipyqtmacvim.scpt"<CR>
 endif
 
-" nnoremap <Leader>l :execute "!bzr qblame % -L " . line('.')<CR>
-nnoremap <Leader>gl :execute ":silent !git gui blame --line=" . line('.') . " %"<CR>
-nnoremap <Leader>gg :Gblame<CR>
-nnoremap <Leader>gt :Gstatus<CR>
-vnoremap <Leader>gb :Gbrowse<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gg <s-v>:Gbrowse<CR>
+vnoremap <Leader>gg :Gbrowse<CR>
+nnoremap <Leader>gs :Gstatus<CR>
 if has("gui_macvim")
-    nnoremap <Leader>gb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
+    nnoremap <Leader>gtl ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig %:p:t;exit'"<CR>
+    nnoremap <Leader>gtb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
 else
-    nnoremap <Leader>gb :execute "!urxvt -cd '%:p:h' -e tig blame %:p:t +" . line('.')<CR>
+    nnoremap <Leader>gtl :execute "!urxvt -cd '%:p:h' -e tig %:p:t"<CR>
+    nnoremap <Leader>gtb :execute "!urxvt -cd '%:p:h' -e tig blame %:p:t +" . line('.')<CR>
 endif
-nnoremap <Leader>gs :execute "!git qshow " . expand("<cword>")<CR>
-
 " Fixed scrolling
 noremap <C-Down> <C-E><Down>
 inoremap <C-Down> <C-O><C-E><Down>
