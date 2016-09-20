@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -x "$(command -v jupyter)" ]; then
-    jupyter qtconsole  --style monokai --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 &
+    jupyter qtconsole  --style monokai --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=14 &
 else
     ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint
 fi
