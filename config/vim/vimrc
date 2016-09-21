@@ -43,6 +43,7 @@ if v:version > 701
     " Plugin 'tpope/vim-surround'
     Plugin 'mattn/emmet-vim'  " (used to be Zen coding)
     Plugin 'tomtom/tcomment_vim'
+    Plugin 'glts/vim-textobj-comment'
     Plugin 'godlygeek/tabular'
     Plugin 'terryma/vim-expand-region'
     Plugin 'ciaranm/detectindent'
@@ -98,6 +99,7 @@ if v:version > 701
     Plugin 'haya14busa/vim-asterisk'
 
     " Libs
+    Plugin 'kana/vim-textobj-user'           " required by vim-textobj-* plugins
     " Plugin 'tomtom/tlib_vim'               " required by snipmate
     " Plugin 'MarcWeber/vim-addon-mw-utils'  " required by snipmate
     " Plugin 'mattn/webapi-vim' " used by gist-vim
