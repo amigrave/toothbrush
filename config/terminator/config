@@ -1,6 +1,5 @@
 [global_config]
-  close_button_on_tab = False
-  enabled_plugins = EditorPlugin
+  enabled_plugins = EditorPlugin, ActivityWatch, TerminalShot
 [keybindings]
   copy = <Super>c
   edit_window_title = <Alt><Super>i
@@ -10,6 +9,7 @@
   go_right = <Super>Right
   go_up = <Super>Up
   group_tab = None
+  hide_window = None
   new_tab = <Super>t
   next_tab = <Primary>Tab
   paste = <Super>v
@@ -43,10 +43,8 @@
     match = '''([^ \t\n\r\f\v:"']+[\.\/][^ \t\n\r\f\v:"']+)?((:|(". line ))([0-9]+))?'''
 [profiles]
   [[default]]
-    background_darkness = 0.91
     background_image = None
-    copy_on_selection = True
     font = DejaVu Sans Mono for Powerline 9
+    scroll_on_output = False
     scrollback_infinite = True
-    scrollback_lines = 1000
     use_system_font = False
