@@ -6,6 +6,9 @@ clear Lock
 keycode 66 = Control_R
 add Control = Control_R
 
+! Map F13 as Insert
+keycode 107 = Insert
+
 ! Switch Alt and Win
 ! ==================
 ! keycode 14 = Alt_L
