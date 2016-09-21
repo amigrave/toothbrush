@@ -63,9 +63,10 @@ class EditorPlugin(plugin.URLHandler):
         groups = [group for group in match.groups() if group is not None]
         lineno = '1'
         filepath = None
+        cwd = self.get_cwd()
         # Iterate through match groups in order to find file and lineno if any
         for item in groups:
-            fileitem = os.path.join(self.get_cwd(), item)
+            fileitem = os.path.join(cwd, item)
             if os.path.exists(fileitem):
                 filepath = fileitem
                 continue
@@ -75,12 +76,13 @@ class EditorPlugin(plugin.URLHandler):
                 pass
             else:
                 lineno = item
-        return filepath, lineno
+        return filepath, lineno, cwd
 
     def callback(self, strmatch):
-        filepath, lineno = self.get_filepath(strmatch)
+        filepath, lineno, cwd = self.get_filepath(strmatch)
         # Generate the openurl string
         command = self.config.plugin_get(self.plugin_name, 'command')
+        command = command.replace('{cwd}', cwd)
         command = command.replace('{filepath}', filepath)
         command = command.replace('{line}', lineno)
         # Check we are opening the file

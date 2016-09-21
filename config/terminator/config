@@ -39,7 +39,7 @@
       type = Window
 [plugins]
   [[EditorPlugin]]
-    command = gvim-agr --remote-silent +{line} {filepath}
+    command = 'vims --cwd={cwd} +{line} "{filepath}"'
     match = '''([^ \t\n\r\f\v:"']+[\.\/][^ \t\n\r\f\v:"']+)?((:|(". line ))([0-9]+))?'''
 [profiles]
   [[default]]
