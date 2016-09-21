@@ -120,6 +120,8 @@ set fileencoding=utf8
 set fileencodings=utf-8,latin1
 set visualbell
 set novb
+set notitle             " temporarily prevent vim to set title until I find a way to connect
+                        " zsh and terminator's title
 set noerrorbells        " do not bell on error
 set shiftwidth=4        " Number of spaces to use for each step of (auto)
 set tabstop=4           " Number of spaces that a <Tab> in the file counts for
