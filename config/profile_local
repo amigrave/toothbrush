@@ -35,10 +35,10 @@ if [[ -n "$DISPLAY" && -z "$AGRLOCAL" ]]; then
     ################
     # xrdb -merge $DOTFILES/Xdefaults
 
-    # Keyboard stuff
+    # Keyboard stuff (check options: /usr/share/X11/xkb/rules/evdev.lst)
     ################
     # setxkbmap -option                              # clear config
-    # setxkbmap us -variant mac -option ctrl:nocaps  # make Caps Lock a ctrl key
+    # setxkbmap us -variant altgr-intl -option ctrl:nocaps  # make Caps Lock a ctrl key
     # xset r rate 200 50
 
     # xmodmap $DOTFILES/Xmodmap
