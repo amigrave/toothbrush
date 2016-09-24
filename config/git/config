@@ -68,6 +68,7 @@
     lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"  # list deleted files
     lsi = ls-files --other --ignored --exclude-standard # list ignored files
     p   = "!git fetch --prune; git rebase --autostash"
+    ri  = rebase --interactive --autostash
     sa  = "!sh -c 'git stash apply stash@{$1}' -"
     sd  = "!sh -c 'git stash drop stash@{$1}' -"
     sh  = "!sh -c 'git stash show -p stash@{$1}' -"
