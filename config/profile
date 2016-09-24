@@ -66,6 +66,7 @@ export MPLAYER_HOME=$DOTFILES/mplayer
 export MPV_HOME=$DOTFILES/mpv
 export CMUS_HOME=$DOTFILES/cmus
 export IPYTHONDIR=$DOTFILES/ipython
+export JUPYTER_CONFIG_DIR=$DOTFILES/jupyter
 export INPUTRC=$DOTFILES/inputrc
 export SCREENRC=$DOTFILES/screenrc
 export IRBRC=$DOTFILES/irbrc
