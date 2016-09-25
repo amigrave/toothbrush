@@ -22,10 +22,20 @@ for arg in args:
 args = ' '.join(args)  # TODO: escape properly
 _log.info("Command called with args %r" % args)
 
-server_name = os.path.realpath(cwd).upper()
-_log.info("Use server name %s for cwd '%s'" % (server_name, cwd))
 servers = getoutput('vim --serverlist').strip().splitlines()
 _log.info("Got servers: %r" % servers)
+
+server_name = os.path.realpath(cwd).upper()
+server_name_test = server_name
+
+while server_name_test != '/':
+    # Recurse parents and check if a server name is found
+    if server_name_test in servers:
+        server_name = server_name_test
+        break
+    server_name_test = os.path.split(server_name_test)[0]
+
+_log.info("Use server name %s for cwd '%s'" % (server_name, cwd))
 
 
 def call(cmd):
