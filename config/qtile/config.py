@@ -53,7 +53,7 @@ keys = [
     # Swap panes of split stack
     Key([mod, "shift"], "j", lazy.layout.rotate()),
 
-    Key([mod, "control"], "Return", lazy.spawn("urxvt -e ipython")),
+    Key([mod, alt, "control"], "Return", lazy.spawn("urxvt -e ipython")),
 
     # Key([mod], "w", lazy.window.kill()),
     Key([mod], "q", lazy.window.kill()),

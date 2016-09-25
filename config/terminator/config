@@ -9,12 +9,14 @@
   go_right = <Super>Right
   go_up = <Super>Up
   group_tab = None
+  help = None
   hide_window = None
   new_tab = <Super>t
   next_tab = <Primary>Tab
   paste = <Super>v
   prev_tab = <Primary><Shift>Tab
   reset_clear = <Super>k
+  scaled_zoom = <Primary><Super>Return
   search = <Super>f
   split_horiz = <Shift><Super>d
   split_vert = <Super>d
