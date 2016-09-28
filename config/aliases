@@ -10,7 +10,6 @@ alias flake8="flake8 --config=$DOTFILES/flake8"
 
 # Application shadowers {{{
 alias sudo='sudo -E'
-alias vim='vim -p '
 alias qmv='qmv --format=destination-only'
 alias ag="ag --page=less"
 alias agp="ag --page=less --ignore=node_modules --ignore=migrations --ignore='*min.js' --ignore='*.po' -S" # ag for projects
@@ -19,7 +18,6 @@ alias ack="ack --pager=less --color-match=red"
 alias cdiff='cdiff -s -w0'
 alias cal='ncal -bM'
 alias grep='grep --color=auto'
-alias pip='pip --log /dev/null'
 alias invoke='PYTHONDONTWRITEBYTECODE=1 invoke'
 # }}}
 
