@@ -115,6 +115,8 @@ endif
 let mapleader = ","
 colorscheme wombat256mod
 
+set clipboard=unnamedplus " Always use unnamed register (system clipboard)
+set pastetoggle=<S-F11>
 set encoding=utf8
 set fileencoding=utf8
 set fileencodings=utf-8,latin1
@@ -217,10 +219,11 @@ endif
 if has("gui_macvim")
     set visualbell t_vb=
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+    set clipboard=unnamed " Always use unnamed register
 endif
 
 if has("win32")
-    set clipboard=unnamedplus " Always use unnamed register
+    set clipboard=unnamed " Always use unnamed register
     au GUIEnter * simalt ~x
     set guifont=DejaVu\ Sans\ Mono:h9
 
@@ -458,14 +461,6 @@ nnoremap <silent> <F10> :Bdelete<CR>
 inoremap <silent> <F10> <C-O>:Bdelete<CR>
 nnoremap <silent> <S-F10> :bde!<CR>
 inoremap <silent> <S-F10> <C-O>:bde!<CR>
-
-" Clipboard stuff
-set pastetoggle=<S-F11>
-nmap <F11> :set paste<CR>"+p:set nopaste<CR>
-imap <F11> <C-O>:set paste<CR><C-O>"+p<C-O>:set nopaste<CR>
-vmap <C-C> "+y
-vmap <leader>y "+y
-nmap <leader>p "+p
 
 " Number toggling
 nnoremap <S-F11> :set nonumber!<CR>
