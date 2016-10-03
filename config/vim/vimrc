@@ -419,7 +419,7 @@ augroup END
 
 " Commenting
 nnoremap <silent> \\ :TComment<CR>
-vnoremap <silent> \\ :TComment<CR>
+vnoremap <silent> \\ :TCommentBlock<CR>
 
 " Folding
 nnoremap <silent> <S-Up> zc
@@ -467,14 +467,7 @@ nnoremap <S-F11> :set nonumber!<CR>
 
 " Ctrl+L removes highlighting and triggers GitGutterAll
 " then calls normal C-L (redraw)
-autocmd VimEnter *
-    \ if exists(":GitGutterAll") |
-        \ echo "ONE" |
-        \ exe "nnoremap <C-l> :nohlsearch<CR>:GitGutterAll<CR><C-l>" |
-    \ else |
-        \ echo "TWO" |
-        \ exe "nnoremap <C-l> :nohlsearch<CR><C-l>" |
-    \ endif
+nnoremap <C-l> :nohlsearch<CR>:GitGutterAll<CR><C-l>
 
 " NERD Tree
 nnoremap <F12> :NERDTreeFind<CR>
@@ -491,14 +484,12 @@ let g:tagbar_map_closeallfolds = ['<F5>']
 let g:tagbar_map_closefold = ['<S-Up>']
 let g:tagbar_map_openfold = ['<Right>']
 
-" nnoremap <silent> <S-F7> :lcd %:p:h<CR>:RepoRoot<CR>:!ctags .<CR>
-
 " Calculator
 inoremap <Leader>= <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 " airline
 let g:airline_powerline_fonts=1
-" let g:airline_section_c = '%f - (%{FileSize()})'
+let g:airline_section_c = '%f [%{FileSize()}]'
 let g:airline#extensions#tabline#enabled = 1        " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t'    " Show just the filename
 let g:airline#extensions#tabline#show_tabs = 0
@@ -510,6 +501,7 @@ vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right
 
 " Emmet (used to be Zen coding)
 let g:user_emmet_expandabbr_key = '<S-CR>'
+let g:emmet_html5 = 0  " always close tags, eg: <img/>, <hr/>, ...
 let g:user_emmet_settings = {
     \  'indentation' : '    '
 \}
@@ -525,8 +517,6 @@ nnoremap <leader>on :tabnew<CR>:Note<Space>
 let g:markdown_fenced_languages = ['python', 'javascript', 'html', 'xml', 'yaml', 'sql', 'sh', 'diff']
 let g:markdown_folding = 1
 
-" imap <c-e> <c-o>:lnext<cr>
-" nmap <c-e> :lnext<cr>
 nmap <leader>m :make<cr>
 
 " vim-dirdiff
