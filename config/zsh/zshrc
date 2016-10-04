@@ -85,13 +85,21 @@ prompt_agr
 # Use vim keybindings.
 # http://dougblack.io/words/zsh-vi-mode.html
 # http://readline.kablamo.org/emacs.html
-bindkey -v
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line
-bindkey '^p' up-history
-bindkey '^n' down-history
-bindkey '^w' backward-kill-word
+# bindkey -v
+# bindkey '^a' beginning-of-line
+# bindkey '^e' end-of-line
+# bindkey '^p' up-history
+# bindkey '^n' down-history
+# bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
+
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
+bindkey '^[[5~' history-beginning-search-backward
+bindkey '^[[6~' history-beginning-search-forward
+bindkey '^[[3~' delete-char
+bindkey '^[[5C' forward-word
+bindkey '^[[5D' backward-word
 
 # function zle-line-init zle-keymap-select {
 #     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
