@@ -109,9 +109,3 @@
 
 [github]
     user = amigrave
-
-[tig "bind"]
-    generic = P !<tig --first-parent %(commit)
-    generic = O !tig --first-parent %(commit)^2
-    generic = <F1> !git dd %(commit)~1..%(commit)
-    generic = <F2> !git change-date %(commit)
