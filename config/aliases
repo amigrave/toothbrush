@@ -98,6 +98,7 @@ if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
 alias e="gvim-agr --remote-tab-silent"
 alias vimst="vims \$(git ls-files --modified)"
+alias vimgs="vim -c ':Gstatus' ."
 alias ack="ack-grep --pager=less --color-match=red"
 alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
