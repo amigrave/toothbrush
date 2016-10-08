@@ -1,0 +1,34 @@
+#!/bin/bash
+if [[ $# -eq 0 ]] ; then
+    echo "Usage: `basename "$0"` [<user>@][<host>:]<dbname>"
+    exit 0
+fi
+
+uri=$1
+user='root'
+
+if [[ $uri == *@* ]]; then
+    IFS=@ read -r user uri <<< "$uri"
+fi
+
+if [[ $uri == *:* ]]; then
+    IFS=: read -r host db <<< "$uri"
+else
+    db=$uri
+    host=$db
+    if [[ $DBSHELL_DEFAULT_DOMAIN != "" ]]; then
+        host="${host}${DBSHELL_DEFAULT_DOMAIN}"
+    fi
+fi
+
+ssh_options="-q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+temp=`mktemp -d --suffix="-dbshell"`
+socat_exec="ssh $ssh_options $user@$host socat STDIO UNIX-CONNECT\:/var/run/postgresql/.s.PGSQL.5432"
+{ socat "UNIX-LISTEN:${temp}/.s.PGSQL.5432,reuseaddr,fork" EXEC:"$socat_exec" ; } &
+
+echo "Connecting to $user@$host:$db..."
+args="--host=${temp} -d $db -U $user"
+pgcli  $args || psql $args
+
+rm -rf $temp
+kill 0
