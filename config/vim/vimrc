@@ -42,7 +42,7 @@ if v:version > 701
     Plugin 'amigrave/vim-react-snippets'  " waiting pull request on justinj/vim-react-snippets
     " Plugin 'tpope/vim-surround'
     Plugin 'mattn/emmet-vim'  " (used to be Zen coding)
-    Plugin 'tomtom/tcomment_vim'
+    Plugin 'tpope/vim-commentary'
     Plugin 'glts/vim-textobj-comment'
     Plugin 'godlygeek/tabular'
     Plugin 'terryma/vim-expand-region'
@@ -418,8 +418,10 @@ augroup qf
 augroup END
 
 " Commenting
-nnoremap <silent> \\ :TComment<CR>
-vnoremap <silent> \\ :TCommentBlock<CR>
+nmap \\ <Plug>CommentaryLine
+nmap \<bs> vacgc
+nmap \| gcap
+vmap \\ gc
 
 " Folding
 nnoremap <silent> <S-Up> zc
