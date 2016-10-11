@@ -1,11 +1,16 @@
 #!/bin/bash
 if [[ $# -eq 0 ]] ; then
     echo "Usage: `basename "$0"` [<user>@][<host>:]<dbname>"
+    echo
+    echo "  Allows to connect to a remote postgresql database (only available"
+    echo "  trough unix socket) using local tools (eg: pgcli, pgadmin, ...)."
+    echo "  The 'socat' program must be installed on the remote host."
     exit 0
 fi
 
 uri=$1
 user='root'
+shell=${DBSHELL_PROGRAM:-psql}
 
 if [[ $uri == *@* ]]; then
     IFS=@ read -r user uri <<< "$uri"
@@ -22,13 +27,13 @@ else
 fi
 
 ssh_options="-q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-temp=`mktemp -d --suffix="-dbshell"`
+temp=`mktemp -d --suffix="-dbshell-$host"`
 socat_exec="ssh $ssh_options $user@$host socat STDIO UNIX-CONNECT\:/var/run/postgresql/.s.PGSQL.5432"
 { socat "UNIX-LISTEN:${temp}/.s.PGSQL.5432,reuseaddr,fork" EXEC:"$socat_exec" ; } &
 
 echo "Connecting to $user@$host:$db..."
 args="--host=${temp} -d $db -U $user"
-pgcli  $args || psql $args
+$shell $args
 
 rm -rf $temp
 kill 0
