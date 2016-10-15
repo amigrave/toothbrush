@@ -466,6 +466,8 @@ inoremap <S-F6> <C-O>:setlocal spell! spelllang=en<CR>
 " Quit using vim-bbye
 nnoremap <silent> <F10> :Bdelete<CR>
 inoremap <silent> <F10> <C-O>:Bdelete<CR>
+nnoremap <silent> <S-F10> :only<CR>
+inoremap <silent> <S-F10> <C-O>:only<CR>
 nnoremap <silent> <S-F10> :bde!<CR>
 inoremap <silent> <S-F10> <C-O>:bde!<CR>
 
@@ -560,13 +562,20 @@ inoremap ({<cr> ({<cr><Backspace>});<esc>O
 inoremap {<cr> {<cr><Backspace>}<esc>O
 inoremap {{ {{  }}<left><left><left>
 
+" window management
+nmap <silent> <A-w> :wincmd c<cr>
+imap <silent> <A-w> <c-o>:wincmd c<cr>
+
 nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
 imap <silent> <A-Up> <C-O>:wincmd k<CR>
+
+nmap <silent> <A-Down> :wincmd j<CR>
 imap <silent> <A-Down> <C-O>:wincmd j<CR>
+
+nmap <silent> <A-Left> :wincmd h<CR>
 imap <silent> <A-Left> <C-O>:wincmd h<CR>
+
+nmap <silent> <A-Right> :wincmd l<CR>
 imap <silent> <A-Right> <C-O>:wincmd l<CR>
 
 map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") ."> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
