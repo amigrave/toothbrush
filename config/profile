@@ -76,6 +76,7 @@ export HTTPIE_CONFIG_DIR=$DOTFILES/httpie
 export PSQLRC=$DOTFILES/postgresql/psqlrc
 export WGETRC=$DOTFILES/wgetrc
 export GIMP2_DIRECTORY="$DOTFILES/gimp"
+export GTK2_RC_FILES="$DOTFILES/gtk-2.0/gtkrc"
 export ATOM_HOME="$DOTFILES/atom"
 export NPM_CONFIG_USERCONFIG=$DOTFILES/npm/npmrc
 

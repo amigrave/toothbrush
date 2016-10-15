@@ -1,0 +1,5 @@
+binding "NoKeyboardNavigation" {
+    unbind "<shift>F10" # This was still bound in terminator
+}
+
+class "*" binding "NoKeyboardNavigation"
