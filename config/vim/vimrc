@@ -713,24 +713,10 @@ endfunction
 " }}}
 
 " Python Debug {{{
-if has('python')
-python << EOF
-import vim
-def SetBreakpoint():
-    import re
-    nLine = int( vim.eval( 'line(".")'))
-
-    strLine = vim.current.line
-    strWhite = re.search( '^(\s*)', strLine).group(1)
-
-    vim.current.buffer.append(
-       "%sfrom pudb import set_trace; set_trace()  # *** Breakpoint ***" %
-       strWhite, nLine - 1)
-
-vim.command('map <F8> :py SetBreakpoint()<cr>')
-EOF
-endif
-imap <F8> from pudb import set_trace; set_trace()  # *** Breakpoint ***
+imap <F8> from pudb import set_trace; set_trace()  # *** Breakpoint ***<cr>
+nmap <F8> <s-o>from pudb import set_trace; set_trace()  # *** Breakpoint ***<esc><down>
+imap <S-F8> import rpudb; rpudb.set_trace(addr='0.0.0.0', port=4444)  # *** Remote Breakpoint ***"<cr>
+nmap <S-F8> <s-o>import rpudb; rpudb.set_trace(addr='0.0.0.0', port=4444)  # *** Remote Breakpoint ***"<esc><down>
 " }}}
 
 " VIM Profiling {{{
