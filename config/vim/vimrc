@@ -702,13 +702,13 @@ function! XmlQweb()
 
     syn cluster xmlAttribHook contains=xmlAttribQWeb
     hi link xmlAttribQWeb     xmlAttribQWeb
-    hi xmlAttribQWeb guifg=#f0a040 ctermfg=DarkMagenta
+    hi xmlAttribQWeb guifg=#f0a040 ctermfg=208
     hi xmlAttribQWebTrad guifg=#ffffff ctermfg=white
 
     syn region qwebVarBlock matchgroup=qwebVarDelim start=/{{-\?/ end=/-\?}}/ containedin=xmlString
     syn region qwebVarBlock2 matchgroup=qwebVarDelim start=/#{-\?/ end=/-\?}/ containedin=xmlString
     hi def link qwebVarDelim qwebVarBlock
-    hi qwebVarDelim guifg=#D4C828 ctermfg=DarkYellow
+    hi qwebVarDelim guifg=#D4C828 ctermfg=Yellow
 endfunction
 " }}}
 
