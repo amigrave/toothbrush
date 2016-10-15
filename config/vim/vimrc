@@ -368,19 +368,24 @@ else
     nnoremap <Leader>gtl :execute "!urxvt -cd '%:p:h' -e tig %:p:t"<CR>
     nnoremap <Leader>gtb :execute "!urxvt -cd '%:p:h' -e tig blame %:p:t +" . line('.')<CR>
 endif
-" Fixed scrolling
-noremap <C-Down> <C-E><Down>
-inoremap <C-Down> <C-O><C-E><Down>
-noremap Ob <C-E><Down>
-inoremap Ob <C-O><C-E><Down>
-noremap [1;5B <C-E><Down>
-inoremap [1;5B <C-O><C-E><Down>
-noremap <C-Up> <C-Y><Up>
-inoremap <C-Up> <C-O><C-Y><Up>
-noremap Oa <C-Y><Up>
-inoremap Oa <C-O><C-Y><Up>
-noremap [1;5A <C-E><Up>
-inoremap [1;5A <C-O><C-E><Up>
+
+" Scrolling
+"""""""""""
+function! ToggleScrolloff()
+    if &scrolloff == 999
+        set scrolloff=5
+    else
+        set scrolloff=999
+    endif
+endfunction
+nmap coz :call ToggleScrolloff()<CR>
+
+" terminator c-pageup/c-pagedown (escape sequences obtaines with <c-v><key>)
+noremap [5;5~ 5<C-Y>5<Up>
+inoremap [5;5~ <C-O>5<C-Y>5<Up>
+noremap [6;5~ 5<C-E>5<Down>
+inoremap [6;5~ <C-O>5<C-E>5<Down>
+
 noremap <S-MouseUp> <C-E><Down>
 noremap <S-MouseDown> <C-Y><Up>
 
