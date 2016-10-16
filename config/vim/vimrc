@@ -184,6 +184,13 @@ let g:netrw_dirhistmax = 0  " disable creation of ~/.vim/.netrwhist
 " ################################### PLATFORM ################################## {{{
 syntax on
 
+" Compatible way to use either :py or :py3 -> :Py
+if has("python3")
+    command! -nargs=1 Py py3 <args>
+else
+    command! -nargs=1 Py py <args>
+endif
+
 if has('gui')
     set guioptions-=T           " hide toolbar
     " set guioptions-=m           " Remove menu bar
