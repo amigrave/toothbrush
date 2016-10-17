@@ -145,7 +145,12 @@ set ruler               " Show the line and column number of the cursor position
 set number              " precede each line with its line number
 set showcmd             " Show (partial) command in the last line of the screen
 set showmode            " If in Insert, Replace or Visual mode put a message on the last line
-set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/viminfo nowrap
+
+if has('nvim')
+    set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/neoviminfo nowrap
+else
+    set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/viminfo nowrap
+endif
 "set list listchars=tab:~.,trail:.,extends:>,precedes:<
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
 set backupdir=$XDG_CACHE_HOME/vim/backup
