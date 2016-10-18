@@ -44,7 +44,9 @@ compdef ansible-facts=ssh
 compdef sshfs=scp
 compdef sshmount=scp
 compdef vimdiff=scp
-compdef pgcli=psql
+if (( $+commands[psql] )) ; then
+    compdef pgcli=psql
+fi
 
 # add ~/.ssh/config to hosts completion
 zstyle -s ':completion:*:hosts' hosts _ssh_config
