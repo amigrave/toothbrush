@@ -42,7 +42,7 @@ def move_window_to_adjacent_group(qtile, offset=1):
     qtile.currentWindow.togroup(group.name)
     group.cmd_toscreen()
 
-
+# Key mapping: https://github.com/qtile/qtile/blob/develop/libqtile/xkeysyms.py
 keys = [
     # Switch between windows in current stack pane
     Key([mod], "Tab", lazy.layout.down()),
@@ -60,6 +60,7 @@ keys = [
 
     # Restart QTile
     Key([mod, "control"], "r", lazy.restart()),
+    Key([alt, "control"], "Delete", lazy.restart()),
 
     # Close QTile session
     Key([mod, "control"], "q", lazy.shutdown()),
@@ -161,13 +162,29 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front())
 ]
 
+# Automatically float these types.
+floating_layout = layout.Floating(
+    float_rules=[
+        dict(wmclass="skype"),
+        dict(wmclass="wine"),
+        dict(wname="6502 Debugger"),
+        dict(wname="Wine configuration"),
+        dict(wname="Terminator Preferences"),
+    ], auto_float_types=[
+        "utility",
+        "notification",
+        "toolbar",
+        "splash",
+        "dialog",
+]
+)
+
 dgroups_key_binder = None
 dgroups_app_rules = []
 main = None
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating()
 auto_fullscreen = True
 wmname = "qtile"
 
