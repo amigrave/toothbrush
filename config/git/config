@@ -52,6 +52,7 @@
     bc  = branch -r --contains
     ci  = commit
     cia = commit --amend
+    cim = commit -a -mm  # antony style
     co  = checkout
     cp  = cherry-pick
     d   = "!f() { git diff --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '; }; f"
@@ -68,8 +69,7 @@
     lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"  # list deleted files
     lsi = ls-files --other --ignored --exclude-standard # list ignored files
     p   = "!git fetch --prune; git rebase --autostash"
-    ri  = rebase --interactive --autostash
-    rii = rebase --interactive --autostash HEAD~10
+    ri = "!sh -c 'git rebase --interactive --autostash HEAD~$0'"
     sa  = "!sh -c 'git stash apply stash@{$1}' -"
     sd  = "!sh -c 'git stash drop stash@{$1}' -"
     sh  = "!sh -c 'git stash show -p stash@{$1}' -"
@@ -79,6 +79,8 @@
     ss  = stash save
     s   = status --short --branch
     st  = status
+    vst = "!sh -c 'vim $(git ls-files --modified)'"
+    vgs = "!sh -c 'vim -R -c ':Gstatus' .'"
 
     auth = shortlog -s -n --all  # author statistics
     info = "!for i in $(git remote); do git remote show $i -n; done"
