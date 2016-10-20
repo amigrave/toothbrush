@@ -116,7 +116,7 @@ let mapleader = ","
 colorscheme wombat256mod
 
 set clipboard=unnamedplus " Always use unnamed register (system clipboard)
-set pastetoggle=<S-F11>
+set pastetoggle=<F11>
 set encoding=utf8
 set fileencoding=utf8
 set fileencodings=utf-8,latin1
@@ -390,7 +390,8 @@ function! ToggleScrolloff()
         set scrolloff=999
     endif
 endfunction
-nmap coz :call ToggleScrolloff()<CR>
+nnoremap <F6> :call ToggleScrolloff()<CR>
+inoremap <F6> <C-O>:call ToggleScrolloff()<CR>
 
 " terminator c-pageup/c-pagedown (escape sequences obtaines with <c-v><key>)
 noremap [5;5~ 5<C-Y>5<Up>
@@ -457,34 +458,13 @@ inoremap <silent> <F5> <C-O>zM
 " Insert marker folds
 vmap <leader>zf d<S-o><cr><up><esc>v<down>zf<down><end>2<left>i<space><up><esc>p<up><end>2<left>i<space><space><left>
 
-" Column marker
-nnoremap <F6> :call ToggleMarkers()<CR>
-vnoremap <F6> :call ToggleMarkers()<CR>gv
-inoremap <F6> <C-O>:call ToggleMarkers()<CR>
-function! ToggleMarkers()
-    if &colorcolumn
-        setlocal colorcolumn=0
-        setlocal nocursorline nocursorcolumn
-    else
-        setlocal colorcolumn=79
-        setlocal cursorline cursorcolumn
-    endif
-endfunction
-
-nnoremap <S-F6> :setlocal spell! spelllang=en<CR>
-vnoremap <S-F6> :setlocal spell! spelllang=en<CR>
-inoremap <S-F6> <C-O>:setlocal spell! spelllang=en<CR>
-
 " Quit using vim-bbye
 nnoremap <silent> <F10> :Bdelete<CR>
 inoremap <silent> <F10> <C-O>:Bdelete<CR>
-nnoremap <silent> <S-F10> :only<CR>
-inoremap <silent> <S-F10> <C-O>:only<CR>
 nnoremap <silent> <S-F10> :bde!<CR>
 inoremap <silent> <S-F10> <C-O>:bde!<CR>
-
-" Number toggling
-nnoremap <S-F11> :set nonumber!<CR>
+nnoremap <silent> <S-F11> :only<CR>
+inoremap <silent> <S-F11> <C-O>:only<CR>
 
 " Ctrl+L removes highlighting and triggers GitGutterAll
 " then calls normal C-L (redraw)
