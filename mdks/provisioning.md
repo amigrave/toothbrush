@@ -5,13 +5,17 @@
 My personal environment provisioning on Debian jessie or Kali 2 rolling release.
 
 ```docopt
-Usage: mdk provisioning.md (--dektop | --server) [--miniconda-location=PATH] <host> <user>
+Usage: mdk provisioning.md [(--dektop | --server) | --module=<module>]
+                           [--miniconda-location=PATH] <host> <user>
+       mdk provisioning.md --list-modules
 
 Options:
 
 --desktop               Setup a desktop machine
 --server                Setup a server
+--module=<module>       Install a specific module
 --miniconda-location    Path to the miniconda installation (Defaults: ~/miniconda)
+--list-modules          List available modules
 ```
 
 ## Host preparation
@@ -395,4 +399,77 @@ pip install --user watchdog prettytable fabric fabtool
 ```sh
 apt install -y nodejs npm
 npm install -g diff-so-fancy eslint
+```
+
+## Misc stuff
+
+### Wine
+
+<mdk as='root'>
+```sh
+dpkg --add-architecture i386
+apt-get update
+apt-get install wine32
+```
+
+### FCeux (just kept as example)
+
+[FCEUX](http://www.fceux.com/web/home.html) is a featured rich cross platform
+NES emulator.
+
+We install both native and windows version (wine) because the native version is fast but does not
+have the debugging features the windows version has.
+
+#### Linux version
+
+```sh
+sudo apt -y install subversion scons libsdl1.2-dev libgtk-3-dev \
+            liblua5.3-dev libgd-dev
+cd /tmp
+svn checkout svn://svn.code.sf.net/p/fceultra/code/fceu/trunk fceux
+cd fceux  # mdk retains the current directory amongst code blocks
+```
+
+The file `SConstruct` should be modified in order to use gtk3:
+
+<mdk change="SConstruct">
+```diff
+-  BoolVariable('GTK', 'Enable GTK2 GUI (SDL only)', 1),
+-  BoolVariable('GTK3', 'Enable GTK3 GUI (SDL only)', 0),
++  BoolVariable('GTK', 'Enable GTK2 GUI (SDL only)', 0),
++  BoolVariable('GTK3', 'Enable GTK3 GUI (SDL only)', 1),
+```
+
+```sh
+scons
+sudo scons --prefix=/usr/local install
+```
+
+#### Wine version
+
+```python
+# FCEUX download page does not contain a wgetable link. let's fix this.
+FCEUX_URL = 'http://www.fceux.com/web/download.html'
+xpath = "//h3[contains(text(), 'Download')]/following::ul[1]/li[1]/a/@href"
+url = mdk.scrape.url(FCEUX_URL).root.xpath(xpath)[0].split('/')
+
+# Sanitize sourceforge url which lands on download page by default
+if url[2] == 'sourceforge.net':
+    url[2] = 'downloads.' + url[2]
+if url[-1] == 'download':
+    url.pop(-1)
+url = '/'.join(url)
+mdk.sh.wget(url)
+# TODO: next
+```
+
+### CC65
+
+<mdk as='root'>
+```sh
+cd /usr/local/src
+git clone https://github.com/cc65/cc65.git
+cd cc65
+make
+prefix=/usr/local make install
 ```
