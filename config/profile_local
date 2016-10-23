@@ -3,6 +3,9 @@
 # LOCAL PROFILE
 ###############
 
+# Use nvim instead of vim
+# export PATH=$AMIGRAVE/config/vim/nvim/bin:$PATH
+
 alias root='SUDO_SHELL=root $AMIGRAVE/bin/shell'
 # Put your custom sudo users here, eg:
 # alias foouser='SUDO_SHELL=foouser $AMIGRAVE/bin/shell'
@@ -31,6 +34,9 @@ fi
 # export https_proxy=$proxy
 
 if [[ -n "$DISPLAY" && -z "$AGRLOCAL" ]]; then
+    if [ "$XDG_RUNTIME_DIR" != ""]; then
+        mkdir -p $XDG_RUNTIME_DIR/neovim
+    fi
 
     # vmware-user
 

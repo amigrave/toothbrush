@@ -19,6 +19,7 @@ alias cdiff='cdiff -s -w0'
 alias cal='ncal -bM'
 alias grep='grep --color=auto'
 alias invoke='PYTHONDONTWRITEBYTECODE=1 invoke'
+alias nvim='NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/neovim/$(date +%s) nvim'
 # }}}
 
 # Application shortcuts {{{
@@ -96,7 +97,8 @@ alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]
 # Linux aliases {{{
 if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
-alias e="gvim-agr --remote-tab-silent"
+alias e="editor-agr"
+alias ge="gvim-agr --remote-tab-silent"
 alias ack="ack-grep --pager=less --color-match=red"
 alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
 alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'

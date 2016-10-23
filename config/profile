@@ -17,7 +17,7 @@ export LC_COLLATE=C
 
 # Applicatons
 export EDITOR=vim
-export VISUAL=vim
+export VISUAL=$EDITOR
 export TERMINAL=terminator
 export BROWSER=google-chrome
 

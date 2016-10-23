@@ -82,12 +82,11 @@ class EditorPlugin(plugin.URLHandler):
         filepath, lineno, cwd = self.get_filepath(strmatch)
         # Generate the openurl string
         command = self.config.plugin_get(self.plugin_name, 'command')
-        command = command.replace('{cwd}', cwd)
         command = command.replace('{filepath}', filepath)
         command = command.replace('{line}', lineno)
         # Check we are opening the file
         if self.open_url():
             if filepath:
-                subprocess.call(shlex.split(command))
+                subprocess.call(shlex.split(command), cwd=cwd)
             return '--version'
         return command
