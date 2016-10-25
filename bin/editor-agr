@@ -37,11 +37,12 @@ def get_neovim_sockets():
 
 
 def get_neovim_instance(cwd):
+    cwd = os.path.realpath(cwd)
     sockets = get_neovim_sockets()
     for socket in sockets:
         nvim = neovim.attach('socket', path=socket)
         nvim_cwd = nvim.eval('getcwd()')
-        if nvim_cwd in cwd:
+        if os.path.realpath(nvim_cwd) in cwd:
             return nvim
 
 
