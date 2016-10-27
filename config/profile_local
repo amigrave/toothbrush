@@ -3,10 +3,15 @@
 # LOCAL PROFILE
 ###############
 
-# Use nvim instead of vim
+# export EDITOR=vim
+# export VISUAL=$EDITOR
+# export TERMINAL=terminator
 # export BROWSER=chromium
 
+# Uncomment to use nvim instead of vim (use `vi` for real vim)
+# ------------------------------------------------------------
 # export PATH=$AMIGRAVE/config/vim/nvim/bin:$PATH
+# alias vim=nvim  # even if covered with $PATH, it's better to minimize subprocesses
 
 alias root='SUDO_SHELL=root $AMIGRAVE/bin/shell'
 # Put your custom sudo users here, eg:
