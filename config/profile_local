@@ -4,6 +4,8 @@
 ###############
 
 # Use nvim instead of vim
+# export BROWSER=chromium
+
 # export PATH=$AMIGRAVE/config/vim/nvim/bin:$PATH
 
 alias root='SUDO_SHELL=root $AMIGRAVE/bin/shell'

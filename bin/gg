@@ -8,5 +8,5 @@ if [[ $DESKTOP_SESSION == 'qtile' ]]; then
 fi
 
 query=`urlencode "$@"`
-chromium "https://www.google.com/search?q=$query"
-
+$BROWSER "https://www.google.com/search?q=$query" &
+disown

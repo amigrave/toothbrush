@@ -19,7 +19,7 @@ export LC_COLLATE=C
 export EDITOR=vim
 export VISUAL=$EDITOR
 export TERMINAL=terminator
-export BROWSER=google-chrome
+export BROWSER=chromium
 
 export VIMINIT='let $MYVIMRC="$DOTFILES/vim/vimrc" | source $MYVIMRC'
 export LESS="--no-init --ignore-case --LONG-PROMPT --silent --tabs=4 -R -F"
