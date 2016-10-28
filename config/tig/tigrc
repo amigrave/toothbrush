@@ -3,6 +3,7 @@ bind    generic     P           !tig --first-parent %(commit)
 bind    generic     O           !tig --first-parent %(commit)^2
 bind    generic     <F1>        !git dd %(commit)~1..%(commit)
 bind    generic     <F2>        !git change-date %(commit)
+bind    generic     <F3>        !git rebase -i %(commit)^
 bind    generic     V           !git vdd --no-prompt %(commit)
 
 # bind    diff        <Up>       none
