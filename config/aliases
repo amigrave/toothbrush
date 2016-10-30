@@ -25,6 +25,7 @@ alias nvim='NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/neovim/$(date +%s) nvim'
 # Application shortcuts {{{
 alias i="ipython"
 alias g="git"
+alias digs="dig +noall +answer"  # dig short
 alias dk='sudo docker'
 alias dkb='sudo docker build --force-rm=true --no-cache=true'
 alias npml='npm list --depth=0'
