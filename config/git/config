@@ -78,12 +78,13 @@
     ss  = stash save
     s   = status --short --branch
     st  = status
-    vst = "!sh -c 'vim $(git ls-files --modified)'"
-    vgs = "!sh -c 'vim -R -c ':Gstatus' .'"
 
-    auth = shortlog -s -n --all  # author statistics
-    info = "!for i in $(git remote); do git remote show $i -n; done"
-    subs = submodule foreach git
+    auth  = shortlog -s -n --all  # author statistics
+    info  = "!for i in $(git remote); do git remote show $i -n; done"
+    stats = shortlog -s -n --all
+    subs  = submodule foreach git
+    vimgs = "!sh -c 'vim -c ':Gstatus' .'"
+    vimst = "!sh -c 'vim $(git ls-files --modified)'"
 
     force-ignore = update-index --assume-unchanged  # eg: when added to .git/info/exclude but was changed before
     undo-ignore = update-index --no-assume-unchanged
