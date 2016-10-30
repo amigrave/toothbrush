@@ -1,0 +1,5 @@
+#!/bin/bash
+screen_size=`xdpyinfo | grep "dimensions:" | tr -s ' ' | cut -d ' ' -f3`
+title=`basename $1`
+
+wine explorer /desktop=$title,$screen_size "$@"
