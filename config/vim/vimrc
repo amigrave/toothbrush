@@ -147,6 +147,7 @@ set showcmd             " Show (partial) command in the last line of the screen
 set showmode            " If in Insert, Replace or Visual mode put a message on the last line
 set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/viminfo nowrap
 
+set foldlevelstart=99   " do not fold by default when opening files
 "set list listchars=tab:~.,trail:.,extends:>,precedes:<
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
 set backupdir=$XDG_CACHE_HOME/vim/backup
