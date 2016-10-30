@@ -1,0 +1,11 @@
+#!/bin/bash
+if [[ $# -eq 0 ]] ; then
+    echo "Usage: `basename "$0"` <ISO_FILE>"
+    exit 0
+fi
+
+isodir=$(mktemp -d --suffix="-isomount")
+sudo mount -o loop $1 $isodir
+mc $isodir
+sudo umount $isodir
+rmdir $isodir
