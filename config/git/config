@@ -5,7 +5,6 @@
 
 [core]
     filemode = false
-    editor = vim
 
 [color]
     ui = true
