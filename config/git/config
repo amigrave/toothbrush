@@ -54,10 +54,11 @@
     cim = commit -a -mm  # antony style
     co  = checkout
     cp  = cherry-pick
-    d   = "!f() { git diff --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '; }; f"
-    dc  = "!f() { git diff --color \"$@\" | cdiff -s -w0 | less --tabs=4 -RFX; }; f"
+    d  = "!cdiff -c always | less --tabs=4 -RFX --pattern \"^diff --git \""
+    cd  = "!cdiff -s -w0 -c always | less --tabs=4 -RFX --pattern \"^diff --git \""
     dd  = difftool --dir-diff -t meld
-    ddv = difftool --dir-diff -t vim-dirdiff
+    dsf = "!f() { git diff --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '; }; f"
+    vdd = difftool --dir-diff -t vim-dirdiff
     fa  = fetch --all -p
     h   = "!git hh -10"
     hh  = "!git ll --stat"
