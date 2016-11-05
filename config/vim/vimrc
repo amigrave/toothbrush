@@ -196,6 +196,7 @@ endif
 if has("nvim")
     tnoremap <C-Delete> <C-\><C-n>  " get out of terminal mode
     set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/neoviminfo nowrap  " neovim can't use vim's viminfo and vice-versa
+    let &runtimepath = printf('%s/.local/share/nvim/site,%s', $HOME, &runtimepath)
 endif
 
 if has('gui')
