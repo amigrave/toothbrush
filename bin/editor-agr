@@ -52,7 +52,10 @@ def get_neovim_instance(cwd):
 def main(args):
     cwd = os.getcwd()
 
-    args = ' '.join(args)  # TODO: escape properly
+    for i, arg in enumerate(args):
+        if os.path.isfile(arg):
+            args[i] = os.path.realpath(arg)
+    args = ' '.join(args)  # TODO: support multiple files... need to iterate
     _log.info("Command called with args %r" % args)
 
     # First try to find a neovim instance
