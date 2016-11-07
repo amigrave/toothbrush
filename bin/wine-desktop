@@ -1,4 +1,8 @@
 #!/bin/bash
+if [[ $DESKTOP_SESSION == 'qtile' ]]; then
+    qtile-agr --silent switch_group tmp
+fi
+
 screen_size=`xdpyinfo | grep "dimensions:" | tr -s ' ' | cut -d ' ' -f3`
 title=`basename $1`
 
