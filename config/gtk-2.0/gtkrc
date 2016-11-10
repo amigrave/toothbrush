@@ -1,5 +1,16 @@
+gtk-icon-theme-name = "Vibrancy-Kali-Full-Dark"
+gtk-theme-name = "Blackbird"
+
 binding "NoKeyboardNavigation" {
     unbind "<shift>F10" # This was still bound in terminator
 }
 
 class "*" binding "NoKeyboardNavigation"
+
+
+style "gnome_terminal_notebook"
+{
+  bg[NORMAL] = shade (1.5, "#3c3b37")
+}
+
+widget "*GtkNotebook*" style "gnome_terminal_notebook"
