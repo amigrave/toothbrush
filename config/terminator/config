@@ -45,8 +45,6 @@
     match = '''([^ \t\n\r\f\v:"']+[\.\/][^ \t\n\r\f\v:"']+)?((:|(". line ))([0-9]+))?'''
 [profiles]
   [[default]]
-    background_image = None
     font = DejaVu Sans Mono for Powerline 9
-    scroll_on_output = False
     scrollback_infinite = True
     use_system_font = False
