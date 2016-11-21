@@ -1,4 +1,7 @@
 # vim:ft=conf:
+
+set main-view-id = yes  # show sha in main view
+
 bind    generic     P           !tig --first-parent %(commit)
 bind    generic     O           !tig --first-parent %(commit)^2
 bind    generic     <F1>        !git dd %(commit)~1..%(commit)
