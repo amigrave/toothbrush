@@ -10,6 +10,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$XDG_CACHE_HOME/zsh_history"
 setopt histignorealldups
+setopt share_history
 # }}}
 
 # Setup Completion {{{
@@ -44,7 +45,7 @@ compdef ansible-facts=ssh
 compdef sshfs=scp
 compdef sshmount=scp
 compdef vimdiff=scp
-if (( $+commands[psql] )) ; then
+if [[ $+commands[psql] && "$OSTYPE" != darwin* ]]; then
     compdef pgcli=psql
 fi
 
