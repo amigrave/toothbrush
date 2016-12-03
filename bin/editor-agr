@@ -37,16 +37,21 @@ def get_neovim_sockets():
 
 
 def get_neovim_instance(cwd):
+    nvim = None
+    path = ''
     cwd = os.path.realpath(cwd)
     sockets = get_neovim_sockets()
     for socket in sockets:
         try:
-            nvim = neovim.attach('socket', path=socket)
-            nvim_cwd = nvim.eval('getcwd()')
-            if os.path.realpath(nvim_cwd) in cwd:
-                return nvim
+            _nvim = neovim.attach('socket', path=socket)
+            nvim_cwd = os.path.realpath(_nvim.eval('getcwd()'))
+            if nvim_cwd in cwd and len(nvim_cwd) > len(path):
+                # Take longest match in order to select the more appropriate nvim instance
+                path = nvim_cwd
+                nvim = _nvim
         except Exception:
             _log.exception("Could not communicate with socket '%s'" % socket)
+    return nvim
 
 
 def main(args):
