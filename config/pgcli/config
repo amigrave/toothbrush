@@ -205,10 +205,74 @@ functions = '''
     FROM pg_catalog.pg_namespace n JOIN pg_catalog.pg_proc p ON pronamespace = n.oid
     WHERE nspname = 'public';
 '''
+
+# Drop all PL functions
 dropfunctions = '''/* Drop all PL/* functions */
     SELECT 'DROP FUNCTION ' || ns.nspname || '.' || proname || '(' || oidvectortypes(proargtypes) || ');' AS agr
     FROM pg_proc INNER JOIN pg_namespace ns ON (pg_proc.pronamespace = ns.oid)
     WHERE ns.nspname = 'public' ORDER BY proname;
+'''
+
+# Show create table SQL
+show_create_table = '''
+    SELECT
+      tc.constraint_name,
+      tc.constraint_type,
+      tc.table_name,
+      kcu.column_name,
+      tc.is_deferrable,
+      tc.initially_deferred,
+      rc.match_option AS match_type,
+
+      rc.update_rule AS on_update,
+      rc.delete_rule AS on_delete,
+      ccu.table_name AS references_table,
+      ccu.column_name AS references_field
+
+    FROM information_schema.table_constraints tc
+
+    LEFT JOIN information_schema.key_column_usage kcu
+      ON tc.constraint_catalog = kcu.constraint_catalog
+      AND tc.constraint_schema = kcu.constraint_schema
+      AND tc.constraint_name = kcu.constraint_name
+
+    LEFT JOIN information_schema.referential_constraints rc
+      ON tc.constraint_catalog = rc.constraint_catalog
+      AND tc.constraint_schema = rc.constraint_schema
+      AND tc.constraint_name = rc.constraint_name
+
+    LEFT JOIN information_schema.constraint_column_usage ccu
+      ON rc.unique_constraint_catalog = ccu.constraint_catalog
+      AND rc.unique_constraint_schema = ccu.constraint_schema
+      AND rc.unique_constraint_name = ccu.constraint_name
+
+    --- any conditions for table etc. filtering
+    WHERE lower(tc.constraint_type) in ('foreign key')
+'''
+
+# Display number of records in database per table
+number_of_records = '''
+    SELECT table_schema,
+           table_name,
+           (xpath('/row/cnt/text()', xml_count))[1]::text::int as row_count
+    FROM (
+        SELECT table_name, table_schema,
+             query_to_xml(format('SELECT count(*) AS cnt FROM %I.%I', table_schema, table_name), false, true, '') AS xml_count
+        FROM information_schema.tables
+        WHERE table_schema = 'public'
+    ) t
+'''
+
+# Display total number of records in database
+number_of_records_total = '''
+    SELECT
+        sum((xpath('/row/cnt/text()', xml_count))[1]::text::int)
+    FROM (
+        SELECT table_name, table_schema,
+             query_to_xml(format('SELECT count(*) AS cnt FROM %I.%I', table_schema, table_name), false, true, '') AS xml_count
+        FROM information_schema.tables
+        WHERE table_schema = 'public'
+    ) t
 '''
 
 # DNS to call by -D option
