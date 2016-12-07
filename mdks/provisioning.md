@@ -133,7 +133,7 @@ Here's the desktop stuff
 ```sh
 sudo apt install -y chromium command-not-found qiv pidgin alsa-utils numlockx \
      rxvt-unicode-256color python-qt4 python-tk mtr terminator vim-gtk3 irssi scrot \
-     xdotool xclip cmus sshfs feh mpv gtk-recordmydesktop mupdf
+     xdotool xclip cmus sshfs feh mpv gtk-recordmydesktop mupdf imagemagick
 sudo update-alternatives --set x-www-browser /usr/bin/chromium
 ```
 
@@ -156,9 +156,12 @@ dpkg -i fontconfig-infinality_20130104-0ubuntu0ppa1_all.deb
 bash /etc/fonts/infinality/infctl.sh setstyle win7
 ```
 
+Next step is to [patch it in order to avoid X error messages](https://github.com/Infinality/fontconfig-infinality/pull/15/files)
+<mdk run-as="root" patch="https://github.com/gamunu/fontconfig-infinality/commit/75a1ae15a15a005a965ba6a6bba890919ca4a005.patch">
+
 Set rendering style:
 
-<mdk change='/etc/profile.d/infinality-settings.sh'>
+<mdk run-as="root" change='/etc/profile.d/infinality-settings.sh'>
 ```diff
 -USE_STYLE="DEFAULT"
 +USE_STYLE="WINDOWS7"
@@ -345,11 +348,13 @@ sudo dpkg -i atom.deb
 ```
 
 ## Dev
+
 ```sh
 sudo apt install -y ruby-dev libsqlite3-dev socat wkhtmltopdf libxml2-utils tidy jq apache2-utils gnuplot
 ```
 
 ## Sysadmin
+
 ```sh
 sudo apt install -y iperf
 ```
@@ -472,4 +477,15 @@ git clone https://github.com/cc65/cc65.git
 cd cc65
 make
 prefix=/usr/local make install
+```
+
+### Synergy
+
+```sh
+# TODO:
+# - Get list of branches: https://github.com/symless/synergy/branches
+# - List available builds: http://symless.com/nightly
+# http://symless.com/files/nightly/synergy-v1.8.6-rc1-d0db743-MacOSX-x86_64.dmg
+# http://symless.com/files/nightly/synergy-v1.8.6-rc1-d0db743-Linux-x86_64.deb
+# http://symless.com/files/nightly/synergy-v1.8.6-rc1-d0db743-Windows-x64.msi
 ```
