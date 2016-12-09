@@ -97,9 +97,10 @@ groups = [
     ('web2', [mod], '2', {}),
     ('chat', [mod], '3', {}),
     ('term', [mod], 'Return', {'spawn': 'terminator'}),
+    ('ipy', [mod], 'Delete', {}),
     ('gvim', [mod], 'e', {}),
-    ('ipy', [mod, alt], 'Return', {}),
     ('gimp', [mod], 'g', {}),
+    ('tmp', [mod, alt], 'Return', {'spawn': 'urxvt'}),
 ]
 
 for i, group in enumerate(groups):
@@ -170,13 +171,15 @@ floating_layout = layout.Floating(
         dict(wname="6502 Debugger"),
         dict(wname="Wine configuration"),
         dict(wname="Terminator Preferences"),
+        dict(wname="recordMyDesktop"),
+        dict(wname="galculator"),
     ], auto_float_types=[
         "utility",
         "notification",
         "toolbar",
         "splash",
         "dialog",
-]
+    ]
 )
 
 dgroups_key_binder = None
