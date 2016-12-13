@@ -12,6 +12,7 @@
 # ------------------------------------------------------------
 # export PATH=$AMIGRAVE/config/vim/nvim/bin:$PATH
 # alias vim=nvim  # even if covered with $PATH, it's better to minimize subprocesses
+# export EDITOR_AGR_DEBUG=1
 
 alias root='SUDO_SHELL=root $AMIGRAVE/bin/shell'
 # Put your custom sudo users here, eg:

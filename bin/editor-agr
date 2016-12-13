@@ -8,22 +8,27 @@ import logging
 import os
 import sys
 
-import neovim
+
+# This should go below the imports but neovim breaks the logging configurations, should fix it one day...
+if os.getenv('EDITOR_AGR_DEBUG'):
+    logging.basicConfig(filename='/tmp/debug-%s.log' % os.path.basename(__file__), level=logging.INFO)
+log = logging.getLogger(__name__)
+
+try:
+    import neovim
+except ImportError:
+    neovim = None
 
 # TODO: make it a general purpose editor (check out file type and open in appropriate program)
-
-if os.path.isdir('/tmp/debug'):
-    logging.basicConfig(filename='/tmp/debug/%s.log' % os.path.basename(__file__), level=logging.DEBUG)
-_log = logging.getLogger(__name__)
 
 
 def call(cmd):
     try:
-        _log.info("Calling %s" % cmd)
+        log.info("Calling %s" % cmd)
         ret = os.system(cmd)
-        _log.info("Got return value %d" % ret)
+        log.info("Got return value %d" % ret)
     except Exception:
-        _log.exception("Error while calling %s" % cmd)
+        log.exception("Error while calling %s" % cmd)
 
 
 def get_neovim_sockets():
@@ -43,14 +48,16 @@ def get_neovim_instance(cwd):
     sockets = get_neovim_sockets()
     for socket in sockets:
         try:
+            log.info("Trying to contact neovim socket %s ..." % socket)
             _nvim = neovim.attach('socket', path=socket)
             nvim_cwd = os.path.realpath(_nvim.eval('getcwd()'))
+            log.info("   got cwd %s" % nvim_cwd)
             if nvim_cwd in cwd and len(nvim_cwd) > len(path):
                 # Take longest match in order to select the more appropriate nvim instance
                 path = nvim_cwd
                 nvim = _nvim
         except Exception:
-            _log.exception("Could not communicate with socket '%s'" % socket)
+            log.exception("Could not communicate with socket '%s'" % socket)
     return nvim
 
 
@@ -61,20 +68,28 @@ def main(args):
         if os.path.isfile(arg):
             args[i] = os.path.realpath(arg)
     args = ' '.join(args)  # TODO: support multiple files... need to iterate
-    _log.info("Command called with args %r" % args)
+    log.info("Command called with args %r" % args)
 
-    # First try to find a neovim instance
-    nvim = get_neovim_instance(cwd)
-    if nvim:
-        try:
-            nvim.command('edit %s' % args)
-            return
-        except Exception:
-            _log.exception("Could not launch edit command to nvim")
+    if neovim:
+        # First try to find a neovim instance
+        nvim = get_neovim_instance(cwd)
+        if nvim:
+            try:
+                nvim.command('edit %s' % args)
+                return
+            except neovim.api.nvim.NvimError as e:
+                # TODO: find a way to detect if the error is critical
+                #       eg, exception:
+                #           'Vim(edit):E520: Not allowed in a modeline: makeprg=python\\ %'
+                #       is not critical
+                #       Maybe check if the file is in the list of opened files then in that
+                #       case it's ok to return.
+                log.exception("nvim exception: %s" % e)
+                return
 
     # Otherwise go the vim way
     servers = getoutput('/usr/bin/vim --serverlist').strip().splitlines()
-    _log.info("Got servers: %r" % servers)
+    log.info("Got servers: %r" % servers)
 
     server_name = os.path.realpath(cwd).upper()
     server_name_test = server_name
@@ -86,14 +101,14 @@ def main(args):
             break
         server_name_test = os.path.split(server_name_test)[0]
 
-    _log.info("Use server name %s for cwd '%s'" % (server_name, cwd))
+    log.info("Use server name %s for cwd '%s'" % (server_name, cwd))
 
     if server_name in servers:
         # If a server with current path name exists, always use this one
-        _log.info("Server %s is found in list" % server_name)
+        log.info("Server %s is found in list" % server_name)
         call('/usr/bin/vim --servername "%s" --remote-tab %s' % (server_name, args))
     elif not sys.stdin.isatty():
-        _log.info("Calling command not through a tty, so we'll start gvim")
+        log.info("Calling command not through a tty, so we'll start gvim")
         if os.environ.get('DESKTOP_SESSION') == 'qtile':
             call('qtile-agr --silent switch_group gvim')
         call('gvim --remote-tab %s' % args)
@@ -102,10 +117,12 @@ def main(args):
         call('nvim %s' % args)
     else:
         # When called explicitely, create a server
-        _log.info("Creating server %s" % server_name)
+        log.info("Creating server %s" % server_name)
         call('vim --servername "%s" %s' % (server_name, args))
 
 
 if __name__ == '__main__':
+    # files = [os.path.realpath(arg) for arg in sys.argv[1:] if os.path.isfile(arg)]
+    # getoutput('file -Eb %s')
     args = sys.argv[1:]
     main(args)
