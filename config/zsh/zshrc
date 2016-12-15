@@ -57,8 +57,6 @@ zstyle ':completion:*:hosts' hosts $_ssh_config
 # }}}
 
 # Set up the prompt {{{
-# autoload -Uz promptinit
-# promptinit
 prompt_agr () {
     local usercol=${1:-'blue'}
     local hostcol=${1:-'blue'}
@@ -81,7 +79,10 @@ prompt_agr () {
 
     prompt_opts=(cr subst percent)
 }
-prompt_agr
+# prompt_agr
+
+setopt prompt_subst
+source $DOTFILES/zsh/agnoster_theme_modified.zsh
 # }}}
 
 # Setup command input key binding {{{

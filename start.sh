@@ -21,7 +21,7 @@ if [ "$ZSH_VERSION" != "" ]; then
     # In zsh context we can get the current file for sure
     current_script=${(%):-%N}
     # TODO: check if we could get a zsh env for ~/.profile
-    rcfile=zsh/zshrc
+    rcfile=zsh/.zshrc
 elif [ "$BASH_SOURCE" != "" ]; then
     # In bash, try to get current file. Not always set unfortunately
     current_script=${BASH_SOURCE[0]}

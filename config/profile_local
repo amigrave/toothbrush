@@ -3,6 +3,10 @@
 # LOCAL PROFILE
 ###############
 
+# Default user for zsh prompt, set it to your hardcoded username
+# if you want to differentiate remote users when using sshrc
+DEFAULT_USER="$USER"
+
 # export EDITOR=vim
 # export VISUAL=$EDITOR
 # export TERMINAL=terminator
