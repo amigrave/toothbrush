@@ -5,4 +5,5 @@
     , "sub": true           // Do not force dot notation
     , "noyield": true       // Disable stupid check if a generator contains a yield statement
     , "boss": true          // Do not warn for assignations used as expression and == null
+    , "eqnull": true        // This option suppresses warnings about == null comparisons
 }
