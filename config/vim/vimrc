@@ -289,6 +289,7 @@ if has("autocmd")
     " au BufWritePost,FileWritePost *.sass :silent !sass --compass --style expanded <afile> > "%:p:r.css"
     au BufWritePost,FileWritePost *.sass setlocal sw=4
     au BufRead,BufNewFile *.s65 setlocal ft=asm_ca65
+    au BufRead,BufNewFile .odoorc,odoo.conf setlocal filetype=dosini
 
     au BufRead,BufNewFile *.pyj set filetype=rapydscript
     " au BufWritePost,FileWritePost *.pyj :silent !rapydscript <afile> -p --comments > "%:p:r.js"
