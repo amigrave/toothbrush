@@ -310,6 +310,7 @@ if has("autocmd")
     autocmd FileType python BracelessEnable -indent -fold -highlight
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+    au Filetype gitcommit setlocal spell textwidth=72 colorcolumn=72
 
     " Markdown: https://github.com/tpope/vim-markdown/issues/90
     au FileType markdown setlocal foldmethod=syntax
