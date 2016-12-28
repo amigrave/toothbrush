@@ -45,7 +45,7 @@ compdef ansible-facts=ssh
 compdef sshfs=scp
 compdef sshmount=scp
 compdef vimdiff=scp
-if [[ $+commands[psql] && "$OSTYPE" != darwin* ]]; then
+if [[ $ZSH_VERSION  > '5.1' && "$OSTYPE" != darwin* && $+commands[psql] ]]; then
     compdef pgcli=psql
 fi
 
