@@ -4,7 +4,7 @@ import os
 
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
-from libqtile import layout, bar, widget
+from libqtile import layout, bar, widget, hook
 
 logger = logging.getLogger('qtile.config')
 
@@ -13,6 +13,12 @@ alt = "mod1"
 win = "mod4"
 
 SCROT_ARGS = " -e 'mv $f ~/Downloads/'"
+
+FONT_AWESOME = {
+    # http://www.iemoji.com/view
+    'font': 'FontAwesome',
+    'fontsize': 20,
+}
 
 SYMBOL_FONT = {
     # http://www.iemoji.com/view
@@ -136,9 +142,10 @@ screens = [
                 widget.Sep(),
                 widget.Volume(emoji=True, **SYMBOL_FONT),
 
-                # widget.Sep(),
+                widget.Sep(),
                 # widget.Battery(),
-                # widget.TextBox(u"\U0001F50B", **SYMBOL_FONT),
+                # widget.TextBox(u"\uf240", **FONT_AWESOME),
+                widget.TextBox(u"\uf09b", **FONT_AWESOME),
 
                 widget.Sep(),
                 widget.MemoryGraph(fill_color='009933', graph_color='339966'),
@@ -193,3 +200,8 @@ wmname = "qtile"
 
 # Set initial wallpaper
 set_wallpaper('/usr/share/images/desktop-base/kali-wallpaper_1920x1080.png')
+
+
+@hook.subscribe.screen_change
+def restart_on_screen_change(qtile, ev):
+    qtile.cmd_restart()
