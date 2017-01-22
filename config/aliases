@@ -102,7 +102,7 @@ alias e="editor-agr"
 alias ge="gvim-agr --remote-tab-silent"
 alias ack="ack-grep --pager=less --color-match=red"
 alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
-alias drop_cache='sync; echo 3 > /proc/sys/vm/drop_caches'
+alias drop_caches='sudo bash -c "for i in 3 2 1; do sync; echo \$i > /proc/sys/vm/drop_caches; done"'
 # alias man="TERMINFO=$HOME/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 alias kid="kid3-qt ."
 alias o="xdg-open"

@@ -3,7 +3,7 @@
 [keybindings]
   copy = <Super>c
   edit_window_title = <Alt><Super>i
-  full_screen = <Primary><Super>f
+  full_screen = <Super>F11
   go_down = <Super>Down
   go_left = <Super>Left
   go_right = <Super>Right
@@ -45,6 +45,7 @@
     match = '''([^ \t\n\r\f\v:"']+[\.\/][^ \t\n\r\f\v:"']+)?((:|(". line ))([0-9]+))?'''
 [profiles]
   [[default]]
+    cursor_color = "#aaaaaa"
     font = DejaVu Sans Mono for Powerline 9
     scrollback_infinite = True
     use_system_font = False

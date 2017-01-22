@@ -173,7 +173,7 @@ function pclean() {
 # Strace and read output {{{
 function strace_vim() {
     logfile=/tmp/strace.log
-    strace -o $logfile "$@"
+    strace -s 80 -o $logfile "$@"
     vim $logfile
     rm $logfile
 }
