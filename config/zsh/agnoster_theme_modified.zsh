@@ -111,7 +111,10 @@ prompt_agnoster_main() {
   prompt_status
   prompt_context
   prompt_dir
-  prompt_git
+  if [[ "$MC_SID" == "" && "$DISABLE_GIT_PROMPT" == "" ]]; then
+    # Compute git prompt if not under midnight commander or explicetely prevented
+    prompt_git
+  fi
   prompt_end
 }
 
