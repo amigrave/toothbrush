@@ -53,7 +53,7 @@
     cia = commit --amend
     cim = commit -a -mm  # antony style
     co  = checkout
-    cp  = cherry-pick
+    chp = cherry-pick
     d   = "!f() { cdiff -c always \"$@\" | less --tabs=4 -RFX --pattern \"^diff --git \" ; }; f"
     cd  = "!cdiff -s -w0 -c always | less --tabs=4 -RFX --pattern \"^diff --git \""
     dd  = difftool --dir-diff -t meld
@@ -68,6 +68,7 @@
     ls  = ls-files
     lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"  # list deleted files
     lsi = ls-files --other --ignored --exclude-standard # list ignored files
+    mff = merge --ff-only --no-commit
     p   = "!git fetch --prune; git rebase --autostash"
     ri = "!sh -c 'git rebase --interactive --autostash HEAD~$0'"
     sa  = "!sh -c 'git stash apply stash@{$1}' -"
