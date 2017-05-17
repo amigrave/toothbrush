@@ -34,6 +34,9 @@ debug_widget = widget.TextBox(u"\u2620", name="coucou", **SYMBOL_FONT)
 
 
 def set_random_wallpaper(*a):
+    # TODO:
+    #       - https://github.com/carlosabalde/ngwallpaper
+    #       - https://github.com/aepsil0n/random-wallpaper
     nimg = random.randrange(1701, 2199)
     set_wallpaper('https://www.gstatic.com/prettyearth/assets/full/%s.jpg' % nimg)
 
