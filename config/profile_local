@@ -62,6 +62,7 @@ if [[ -n "$DISPLAY" && -z "$AGRLOCAL" ]]; then
     ################
     # setxkbmap -option                              # clear config
     # setxkbmap us -variant altgr-intl -option ctrl:nocaps  # make Caps Lock a ctrl key
+    # -option apple:badmap  ## on some platform (vms) the apple keyboard is handled differently
     # xset r rate 200 50
 
     # xmodmap $DOTFILES/Xmodmap
