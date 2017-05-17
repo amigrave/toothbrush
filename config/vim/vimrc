@@ -304,10 +304,11 @@ if has("autocmd")
     " Disable syntax hightlighting for big files
     au Filetype xml if getfsize(@%) > 1000000 | setlocal syntax=off | endif
 
-    au Filetype python syn match agrEq "[=]" | hi agrEq ctermfg=green guifg=green
+    au Filetype python syn match pythonEqual "[=]"
     au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=darkcyan guifg=darkcyan
 
     autocmd FileType python BracelessEnable -indent -fold -highlight
+    " au! FileType python setl nosmartindent  " http://stackoverflow.com/questions/2063175/comments-go-to-start-of-line-in-the-insert-mode-in-vim
 
     " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
     au Filetype gitcommit setlocal spell textwidth=72 colorcolumn=72
@@ -338,7 +339,7 @@ if has("autocmd")
     let php_folding=1
     let php_asp_tags = 1
     let g:xml_syntax_folding=1
-    let python_highlight_all = 1
+    let g:python_highlight_all = 1
     let coffee_folding = 1
 
 endif
@@ -384,6 +385,7 @@ nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gg <s-v>:Gbrowse<CR>
 vnoremap <Leader>gg :Gbrowse<CR>
 nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
 if has("gui_macvim")
     nnoremap <Leader>gtl ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig %:p:t;exit'"<CR>
     nnoremap <Leader>gtb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
