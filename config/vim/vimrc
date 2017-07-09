@@ -50,8 +50,9 @@ if v:version > 701
 
     " Languages
     Plugin 'scrooloose/syntastic'
-    " Plugin 'hdima/python-syntax'  " Supports python3 but no folding
-    Plugin 'vim-scripts/Python-Syntax-Folding'
+    " Plugin 'vim-scripts/Python-Syntax-Folding'  " Folding for vim's original python syntax
+    Plugin 'vim-python/python-syntax'  " Supports python3 but no folding
+    Plugin 'tmhedberg/SimpylFold'
     Plugin 'rmartinho/vim-boo'
     Plugin 'atsepkov/vim-rapydscript'
     Plugin 'amigrave/JavaScript-syntax'
@@ -147,7 +148,7 @@ set showcmd             " Show (partial) command in the last line of the screen
 set showmode            " If in Insert, Replace or Visual mode put a message on the last line
 set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/viminfo nowrap
 
-set foldlevelstart=99   " do not fold by default when opening files
+" set foldlevelstart=99   " do not fold by default when opening files
 "set list listchars=tab:~.,trail:.,extends:>,precedes:<
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
 set backupdir=$XDG_CACHE_HOME/vim/backup
@@ -553,6 +554,12 @@ map *  <Plug>(asterisk-z*)
 map #  <Plug>(asterisk-z#)
 map g* <Plug>(asterisk-gz*)
 map g# <Plug>(asterisk-gz#)
+
+
+" SimpylFold
+let g:SimpylFold_docstring_preview = 1
+let g:SimpylFold_fold_docstring = 0
+let g:SimpylFold_fold_import = 1
 
 " Don't wanna ex mode, prefer quick Quit
 map Q :qa<CR>
