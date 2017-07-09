@@ -66,9 +66,9 @@ mkdir -p ~/bin
 # TODO: keep only necessary for server move the rest to desktop
 apt install -y \
     vim whois build-essential linux-headers-amd64 linux-image-amd64 \
-    zsh mc screen tmux htop rsync telnet strace less netcat ncurses-term \
+    zsh mc screen tmux htop rsync telnet strace less netcat-openbsd ncurses-term \
     multitail silversearcher-ag git tig tree python-pip curl rename-utils \
-    ncdu
+    ncdu dialog
 chsh -s /bin/zsh
 update-alternatives --set editor /usr/bin/vim.basic
 ```
@@ -141,6 +141,12 @@ sudo update-alternatives --set x-www-browser /usr/bin/chromium
 pip install --user cdiff howdoi escrotum pipdeptree
 ```
 
+### Sound
+
+```sh
+sudo apt install -y xmp
+```
+
 ### Better fonts
 
 The default font rendering in debian (hence Kali) is awful.
@@ -172,6 +178,10 @@ Set rendering style:
 Install additional fonts:
 
 - powerline for the terminal and gvim:
+
+TODO: check if the following font should be installed too:
+- https://github.com/ryanoasis/nerd-fonts
+- https://github.com/ryanoasis/powerline-extra-symbols
 
 ```sh
 # TODO: check if should be root ?
@@ -347,34 +357,63 @@ sudo apt-get install gvfs-bin
 sudo dpkg -i atom.deb
 ```
 
+## Common packages
+
+```sh
+sudo apt install -y unzip rar
+```
 ## Dev
 
 ```sh
-sudo apt install -y ruby-dev libsqlite3-dev socat wkhtmltopdf libxml2-utils tidy jq apache2-utils gnuplot
+sudo apt install -y ruby-dev libsqlite3-dev socat wkhtmltopdf libxml2-utils tidy jq apache2-utils gnuplot cloc \
+                    ttyrec asciinema lolcat python-pygit2 python-fuse
+```
+
+### Mailcatcher
+
+```sh
+sudo gem install mailcatcher
+```
+
+<mdk run-as="root" put="/etc/systemd/system/mailcatcher.service">
+```dosini
+[Unit]
+Description=MailCatcher Service
+After=network.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/mailcatcher --foreground --smtp-port 25
+
+[Install]
+WantedBy=multi-user.target
+description "Mailcatcher"
+```
+
+### MailHog
+
+TODO: install go, make mailhog to /usr/local/bin/MailHog
+
+[mdk run-as="root" put="/etc/systemd/system/mailhog.service"]
+```dosini
+[Unit]
+Description=MailHog Email Catcher
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/MailHog
+StandardOutput=journal
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
 ```
 
 ## Sysadmin
 
 ```sh
 sudo apt install -y iperf
-```
-
-### Install mailcatcher
-
-```
-sudo gem install mailcatcher
-```
-
-<mdk run-as="root" put="/etc/init/mailcatcher.conf">
-```conf
-description "Mailcatcher"
-
-start on runlevel [2345]
-stop on runlevel [!2345]
-
-respawn
-
-exec /usr/bin/env $(which mailcatcher) --foreground
 ```
 
 ## Odoo
@@ -403,7 +442,7 @@ pip install --user watchdog prettytable fabric fabtool
 <run run-as="root">
 ```sh
 apt install -y nodejs npm
-npm install -g diff-so-fancy eslint
+npm install -g eslint jshint rapydscript
 ```
 
 ## Misc stuff
