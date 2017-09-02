@@ -1,4 +1,17 @@
-#!/bin/bash
-# TODO: autodetect virtual box and add touch-device flag: https://code.google.com/p/chromium/issues/detail?id=456222
-chromium-browser --touch-devices=123 "$@"
-# chromium-browser --touch-devices=123 --disable-web-security "$@"
+#!/usr/bin/env python
+import sys
+
+from cefpython3 import cefpython as cef
+
+
+if len(sys.argv) != 2:
+    print('usage: www <url>')
+    sys.exit(1)
+
+url = sys.argv[1]
+
+sys.excepthook = cef.ExceptHook  # To shutdown all CEF processes on error
+cef.Initialize()
+cef.CreateBrowserSync(url=url, window_title=url)
+cef.MessageLoop()
+cef.Shutdown()
