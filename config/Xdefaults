@@ -49,8 +49,10 @@ URxvt.color7  : #D3D7CF
 URxvt.color15 : #EEEEEC
 
 URxvt*xftAntialias: true
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=20
-URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=20
+URxvt.font: xft:DejaVu Sans Mono for Powerline:style=Book:pixelsize=20
+! URxvt*font: xft:DejaVu Sans Mono:pixelsize=20
+URxvt.boldFont: xft:DejaVu Sans Mono for Powerline:style=Book:pixelsize=20
+! URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=20
 URxvt*letterSpace: -1
 !URxvt.font: -misc-console-*-r-*--16-160-72-72-c-80-*-1,fixed
 !xterm*font:-bitstream-terminal-bold-r-*-*-*-140-100-100-*-*-iso8859-1
