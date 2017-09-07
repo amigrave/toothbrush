@@ -12,6 +12,9 @@
     status = true
     branch = auto
 
+[rerere]
+    enabled = true
+
 [pretty]
     hist  = "%C(bold yellow)%h %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)"
     histp = "%C(bold yellow)%h %C(reset)%C(yellow)%p %C(bold green)(%ad) %C(reset)%C(red)[%an] %C(reset)%s %C(bold red)%d%C(reset)" # with parents
@@ -46,12 +49,14 @@
     ff = only  # only pull if merge can be done as fast-forward
 
 [alias]
-    b   = branch -vv
-    bb  = branch -vva
+    b   = branch
+    bb  = branch -vv
+    bbb = branch -vva
     bc  = branch -r --contains
     ci  = commit
     cia = commit --amend
     cim = commit -a -mm  # antony style
+    cif = commit --fixup
     co  = checkout
     chp = cherry-pick
     d   = "!f() { cdiff -c always \"$@\" | less --tabs=4 -RFX --pattern \"^diff --git \" ; }; f"
@@ -70,7 +75,8 @@
     lsi = ls-files --other --ignored --exclude-standard # list ignored files
     mff = merge --ff-only --no-commit
     p   = "!git fetch --prune; git rebase --autostash"
-    ri = "!sh -c 'git rebase --interactive --autostash HEAD~$0'"
+    rem = remote -v
+    ri  = "!sh -c 'git rebase --interactive --autostash HEAD~$0'"
     sa  = "!sh -c 'git stash apply stash@{$1}' -"
     sd  = "!sh -c 'git stash drop stash@{$1}' -"
     sh  = "!sh -c 'git stash show -p stash@{$1}' -"
