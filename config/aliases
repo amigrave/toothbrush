@@ -48,8 +48,11 @@ alias cdr='cd $(git rev-parse --show-cdup)'
 # }}}
 
 # Sysadmin {{{
-alias dblist='psql -lX | tail -n +4 | head -n -2 | cut -d\| -f1 | tr -d " " | grep -v -E "^(|postgres|template[01])$" | sort'
-alias dropdbs='dblist | iselect -am | xargs -n1 dropdb -i'
+alias dblist='psql -lX | tail -n +4 | head -n -2 | cut -d\| -f1 | tr -d " " | awk "NF" | grep -v -E "^(|postgres|template[01])$" | sort'
+alias dropdbs='dblist | grep -v -E "^(|postgres|template[01])$" | iselect -am | xargs -n1 dropdb -i'
+alias dbusers='psql -Xc "\\du" postgres | tail -n +4 | head -n -1 | cut -d\| -f1 | tr -d " " | awk "NF" | sort'
+alias dropusers='dbusers | grep -v postgres | iselect -am | xargs -n1 dropuser -i'
+alias ssl_file='openssl x509 -noout -text -in'
 # }}}
 
 # Misc {{{
@@ -61,6 +64,7 @@ alias upper='for i in *; do mv "$i" "$(echo $i | tr "[a-z]" "[A-Z]" )"; done'
 alias chmodx="find . -type d -exec chmod 0755 '{}' ';'; find . -type f -exec chmod 0644 '{}' ';'"
 alias chownx="sudo chown -R $USER:$(id -g -n $USER)"
 alias dusage="du -sk * | sort -nr | cut -f2 | xargs -d '\n' du -sh"
+alias exif="identify -format '%[EXIF:*]'"
 alias pst="pstree -hanUul $USER | less"
 alias find_non_ascii="ag '[^\x00-\x7F]'"
 # Make a function out of this or even consider to put it in agr.py
@@ -105,6 +109,7 @@ alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed
 alias drop_caches='sudo bash -c "for i in 3 2 1; do sync; echo \$i > /proc/sys/vm/drop_caches; done"'
 # alias man="TERMINFO=$HOME/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 alias kid="kid3-qt ."
+alias getchmod_from_file="stat --format '%a'"
 alias o="xdg-open"
 alias qmv='qmv -f do'
 alias track='inotifywait -rm . | grep -iE "(modify |create |delete|attrib|moved)"'
@@ -113,6 +118,7 @@ alias ubuntuwin="gconftool-2 --set /apps/metacity/general/button_layout --type s
 alias vboxusb="sudo chown -R amigrave:vboxusers /proc/bus/usb"
 alias vir='clamscan -r *'
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo' # check for virtualization instructions
+alias vtime='/usr/bin/time -v'
 alias zsnes_gamepad="sudo ln -s /dev/input/js0 /dev/js0"
 
 fi
@@ -128,6 +134,7 @@ alias htop="HOMERC=$XDG_CONFIG_HOME/htop/htoprc htop"  # will soon change: https
 alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 alias jjs="rlwrap /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/bin/jjs"
 alias kid3="/Applications/kid3.app/Contents/MacOS/kid3 ."
+alias getchmod_from_file="stat -f '%OLp'"
 alias xee="/Applications/Xee.app/Contents/MacOS/Xee"
 alias safari="/Applications/Safari.app/Contents/MacOS/Safari"
 alias google-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
