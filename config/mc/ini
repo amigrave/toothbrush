@@ -81,8 +81,8 @@ editor_filesize_threshold=64M
 editor_stop_format_chars=-+*\\,.;:&>
 mcview_eof=
 ignore_ftp_chattr_errors=true
-
 skin=default
+editor_state_full_filename=1
 
 [Panels]
 kilobyte_si=true
@@ -103,11 +103,11 @@ permission_mode=false
 torben_fj_mode=false
 quick_search_mode=2
 select_flags=6
-
 simple_swap=false
+panel_scroll_center=false
 
 [Layout]
-message_visible=1
+message_visible=0
 keybar_visible=1
 xterm_title=0
 output_lines=0
@@ -130,6 +130,7 @@ source_codepage=Other_8_bit
 autodetect_codeset=
 clipboard_store=
 clipboard_paste=
+spell_language=en
 
 [Colors]
 base_color=
