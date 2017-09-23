@@ -17,6 +17,10 @@ function ansible-facts() {
     ansible all -i "$1," -m setup
 }
 
+function ssl_https() {
+    curl --insecure -v https://"$1" 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }'
+}
+
 # vless: make vim behave like `less` {{{
 function vless() {
     # /usr/share/vim/vim74/macros/less.sh
@@ -83,10 +87,18 @@ function mc() {
 }
 # }}}
 
-# Launch mc and `sh` connect to a remote host {{{
+# SSH helpers {{{
+
+# Launch mc and `sh` connect to a remote host
 function sshmc() {
     mc ./ sh://$1
 }
+
+# Ssh to host and resume tmux or screen if found
+function sshh() {
+    ssh -t $1 "tmux attach || screen -rx"
+}
+
 # }}}
 
 # Dump `ping` packets received on a given network interface {{{

@@ -39,6 +39,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # https://github.com/keithw/mosh/issues/139
 compdef mosh=ssh
 compdef autossh=ssh
+compdef sshh=ssh
 compdef sshrc=ssh
 compdef sshmc=ssh
 compdef ansible-facts=ssh
