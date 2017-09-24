@@ -60,9 +60,13 @@ if [[ -n "$DISPLAY" && -z "$AGRLOCAL" ]]; then
 
     # Keyboard stuff (check options: /usr/share/X11/xkb/rules/evdev.lst)
     ################
-    # setxkbmap -option                              # clear config
-    # setxkbmap us -variant altgr-intl -option ctrl:nocaps  # make Caps Lock a ctrl key
-    # -option apple:badmap  ## on some platform (vms) the apple keyboard is handled differently
+    # setxkbmap us \
+    #     -variant altgr-intl \
+    #     -option ctrl:nocaps \
+    #     -option compose:ralt \
+    #     -option compose:prsc \
+    #     -option altwin:swap_lalt_lwin
+
     # xset r rate 200 50
 
     # xmodmap $DOTFILES/Xmodmap
