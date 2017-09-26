@@ -5,6 +5,7 @@ Host *
     # HashKnownHosts no
     # CheckHostIP no
     ForwardAgent yes
+    ServerAliveInterval 60
 
     # Sharing connections conflicts with midnight commander's fish
     ControlMaster auto
@@ -13,6 +14,10 @@ Host *
 Host *.local
     ForwardX11 yes
     ForwardX11Trusted no
+
+Host *.slow
+    Hostname %h
+    ProxyCommand pv -q -L 1k | nc %h 22
 # }}}
 
 # {{{ AGR
