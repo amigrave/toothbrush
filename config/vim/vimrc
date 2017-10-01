@@ -388,11 +388,11 @@ vnoremap <Leader>gg :Gbrowse<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 if has("gui_macvim")
-    nnoremap <Leader>gtl ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig %:p:t;exit'"<CR>
-    nnoremap <Leader>gtb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
+    nnoremap <Leader>tl ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig --follow %:p:t;exit'"<CR>
+    nnoremap <Leader>tb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
 else
-    nnoremap <Leader>gtl :execute "!urxvt -cd '%:p:h' -e tig %:p:t"<CR>
-    nnoremap <Leader>gtb :execute "!urxvt -cd '%:p:h' -e tig blame %:p:t +" . line('.')<CR>
+    nnoremap <Leader>tl :execute "!terminator --working-directory='%:p:h' -f -m -b --profile=tig -x tig --follow %:p:t &"<CR>
+    nnoremap <Leader>tb :execute "!terminator --working-directory='%:p:h' -f -m -b --profile=tig -x tig blame %:p:t +" . line('.')<CR>
 endif
 
 " Scrolling

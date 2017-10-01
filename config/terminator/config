@@ -49,3 +49,7 @@
     font = DejaVu Sans Mono for Powerline 9
     scrollback_infinite = True
     use_system_font = False
+  [[tig]]
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono for Powerline 18
+    use_system_font = False
