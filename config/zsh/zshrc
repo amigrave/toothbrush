@@ -4,6 +4,16 @@ source $DOTFILES/profile
 setopt AUTO_CD
 # eval "$(dircolors -b)"
 
+# Misc configuration {{{
+
+# magically quote pasted urls
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
+
+# }}}
+
 # History stuff {{{
 # My history is bigger than yours
 HISTSIZE=10000
