@@ -1,74 +1,68 @@
-;A window's title can contain WinTitle anywhere inside it to be a match.
-SetTitleMatchMode, 2
+; Doc reminder {{{
+; ============
+; # Win (Windows logo key)
+; ! Alt
+; ^ Control
+; + Shift
+; &  An ampersand may be used between any two keys or mouse buttons
+;    to combine them into a custom hotkey.
+;
+; }}}
+
+; Globals {{{
+; =======
+; Use regular expressions to match windows titles when using commands:
+;     WinTitle, WinText, ExcludeTitle and ExcludeText
+;
+; Eg: WinActivate Untitled.*Notepad.
+; https://autohotkey.com/docs/commands/SetTitleMatchMode.htm
+SetTitleMatchMode, RegEx
+
+; }}}
+
+; Hotkeys {{{
 
 ; Map CapsLock to CTRL
 Capslock::Control
 
-; Control to Win key
+; Map some WIN+<key> to CTRL+<key> (mac habit)
 #c::^c
 #v::^v
-#x::^x
-#z::^z
-#t::^t
-#l::^l
-#s::^s
-#k::^k
-#f::^f
+; #x::^x
+; #z::^z
+; #t::^t
+; #l::^l
+; #s::^s
+; #k::^k
+; #f::^f
 #w::Send ^{F4}
 #q::Send !{F4}
-
-; Maximize active windows
-!#Up::WinMaximize, A
 
 ; Map prev/next tab
 !#Left::Send ^{PgUp}
 !#Right::Send ^{PgDn}
 
-; Map prev/next window
-LWin & Tab::AltTab
+; Make Win+Tab behave like Alt+Tab
+; TODO: find a working solution or make Win and Alt hot swappable
 
-; Workaround for ShiftAltTab
-; http://www.autohotkey.com/forum/topic56870.html
-KeyWait,LShift
-Suspend, On
-~LWin::Suspend Off
-~LWin UP::
-KeyWait,LShift
-Suspend On
-Return
-~<+Tab::ShiftAltTab
+; Win+Alt+t == always on top
+; !#t:: Winset, Alwaysontop, , A
+; ^SPACE::  Winset, Alwaysontop, , A
+!#t::Winset, Alwaysontop, , A
 
-#+e::Run explorer
+; }}}
 
-; Map editor shortcut
-#e::
-IfWinExist, GVIM
-{
-    WinActivate
-    return
-} else {
-    Run C:\Program Files\vim\vim73\gvim.exe
-    return
-}
 
-; Map Browsers
-#F2::
-IfWinExist, Google Chrome
-{
-    WinActivate
-    return
-} else {
-    Run "%HOMEPATH%\Local Settings\Application Data\Google\Chrome\Application\chrome.exe"
-    return
-}
+; ; Workaround for ShiftAltTab
+; ; http://www.autohotkey.com/forum/topic56870.html
+; KeyWait,LShift
+; Suspend, On
+; ~LWin::Suspend Off
+; ~LWin UP::
+; KeyWait,LShift
+; Suspend On
+; Return
+; ~<+Tab::ShiftAltTab
 
-#F4::
-IfWinExist, Google Chrome
-{
-    WinActivate
-    return
-} else {
-    Run "C:\Program Files\Mozilla Firefox\firefox.exe"
-    return
-}
 
+; vim: set fdm=marker:
