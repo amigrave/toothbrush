@@ -395,8 +395,18 @@ else
     nnoremap <Leader>tb :execute "!terminator --working-directory='%:p:h' -f -m -b --profile=tig -x tig blame %:p:t +" . line('.')<CR>
 endif
 
-" Scrolling
+" Toggling
 """""""""""
+function! ToggleColorColumn()
+    if &colorcolumn == 0
+        set colorcolumn=79,120
+    else
+        set colorcolumn=0
+    endif
+endfunction
+nnoremap <S-F6> :call ToggleColorColumn()<CR>
+inoremap <S-F6> <C-O>:call ToggleColorColumn()<CR>
+
 function! ToggleScrolloff()
     if &scrolloff == 999
         set scrolloff=5
