@@ -492,7 +492,8 @@ inoremap <silent> <S-F11> <C-O>:only<CR>
 
 " Ctrl+L removes highlighting and triggers GitGutterAll
 " then calls normal C-L (redraw)
-nnoremap <C-l> :nohlsearch<CR>:GitGutterAll<CR><C-l>
+" added :mode because of glitches when resizing a neovim terminal with airline
+nnoremap <C-l> :nohlsearch<CR>:GitGutterAll<CR><C-l>:mode<CR>
 
 " NERD Tree
 nnoremap <F12> :NERDTreeFind<CR>
@@ -539,7 +540,7 @@ let g:notes_directories = ['~/Documents/Notes']
 nnoremap <leader>on :tabnew<CR>:Note<Space>
 
 " vim-markdown
-let g:markdown_fenced_languages = ['python', 'javascript', 'html', 'xml', 'yaml', 'sql', 'sh', 'diff']
+let g:markdown_fenced_languages = ['python', 'javascript', 'html', 'xml', 'yaml', 'sql', 'sh', 'diff', 'dosini', 'conf']
 let g:markdown_folding = 1
 
 nmap <leader>m :make<cr>
@@ -596,11 +597,25 @@ imap <silent> <A-Down> <C-O>:wincmd j<CR>
 
 nmap <silent> <A-Left> :wincmd h<CR>
 imap <silent> <A-Left> <C-O>:wincmd h<CR>
+nmap <silent> <S-Left> :wincmd h<CR>
+imap <silent> <S-Left> <C-O>:wincmd h<CR>
 
 nmap <silent> <A-Right> :wincmd l<CR>
 imap <silent> <A-Right> <C-O>:wincmd l<CR>
+nmap <silent> <S-Right> :wincmd l<CR>
+imap <silent> <S-Right> <C-O>:wincmd l<CR>
 
 map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") ."> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" format json
+nmap =j :%!python -m json.tool<CR>
+
+"" }}}
+
+"" ################################ PLUGIN CONFIG ################################ {{{
+
+" TODO
+
 "" }}}
 
 "" ################################### ADDONS #################################### {{{
