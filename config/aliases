@@ -19,6 +19,7 @@ alias cdiff='cdiff -s -w0'
 alias cal='ncal -bM'
 alias grep='grep --color=auto'
 alias invoke='PYTHONDONTWRITEBYTECODE=1 invoke'
+alias mtr="mtr --curses"
 alias nvim='mkdir -p $XDG_RUNTIME_DIR/neovim; NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/neovim/$(date +%s) nvim'
 # }}}
 
