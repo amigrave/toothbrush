@@ -79,7 +79,7 @@ if v:version > 701
     Plugin 'Glench/Vim-Jinja2-Syntax'
     " Plugin https://github.com/mitsuhiko/vim-jinja from Armin Ronacher (outdated?)
     Plugin 'sophacles/vim-bundle-mako'
-    Plugin 'evanmiller/nginx-vim-syntax'
+    Plugin 'chr4/nginx.vim'
     Plugin 'vim-scripts/Nmap-syntax-highlight'
     Plugin 'ekalinin/Dockerfile.vim'
     Plugin 'pearofducks/ansible-vim'
