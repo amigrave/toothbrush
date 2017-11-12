@@ -526,7 +526,11 @@ noremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right>
 vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 
 " Emmet (used to be Zen coding)
-let g:user_emmet_expandabbr_key = '<S-CR>'
+let g:user_emmet_leader_key='<C-\>'
+let g:user_emmet_expandabbr_key = '<C-@>'
+if has("nvim")
+    let g:user_emmet_expandabbr_key = '<C-space>'
+endif
 let g:emmet_html5 = 0  " always close tags, eg: <img/>, <hr/>, ...
 let g:user_emmet_settings = {
     \  'indentation' : '    '
