@@ -88,6 +88,7 @@ alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
 alias termkey='tput smkx; cat; tput rmkx'
 alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
 alias reverse_ip_lookup="dig +noall +answer -x"
+alias dig_reverse="dig +noall +answer -x"
 alias tunnel_github="tunnel-https.py ssh.github.com --target-port=443 --tunnel-port=2223"
 # }}}
 
