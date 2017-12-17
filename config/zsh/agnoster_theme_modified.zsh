@@ -138,5 +138,3 @@ prompt_agnoster_setup() {
 }
 
 prompt_agnoster_setup "$@"
-
-

@@ -27,7 +27,7 @@ export PYTHONPATH=$AMIGRAVE:$PYTHONPATH
 
 # Customize The location where the dotfiles should be remotely
 # placed when using `sshrc` (defaults to the same directory name as locally)
-# export SSHRC_LOCATION="~/.cache/$USER"
+export SSHRC_LOCATION="~/.cache/$USER"
 
 # Default dbshell domain (will append the domain for each dbname in order to find the host)
 # export DBSHELL_DEFAULT_DOMAIN=".example.com"
