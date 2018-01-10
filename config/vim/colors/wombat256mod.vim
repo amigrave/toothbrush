@@ -98,5 +98,6 @@ hi! link NonText		LineNr
 " Python
 hi pythonEqual ctermfg=green guifg=green
 hi pythonInstanceVariable ctermfg=darkcyan guifg=darkcyan
+hi pythonClassVar ctermfg=darkcyan guifg=darkcyan
 
 " vim:set ts=4 sw=4 noet:
