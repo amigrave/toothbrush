@@ -399,13 +399,13 @@ endif
 """""""""""
 function! ToggleColorColumn()
     if &colorcolumn == 0
-        set colorcolumn=79,120
+        set colorcolumn=79,99,120
     else
         set colorcolumn=0
     endif
 endfunction
-nnoremap <S-F6> :call ToggleColorColumn()<CR>
-inoremap <S-F6> <C-O>:call ToggleColorColumn()<CR>
+nnoremap <F6> :call ToggleColorColumn()<CR>
+inoremap <F6> <C-O>:call ToggleColorColumn()<CR>
 
 function! ToggleScrolloff()
     if &scrolloff == 999
@@ -414,8 +414,8 @@ function! ToggleScrolloff()
         set scrolloff=999
     endif
 endfunction
-nnoremap <F6> :call ToggleScrolloff()<CR>
-inoremap <F6> <C-O>:call ToggleScrolloff()<CR>
+nnoremap <S-F6> :call ToggleScrolloff()<CR>
+inoremap <S-F6> <C-O>:call ToggleScrolloff()<CR>
 
 " terminator c-pageup/c-pagedown (escape sequences obtaines with <c-v><key>)
 noremap [5;5~ 5<C-Y>5<Up>
@@ -515,13 +515,14 @@ inoremap <Leader>= <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 " airline
 let g:airline_powerline_fonts=1
-let g:airline_section_c = '%f [%{FileSize()}]'
+let g:airline_section_c = "%f [%{FileSize()}]"
 let g:airline#extensions#tabline#enabled = 1        " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t'    " Show just the filename
 let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tagbar#flags = 'f'
 
 " Ag
-let g:ag_prg = 'ag --nogroup --nocolor --column'
+let g:ag_prg = 'ag --nogroup --nocolor --column --ignore=node_modules --ignore=migrations --ignore="*min.js" --ignore="*.po" -S'
 noremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 
