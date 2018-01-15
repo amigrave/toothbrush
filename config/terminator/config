@@ -1,6 +1,9 @@
 [global_config]
   enabled_plugins = EditorPlugin, ActivityWatch, TerminalShot
 [keybindings]
+  broadcast_all = <Alt><Super>a
+  broadcast_group = <Alt><Super>g
+  broadcast_off = <Alt><Super>o
   copy = <Super>c
   edit_window_title = <Alt><Super>i
   full_screen = <Super>F11
