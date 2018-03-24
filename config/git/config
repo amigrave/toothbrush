@@ -62,6 +62,7 @@
     d   = "!f() { cdiff -c always \"$@\" | less --tabs=4 -RFX --pattern \"^diff --git \" ; }; f"
     cd  = "!cdiff -s -w0 -c always | less --tabs=4 -RFX --pattern \"^diff --git \""
     dd  = difftool --dir-diff -t meld
+    dnp  = diff --no-prefix
     dsf = "!f() { git diff --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '; }; f"
     vdd = difftool --dir-diff -t vim-dirdiff
     fa  = fetch --all -p
