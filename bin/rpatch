@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import os
+import select
+import subprocess
+import sys
+
+from chopsticks.tunnel import SSHTunnel
+
+
+def usage():
+    sys.exit("Usage: rpatch [user@]<host>:<directory> [-n|--dry-run]")
+
+
+if len(sys.argv) not in (2, 3):
+    usage()
+
+can_read, _, _ = select.select([sys.stdin], [], [], 0.01)
+if can_read:
+    source = sys.stdin.read()
+else:
+    sys.exit("Could not read from stdin")
+
+uri = sys.argv[1]
+if ':' not in uri:
+    usage()
+
+host, directory = uri.split(':')
+
+dryrun = False
+if len(sys.argv) == 3 and sys.argv[2] in ('-n', '--dry-run'):
+    dryrun = True
+
+
+def patch(source, directory, user=None):
+    # from __bubble__ import debug
+    os.chdir(directory)
+    cmd = ['sudo', '-u', user] if user else []
+    cmd += ['patch', '-p0']
+    if dryrun:
+        cmd += ['--dry-run']
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    out, err = p.communicate(source.encode('utf8'))
+    return p.poll(), out, err
+
+
+tunnel = SSHTunnel(host)
+rc, stdout, stderr = tunnel.call(patch, source, directory, user='odoo')
+if stdout:
+    sys.stdout.write(stdout.decode('utf8'))
+if stderr:
+    sys.stderr.wrtie(stderr.decode('utf8'))
+sys.exit(rc)

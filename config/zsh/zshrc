@@ -53,6 +53,8 @@ compdef s=ssh
 compdef sshrc=ssh
 compdef sshmc=ssh
 compdef ansible-facts=ssh
+
+compdef rpatch=scp
 compdef sshfs=scp
 compdef sshmount=scp
 compdef vimdiff=scp

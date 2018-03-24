@@ -5,6 +5,7 @@
 
 [core]
     filemode = false
+    quotepath = false
 
 [color]
     ui = true
