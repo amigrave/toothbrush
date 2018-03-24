@@ -10,7 +10,7 @@ DEFAULT_USER="$USER"
 # export EDITOR=vim
 # export VISUAL=$EDITOR
 # export TERMINAL=terminator
-# export BROWSER=chromium
+# export BROWSER=google-chrome
 
 # Uncomment to use nvim instead of vim (use `vi` for real vim)
 # ------------------------------------------------------------
