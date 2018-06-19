@@ -1,9 +1,10 @@
 #!/bin/bash
+common_args="--ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=14 --style=monokai"
 
 if [ -x "$(command -v jupyter)" ]; then
-    jupyter qtconsole  --style monokai --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=14 &
+    jupyter qtconsole $common_args &
 else
-    ipython qtconsole --ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=12 --colors=linux --pprint
+    ipython qtconsole $common_args &
 fi
 
 if [ $? -eq 0 ]; then
