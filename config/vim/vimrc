@@ -35,8 +35,7 @@ if v:version > 701
 
     " Edition
     Plugin 'ervandew/supertab'
-    " Plugin 'garbas/vim-snipmate'
-    " Plugin 'SirVer/ultisnips'
+    Plugin 'garbas/vim-snipmate'
     Plugin 'honza/vim-snippets'
     Plugin 'bonsaiben/bootstrap-snippets'
     Plugin 'amigrave/vim-react-snippets'  " waiting pull request on justinj/vim-react-snippets
