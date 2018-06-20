@@ -1,0 +1,26 @@
+/* .notebook.header { */
+/*     background-color: @bg_color; */
+/* } */
+
+/* .pane-separator { */
+/*         background-color: @bg_color; } */
+
+/* /1* need a searchbar classname, just using horizontal works, but breaks other areas *1/ */
+/* .searchbar { */
+/*         background-color: @bg_color; } */
+
+/* /1* Haven't figured out this properly yet. None-obvious breakage in Ambiance. *1/ */
+/* .scrollbar:hover:not(.slider), */
+/* .scrollbar.dragging:not(.slider) { */
+/*     background-color: alpha(@scrollbar_track_color, 0.4); */
+/* } */
+
+/* .scrollbar { */
+/*         background-color: @bg_color; } */
+
+tab {
+    background-color: red;
+}
+.scrollbar {
+        background-color: red;
+}
