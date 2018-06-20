@@ -1,0 +1,70 @@
+#!/usr/bin/python3.6
+"""
+Meld does not support flat config files, only gnome settings crap.
+This is a hack in order to customize settings.
+"""
+# flake8: noqa
+
+MY_CONFIG = {
+    'highlight-syntax': True,
+    'style-scheme': 'oblivion',
+}
+
+class HackedSettings:
+    def __init__(self, orig):
+        self._orig = orig
+
+    def get_boolean(self, key):
+        if key in MY_CONFIG:
+            return MY_CONFIG[key]
+        return self._orig.get_boolean(key)
+
+    def get_string(self, key):
+        if key in MY_CONFIG:
+            return MY_CONFIG[key]
+        return self._orig.get_string(key)
+
+    def __getattr__(self, key):
+        return getattr(self._orig, key)
+
+def hack_settings():
+    import meld.settings
+    old = meld.settings.load_settings_schema
+    def new(*a):
+        settings = old(*a)
+        return HackedSettings(settings)
+    meld.settings.load_settings_schema = new
+
+
+__name__ = 'hack'
+exec(open("/usr/bin/meld").read())
+__name__ = '__main__'
+
+setup_logging()
+disable_stdout_buffering()
+check_requirements()
+setup_glib_logging()
+setup_resources()
+hack_settings()
+setup_settings()
+environment_hacks()
+
+##############################################################################
+# HACKS !!!
+##############################################################################
+import meld.meldbuffer
+
+old_init = meld.meldbuffer.MeldBuffer.__init__
+def __init__(self):
+    old_init(self)
+    self.set_highlight_syntax(True)
+meld.meldbuffer.MeldBuffer.__init__ = __init__
+##############################################################################
+
+import meld.meldapp
+if sys.platform != 'win32':
+    from gi.repository import GLib
+    GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT,
+                         lambda *args: meld.meldapp.app.quit(), None)
+status = meld.meldapp.app.run(sys.argv)
+sys.exit(status)
