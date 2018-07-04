@@ -1,30 +1,19 @@
-#!/usr/bin/env python-qtile
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import argparse
-import glob
-import os
 import sys
 
-# Add miniconda qtile env to python path if found
-qtile_conda_glob = os.path.expanduser('~/miniconda*/envs/qtile/lib/python*/site-packages/')
-qtile_path = glob.glob(qtile_conda_glob)
-if qtile_path:
-    sys.path.insert(0, qtile_path[0])
-
-client = None
+from libqtile.command import Client
 
 
-def switch_group(name):
-    """Switch to a named group"""
-    client.group[name].toscreen()
+class Qtile:
+    def __init__(self):
+        self._client = Client()
 
+    def switch_group(self, name):
+        """Switch to a named group"""
+        self._client.group[name].toscreen()
 
-def main(options):
-    from libqtile.command import Client
-    global client
-    client = Client()
-    if options.subcommand == 'switch_group':
-        switch_group(options.name[0])
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -32,11 +21,13 @@ if __name__ == '__main__':
                         help="Silent errors for non interactive usage")
     subparsers = parser.add_subparsers(title="Subcommands:", dest='subcommand')
     sg = subparsers.add_parser('switch_group')
-    sg.add_argument('name', nargs=1, help=switch_group.__doc__)
+    sg.add_argument('name', nargs=1, help=Qtile.switch_group.__doc__)
     options = parser.parse_args()
 
     try:
-        main(options)
+        qtile = Qtile()
+        if options.subcommand == 'switch_group':
+            qtile.switch_group(options.name[0])
     except Exception:
         if options.silent:
             sys.exit(0)
