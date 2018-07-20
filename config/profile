@@ -80,6 +80,9 @@ export GTK2_RC_FILES="$DOTFILES/gtk-2.0/gtkrc"
 export ATOM_HOME="$DOTFILES/atom"
 export NPM_CONFIG_USERCONFIG=$DOTFILES/npm/npmrc
 
+export GNUPGHOME=/tmp/gnupg
+mkdir -p $GNUPGHOME
+
 export DVDCSS_CACHE=$XDG_CACHE_HOME/dvdcss/
 export LESSHISTFILE=$XDG_CACHE_HOME/less_history
 export ERRFILE=$XDG_CACHE_HOME/xsession-errors.log
