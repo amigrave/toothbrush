@@ -46,7 +46,7 @@ fi
 # export https_proxy=$proxy
 
 if [[ -n "$DISPLAY" && -z "$AGRLOCAL" ]]; then
-    if [ "$XDG_RUNTIME_DIR" != ""]; then
+    if [[ $XDG_RUNTIME_DIR ]]; then
         mkdir -p $XDG_RUNTIME_DIR/neovim
     fi
 
