@@ -19,6 +19,10 @@
   paste = <Super>v
   prev_tab = <Primary><Shift>Tab
   reset_clear = <Super>k
+  resize_down = <Shift><Super>Down
+  resize_left = <Shift><Super>Left
+  resize_right = <Shift><Super>Right
+  resize_up = <Shift><Super>Up
   scaled_zoom = <Primary><Super>Return
   search = <Super>f
   split_horiz = <Shift><Super>d
