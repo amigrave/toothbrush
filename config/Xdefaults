@@ -62,10 +62,20 @@ URxvt.urlLauncher: chromium
 URxvt.matcher.button: 1
 
 URxvt.tabbed.tabbar-fg: 7
-URxvt.tabbed.tabbar-bg: 4
+URxvt.tabbed.tabbar-bg: 0
 URxvt.tabbed.tab-fg: 15
-URxvt.tabbed.tab-bg: 2
+URxvt.tabbed.tab-bg: 8
 URxvt.tabbed.autohide: true
+
+!Disablt Ctrl-Shift mapping
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+!Copy/paste
+URxvt.keysym.Shift-Control-c: eval:selection_to_clipboard
+URxvt.keysym.Shift-Control-v: eval:paste_clipboard
+URxvt.keysym.Mod4-c: eval:selection_to_clipboard
+URxvt.keysym.Mod4-v: eval:paste_clipboard
 
 !URxvt.saveLines: 2000
 URxvt.scrollBar_right: true

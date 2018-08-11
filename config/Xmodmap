@@ -1,4 +1,6 @@
 ! keycode 49 = F13
 
 ! Map F13 as Insert
-keycode 107 = Insert
+! keycode 107 = Insert
+
+add mod4 = Super_L Super_R
