@@ -97,8 +97,8 @@ keys = [
 
     Key([win], "l", lazy.function(set_random_wallpaper)),
 
-    Key([win, alt], "Prior", lazy.function(move_window_to_adjacent_group, -1)),
-    Key([win, alt], "Next", lazy.function(move_window_to_adjacent_group)),
+    Key([win, alt], "Left", lazy.function(move_window_to_adjacent_group, -1)),
+    Key([win, alt], "Right", lazy.function(move_window_to_adjacent_group)),
 ]
 
 groups = [
@@ -109,7 +109,7 @@ groups = [
     ('ipy', [mod], 'Delete', {}),
     ('gvim', [mod], 'e', {}),
     ('gimp', [mod], 'g', {}),
-    ('tmp', [mod, alt], 'Return', {'spawn': 'urxvt'}),
+    ('urxvt', [mod, alt], 'Return', {'spawn': 'urxvt'}),
 ]
 
 for i, group in enumerate(groups):
