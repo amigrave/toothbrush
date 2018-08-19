@@ -1,12 +1,11 @@
-# AMIGrAve's Debian/Kali provisioning
+# AMIGrAve's provisioning for Ubuntu 18.04 and Kali
 
 ## Description
 
 My personal environment provisioning on Debian jessie or Kali 2 rolling release.
 
 ```docopt
-Usage: mdk provisioning.md [(--dektop | --server) | --module=<module>]
-                           [--miniconda-location=PATH] <host> <user>
+Usage: mdk provisioning.md [(--dektop | --server) | --module=<module>] <host> <user>
        mdk provisioning.md --list-modules
 
 Options:
@@ -14,7 +13,6 @@ Options:
 --desktop               Setup a desktop machine
 --server                Setup a server
 --module=<module>       Install a specific module
---miniconda-location    Path to the miniconda installation (Defaults: ~/miniconda)
 --list-modules          List available modules
 ```
 
@@ -49,8 +47,8 @@ For a password-less sudo use `visudo` and append at the last line:
 
 <mdk run-as="$new_user">
 ```sh
-ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
-git clone --recursive git@bitbucket.org:AMIGrAve/dotfiles.git ~/amigrave
+ssh-keyscan -t rsa -H github.com >> ~/.ssh/known_hosts
+git clone --recursive git@github.com:amigrave/toothbrush.git ~/amigrave
 ~/amigrave/start.sh -i
 mkdir -p ~/bin
 ```
@@ -65,10 +63,10 @@ mkdir -p ~/bin
 ```sh
 # TODO: keep only necessary for server move the rest to desktop
 apt install -y \
-    vim whois build-essential linux-headers-amd64 linux-image-amd64 \
+    vim whois build-essential linux-headers-generic \
     zsh mc screen tmux htop rsync telnet strace less netcat-openbsd ncurses-term \
-    multitail silversearcher-ag git tig tree python-pip curl rename-utils \
-    ncdu dialog
+    multitail silversearcher-ag git tig tree python-pip python3-pip curl renameutils \
+    ncdu dialog systemd-container debootstrap iselect pgcli
 chsh -s /bin/zsh
 update-alternatives --set editor /usr/bin/vim.basic
 ```
@@ -129,16 +127,32 @@ ln -s $MINICONDA/bin/conda ~/bin/
 Here's the desktop stuff
 
 
-### Miscellaneous packages
+### Install google chrome (Y/n)
+
+Chromium is ok for most cases but I experienced some graphic rendering glitches under
+virtual box which are not experienced with google chrome.
+
+<mdk if="switch == 'Y'"/>
 ```sh
-sudo apt install -y chromium command-not-found qiv pidgin alsa-utils numlockx \
-     rxvt-unicode-256color python-qt4 python-tk mtr terminator vim-gtk3 irssi scrot \
-     xdotool xclip cmus sshfs feh mpv gtk-recordmydesktop mupdf imagemagick
+cd /tmp
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome*.deb
+rm google-chome*.deb
+sudo update-alternatives --set x-www-browser /usr/bin/google-chrome
+```
+
+<mdk if="switch == 'n'"/>
+```sh
+sudo apt install chromium
 sudo update-alternatives --set x-www-browser /usr/bin/chromium
 ```
 
+### Miscellaneous packages
 ```sh
-pip install --user cdiff howdoi escrotum pipdeptree
+sudo apt install -y command-not-found qiv pidgin alsa-utils numlockx howdoi golang-go \
+     rxvt-unicode-256color python-tk mtr terminator vim-gtk3 irssi scrot \
+     xdotool xclip cmus sshfs feh mpv gtk-recordmydesktop mupdf imagemagick unzip rar \
+     blackbird-gtk-theme python3-qt5 python3-pyqt5.qtwebkit python3-pyqt5.qtsvg
 ```
 
 ### Sound
@@ -147,7 +161,7 @@ pip install --user cdiff howdoi escrotum pipdeptree
 sudo apt install -y xmp
 ```
 
-### Better fonts
+### Better fonts (TODO: still needed ?)
 
 The default font rendering in debian (hence Kali) is awful.
 Using [a better method](http://www.webupd8.org/2013/06/better-font-rendering-in-linux-with.html) than crafting my own `fonts.conf`:
@@ -175,6 +189,14 @@ Set rendering style:
 # +USE_STYLE="UBUNTU"
 ```
 
+NOTE: the previous operation is probably not needed anymore with this:
+https://bugs.launchpad.net/ubuntu/+source/freetype/+bug/1722508/comments/36
+
+<mdk run-as="root" change='/etc/environment'>
+```diff
++FREETYPE_PROPERTIES="truetype:interpreter-version=35 cff:no-stem-darkening=1 
+```
+
 Install additional fonts:
 
 - powerline for the terminal and gvim:
@@ -184,7 +206,6 @@ TODO: check if the following font should be installed too:
 - https://github.com/ryanoasis/powerline-extra-symbols
 
 ```sh
-# TODO: check if should be root ?
 tmp=`mktemp -d`
 cd $tmp
 git clone https://github.com/powerline/fonts.git
@@ -197,47 +218,18 @@ rm -rf $tmp
 
 ```sh
 sudo apt install -y ttf-dejavu
+
+## Those fonts brings emoji and other unicode fonts
+sudo apt install -y ttf-ancient-fonts ttf-mscorefonts-installer
+```
+
 ```
 
 ### Install QTile
 
 
 ```sh
-sudo apt install -y libxcb-render0-dev libffi-dev libcairo2-dev
-sudo pip install virtualenv
-
-qtile_venv=`readlink -f ~/.local/venvs/qtile`
-mkdir -p $qtile_venv
-virtualenv --system-site-packages $qtile_venv
-$qtile_venv/bin/pip install xcffib cairocffi qtile # git+https://github.com/python-xlib/python-xlib.git pyautogui
-mkdir -p ~/bin
-ln -s $qtile_venv/bin/qtile ~/bin/
-ln -s $qtile_venv/bin/qshell ~/bin/
-
-# export MINICONDA=~/miniconda
-# $MINICONDA/bin/conda create -y -n qtile pip
-# $MINICONDA/envs/qtile/bin/pip install xcffib cairocffi qtile git+https://github.com/python-xlib/python-xlib.git pyautogui
-# ln -s $MINICONDA/envs/qtile/bin/qtile ~/bin/
-# ln -s $MINICONDA/envs/qtile/bin/qshell ~/bin/
-
-```
-
-<mdk run-as="root" put="/usr/share/xsessions/qtile.desktop" expand="django">
-```ini
-[Desktop Entry]
-Name=Qtile
-Comment=Qtile Session
-Exec={{ qtile_venv }}/bin/qtile
-Type=Application
-Keywords=wm;tiling
-```
-
-<mdk run-as="root" change="/etc/lightdm/lightdm.conf" mode="regex">
-```diff
-# Uncomment line:
-# #sessions-directory=/usr/share/lightdm/sessions:/usr/share/xsessions:/usr/share/wayland-sessions
--#(sessions-directory=.+)
-+\1
+sudo apt install -y qtile
 ```
 
 ## Install common stuff
@@ -251,13 +243,15 @@ Check that for linux:
 
 
 
-### Install global python packages ?
+### Install python packages
 
 ```sh
-pip install --user grip Baker bzr cdiff fabric fabtools flake8 git-qdiff httpie \
-                   jedi pudb pyquery pythonpy requests virtualenv pyrasite pandas matplotlib numpy
-pip install --user ipython==4.2.1  # version 5 uses prompt-toolkit which (at time of writing) does
-                                   # not play well with pudb
+pip install --user pipdeptree cdiff escrotum grip pudb httpie ipython
+pip3 install --user pipdeptree flake8 jedi pudb jupyter ipython
+# TODO: decide
+# fabric fabtools pyquery pythonpy requests virtualenv pyrasite pandas matplotlib numpy
+# pip install --user ipython==4.2.1  # version 5 uses prompt-toolkit which (at time of writing) does
+# not play well with pudb
 ```
 
 
@@ -310,12 +304,6 @@ pip install appscript
 brew install homebrew/dupes/gdb # for pyrasite
 PYTHON=/usr/local/bin/python3 brew install --with-python postgresql
 
-## Those fonts brings emoji and other unicode fonts
-
-```sh
-sudo apt install -y ttf-ancient-fonts
-```
-
 ## TODO
 
 GIT: show author on rebase interactive:
@@ -339,6 +327,7 @@ apt-get install -y postgresql postgresql-server-dev-all
 update-rc.d -f postgresql enable 2 3 4 5
 service postgresql start
 su - postgres -c "createuser -s $USER"
+su - postgres -c "createuser -s root"
 ```
 
 ## Postinstall
@@ -357,17 +346,15 @@ sudo apt-get install gvfs-bin
 sudo dpkg -i atom.deb
 ```
 
-## Common packages
-
-```sh
-sudo apt install -y unzip rar
-```
 ## Dev
 
 ```sh
-sudo apt install -y ruby-dev libsqlite3-dev socat wkhtmltopdf libxml2-utils tidy jq apache2-utils gnuplot cloc \
-                    ttyrec asciinema lolcat python-pygit2 python-fuse
+sudo apt install -y libsqlite3-dev socat wkhtmltopdf libxml2-utils tidy jq gnuplot cloc \
+                    ttyrec asciinema lolcat meld virtualenv
 ```
+
+TODO: stuff in ~/bin (ws, hey, ...)
+Do I use this ? -->  python-pygit2 python-fuse
 
 ### Mailcatcher
 
@@ -441,7 +428,7 @@ pip install --user watchdog prettytable fabric fabtool
 
 <run run-as="root">
 ```sh
-apt install -y nodejs npm
+apt install -y nodejs npm node-babel-cli
 npm install -g eslint jshint rapydscript
 ```
 
