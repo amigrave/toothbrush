@@ -60,7 +60,7 @@ prompt_git() {
   if [[ -n "$ref" ]]; then
     if is_dirty; then
       # color=yellow
-      color=214
+      color=220
       ref="${ref} $PLUSMINUS"
     else
       # color=green
