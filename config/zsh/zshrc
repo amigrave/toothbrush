@@ -165,3 +165,6 @@ function chpwd {
 }
 chpwd # initial run
 # }}}
+
+source $DOTFILES/zsh/fzf-key-bindings.zsh
+bindkey '^P' fzf-file-widget  # Add the same keystroke as vim's Ctrl+P (I'm used to it :)

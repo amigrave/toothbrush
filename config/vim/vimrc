@@ -25,6 +25,7 @@ if v:version > 701
     " Navigation
     Plugin 'scrooloose/nerdtree'
     Plugin 'ctrlpvim/ctrlp.vim'
+    Plugin 'junegunn/fzf.vim'
     Plugin 'dbakker/vim-projectroot'  " Brings function to cd to the current repository root
     Plugin 'majutsushi/tagbar'
     Plugin 'moll/vim-bbye'  " provides :Bdelete
@@ -689,6 +690,12 @@ let g:ctrlp_max_files = 0
 " \ }
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>t :CtrlPTag<CR>
+
+" If fzf is available, overwrite C-P
+if executable('fzf')
+    let g:ctrlp_map = '<a-p>'
+    nmap <C-p> :Files<cr>
+endif
 
 " NERDTree
 let g:nerdtree_tabs_open_on_gui_startup=0
