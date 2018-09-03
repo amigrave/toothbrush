@@ -54,6 +54,7 @@ if v:version > 701
     Plugin 'vim-python/python-syntax'  " Supports python3 but no folding
     Plugin 'tmhedberg/SimpylFold'
     Plugin 'rmartinho/vim-boo'
+    Plugin 'rhysd/vim-crystal'
     Plugin 'atsepkov/vim-rapydscript'
     Plugin 'amigrave/JavaScript-syntax'
     " Plugin 'pangloss/vim-javascript' " modern but slow and indent fucks up
@@ -280,6 +281,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.yml,*.yaml setlocal sw=4
     au BufRead,BufNewFile *.php,*.php3 setlocal ft=php.html foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.rb setlocal fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.cr setlocal fdm=syntax
     au BufRead,BufNewFile *.aspx setlocal syntax=cs
     au BufRead,BufNewFile *.asp setlocal ft=javascript
     au BufRead,BufNewFile *.coffee setlocal fdm=indent
