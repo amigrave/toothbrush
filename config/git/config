@@ -56,7 +56,7 @@
     bc  = branch -r --contains
     ci  = commit
     cia = commit --amend
-    cim = commit -a -mm  # antony style
+    wip = commit -a -mwip
     cif = commit --fixup
     co  = checkout
     chp = cherry-pick
