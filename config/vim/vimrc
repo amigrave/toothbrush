@@ -52,7 +52,8 @@ if v:version > 701
     Plugin 'scrooloose/syntastic'
     " Plugin 'vim-scripts/Python-Syntax-Folding'  " Folding for vim's original python syntax
     Plugin 'vim-python/python-syntax'  " Supports python3 but no folding
-    Plugin 'tmhedberg/SimpylFold'
+    Plugin 'Konfekt/FastFold'  " Prevents folding when not needed
+    Plugin 'tmhedberg/SimpylFold'      " Python folding
     Plugin 'rmartinho/vim-boo'
     Plugin 'rhysd/vim-crystal'
     Plugin 'atsepkov/vim-rapydscript'
@@ -71,10 +72,11 @@ if v:version > 701
     Plugin 'rainux/vim-vala'
     Plugin 'davidhalter/jedi-vim'
     " Plugin 'marijnh/tern_for_vim'
-    Plugin 'elzr/vim-json'
+    " Plugin 'elzr/vim-json'
     Plugin 'wavded/vim-stylus'
     Plugin 'tpope/vim-markdown'
     Plugin 'maxbane/vim-asm_ca65'
+    Plugin 'posva/vim-vue'
 
     " Templating and special filetypes
     Plugin 'Glench/Vim-Jinja2-Syntax'
@@ -96,14 +98,13 @@ if v:version > 701
     Plugin 'will133/vim-dirdiff'
     Plugin 'AndrewRadev/linediff.vim'
     " Plugin 'mattn/gist-vim'
-    Plugin 'marzocchi/vim-color-picker-osx'
     Plugin 'rking/ag.vim'
     Plugin 'haya14busa/vim-asterisk'
 
     " Libs
     Plugin 'kana/vim-textobj-user'           " required by vim-textobj-* plugins
-    " Plugin 'tomtom/tlib_vim'               " required by snipmate
-    " Plugin 'MarcWeber/vim-addon-mw-utils'  " required by snipmate
+    Plugin 'tomtom/tlib_vim'                 " required by snipmate
+    Plugin 'MarcWeber/vim-addon-mw-utils'    " required by snipmate
     " Plugin 'mattn/webapi-vim' " used by gist-vim
 
     call vundle#end()
@@ -302,7 +303,7 @@ if has("autocmd")
     " au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
 
     au FileType javascript setlocal foldmethod=syntax
-    au Filetype json setlocal conceallevel=1 | hi Conceal ctermbg=234 guibg=#242424
+    " au Filetype json setlocal conceallevel=1 | hi Conceal ctermbg=234 guibg=#242424
 
     " Disable syntax hightlighting for big files
     au Filetype xml if getfsize(@%) > 1000000 | setlocal syntax=off | endif
@@ -331,19 +332,28 @@ if has("autocmd")
     au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
     if has("unix")
-        au BufNewFile *.py setlocal autoread | s,^,#!/usr/bin/env python\r# -*- coding: utf-8 -*-\rfrom __future__ import absolute_import\, division\, print_function\r\r,
         au BufNewFile *.rb setlocal autoread | s,^,#!/usr/bin/env ruby,
         au BufNewFile *.sh setlocal autoread | s,^,#!/bin/bash, | w | !chmod +x %
     endif
 
     au Filetype xml call XmlQweb()
 
-    let php_sync_method=0
-    let php_folding=1
-    let php_asp_tags = 1
-    let g:xml_syntax_folding=1
     let g:python_highlight_all = 1
-    let coffee_folding = 1
+    let g:markdown_folding = 1
+    let g:tex_fold_enabled = 1
+    let g:vimsyn_folding = 'af'
+    let g:xml_syntax_folding = 1
+    let g:javaScript_fold = 1
+    let g:coffee_folding = 1
+    let g:sh_fold_enabled= 7
+    let g:ruby_fold = 1
+    let g:perl_fold = 1
+    let g:perl_fold_blocks = 1
+    let g:r_syntax_folding = 1
+    let g:rust_fold = 1
+    let g:php_folding = 1
+    let g:php_sync_method=0
+    let g:php_asp_tags = 1
 
 endif
 "}}}
