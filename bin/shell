@@ -7,8 +7,8 @@ fi
 if [[ -x "$(command -v zsh)" && $(zsh --version | awk '{print $2}') > 4.3.0 && $FORCE_BASH != 1 ]]; then
     export SHELL=$(which zsh)
     export ZDOTDIR=$DOTFILES/zsh
-    $SUDO_SHELL zsh $@
+    exec $SUDO_SHELL zsh $@
 else
     export SHELL=$(which bash)
-    $SUDO_SHELL bash --rcfile $DOTFILES/bash/bashrc $@
+    exec $SUDO_SHELL bash --rcfile $DOTFILES/bash/bashrc $@
 fi
