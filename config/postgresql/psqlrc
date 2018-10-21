@@ -37,6 +37,9 @@
 \echo '\t:waits\t\t-- Waiting queries'
 \set waits 'SELECT pg_stat_activity.pid, pg_stat_activity.query, pg_stat_activity.waiting, now() - pg_stat_activity.query_start AS \"totaltime\", pg_stat_activity.backend_start FROM pg_stat_activity WHERE pg_stat_activity.query !~ \'%IDLE%\'::text AND pg_stat_activity.waiting = true;'
 
+\echo '\t:frozenxid\t\t-- Show frozen max xid'
+\set frozenxid 'SELECT datname, age(datfrozenxid) FROM pg_database ORDER BY 2 DESC;'
+
 \echo '\t:slowqueries\t\t-- Show slow queries'
 \set slowqueries 'CREATE extension if not exists pg_stat_statements; SELECT (total_time / 1000 / 60) as total_minutes, (total_time/calls) as average_time, query FROM pg_stat_statements ORDER BY 1 DESC LIMIT 100;'
 
