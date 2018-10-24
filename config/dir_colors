@@ -1,3 +1,4 @@
+# vim:set ft=dircolors:
 TERM linux
 TERM console
 TERM con132x25
@@ -97,6 +98,7 @@ EXEC      01;31    # file with executable attribute set
 .CPP  32
 .c++  32
 .cc   32
+.cr   32
 .cs   32
 .CC   32
 .h    32
@@ -334,5 +336,3 @@ EXEC      01;31    # file with executable attribute set
 .INI  01;33
 .sys  01;33
 .SYS  01;33
-
-
