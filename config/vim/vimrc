@@ -61,6 +61,7 @@ if v:version > 701
     " Plugin 'pangloss/vim-javascript' " modern but slow and indent fucks up
     " Plugin 'mxw/vim-jsx'  " requires pangloss vim-javascript, conflicts with xml_syntax_folding
     Plugin 'tweekmonster/braceless.vim'
+    Plugin 'lifepillar/pgsql.vim'
 
     Plugin 'vim-scripts/ASPJScript'
     Plugin 'dmitry-ilyashevich/vim-typescript'
@@ -734,6 +735,10 @@ let g:syntastic_style_error_symbol = '⚠'
 let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_always_populate_loc_list = 1  " needed for :lnext :prev to work
 let g:syntastic_auto_loc_list = 0
+
+" lifepillar/pgsql
+let g:sql_type_default = 'pgsql'
+let g:pgsql_pl = ['python', 'javascript']
 
 " localvimrmc
 let g:localvimrc_sandbox=0
