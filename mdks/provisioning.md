@@ -86,6 +86,21 @@ cd vmware-tools-patches
 ./patched-open-vm-tools.sh
 ```
 
+### Virtualbox
+
+#### Fix mouse scrolling
+
+An annoying bug in Virtual box linux guests is that the mouse scrolling is inaccurate if mouse is
+moved at the same time:
+https://forums.virtualbox.org/viewtopic.php?f=3&t=79002&sid=98b64e22a6d5fc02e50c157ce0c33b4f&start=15#p416603
+
+So if we are in a VBox linux guest, install imwheel
+
+<mdk run-as='root'>
+```bash
+dmidecode -t system | grep VirtualBox && apt install -y imwheel
+```
+
 ### Fix Edimax wifi dongle driver
 
 <mdk confirm="Do you want to install the Edimax wifi driver">
