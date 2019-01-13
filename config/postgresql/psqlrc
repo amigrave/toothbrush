@@ -12,7 +12,7 @@
 \pset null 'NULL'
 -- \pset linestyle unicode
 \pset border 1
-\x auto
+-- \x auto
 \set COMP_KEYWORD_CASE upper
 \timing
 
