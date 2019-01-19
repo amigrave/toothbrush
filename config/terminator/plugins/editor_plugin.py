@@ -4,6 +4,7 @@ Terminator plugin to open a file using a chosen editor.
 Author: michele.silva@gmail.com
 License: GPLv2
 """
+sys.exit()
 import inspect
 import os
 import re
@@ -48,6 +49,12 @@ class EditorPlugin(plugin.URLHandler):
         for frameinfo in inspect.stack():
             frameobj = frameinfo[0].f_locals.get('self')
             if frameobj and frameobj.__class__.__name__ == 'Terminal':
+                # TODO: default to nvim here and find if nvim pid parent in terminals pids then focus
+                # os.environ['TERM'] = 'xterm-256color'
+                # from pudb import set_trace; set_trace()  # *** Breakpoint ***
+                # for terminal in frameobj.terminator.terminals:
+                #     if my_pid is child of terminal.pid:
+                #         terminal.ensure_visible_and_focussed()
                 return frameobj.get_cwd()
         return None
 
