@@ -101,6 +101,17 @@ So if we are in a VBox linux guest, install imwheel
 dmidecode -t system | grep VirtualBox && apt install -y imwheel
 ```
 
+#### Fix VBoxOGLcrutil.so
+
+Version 6.x of VirtualBox introduxes a regression preventing QT 5.x to work when 3D acceleration is
+activated:
+https://www.virtualbox.org/ticket/18324#comment:3
+
+```bash
+sudo apt install patchelf
+sudo patchelf --add-needed libcrypt.so.1 /usr/lib/x86_64-linux-gnu/VBoxOGLcrutil.so
+```
+
 ### Fix Edimax wifi dongle driver
 
 <mdk confirm="Do you want to install the Edimax wifi driver">
