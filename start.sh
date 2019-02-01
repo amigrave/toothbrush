@@ -89,7 +89,7 @@ shift $((OPTIND-1))
 if [[ "$0" == "$current_script" ]]; then
     # start.sh called explicitely
     [[ "$use_bash" == 1 ]] && export FORCE_BASH=1
-    $AMIGRAVE/bin/shell
+    exec $AMIGRAVE/bin/shell
 elif [ "$rcfile" != "" ]; then
     . $DOTFILES/$rcfile
 else
