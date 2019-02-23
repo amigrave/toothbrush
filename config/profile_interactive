@@ -191,6 +191,14 @@ function strace_vim() {
 }
 # }}}
 
+# Provide an almost similar zsh 'repeat' functionality to bash. eg: repeatx 3 ls -al {{{
+function repeatx() {
+    for (( n=0; n<$1; n++ ))
+        do ${*:2}
+    done
+}
+# }}}
+
 # man() {
 #     env LESS_TERMCAP_mb=$'\E[01;31m' \
 #     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
