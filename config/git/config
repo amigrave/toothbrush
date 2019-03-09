@@ -73,7 +73,7 @@
     l1  = log --pretty=oneline --abbrev-commit --color=never --format=format:"%an%x09%s"
     ll  = log --date=relative --pretty=hist
     ls  = ls-files
-    lsd = "! git log --all --pretty=format: --name-only --diff-filter=D | sort -u"  # list deleted files
+    lsd = "!git log --all --pretty=format: --name-only --diff-filter=D | sort -u"  # list deleted files
     lsi = ls-files --other --ignored --exclude-standard # list ignored files
     mff = merge --ff-only --no-commit
     p   = "!git fetch --prune; git rebase --autostash"
