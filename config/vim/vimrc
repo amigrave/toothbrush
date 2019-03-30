@@ -783,8 +783,8 @@ endfunction
 " Python Debug {{{
 imap <F8> from pudb import set_trace; set_trace()  # *** Breakpoint ***<cr>
 nmap <F8> <s-o>from pudb import set_trace; set_trace()  # *** Breakpoint ***<esc><down>
-imap <S-F8> import rpudb; rpudb.set_trace(addr='0.0.0.0', port=4444)  # *** Remote Breakpoint ***"<cr>
-nmap <S-F8> <s-o>import rpudb; rpudb.set_trace(addr='0.0.0.0', port=4444)  # *** Remote Breakpoint ***"<esc><down>
+imap <S-F8> from pudb.remote import set_trace; set_trace(term_size=(134, 32))  # *** telnet localhost 6899 ***"<cr>
+nmap <S-F8> <s-o>from pudb.remote import set_trace; set_trace(term_size=(134, 32))  # *** telnet localhost 6899 ***"<esc><down>
 " }}}
 
 " VIM Profiling {{{
