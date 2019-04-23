@@ -10,5 +10,5 @@ if [[ $current_script == $orig ]]; then
     echo "jshint was not found in \$PATH"
     exit 1
 else
-    $orig --config $XDG_CONFIG_HOME/jshint/jshintrc $@
+    exec $orig --config $XDG_CONFIG_HOME/jshint/jshintrc $@
 fi
