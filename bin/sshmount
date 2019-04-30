@@ -1,13 +1,13 @@
 #!/bin/bash
 
 if [ $# -eq 0 ]; then
-    echo "Usage: `basename $0` REMOTE_LOCATION" 1>&2; exit 1;
+    echo "Usage: `basename $0` [USER@]HOST:[PATH]" 1>&2; exit 1;
     exit 1
 fi
 
 # TODO: prefix instead of suffix, check if $TMPDIR is set on OSX
 tmpdir=$(mktemp -d --suffix='-sshmount')
-if sshfs $@ $tmpdir; then
+if sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 $@ $tmpdir; then
     # TODO: remake pompt in bash and zsh, allow to override local path for those cases
     term_title "MOUNT <$@>"
     TERM_TITLE_FROZEN=1 $SHELL -c "cd $tmpdir; PS1_PREFIX='[$@]' $SHELL"
