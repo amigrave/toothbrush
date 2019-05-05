@@ -34,6 +34,9 @@
 [difftool "vim-dirdiff"]
     cmd = vim -R -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE '+syntax on'
 
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
 [diff-so-fancy]
     stripLeadingSymbols = false
 
