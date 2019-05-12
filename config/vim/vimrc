@@ -62,6 +62,7 @@ if v:version > 701
     " Plugin 'mxw/vim-jsx'  " requires pangloss vim-javascript, conflicts with xml_syntax_folding
     Plugin 'tweekmonster/braceless.vim'
     Plugin 'lifepillar/pgsql.vim'
+    Plugin 'zah/nim.vim'
 
     Plugin 'vim-scripts/ASPJScript'
     Plugin 'dmitry-ilyashevich/vim-typescript'
@@ -290,6 +291,7 @@ if has("autocmd")
     au BufRead,BufNewFile .vimrc setlocal fdm=marker
     au BufRead,BufNewFile *.iced setlocal filetype=coffee
     au BufRead,BufNewFile *.boo setlocal filetype=boo
+    au BufRead,BufNewFile *.nim setlocal sw=4
     au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
     " au BufWritePost,FileWritePost *.sass :silent !sass --compass --style expanded <afile> > "%:p:r.css"
     au BufWritePost,FileWritePost *.sass setlocal sw=4
@@ -633,7 +635,17 @@ nmap =j :%!python -m json.tool<CR>
 
 "" ################################ PLUGIN CONFIG ################################ {{{
 
-" TODO
+" nim
+" ===
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
 
 "" }}}
 
