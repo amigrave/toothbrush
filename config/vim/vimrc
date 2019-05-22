@@ -378,7 +378,7 @@ nnoremap gt <C-w>gf
 nnoremap gf gF
 
 " Find non-ascii characters
-nnoremap <Leader>§ /[^\x00-\x7F]<CR>
+nnoremap <Leader>` /[^\x00-\x7F]<CR>
 
 " Replace by first spell checking proposition
 nnoremap <Leader>z z=1<cr><cr>
