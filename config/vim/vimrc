@@ -281,10 +281,10 @@ if has("autocmd")
 
     au BufRead *.txt,*.rst setlocal tw=78 colorcolumn=79
     au BufRead,BufNewFile *.xml,*.xsl  setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2 synmaxcol=300
-    au BufRead,BufNewFile *.yml,*.yaml setlocal sw=4
+    au BufRead,BufNewFile *.yml,*.yaml setlocal sw=2
     au BufRead,BufNewFile *.php,*.php3 setlocal ft=php.html foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
     au BufRead,BufNewFile *.rb setlocal fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
-    au BufRead,BufNewFile *.cr setlocal fdm=syntax
+    au BufRead,BufNewFile *.cr setlocal fdm=syntax sw=2
     au BufRead,BufNewFile *.aspx setlocal syntax=cs
     au BufRead,BufNewFile *.asp setlocal ft=javascript
     au BufRead,BufNewFile *.coffee setlocal fdm=indent
