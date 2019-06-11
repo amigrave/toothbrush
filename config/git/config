@@ -52,6 +52,9 @@
 [pull]
     ff = only  # only pull if merge can be done as fast-forward
 
+[rebase]
+    instructionFormat = "%s -- %an <%ae>"
+
 [alias]
     b   = branch
     bb  = branch -vv
