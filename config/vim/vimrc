@@ -396,12 +396,6 @@ if has("gui_macvim")
     vmap <C-S> "+y:execute "silent !osascript ~/bin/osx/ipyqtmacvim.scpt"<CR>
 endif
 
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gg <s-v>:Gbrowse<CR>
-vnoremap <Leader>gg :Gbrowse<CR>
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gd :Gdiff<CR>
 if has("gui_macvim")
     nnoremap <Leader>tl ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig --follow %:p:t;exit'"<CR>
     nnoremap <Leader>tb ::execute "!osascript ~/bin/osx/new_iterm_window.applescript 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
@@ -646,6 +640,16 @@ fun! JumpToDef()
 endf
 nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
+
+" Fugitive
+nnoremap <Leader>gy :.GBrowse!<CR>
+xnoremap <Leader>gy :'<'>GBrowse!<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gg <s-v>:Gbrowse<CR>
+vnoremap <Leader>gg :Gbrowse<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
 
 "" }}}
 
