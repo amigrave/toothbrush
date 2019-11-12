@@ -103,12 +103,14 @@ source $DOTFILES/zsh/agnoster_theme_modified.zsh
 # http://dougblack.io/words/zsh-vi-mode.html
 # http://readline.kablamo.org/emacs.html
 # bindkey -v
-# bindkey '^a' beginning-of-line
-# bindkey '^e' end-of-line
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
 # bindkey '^p' up-history
 # bindkey '^n' down-history
-# bindkey '^w' backward-kill-word
+bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
+bindkey '^[f' forward-word
+bindkey '^[b' backward-word
 
 bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
