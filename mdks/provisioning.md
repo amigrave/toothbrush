@@ -220,7 +220,7 @@ https://bugs.launchpad.net/ubuntu/+source/freetype/+bug/1722508/comments/36
 
 <mdk run-as="root" change='/etc/environment'>
 ```diff
-+FREETYPE_PROPERTIES="truetype:interpreter-version=35 cff:no-stem-darkening=1 
++FREETYPE_PROPERTIES='truetype:interpreter-version=35 cff:no-stem-darkening=1 autofitter:warping=1'
 ```
 
 Install additional fonts:
