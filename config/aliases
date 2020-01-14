@@ -12,7 +12,7 @@ alias flake8="flake8 --config=$DOTFILES/flake8"
 alias sudo='sudo -E'
 alias qmv='qmv --format=destination-only'
 alias ag="ag --page=less"
-alias agp="ag --page=less --ignore=node_modules --ignore=migrations --ignore='*min.js' --ignore='*.po' --ignore='*.css.map' -S" # ag for projects
+alias agp="ag --page=less --ignore=node_modules --ignore=migrations --ignore='*min.js' --ignore='*.po' --ignore='*.css.map' --ignore='*.js.map' -S" # ag for projects
 alias agpy="ag -Gpy$ --page=less"
 alias ags="agp -l --stats"
 alias ack="ack --pager=less --color-match=red"

@@ -1,5 +1,6 @@
 [global_config]
   enabled_plugins = EditorPlugin, ActivityWatch, TerminalShot
+  title_use_system_font = False
 [keybindings]
   broadcast_all = <Alt><Super>a
   broadcast_group = <Alt><Super>g
