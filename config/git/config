@@ -60,6 +60,7 @@
     bb  = branch -vv
     bbb = branch -vva
     bc  = branch -r --contains
+    bd  = "!git branch | grep -v '* ' | iselect -am | xargs -r -n1 git branch -D"
     ci  = commit
     cia = commit --amend
     wip = commit -a -mwip
