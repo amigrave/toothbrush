@@ -54,6 +54,7 @@ alias dropdbs='dblist | grep -v -E "^(|postgres|template[01])$" | iselect -am | 
 alias dbusers='psql -Xc "\\du" postgres | tail -n +4 | head -n -1 | cut -d\| -f1 | tr -d " " | awk "NF" | sort'
 alias dropusers='dbusers | grep -v postgres | iselect -am | xargs -n1 dropuser -i'
 alias ssl_file='openssl x509 -noout -text -in'
+alias ssl_telnet='openssl s_client -connect'
 # }}}
 
 # Misc {{{
