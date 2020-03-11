@@ -86,6 +86,7 @@
     p   = "!git fetch --prune; git rebase --autostash"
     rem = remote -v
     ri  = "!sh -c 'git rebase --interactive --autostash HEAD~$0'"
+    rl  = reflog --date=iso
     sa  = "!sh -c 'git stash apply stash@{$1}' -"
     sd  = "!sh -c 'git stash drop stash@{$1}' -"
     sh  = "!sh -c 'git stash show -p stash@{$1}' -"
