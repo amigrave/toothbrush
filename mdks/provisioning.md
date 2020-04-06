@@ -1,8 +1,8 @@
-# AMIGrAve's provisioning for Ubuntu 18.04 and Kali
+# AMIGrAve's provisioning for Kali linux
 
 ## Description
 
-My personal environment provisioning on Debian jessie or Kali 2 rolling release.
+My personal environment provisioning on Kali rolling release.
 
 ```docopt
 Usage: mdk provisioning.md [(--dektop | --server) | --module=<module>] <host> <user>
@@ -63,10 +63,10 @@ mkdir -p ~/bin
 ```sh
 # TODO: keep only necessary for server move the rest to desktop
 apt install -y \
-    vim whois build-essential linux-headers-generic \
+    vim whoisudo apt build-essential linux-headers-amd64 \
     zsh mc screen tmux htop rsync telnet strace less netcat-openbsd ncurses-term \
     multitail silversearcher-ag git tig tree python-pip python3-pip curl renameutils \
-    ncdu dialog systemd-container debootstrap iselect pgcli
+    ncdu dialog systemd-container debootstrap iselect pgcli fzf
 chsh -s /bin/zsh
 update-alternatives --set editor /usr/bin/vim.basic
 ```
