@@ -4,7 +4,7 @@ common_args="--ConsoleWidget.font_family='Menlo' --ConsoleWidget.font_size=14 --
 if [ -x "$(command -v jupyter)" ]; then
     jupyter qtconsole $common_args &
 else
-    ipython qtconsole $common_args &
+    ipython3 qtconsole $common_args &
 fi
 
 if [ $? -eq 0 ]; then

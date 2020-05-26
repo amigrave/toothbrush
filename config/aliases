@@ -25,7 +25,7 @@ alias nvim='mkdir -p $XDG_RUNTIME_DIR/neovim; NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_D
 # }}}
 
 # Application shortcuts {{{
-alias i="ipython"
+alias i="ipython3"
 alias g="git"
 alias digs="dig +noall +answer"  # dig short
 alias dk='sudo docker'
