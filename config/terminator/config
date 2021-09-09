@@ -2,30 +2,21 @@
   enabled_plugins = EditorPlugin, ActivityWatch, TerminalShot
   title_use_system_font = False
 [keybindings]
-  broadcast_all = <Alt><Super>a
-  broadcast_group = <Alt><Super>g
-  broadcast_off = <Alt><Super>o
-  copy = <Super>c
-  edit_window_title = <Alt><Super>i
-  full_screen = <Super>F11
+  new_tab = <Super>t
+  go_up = <Super>Up
   go_down = <Super>Down
   go_left = <Super>Left
   go_right = <Super>Right
-  go_up = <Super>Up
-  group_tab = None
-  help = None
-  hide_window = None
-  new_tab = <Super>t
-  next_tab = <Primary>Tab
-  paste = <Super>v
-  prev_tab = <Primary><Shift>Tab
-  reset_clear = <Super>k
-  scaled_zoom = <Primary><Super>Return
-  search = <Super>f
   split_horiz = <Shift><Super>d
   split_vert = <Super>d
+  copy = <Super>c
+  paste = <Super>v
+  search = <Super>f
+  toggle_zoom = <Shift><Super>Return
+  scaled_zoom = <Primary><Super>Return
+  next_tab = <Primary>Tab
+  prev_tab = <Primary><Shift>Tab
   switch_to_tab_1 = <Alt><Super>KP_1
-  switch_to_tab_10 = <Alt><Super>KP_0
   switch_to_tab_2 = <Alt><Super>KP_2
   switch_to_tab_3 = <Alt><Super>KP_3
   switch_to_tab_4 = <Alt><Super>KP_4
@@ -34,7 +25,26 @@
   switch_to_tab_7 = <Alt><Super>KP_7
   switch_to_tab_8 = <Alt><Super>KP_8
   switch_to_tab_9 = <Alt><Super>KP_9
-  toggle_zoom = <Shift><Super>Return
+  switch_to_tab_10 = <Alt><Super>KP_0
+  full_screen = <Super>F11
+  reset_clear = <Super>k
+  hide_window = None
+  group_tab = None
+  broadcast_off = <Alt><Super>o
+  broadcast_group = <Alt><Super>g
+  broadcast_all = <Alt><Super>a
+  edit_window_title = <Alt><Super>i
+  help = None
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono for Powerline 9
+    scrollback_infinite = True
+    use_system_font = False
+  [[tig]]
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono for Powerline 18
+    use_system_font = False
 [layouts]
   [[default]]
     [[[child1]]]
@@ -47,13 +57,3 @@
   [[EditorPlugin]]
     command = 'editor-agr +{line} "{filepath}"'
     match = '''([^ \t\n\r\f\v:"']+[\.\/][^ \t\n\r\f\v:"']+)?((:|(". line ))([0-9]+))?'''
-[profiles]
-  [[default]]
-    cursor_color = "#aaaaaa"
-    font = DejaVu Sans Mono for Powerline 9
-    scrollback_infinite = True
-    use_system_font = False
-  [[tig]]
-    cursor_color = "#aaaaaa"
-    font = DejaVu Sans Mono for Powerline 18
-    use_system_font = False

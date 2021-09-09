@@ -1,0 +1,573 @@
+" vim:ft=vim:fdm=marker:nowrap
+scriptencoding utf-8
+
+
+" #################################### VUNDLE ################################### {{{
+filetype off
+if v:version > 701
+    " set the runtime path to include Vundle and initialize
+    call vundle#begin(expand('<sfile>:p:h') . '/bundle')
+
+    " Called first
+    Plugin 'embear/vim-localvimrc'
+
+    " Navigation
+    Plugin 'ctrlpvim/ctrlp.vim'
+    Plugin 'junegunn/fzf.vim'
+    Plugin 'dbakker/vim-projectroot'  " Brings function to cd to the current repository root
+    Plugin 'majutsushi/tagbar'
+    Plugin 'moll/vim-bbye'  " provides :Bdelete
+
+
+    " Edition
+    Plugin 'ervandew/supertab'
+    Plugin 'garbas/vim-snipmate'
+    Plugin 'honza/vim-snippets'
+    Plugin 'bonsaiben/bootstrap-snippets'
+    Plugin 'amigrave/vim-react-snippets'  " waiting pull request on justinj/vim-react-snippets
+    " Plugin 'tpope/vim-surround'
+    Plugin 'mattn/emmet-vim'  " (used to be Zen coding)
+    Plugin 'glts/vim-textobj-comment'
+    Plugin 'godlygeek/tabular'
+    Plugin 'terryma/vim-expand-region'
+    Plugin 'ciaranm/detectindent'
+
+    " Languages
+    Plugin 'scrooloose/syntastic'
+    " Plugin 'vim-scripts/Python-Syntax-Folding'  " Folding for vim's original python syntax
+    Plugin 'vim-python/python-syntax'  " Supports python3 but no folding
+    Plugin 'Konfekt/FastFold'  " Prevents folding when not needed
+    Plugin 'tmhedberg/SimpylFold'      " Python folding
+    Plugin 'rmartinho/vim-boo'
+    Plugin 'rhysd/vim-crystal'
+    Plugin 'atsepkov/vim-rapydscript'
+    Plugin 'amigrave/JavaScript-syntax'
+    " Plugin 'pangloss/vim-javascript' " modern but slow and indent fucks up
+    " Plugin 'mxw/vim-jsx'  " requires pangloss vim-javascript, conflicts with xml_syntax_folding
+    Plugin 'tweekmonster/braceless.vim'
+    Plugin 'lifepillar/pgsql.vim'
+    Plugin 'zah/nim.vim'
+
+    Plugin 'vim-scripts/ASPJScript'
+    Plugin 'dmitry-ilyashevich/vim-typescript'
+    Plugin 'kchmck/vim-coffee-script'
+    Plugin 'groenewege/vim-less'
+    Plugin 'alvan/vim-closetag'
+    Plugin 'amigrave/vim-xpath' " waiting pull request on 'actionshrimp/vim-xpath'
+    Plugin 'stephpy/vim-yaml'  " Simplify yaml syntax for faster processing
+    Plugin 'rainux/vim-vala'
+    Plugin 'davidhalter/jedi-vim'
+    " Plugin 'marijnh/tern_for_vim'
+    " Plugin 'elzr/vim-json'
+    Plugin 'wavded/vim-stylus'
+    Plugin 'tpope/vim-markdown'
+    Plugin 'maxbane/vim-asm_ca65'
+    Plugin 'posva/vim-vue'
+
+    " Templating and special filetypes
+    Plugin 'Glench/Vim-Jinja2-Syntax'
+    " Plugin https://github.com/mitsuhiko/vim-jinja from Armin Ronacher (outdated?)
+    Plugin 'sophacles/vim-bundle-mako'
+    Plugin 'chr4/nginx.vim'
+    Plugin 'vim-scripts/Nmap-syntax-highlight'
+    Plugin 'ekalinin/Dockerfile.vim'
+    Plugin 'pearofducks/ansible-vim'
+
+    " Misc Tools
+    if v:version >= 740
+        Plugin 'eiginn/netrw'
+    endif
+    Plugin 'tpope/vim-unimpaired'
+    Plugin 'tpope/vim-rhubarb'
+    Plugin 'will133/vim-dirdiff'
+    Plugin 'AndrewRadev/linediff.vim'
+    " Plugin 'mattn/gist-vim'
+    Plugin 'rking/ag.vim'
+    Plugin 'haya14busa/vim-asterisk'
+
+    " Libs
+    Plugin 'kana/vim-textobj-user'           " required by vim-textobj-* plugins
+    Plugin 'tomtom/tlib_vim'                 " required by snipmate
+    Plugin 'MarcWeber/vim-addon-mw-utils'    " required by snipmate
+    " Plugin 'mattn/webapi-vim' " used by gist-vim
+
+    call vundle#end()
+    filetype plugin indent on
+endif
+"}}}
+
+" ############################ AUTOCMD & FILETYPES ############################## {{{
+if has("autocmd")
+    "au BufEnter * silent! lcd %:p:h    "automatically change cwd to file's dir
+    "\ if line("'\"") | exe "normal '\"" | endif |
+    au BufRead *
+        \ if line("'\"") | exe "normal '\"" | endif |
+        \ if match( getline(1) , '^\#!') == 0 |
+            \ execute("let b:interpreter = getline(1)[2:]") |
+            \ if getline(1) =~ '^#!.*python' | set filetype=python | endif |
+            \ if getline(1) =~ '^#!.*ruby' | set filetype=ruby | endif |
+            \ if getline(1) =~ '^#!.*bash' | set filetype=sh | endif |
+            \ if getline(1) =~ '^<DOCTYPE' | set filetype=html | endif |
+        \endif
+
+    au BufRead *.txt,*.rst setlocal tw=78 colorcolumn=79
+    au BufRead,BufNewFile *.xml,*.xsl  setlocal foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2 synmaxcol=300
+    au BufRead,BufNewFile *.yml,*.yaml setlocal sw=2
+    au BufRead,BufNewFile *.php,*.php3 setlocal ft=php.html foldmethod=syntax foldcolumn=3 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.rb setlocal fdm=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+    au BufRead,BufNewFile *.cr setlocal fdm=syntax sw=2
+    au BufRead,BufNewFile *.aspx setlocal syntax=cs
+    au BufRead,BufNewFile *.asp setlocal ft=javascript
+    au BufRead,BufNewFile *.coffee setlocal fdm=indent
+    au BufRead,BufNewFile .vimrc setlocal fdm=marker
+    au BufRead,BufNewFile *.iced setlocal filetype=coffee
+    au BufRead,BufNewFile *.boo setlocal filetype=boo
+    au BufRead,BufNewFile *.nim setlocal sw=4
+    au BufWritePost,FileWritePost *.coffee :!coffee -c -b <afile>
+    " au BufWritePost,FileWritePost *.sass :silent !sass --compass --style expanded <afile> > "%:p:r.css"
+    au BufWritePost,FileWritePost *.sass setlocal sw=4
+    au BufRead,BufNewFile *.s65 setlocal ft=asm_ca65
+    au BufRead,BufNewFile .odoorc,odoo.conf setlocal filetype=dosini
+
+    au BufRead,BufNewFile *.pyj set filetype=rapydscript
+    " au BufWritePost,FileWritePost *.pyj :silent !rapydscript <afile> -p --comments > "%:p:r.js"
+
+    " au BufRead,BufNewFile *.css,*.aspx,*.c,*.cpp,*.cs,*.java,*.js,*.json,*.asp syn region myFold start="{" end="}" transparent fold |
+    "     \ syn sync fromstart | set foldmethod=syntax foldcolumn=3 foldnestmax=3 foldlevel=2
+    " au BufRead,BufNewFile *.js,*.asp,*.json syn clear javaScriptBraces
+
+    au FileType javascript setlocal foldmethod=syntax
+    " au Filetype json setlocal conceallevel=1 | hi Conceal ctermbg=234 guibg=#242424
+
+    " Disable syntax hightlighting for big files
+    au Filetype xml if getfsize(@%) > 1000000 | setlocal syntax=off | endif
+
+    au Filetype python syn match pythonEqual "[=]"
+    au Filetype python syn match agrSelf "self" | hi agrSelf ctermfg=darkcyan guifg=darkcyan
+
+    autocmd FileType python BracelessEnable -indent -fold -highlight
+    " au! FileType python setl nosmartindent  " http://stackoverflow.com/questions/2063175/comments-go-to-start-of-line-in-the-insert-mode-in-vim
+
+    " au Filetype ruby set foldmethod=syntax foldcolumn=0 foldnestmax=2 foldlevel=2
+    au Filetype gitcommit setlocal spell textwidth=72 colorcolumn=72
+
+    " Markdown: https://github.com/tpope/vim-markdown/issues/90
+    au FileType markdown setlocal foldmethod=syntax
+    au FileType markdown syn region mkdHeaderFold
+                              \ start="^\s*\z(#\+\)"
+                              \ skip="^\s*\z1#\+"
+                              \ end="^\(\s*#\)\@="
+                              \ fold contains=TOP
+
+    " Don't screw up folds when inserting text that might affect them, until
+    " leaving insert mode. Foldmethod is local to the window. Protect against
+    " screwing up folding when switching between windows.
+    au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+    au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
+    if has("unix")
+        au BufNewFile *.rb setlocal autoread | s,^,#!/usr/bin/env ruby,
+        au BufNewFile *.sh setlocal autoread | s,^,#!/bin/bash, | w | !chmod +x %
+    endif
+
+    au Filetype xml call XmlQweb()
+
+    let g:python_highlight_all = 1
+    let g:markdown_folding = 1
+    let g:tex_fold_enabled = 1
+    let g:vimsyn_folding = 'af'
+    let g:xml_syntax_folding = 1
+    let g:javaScript_fold = 1
+    let g:coffee_folding = 1
+    let g:sh_fold_enabled= 7
+    let g:ruby_fold = 1
+    let g:perl_fold = 1
+    let g:perl_fold_blocks = 1
+    let g:r_syntax_folding = 1
+    let g:rust_fold = 1
+    let g:php_folding = 1
+    let g:php_sync_method=0
+    let g:php_asp_tags = 1
+
+endif
+"}}}
+
+"" ################################### KEYMAPS ################################### {{{
+
+" Taglist
+nnoremap <silent> <S-F12> :TagbarToggle<CR><C-w>l
+inoremap <silent> <S-F12> <C-O>:TagbarToggle<CR><C-w>l
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_map_closeallfolds = ['<F5>']
+let g:tagbar_map_closefold = ['<S-Up>']
+let g:tagbar_map_openfold = ['<Right>']
+
+" Calculator
+inoremap <Leader>= <C-O>yiW<End>=<C-R>=<C-R>0<CR>
+
+" Ag
+let g:ag_prg = 'ag --nogroup --nocolor --column --ignore=node_modules --ignore=migrations --ignore="*min.js" --ignore="*.po" -S'
+noremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+
+" Emmet (used to be Zen coding)
+let g:user_emmet_leader_key='<C-\>'
+let g:user_emmet_expandabbr_key = '<C-@>'
+if has("nvim")
+    let g:user_emmet_expandabbr_key = '<C-space>'
+endif
+let g:emmet_html5 = 0  " always close tags, eg: <img/>, <hr/>, ...
+let g:user_emmet_settings = {
+    \  'indentation' : '    '
+\}
+
+" vim-xpath
+let g:quiet_xpath = 1
+
+" vim-notes
+let g:notes_directories = ['~/Documents/Notes']
+nnoremap <leader>on :tabnew<CR>:Note<Space>
+
+" vim-markdown
+let g:markdown_fenced_languages = ['python', 'javascript', 'html', 'xml', 'yaml', 'sql', 'sh', 'diff', 'dosini', 'conf']
+let g:markdown_folding = 1
+
+nmap <leader>m :make<cr>
+
+" vim-dirdiff
+let g:DirDiffEnableMappings = 0  " could not find conflict on <leader>dg
+let g:DirDiffWindowSize = 10
+nnoremap <unique> <Leader><Tab> :DirDiffNext<CR>
+nnoremap <unique> <Leader><S-Tab> :DirDiffPrev<CR>
+
+" IP Lookup
+nmap <silent> <Leader>IP :python lookupIPUnderCursor()<CR>
+
+" Visual mode stuff
+vmap <Tab> >
+vmap <S-Tab> <LT>
+" http://vim.wikia.com/wiki/Selecting_your_pasted_text
+nnoremap gp `[v`]
+
+" Asterix
+map *  <Plug>(asterisk-z*)
+map #  <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
+
+
+" SimpylFold
+let g:SimpylFold_docstring_preview = 1
+let g:SimpylFold_fold_docstring = 0
+let g:SimpylFold_fold_import = 1
+
+" Don't wanna ex mode, prefer quick Quit
+map Q :qa<CR>
+
+"inoremap {{ {
+"imap %% <%%><left><left>
+"imap %%<cr> <%<cr>%><esc>O<Tab>
+"inoremap {<cr> {<cr>}<esc>O<Tab>
+"inoremap [ []<left>
+"inoremap ( ()<left>
+inoremap ({<cr> ({<cr><Backspace>});<esc>O
+inoremap {<cr> {<cr><Backspace>}<esc>O
+inoremap {{ {{  }}<left><left><left>
+
+" window management
+nmap <silent> <A-w> :wincmd c<cr>
+imap <silent> <A-w> <c-o>:wincmd c<cr>
+
+nmap <silent> <A-Up> :wincmd k<CR>
+imap <silent> <A-Up> <C-O>:wincmd k<CR>
+
+nmap <silent> <A-Down> :wincmd j<CR>
+imap <silent> <A-Down> <C-O>:wincmd j<CR>
+
+nmap <silent> <A-Left> :wincmd h<CR>
+imap <silent> <A-Left> <C-O>:wincmd h<CR>
+nmap <silent> <S-Left> :wincmd h<CR>
+imap <silent> <S-Left> <C-O>:wincmd h<CR>
+
+nmap <silent> <A-Right> :wincmd l<CR>
+imap <silent> <A-Right> <C-O>:wincmd l<CR>
+nmap <silent> <S-Right> :wincmd l<CR>
+imap <silent> <S-Right> <C-O>:wincmd l<CR>
+
+map <A-i> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") ."> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" format json
+nmap =j :%!python -m json.tool<CR>
+
+"" }}}
+
+"" ################################ PLUGIN CONFIG ################################ {{{
+
+" nim
+" ===
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
+
+"" }}}
+
+"" ################################### ADDONS #################################### {{{
+" Misc Configuration {{{
+function! s:DiffWithSaved()
+    let filetype=&ft
+    diffthis
+    vnew | r # | normal! 1Gdd
+    diffthis
+    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
+" Tabular
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a\| :Tabularize /\|<CR>
+vmap <Leader>a\| :Tabularize /\|<CR>
+
+" Gist
+let g:gist_clip_command = 'pbcopy'
+let g:gist_detect_filetype = 1
+let g:gist_post_private = 1
+
+" SuperTab
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
+
+" SnipMate
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['javascript'] = 'javascript,javascript-agr'
+let g:snipMate.scope_aliases['xml'] = 'xml,xml-agr,html'
+let g:snipMate.scope_aliases['_'] = '_,_-agr'
+let g:snipMate.scope_aliases['python'] = 'python,python-agr'
+let g:snipMate.scope_aliases['jinja'] = 'jinja,html'
+let g:snipMate.scope_aliases['mako'] = 'mako,html'
+
+" Ultisnip
+" let g:UltiSnipsExpandTrigger="<tab>"  " Do not use <tab> if you use YouCompleteMe
+" let g:UltiSnipsListSnippets="<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsEditSplit="vertical"  " If you want :UltiSnipsEdit to split your window.
+
+
+" CtrlP
+let g:ctrlp_max_files = 0
+" let g:ctrlp_prompt_mappings = {
+"     \ 'AcceptSelection("t")': ['<cr>'],
+"     \ 'AcceptSelection("e")': ['<c-x>'],
+" \ }
+nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
+nnoremap <silent> <Leader>t :CtrlPTag<CR>
+
+" Syntastic
+if exists("*SyntasticStatuslineFlag")
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+endif
+let g:syntastic_rapydscript_checkers = ['rapydscript']
+let g:syntastic_javascript_checkers = ['jshint']  " ['eslint']
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_rst_checkers = ['sphynx']
+let g:syntastic_python_flake8_args = '--config=' . $DOTFILES . '/flake8 --filename="*"'  " even check files without .py ext
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_style_error_symbol = '⚠'
+let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_always_populate_loc_list = 1  " needed for :lnext :prev to work
+let g:syntastic_auto_loc_list = 0
+
+" lifepillar/pgsql
+let g:sql_type_default = 'pgsql'
+let g:pgsql_pl = ['python', 'javascript']
+
+" localvimrmc
+let g:localvimrc_sandbox=0
+let g:localvimrc_persistent = 2
+let g:localvimrc_persistence_file = $XDG_CACHE_HOME . '/vim/localvimrc_persistent'
+
+" Jedi
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#force_py_version = 3
+
+" xml-closetag
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
+
+" Go to parent node
+nmap <leader>xp vatatov
+
+" }}}
+
+" Xml QWeb {{{
+function! XmlQweb()
+    syn match   xmlAttribQWeb
+        \ +[-'"<]\@<!\<t-[a-zA-Z:_][-.0-9a-zA-Z0-9:_]*\>\(['">]\@!\|$\)+
+        \ contained
+        \ contains=xmlAttribPunct,@xmlAttribHook
+        \ display
+
+    syn cluster xmlAttribHook contains=xmlAttribQWeb
+    hi link xmlAttribQWeb     xmlAttribQWeb
+    hi xmlAttribQWeb guifg=#f0a040 ctermfg=208
+    hi xmlAttribQWebTrad guifg=#ffffff ctermfg=white
+
+    syn region qwebVarBlock matchgroup=qwebVarDelim start=/{{-\?/ end=/-\?}}/ containedin=xmlString
+    syn region qwebVarBlock2 matchgroup=qwebVarDelim start=/#{-\?/ end=/-\?}/ containedin=xmlString
+    hi def link qwebVarDelim qwebVarBlock
+    hi qwebVarDelim guifg=#D4C828 ctermfg=Yellow
+endfunction
+" }}}
+
+" Python Debug {{{
+imap <F8> from pudb import set_trace; set_trace()  # *** Breakpoint ***<cr>
+nmap <F8> <s-o>from pudb import set_trace; set_trace()  # *** Breakpoint ***<esc><down>
+imap <S-F8> from pudb.remote import set_trace; set_trace(term_size=(134, 32))  # *** telnet localhost 6899 ***"<cr>
+nmap <S-F8> <s-o>from pudb.remote import set_trace; set_trace(term_size=(134, 32))  # *** telnet localhost 6899 ***"<esc><down>
+" }}}
+
+" VIM Profiling {{{
+" Found out that GetPythonFold() was slowing down vim thanks to this profiling hint:
+" http://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
+function! g:StartVimProfiling()
+    profile start /tmp/vim-profile.log
+    profile func *
+    profile file *
+endfunction
+command! StartVimProfiling call g:StartVimProfiling()
+function! g:StopVimProfiling()
+    profile pause
+    noautocmd qall!
+endfunction
+command! StopVimProfiling call g:StopVimProfiling()
+" }}}
+
+" IP Lookup {{{
+" Website: http://codeseekah.com/2012/03/04/vim-scripting-with-python-lookup-ip-country/
+" Lookup the country for an IP address under the current cursor
+" Make sure Python is ready
+
+if has('python')
+python << EOF
+import vim, urllib
+
+def lookupIPUnderCursor():
+    ip = vim.eval("expand('<cWORD>')")
+    print "Looking up %s..." % ip
+    # api info : http://www.hostip.info/use.html API
+    info = urllib.urlopen('http://api.hostip.info/get_html.php?position=true&ip=%s' % ip).read()
+    vim.command("redraw") # discard previous messages
+    print info
+EOF
+endif
+" }}}
+
+" CloseHiddenBuffers {{{
+" This one doesn't work with tab.
+" TODO: find another one
+function! CloseHiddenBuffers()
+    let lastBuffer = bufnr('$')
+    let currentBuffer = 1
+    while currentBuffer <= lastBuffer
+        if bufexists(currentBuffer) && buflisted(currentBuffer) && bufwinnr(currentBuffer) < 0
+            execute 'bdelete' currentBuffer
+        endif
+        let currentBuffer = currentBuffer + 1
+    endwhile
+endfunction
+" }}}
+
+" TextEnableCodeSnip {{{
+" http://vim.wikia.com/wiki/Different_syntax_highlighting_within_regions_of_a_file
+function! TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
+  let ft=toupper(a:filetype)
+  let group='textGroup'.ft
+  if exists('b:current_syntax')
+    let s:current_syntax=b:current_syntax
+    " Remove current syntax definition, as some syntax files (e.g. cpp.vim)
+    " do nothing if b:current_syntax is defined.
+    unlet b:current_syntax
+  endif
+  execute 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
+  try
+    execute 'syntax include @'.group.' after/syntax/'.a:filetype.'.vim'
+  catch
+  endtry
+  if exists('s:current_syntax')
+    let b:current_syntax=s:current_syntax
+  else
+    unlet b:current_syntax
+  endif
+  execute 'syntax region textSnip'.ft.'
+  \ matchgroup='.a:textSnipHl.'
+  \ start="'.a:start.'" end="'.a:end.'"
+  \ contains=@'.group
+endfunction
+" }}}
+
+" Highlight_remove_attr {{{
+" The following removes bold from all highlighting
+" Steve Hall wrote this function for me on vim@vim.org
+" See :help attr-list for possible attrs to pass
+function! Highlight_remove_attr(attr)
+    " save selection registers
+    new
+    silent! put
+
+    " get current highlight configuration
+    redir @x
+    silent! highlight
+    redir END
+    " open temp buffer
+    new
+    " paste in
+    silent! put x
+
+    " convert to vim syntax (from Mkcolorscheme.vim,
+    "   http://vim.sourceforge.net/scripts/script.php?script_id=85)
+    " delete empty,"links" and "cleared" lines
+    silent! g/^$\| links \| cleared/d
+    " join any lines wrapped by the highlight command output
+    silent! %s/\n \+/ /
+    " remove the xxx's
+    silent! %s/ xxx / /
+    " add highlight commands
+    silent! %s/^/highlight /
+    " protect spaces in some font names
+    silent! %s/font=\(.*\)/font='\1'/
+
+    " substitute bold with "NONE"
+    execute 'silent! %s/' . a:attr . '\([\w,]*\)/NONE\1/geI'
+    " yank entire buffer
+    normal ggVG
+    " copy
+    silent! normal "xy
+    " run
+    execute @x
+
+    " remove temp buffer
+    bwipeout!
+
+    " restore selection registers
+    silent! normal ggVGy
+    bwipeout!
+endfunction
+" }}}
+"" }}}

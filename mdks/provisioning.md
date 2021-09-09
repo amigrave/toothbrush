@@ -177,8 +177,8 @@ sudo update-alternatives --set x-www-browser /usr/bin/chromium
 ```sh
 sudo apt install -y command-not-found qiv pidgin alsa-utils numlockx howdoi golang-go \
      rxvt-unicode-256color python-tk mtr terminator vim-gtk3 irssi scrot \
-     xdotool xclip cmus sshfs feh mpv gtk-recordmydesktop mupdf imagemagick unzip rar \
-     blackbird-gtk-theme python3-qt5 python3-pyqt5.qtwebkit python3-pyqt5.qtsvg
+     xdotool xclip cmus sshfs feh mpv recordmydesktop mupdf imagemagick unzip rar \
+     blackbird-gtk-theme python3-pyqt5 python3-pyqt5.qtwebkit python3-pyqt5.qtsvg
 ```
 
 ### Sound
