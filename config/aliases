@@ -131,9 +131,7 @@ fi
 # OSX aliases {{{
 if [[ "$OSTYPE" =~ darwin* ]]; then
 
-alias vim="mvim -v"
-alias e="mvim --remote-tab-silent"
-
+alias vim="nvim"
 alias htop="HOMERC=$XDG_CONFIG_HOME/htop/htoprc htop"  # will soon change: https://github.com/max-horvath/htop-osx/pull/11
 alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 alias jjs="rlwrap /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/bin/jjs"
