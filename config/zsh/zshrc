@@ -114,6 +114,8 @@ bindkey '^[b' backward-word
 
 bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
+bindkey '\e[H'  beginning-of-line  # iterm
+bindkey '\e[F'  end-of-line        # iterm
 bindkey '^[[5~' history-beginning-search-backward
 bindkey '^[[6~' history-beginning-search-forward
 bindkey '^[[3~' delete-char
