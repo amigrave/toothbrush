@@ -30,8 +30,11 @@ set visible-stats on
 "\e[5~": history-search-backward
 "\e[6~": history-search-forward
 "\e[3~": delete-char
+"\e[2~": quoted-insert
 "\e[5C": forward-word
 "\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
 
 ##----------------------------------------------------------
 ## arrows left/right/up/down
