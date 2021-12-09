@@ -102,14 +102,14 @@ keys = [
 ]
 
 groups = [
-    ('web1', [mod], '1', {}),
-    ('web2', [mod], '2', {}),
-    ('chat', [mod], '3', {}),
-    ('term', [mod], 'Return', {'spawn': 'terminator'}),
-    ('ipy', [mod], 'Delete', {}),
-    ('gvim', [mod], 'e', {}),
-    ('gimp', [mod], 'g', {}),
-    ('urxvt', [mod, alt], 'Return', {'spawn': 'urxvt'}),
+    ('🌐 web1', [mod], '1', {}),
+    ('🌐 web2', [mod], '2', {}),
+    ('💬 chat', [mod], '3', {}),
+    ('🖥️ term', [mod], 'Return', {'spawn': 'terminator'}),
+    ('🐍 ipy', [mod], 'Delete', {}),
+    ('📝 memo', [mod], 'e', {}),
+    ('🎨 gimp', [mod], 'g', {}),
+    ('🖥️ urxvt', [mod, alt], 'Return', {'spawn': 'urxvt'}),
 ]
 
 for i, group in enumerate(groups):
@@ -208,3 +208,7 @@ set_wallpaper('/usr/share/images/desktop-base/kali-wallpaper_1920x1080.png')
 @hook.subscribe.screen_change
 def restart_on_screen_change(qtile, ev):
     qtile.cmd_restart()
+
+@hook.subscribe.setgroup
+def show_icon(*a):
+    logger.error('%s', a)
