@@ -1,5 +1,14 @@
 # vim: ft=zsh:fdm=marker:
 
+if [[ -z "$AMIGRAVE" ]]; then
+    # Allow to link only zshrc
+    current_file=$(realpath -q ${(%):-%N})
+    traversal="$(dirname $current_file)/../../"
+    export AMIGRAVE=$(builtin cd $traversal; pwd)
+    export DOTFILES=$AMIGRAVE/config/.xdg  # TODO: now that $DOTFILES == $XDG_CONFIG_HOME maybe
+    export XDG_CONFIG_HOME=$DOTFILES       #       I should get rid of $DOTFILES
+fi
+
 source $DOTFILES/profile
 setopt AUTO_CD
 # eval "$(dircolors -b)"
