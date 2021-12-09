@@ -88,6 +88,7 @@ alias ftpserve='python -m pyftpdlib'
 alias vlc_stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
 alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
 alias termkey='tput smkx; cat; tput rmkx'
+alias termsize='echo "$(tput cols)x$(tput lines)"'
 alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
 alias reverse_ip_lookup="dig +noall +answer -x"
 alias dig_reverse="dig +noall +answer -x"
