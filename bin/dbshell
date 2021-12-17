@@ -26,14 +26,17 @@ else
     fi
 fi
 
-ssh_options="-q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${DBSHELL_SSH_OPTIONS}"
-
 # Using mktemp breaks this tool on OSX due to the temp folder lenght meeting the unix socket path limit (103 chars)
 # temp=`mktemp -d --suffix="-dbshell-$host"`
-temp="/tmp/dbshell-$host"
+temp="/tmp/dbshell-$host.$(date +%s%N)"
+temp_socket="${temp}/.s.PGSQL.5432"
 mkdir $temp
-socat_exec="ssh $ssh_options $user@$host socat STDIO UNIX-CONNECT\:/var/run/postgresql/.s.PGSQL.5432"
-{ socat "UNIX-LISTEN:${temp}/.s.PGSQL.5432,reuseaddr,fork" EXEC:"$socat_exec" ; } &
+
+ssh -N -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${DBSHELL_SSH_OPTIONS} \
+    -L ${temp_socket}:/var/run/postgresql/.s.PGSQL.5432 $user@$host &
+
+echo "Waiting for socket tunnel on ${temp_socket} ..."
+while [ ! -e $temp_socket ]; do sleep .5; done
 
 echo "Connecting to $user@$host:$db..."
 args="--host=${temp} -d $db -U $user"
