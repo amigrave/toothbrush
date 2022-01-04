@@ -119,7 +119,7 @@ if &t_Co > 2 || has("gui_running")
     syntax on
 endif
 if v:progname =~? "vless"
-    set foldlevelstart=99     " do not fold by default when opening files
+    set nofoldenable        " do not fold by default when opening files with vless alias
 endif
 
 if has("nvim")
@@ -207,6 +207,7 @@ endif
 " ## AUTOCMD & FILETYPES ################################################## {{{
 if has("autocmd")
     au FileType vim setlocal keywordprg=:help  " allow to use K on word in order to get vim :help
+    au FileType python setlocal nofoldenable
 endif
 "}}}
 
