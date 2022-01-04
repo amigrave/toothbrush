@@ -122,13 +122,6 @@ if v:progname =~? "vless"
     set foldlevelstart=99     " do not fold by default when opening files
 endif
 
-" Compatible way to use either :py or :py3 -> :Py
-if has("python3")
-    command! -nargs=1 Py py3 <args>
-else
-    command! -nargs=1 Py py <args>
-endif
-
 if has("nvim")
     tnoremap <C-Delete> <C-\><C-n>  " get out of terminal mode
     set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/neoviminfo nowrap  " neovim can't use vim's viminfo and vice-versa
