@@ -21,7 +21,6 @@ alias cal='ncal -bM'
 alias grep='grep --color=auto'
 alias invoke='PYTHONDONTWRITEBYTECODE=1 invoke'
 alias mtr="mtr --curses"
-alias nvim='mkdir -p $XDG_RUNTIME_DIR/neovim; NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/neovim/$(date +%s) nvim'
 # }}}
 
 # Application shortcuts {{{
@@ -83,8 +82,7 @@ alias ssh-nocheck="ssh -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecki
 
 alias winrsync='rsync -rltDvu --modify-window=1 --progress'
 alias python_dependencies='sfood -fuq . | sfood-filter-stdlib | sfood-target-files | xargs dirname | sort | uniq'
-alias webserve='python -m SimpleHTTPServer'
-alias ftpserve='python -m pyftpdlib'
+alias webserve='python3 -m http.server'
 alias vlc_stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
 alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
 alias termkey='tput smkx; cat; tput rmkx'
@@ -107,7 +105,6 @@ alias ami='files=(*.adf); amiga -0 "${files[0]}" -1 "${files[1]}" -2 "${files[2]
 # Linux aliases {{{
 if [[ "$OSTYPE" == "linux" || "$OSTYPE" == "linux-gnu" ]]; then
 
-alias e="editor-agr"
 alias ge="gvim-agr --remote-tab-silent"
 alias ack="ack-grep --pager=less --color-match=red"
 alias burniso='wodim dev=/dev/scd0 driveropts=burnfree,noforcespeed fs=14M speed=16 -dao -eject -overburn -v'
@@ -125,6 +122,7 @@ alias vir='clamscan -r *'
 alias virtualization='egrep "^flags.*(vmx|svm)" /proc/cpuinfo' # check for virtualization instructions
 alias vtime='/usr/bin/time -v'
 alias zsnes_gamepad="sudo ln -s /dev/input/js0 /dev/js0"
+alias bat="batcat"
 
 fi
 # }}}
@@ -132,7 +130,6 @@ fi
 # OSX aliases {{{
 if [[ "$OSTYPE" =~ darwin* ]]; then
 
-alias vim="nvim"
 alias htop="HOMERC=$XDG_CONFIG_HOME/htop/htoprc htop"  # will soon change: https://github.com/max-horvath/htop-osx/pull/11
 alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 alias jjs="rlwrap /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Home/bin/jjs"
