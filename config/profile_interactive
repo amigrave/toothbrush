@@ -21,6 +21,10 @@ function ssl_https() {
     curl --insecure -v https://"$1" 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }'
 }
 
+function ddiff() {
+    diff -u "$@" | delta -s
+}
+
 # Edit local profile (creates one if not exist) {{{
 function profile() {
     local_profile=$XDG_CONFIG_HOME/profile_local

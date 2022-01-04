@@ -6,8 +6,12 @@ bind    generic     P           !tig --first-parent %(commit)
 bind    generic     O           !tig --first-parent %(commit)^2
 bind    generic     <F1>        !git dd %(commit)~1..%(commit)
 bind    generic     <F2>        !git change-date %(commit)
-bind    generic     <F3>        !git rebase -i %(commit)^
-bind    generic     V           !git vdd --no-prompt %(commit)
+bind    generic     <F3>        !git shd %(commit)
+bind    generic     <F4>        !git rebase -i %(commit)^
+bind    generic     V           !git vd --no-prompt %(commit)
+bind    generic     B           @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
+
+
 
 # bind    diff        <Up>       none
 # bind    diff        <Up>       scroll-line-up
