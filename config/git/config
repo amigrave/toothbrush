@@ -111,6 +111,7 @@
     rem = remote -v
     ri  = "!sh -c 'git rebase --interactive --autostash HEAD~$0'"
     rl  = reflog --date=iso
+    rmb = "!git branch --no-color | fzf -m | xargs -I {} git branch -D '{}'"
     sa  = "!sh -c 'git stash apply stash@{$1}' -"
     sd  = "!sh -c 'git stash drop stash@{$1}' -"
     sh  = "!sh -c 'git stash show -p stash@{$1}' -"
@@ -122,6 +123,7 @@
     st  = status
 
     auth  = shortlog -s -n --all  # author statistics
+    alias = "!sh -c 'git config --list | grep alias'"
     info  = "!for i in $(git remote); do git remote show $i -n; done"
     stats = shortlog -s -n --all
     subs  = submodule foreach git
@@ -148,6 +150,9 @@
         files=$@ \
         git filter-branch --force --index-filter 'git rm -rf --cached --ignore-unmatch $files' HEAD \
         rm -rf .git/refs/original/ && git reflog expire --all &&  git gc --aggressive --prune"
+
+    send-patch = "!sh -c 'git format-patch --stdout $0 | ssh $1 git -C $2 apply -v'"
+    send-changes = "!sh -c 'git wip; git send-patch HEAD~1 $0 $1; git reset HEAD~1'"
 
 [push]
     default = simple
