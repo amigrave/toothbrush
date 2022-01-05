@@ -12,13 +12,13 @@ args = parser.parse_args()
 
 commit = args.commit
 try:
-    date = subprocess.check_output(['git', 'show', '-s', '--format=%ci', commit])
+    date = subprocess.check_output(['git', 'show', '-s', '--format=%ai', commit])
 except subprocess.CalledProcessError:
     sys.exit("Could not get date of commit %s" % commit)
 
 args = ['--nocancel', '--inputbox', 'New date', '7', '40', date.strip()]
 p = None
-for prog in ('whiptail', 'dialog'):
+for prog in ('dialog', 'whiptail'):
     try:
         p = subprocess.Popen([prog] + args, stderr=subprocess.PIPE)
         break
@@ -34,6 +34,7 @@ if not newdate or date.strip() == newdate:
 
 gitcmd = ['git', 'filter-branch', '-f', '--env-filter', """
     if test $GIT_COMMIT = "{commit}"; then
+        export FILTER_BRANCH_SQUELCH_WARNING=1;
         export GIT_COMMITTER_DATE="{newdate}";
         export GIT_AUTHOR_DATE="{newdate}";
     fi""".format(**locals()), '%s~1..HEAD' % commit]
