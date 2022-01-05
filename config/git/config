@@ -39,7 +39,7 @@
 
 # {{{ DELTA
 [core]
-    pager = delta
+    pager = delta --side-by-side
 
 [interactive]
     diffFilter = delta --color-only --features=interactive
