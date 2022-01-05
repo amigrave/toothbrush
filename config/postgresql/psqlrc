@@ -30,16 +30,35 @@
 \echo '\t:activity\t-- Server activity'
 \set activity 'select datname, pid, usename, application_name,client_addr, client_hostname, client_port, query, state from pg_stat_activity;'
 
-\echo '\t:locks\t\t-- Lock info'
-\set locks  'SELECT bl.pid AS blocked_pid, a.usename AS blocked_user, kl.pid AS blocking_pid, ka.usename AS blocking_user, a.query AS blocked_statement FROM pg_catalog.pg_locks bl JOIN pg_catalog.pg_stat_activity a ON bl.pid = a.pid JOIN pg_catalog.pg_locks kl JOIN pg_catalog.pg_stat_activity ka ON kl.pid = ka.pid ON bl.transactionid = kl.transactionid AND bl.pid != kl.pid WHERE NOT bl.granted;'
+\echo '\t:blocked\t-- Check Transactional Locks / Blocking'
+-- https://sqlconjuror.com/postgresql-check-transactional-locks-blocking/
+\set QUIET 1
+select
+$$
+    SELECT
+      bl.pid AS blocked_pid,
+      a.usename AS blocked_user,
+      ka.query AS current_or_recent_statement_in_blocking_process,
+      ka.state AS state_of_blocking_process,
+      now() - ka.query_start AS blocking_duration,
+      kl.pid AS blocking_pid,
+      ka.usename AS blocking_user,
+      a.query AS blocked_statement,
+      now() - a.query_start AS blocked_duration
+    FROM
+      pg_catalog.pg_locks bl
+      JOIN pg_catalog.pg_stat_activity a ON a.pid = bl.pid
+      JOIN pg_catalog.pg_locks kl ON kl.transactionid = bl.transactionid
+      AND kl.pid != bl.pid
+      JOIN pg_catalog.pg_stat_activity ka ON ka.pid = kl.pid
+    WHERE
+      NOT bl.GRANTED;
+$$ AS blocked \gset
 
-\echo '\t:waits\t\t-- Waiting queries'
-\set waits 'SELECT pg_stat_activity.pid, pg_stat_activity.query, pg_stat_activity.waiting, now() - pg_stat_activity.query_start AS \"totaltime\", pg_stat_activity.backend_start FROM pg_stat_activity WHERE pg_stat_activity.query !~ \'%IDLE%\'::text AND pg_stat_activity.waiting = true;'
-
-\echo '\t:frozenxid\t\t-- Show frozen max xid'
+\echo '\t:frozenxid\t-- Show frozen max xid'
 \set frozenxid 'SELECT datname, age(datfrozenxid) FROM pg_database ORDER BY 2 DESC;'
 
-\echo '\t:slowqueries\t\t-- Show slow queries'
+\echo '\t:slowqueries\t-- Show slow queries'
 \set slowqueries 'CREATE extension if not exists pg_stat_statements; SELECT (total_time / 1000 / 60) as total_minutes, (total_time/calls) as average_time, query FROM pg_stat_statements ORDER BY 1 DESC LIMIT 100;'
 
 \echo '\t:dbsize\t\t-- Database Size'
@@ -49,17 +68,15 @@
 \set QUIET 1
 select
 $$
-    SELECT table_schema, table_name, pg_size_pretty(size) as size, pg_size_pretty(total_size) as total_size
-    FROM (
-        SELECT
-            table_schema, table_name,
-            pg_relation_size( quote_ident( table_schema ) || '.' || quote_ident( table_name ) ) as size,
-            pg_total_relation_size( quote_ident( table_schema ) || '.' || quote_ident( table_name ) ) as total_size
-        FROM information_schema.tables
-        WHERE table_type = 'BASE TABLE' AND table_schema not in ('information_schema', 'pg_catalog')
-        ORDER BY pg_relation_size( quote_ident( table_schema ) || '.' || quote_ident( table_name ) ) desc, table_schema, table_name
-    ) x
-    ORDER BY x.total_size desc, table_schema, table_name;
+    SELECT table_schema, table_name, pg_size_pretty(size) AS size, pg_size_pretty(total_size) AS total_size
+      FROM (SELECT table_schema, table_name,
+                   pg_relation_size( quote_ident( table_schema ) || '.' || quote_ident( table_name ) ) AS size,
+                   pg_total_relation_size( quote_ident( table_schema ) || '.' || quote_ident( table_name ) ) as total_size
+              FROM information_schema.tables
+             WHERE table_type = 'BASE TABLE'
+               AND table_schema NOT IN ('information_schema', 'pg_catalog')
+          ORDER BY pg_relation_size( quote_ident( table_schema ) || '.' || quote_ident( table_name ) ) DESC, table_schema, table_name) x
+  ORDER BY x.total_size desc, table_schema, table_name;
 $$ AS tablesize \gset
 
 \echo '\t:toast\t\t-- Tables Toast'
@@ -83,16 +100,40 @@ $$
     LIMIT 20;
 $$ AS toast \gset
 
+-- Top row size would be cool, but can't pass parameters (tablename) to those snippets and doing it on
+-- all tables will just crawl all tables
+-- SELECT id, octet_length(t.*::text) FROM linked_partner_rel AS t ORDER BY 2 DESC LIMIT 10;
+
 \echo '\t:uselesscol\t-- Useless columns'
-\set uselesscol 'SELECT nspname, relname, attname, typname, (stanullfrac*100)::int AS null_percent, case when stadistinct >= 0 then stadistinct else abs(stadistinct)*reltuples end AS \"distinct\", case 1 when stakind1 then stavalues1 when stakind2 then stavalues2 end AS \"values\" FROM pg_class c JOIN pg_namespace ns ON (ns.oid=relnamespace) JOIN pg_attribute ON (c.oid=attrelid) JOIN pg_type t ON (t.oid=atttypid) JOIN pg_statistic ON (c.oid=starelid AND staattnum=attnum) WHERE nspname NOT LIKE E\'pg\\\\_%\' AND nspname != \'information_schema\' AND relkind=\'r\' AND NOT attisdropped AND attstattarget != 0 AND reltuples >= 100 AND stadistinct BETWEEN 0 AND 1 ORDER BY nspname, relname, attname;'
+-- This query finds columns in the whole database that have no more than 1 distinct value in its table, using planner's estimates.
+-- This is useful for finding redundant and unused columns.
+-- https://wiki.postgresql.org/wiki/Finding_useless_columns
+\set QUIET 1
+select
+$$
+    select nspname, relname, attname, typname,
+        (stanullfrac*100)::int as null_percent,
+        case when stadistinct >= 0 then stadistinct else abs(stadistinct)*reltuples end as "distinct",
+        case 1 when stakind1 then stavalues1 when stakind2 then stavalues2 end as "values"
+    from pg_class c
+    join pg_namespace ns on (ns.oid=relnamespace)
+    join pg_attribute on (c.oid=attrelid)
+    join pg_type t on (t.oid=atttypid)
+    join pg_statistic on (c.oid=starelid and staattnum=attnum)
+    where nspname not like E'pg\\_%' and nspname != 'information_schema'
+      and relkind='r' and not attisdropped and attstattarget != 0
+      and reltuples >= 100              -- ignore tables with fewer than 100 rows
+      and stadistinct between 0 and 1   -- 0 to 1 distinct values
+    order by nspname, relname, attname;
+$$ AS uselesscol \gset
 
 \echo '\t:uptime\t\t-- Server uptime'
 \set uptime 'select now() - pg_postmaster_start_time() AS uptime;'
 
-\echo '\t:functions\t\t-- Custom PL functions'
+\echo '\t:functions\t-- Custom PL functions'
 \set functions 'SELECT proname as name, proargnames as arguments, prosrc as source FROM pg_catalog.pg_namespace n JOIN pg_catalog.pg_proc p ON pronamespace = n.oid WHERE nspname = \'public\';'
 
-\echo '\t:dropfunctions\t\t-- Drop Custom PL functions'
+\echo '\t:dropfunctions\t-- Drop Custom PL functions'
 \set dropfunctions 'SELECT \'DROP FUNCTION \' || ns.nspname || \'.\' || proname || \'(\' || oidvectortypes(proargtypes) || \');\' as agr FROM pg_proc INNER JOIN pg_namespace ns ON (pg_proc.pronamespace = ns.oid) WHERE ns.nspname = \'public\'  order by proname;'
 
 -- CREATE LANGUAGE plpython3u;
