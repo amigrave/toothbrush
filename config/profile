@@ -110,10 +110,19 @@ export NODE_PATH
 # }}}
 
 # Homebrew {{{
+
+# X86
 if [ -d "/usr/local/Cellar/coreutils" ]; then
     MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     PATH="/usr/local/sbin:/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
+
+# M1
+if [ -d "/opt/homebrew/opt/coreutils/libexec/gnubin" ]; then
+    MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
+    PATH="/opt/homebrew/sbin:/opt/homebrew/bin:/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+fi
+
 # }}}
 
 # Load local profile if any {{{
