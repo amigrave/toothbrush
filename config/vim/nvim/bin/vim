@@ -1,2 +1,0 @@
-#!/bin/bash
-NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/neovim/$(date +%s) nvim "$@"

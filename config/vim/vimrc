@@ -1,4 +1,4 @@
-" vim:ft=vim:fdm=marker:nowrap
+" vim: ft=vim:fdm=marker:nowrap
 " ###################################################################
 " AMIGrAve's vim config
 " https://github.com/amigrave/toothbrush/blob/master/config/vim/vimrc
@@ -24,15 +24,31 @@ set undodir=$XDG_CACHE_HOME/vim/undo
 " ## PLUG ################################################################# {{{
 call plug#begin(s:portable . '/plugged')
 
+" Called first
+Plug 'embear/vim-localvimrc'
+
 " Languages
 Plug 'sheerun/vim-polyglot'
+Plug 'dense-analysis/ale'
+" Plug 'scrooloose/syntastic'
+Plug 'tmhedberg/SimpylFold'      " Python folding
+Plug 'davidhalter/jedi-vim'
+" Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'simeng/vim-imba'
+Plug 'zah/nim.vim'  " https://news.ycombinator.com/item?id=14433389
 
-" Navigation
+" Navigation / Search
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim', { 'on': 'Files' }
+Plug 'jremmen/vim-ripgrep'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-unimpaired'
 
 " Edition
 Plug 'tpope/vim-commentary'
+Plug 'ervandew/supertab'
+Plug 'editorconfig/editorconfig-vim'
 
 " Look
 Plug 'vim-airline/vim-airline'
@@ -40,7 +56,10 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'  " this brings github handlers to fugitive
 Plug 'airblade/vim-gitgutter'
+Plug 'will133/vim-dirdiff'
+Plug 'AndrewRadev/linediff.vim'
 
 call plug#end()
 " }}}
@@ -53,6 +72,7 @@ set background=dark
 set backspace=indent,eol,start
 set belloff=all
 set nocompatible
+set modelines=1
 set complete=.,w,b,u,t    " TODO: nvim removes the 'i', check why...\
 set cscopeverbose
 set encoding=utf8
@@ -76,29 +96,29 @@ colorscheme wombat256mod
 " colorscheme agr
 
 let mapleader = ","
-set clipboard=unnamedplus       " Always use unnamed register (system clipboard)
+set clipboard^=unnamed,unnamedplus  " Always use unnamed register (system clipboard)
 set fileencoding=utf8
 " set fileencodings=utf-8,latin1
-set shiftwidth=4                " Number of spaces to use for each step of (auto)
-set tabstop=4                   " Number of spaces that a <Tab> in the file counts for
-set softtabstop=-1              " Negative value means 'use softtabstop'
-set scrolloff=5                 " minimum number of screen lines that you would like
-                                " above and below the cursor
-set hidden                      " Unused buffers are hidden when abandonned
-set ignorecase                  " ignore case when searching
-set smartcase                   " ignore case when the pattern contains only lowercase
+set shiftwidth=4                    " Number of spaces to use for each step of (auto)
+set tabstop=4                       " Number of spaces that a <Tab> in the file counts for
+set softtabstop=-1                  " Negative value means 'use softtabstop'
+set scrolloff=5                     " minimum number of screen lines that you would like
+                                    " above and below the cursor
+set hidden                          " Unused buffers are hidden when abandonned
+set ignorecase                      " ignore case when searching
+set smartcase                       " ignore case when the pattern contains only lowercase
 set smartindent
 set list listchars=tab:»·,trail:·,extends:>,precedes:<,nbsp:=
 set expandtab
-set number                      " precede each line with its line number
+set number                          " precede each line with its line number
 set viminfo='200,\"5000,n$XDG_CACHE_HOME/vim/viminfo nowrap
 
-set shortmess+=I                " do not display welcome message
-set wildmode=longest:full,full  " Improve autocompletion on command line
+set shortmess+=I                    " do not display welcome message
+set wildmode=longest:full,full      " Improve autocompletion on command line
 set wildignore=*.o,*~,*.pyc
 
-set splitbelow                  " Invert horizontal split order
-set splitright                  " Invert vertical split order
+set splitbelow                      " Invert horizontal split order
+set splitright                      " Invert vertical split order
 if &diff
     " Force vertical diff
     " not supported on macos stock vim:
@@ -202,12 +222,19 @@ else
     nnoremap <Leader>tb :execute "!urxvt -cd '%:p:h' -e tig blame %:p:t +" . line('.')<CR>
     nnoremap <Leader>bb :execute "!urxvt -cd '%:p:h' -e bblame %:p:t +" . line('.')<CR>
 endif
+nnoremap <Leader>tb ::execute "!iterm_cmd 'cd %:p:h;tig blame %:p:t +" . line('.') . ";exit'"<CR>
 "}}}
 
 " ## AUTOCMD & FILETYPES ################################################## {{{
 if has("autocmd")
     au FileType vim setlocal keywordprg=:help  " allow to use K on word in order to get vim :help
     au FileType python setlocal nofoldenable
+
+    if v:version >= 700
+        " Save cursor position when switching buffers
+        au BufLeave * let b:winview = winsaveview()
+        au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+    endif
 endif
 "}}}
 
@@ -252,7 +279,7 @@ nnoremap <Leader>z z=1<cr><cr>
 " Set cwd to current file's directory
 nnoremap <Leader>. :lcd %:p:h<CR>
 
-" toggle 
+" toggle
 function! ToggleColorColumn()
     if &colorcolumn == 0
         set colorcolumn=79,99,119
@@ -324,9 +351,45 @@ augroup qf
     autocmd!
     autocmd FileType qf set nobuflisted
 augroup END
+
+" Restore 'q' for quitting blame window in fugutive
+" https://github.com/tpope/vim-fugitive/issues/1221
+autocmd FileType fugitiveblame nmap <buffer> q gq
+
+" Don't wanna ex mode, prefer quick Quit
+map Q :qa<CR>
+
+" Visual mode stuff
+vmap <Tab> >
+vmap <S-Tab> <LT>
+" http://vim.wikia.com/wiki/Selecting_your_pasted_text
+nnoremap gp `[v`]
+
+" Ag
+let g:ag_prg = 'ag --nogroup --nocolor --column --ignore=node_modules --ignore=migrations --ignore="*min.js" --ignore="*.po" -S'
+noremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+
+" Rg
+noremap <Leader>rg :Rg! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+vnoremap <Leader>rg :Rg! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 " }}}
 
 " ## PLUGIN CONFIG ######################################################## {{{
+" localvimrmc
+let g:localvimrc_sandbox=0
+let g:localvimrc_persistent = 2
+let g:localvimrc_persistence_file = $XDG_CACHE_HOME . '/vim/localvimrc_persistent'
+
+" ALE
+let g:ale_python_flake8_options = ' --config=' . $DOTFILES . '/flake8'
+let g:ale_virtualtext_cursor = 'disabled'
+let g:ale_linters = { "python": ["flake8"] }
+" let g:ale_linters = { "python": ["ruff"] }
+" let g:ale_fixers = {
+" \       "python": ["black", "ruff"],
+" \}
+
 " NERD Tree
 nnoremap <F12> :NERDTreeFind<CR>
 inoremap <F12> <C-O>:NERDTreeFind<CR>
@@ -344,6 +407,8 @@ let NERDTreeMapChangeRoot='<C-Right>'
 if executable('fzf')
     nmap <C-p> :Files<cr>
 endif
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4"
 
 " airline
 let g:airline_powerline_fonts=1
@@ -358,16 +423,81 @@ nmap \\ <Plug>CommentaryLine
 nmap \<bs> vacgc
 nmap \| gcap
 vmap \\ gc
+autocmd FileType nim setlocal commentstring=#\ %s
 
 " Fugitive
 nnoremap <Leader>gy :.GBrowse!<CR>
 xnoremap <Leader>gy :'<'>GBrowse!<CR>
 nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gg <s-v>:Gbrowse<CR>
-vnoremap <Leader>gg :Gbrowse<CR>
+nnoremap <Leader>gb :Git blame<CR>
+nnoremap <Leader>gg <s-v>:GBrowse<CR>
+vnoremap <Leader>gg :GBrowse<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+
+" SuperTab
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
+
+" SimpylFold
+let g:SimpylFold_docstring_preview = 1
+let g:SimpylFold_fold_docstring = 0
+let g:SimpylFold_fold_import = 1
+
+" Jedi-vim
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#use_splits_not_buffers = "left"
+let g:jedi#popup_on_dot = 0
+"let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = 0
+
+"" Jedi settings that are subject to change
+"let g:jedi#goto_command = "<leader>d"
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_stubs_command = "<leader>s"
+"let g:jedi#goto_definitions_command = ""
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
+
+" let g:jedi#environment_path = "/usr/bin/env python3"
+
+let g:jedi#completions_enabled = 1
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#completions_enabled = 0
+" let g:jedi#show_call_signatures = 0
+" let g:jedi#popup_select_first = 0
+" let g:jedi#smart_auto_mappings = 0
+" let g:jedi#force_py_version = 3
+
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_stubs_command = "<leader>s"
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = "K"
+" let g:jedi#usages_command = "<leader>n"
+" let g:jedi#completions_command = "<C-Space>"
+" let g:jedi#rename_command = "<leader>r"
+let g:pymode_rope = 0
+
+
+" vim-dirdiff
+let g:DirDiffEnableMappings = 0  " could not find conflict on <leader>dg
+let g:DirDiffWindowSize = 10
+nnoremap <unique> <Leader><Tab> :DirDiffNext<CR>
+nnoremap <unique> <Leader><S-Tab> :DirDiffPrev<CR>
+
+" nim
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+nn <leader>d :call JumpToDef()<cr>
 
 
 " }}}
@@ -377,6 +507,9 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
                  \ | wincmd p | diffthis
 
 command ShowFileSize echo GetFileSize()
+
+" https://www.cyberciti.biz/faq/vim-vi-text-editor-save-file-without-root-permission/
+command SudoWrite :execute ':silent w !sudo tee % > /dev/null' | :edit!
 "}}}
 
 " ## FUNCTIONS ############################################################ {{{
@@ -409,6 +542,33 @@ endfunction
 " }}}
 " }}}
 
+"" ################################### ADDONS #################################### {{{
+" VIM Profiling {{{
+" Found out that GetPythonFold() was slowing down vim thanks to this profiling hint:
+" http://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
+function! g:StartVimProfiling()
+    profile start /tmp/vim-profile.log
+    profile func *
+    profile file *
+endfunction
+command! StartVimProfiling call g:StartVimProfiling()
+function! g:StopVimProfiling()
+    profile pause
+    noautocmd qall!
+endfunction
+command! StopVimProfiling call g:StopVimProfiling()
+" }}}
+
+" Python Debug {{{
+imap <F8> from pudb import set_trace; set_trace()  # *** Breakpoint ***<cr>
+nmap <F8> <s-o>from pudb import set_trace; set_trace()  # *** Breakpoint ***<esc><down>
+imap <S-F8> from pudb.remote import set_trace; set_trace(term_size=(134, 32))  # *** telnet localhost 6899 ***"<cr>
+nmap <S-F8> <s-o>from pudb.remote import set_trace; set_trace(term_size=(134, 32))  # *** telnet localhost 6899 ***"<esc><down>
+imap <F9> <esc>:! clear; python %<cr>
+nmap <F9> :! clear; python %<cr>
+
+" }}}
+"" }}}
 
 "" ################################# POST CONFIG ################################# {{{
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/backup')
