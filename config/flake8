@@ -2,8 +2,10 @@
 max-line-length = 120
 max-complexity = 20
 
+# https://www.flake8rules.com
 # https://github.com/PyCQA/pep8/issues/300
-ignore=E114,E115,E116
-
-# http://pep8.readthedocs.org/en/latest/intro.html
-# ignore=E501,E301,E302,E261,E128
+ignore = E114,E731,W503
+# E114: do not force indentation to multiple of four that prevent aligned multi line formatting
+# E731: let me assign lambdas if I want to
+# W503: pep8 changed it's mind about line break after/before operator
+#       https://peps.python.org/pep-0008/#should-a-line-break-before-or-after-a-binary-operator
