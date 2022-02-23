@@ -35,7 +35,10 @@ setopt share_history
 # Setup Completion {{{
 # Use modern completion system
 autoload -Uz compinit
-fpath=($XDG_CONFIG_HOME/zsh/zsh-completions/src $fpath)
+# The git site function does not show aliases, the zsh shared one is better
+if [ -d "/opt/homebrew/share/zsh/site-functions" ]; then
+    fpath=($fpath /opt/homebrew/share/zsh/site-functions)
+fi
 compinit -i -d "$XDG_CACHE_HOME/zcompdump"
 
 zstyle ':completion:*' auto-description 'specify: %d'
