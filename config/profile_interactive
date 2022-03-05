@@ -53,7 +53,7 @@ function ccat() {
 # Launch mc and `cd` to last visited directory {{{
 function mc() {
     cwd_file=/tmp/mc-$USER-$$-dir
-    env mc -c --printwd=$cwd_file "$@"
+    env mc --nosubshell -c --printwd=$cwd_file "$@"
     if [ -f $cwd_file ]; then
         cd "`cat /tmp/mc-$USER-$$-dir`"
         rm -f "/tmp/mc-$USER-$$-dir"
