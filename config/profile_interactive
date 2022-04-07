@@ -1,7 +1,8 @@
 # vim: ft=sh:fdm=marker:
 
 # This file is kept seperated from the main profile file because
-# the later should be kept restricted for /bin/sh compatibility
+# the later should be kept free of /bin/sh compatibility and free
+# of environment variable cluttering
 
 # I want sbin even if I'm not root
 [[ ":$PATH:" != *":/sbin:"* ]] && PATH="/sbin:${PATH}"
@@ -157,11 +158,24 @@ function pclean() {
 # }}}
 
 # Strace and read output {{{
-function strace_vim() {
+# }}}
+
+# vim stuff {{{
+function vstrace() {
     logfile=/tmp/strace.log
     strace -s 80 -o $logfile "$@"
     vim $logfile
     rm $logfile
+}
+
+function vag() {
+    search="$*"
+    vim -c ":Ag '$search'"
+}
+
+function vrg() {
+    search="$*"
+    vim -c ":Rg '$search'"
 }
 # }}}
 
