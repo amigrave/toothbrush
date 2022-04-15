@@ -4,6 +4,7 @@
 "
 " Modified version of wombat for 256-color terminals by
 "   David Liang (bmdavll@gmail.com)
+"   Fabien Meghazi (agr@amigrave.com) -- added python, diff, qweb, ...
 " based on version by
 "   Danila Bespalov (danila.bespalov@gmail.com)
 
@@ -16,7 +17,7 @@ if version > 580
 	endif
 endif
 
-let colors_name = "wombat256mod"
+let colors_name = "wombat256.agr"
 
 
 " General colors
@@ -100,5 +101,13 @@ hi pythonEqual ctermfg=green guifg=green
 hi pythonInstanceVariable ctermfg=darkcyan guifg=darkcyan
 hi pythonClassVar ctermfg=darkcyan guifg=darkcyan
 hi pythonAsync ctermfg=magenta guifg=magenta
+
+" QWeb
+hi link xmlAttribQWeb     xmlAttribQWeb
+hi xmlAttribQWeb guifg=#f0a040 ctermfg=208
+hi xmlAttribQWebTrad guifg=#ffffff ctermfg=white
+
+hi def link qwebVarDelim qwebVarBlock
+hi qwebVarDelim guifg=#D4C828 ctermfg=Yellow
 
 " vim:set ts=4 sw=4 noet:

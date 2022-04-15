@@ -92,8 +92,8 @@ set wildmenu
 
 " ## OPTIONS ############################################################## {{{
 " set all&                  " reset all options to compiled in defaults
-colorscheme wombat256mod
 " colorscheme agr
+colorscheme wombat256.agr
 
 let mapleader = ","
 set clipboard^=unnamed,unnamedplus  " Always use unnamed register (system clipboard)
@@ -229,6 +229,7 @@ nnoremap <Leader>tb ::execute "!iterm_cmd 'cd %:p:h;tig blame %:p:t +" . line('.
 if has("autocmd")
     au FileType vim setlocal keywordprg=:help  " allow to use K on word in order to get vim :help
     au FileType python setlocal nofoldenable
+    au Filetype xml call XmlQweb()
 
     if v:version >= 700
         " Save cursor position when switching buffers
@@ -538,6 +539,21 @@ function! EnsureDirExists (dir)
       echo "Please create directory: " . a:dir
     endif
   endif
+endfunction
+" }}}
+
+" Xml QWeb {{{
+function! XmlQweb()
+    " Create syn's in a function for upcoming dynamic declarations
+    syn match   xmlAttribQWeb
+        \ +[-'"<]\@<!\<t-[a-zA-Z:_][-.0-9a-zA-Z0-9:_]*\>\(['">]\@!\|$\)+
+        \ contained
+        \ contains=xmlAttribPunct,@xmlAttribHook
+        \ display
+
+    syn cluster xmlAttribHook contains=xmlAttribQWeb
+    syn region qwebVarBlock matchgroup=qwebVarDelim start=/{{-\?/ end=/-\?}}/ containedin=xmlString
+    syn region qwebVarBlock2 matchgroup=qwebVarDelim start=/#{-\?/ end=/-\?}/ containedin=xmlString
 endfunction
 " }}}
 " }}}
