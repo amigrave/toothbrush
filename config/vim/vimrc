@@ -16,9 +16,22 @@ let s:portable = expand('<sfile>:p:h')
 let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
 
 " XDG Compliance
+if empty($XDG_CACHE_HOME)
+   let $XDG_CACHE_HOME = glob('~/.cache')
+endif
 set backupdir=$XDG_CACHE_HOME/vim/backup
 set directory=$XDG_CACHE_HOME/vim/swap
 set undodir=$XDG_CACHE_HOME/vim/undo
+
+function! EnsureDirExists (dir)
+    if !isdirectory(a:dir)
+        silent! execute "!mkdir -p " . a:dir . " > /dev/null 2>&1"
+    endif
+endfunction
+
+call EnsureDirExists($XDG_CACHE_HOME . '/vim/backup')
+call EnsureDirExists($XDG_CACHE_HOME . '/vim/swap')
+call EnsureDirExists($XDG_CACHE_HOME . '/vim/undo')
 " }}}
 
 " ## PLUG ################################################################# {{{
@@ -529,16 +542,10 @@ endfunction
 " }}}
 
 " EnsureDirExists {{{
-" http://stackoverflow.com/questions/1549263/how-can-i-create-a-folder-if-it-doesnt-exist-from-vimrc
 function! EnsureDirExists (dir)
-  if !isdirectory(a:dir)
-    if exists("*mkdir")
-      call mkdir(a:dir,'p')
-      echo "Created directory: " . a:dir
-    else
-      echo "Please create directory: " . a:dir
+    if !isdirectory(a:dir)
+        silent! execute "!mkdir -p " . a:dir . " > /dev/null 2>&1"
     endif
-  endif
 endfunction
 " }}}
 
@@ -589,4 +596,5 @@ nmap <F9> :! clear; python %<cr>
 "" ################################# POST CONFIG ################################# {{{
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/backup')
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/swap')
+call EnsureDirExists($XDG_CACHE_HOME . '/vim/undo')
 "" }}}
