@@ -50,6 +50,13 @@ hi DiffDelete	ctermfg=60		ctermbg=16		cterm=none		guifg=#242424	guibg=#3e3969	gu
 hi DiffText						ctermbg=53		cterm=none						guibg=#73186e	gui=none
 hi DiffChange					ctermbg=17										guibg=#382a37
 
+" Gitgutter
+hi SignColumn                                   ctermbg=none
+hi GitGutterAdd             ctermfg=46          ctermbg=22
+hi GitGutterChange          ctermfg=226         ctermbg=58
+hi GitGutterDelete          ctermfg=196         ctermbg=52
+hi GitGutterChangeDelete    ctermfg=226         ctermbg=52
+
 "hi CursorIM
 "hi Directory
 "hi IncSearch

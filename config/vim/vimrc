@@ -143,6 +143,7 @@ endif
 set tags+=.git/tags
 set tags+=.bzr/tags
 set tags+="$XDG_CACHE_HOME/vim/tags"
+set updatetime=250                  " delay before writing swap file (also used by gitgutter)
 
 let g:netrw_dirhistmax = 0  " disable creation of ~/.vim/.netrwhist
 " }}}
