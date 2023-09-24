@@ -82,7 +82,8 @@
     bb  = branch -vv
     bbb = branch -vva
     bc  = branch -r --contains
-    bd  = "!git branch | grep -v '* ' | iselect -am | xargs -r -n1 git branch -D"
+    bd = "!git branch --no-color | fzf -m | xargs -I {} git branch -D '{}'"
+    cb = "!git branch --no-color | fzf -m | xargs -I {} git checkout '{}'"
     ci  = commit
     cia = commit --amend
     wip = commit -a -mwip
@@ -111,7 +112,6 @@
     rem = remote -v
     ri  = "!sh -c 'git rebase --interactive --autostash HEAD~$0'"
     rl  = reflog --date=iso
-    rmb = "!git branch --no-color | fzf -m | xargs -I {} git branch -D '{}'"
     sa  = "!sh -c 'git stash apply stash@{$1}' -"
     sd  = "!sh -c 'git stash drop stash@{$1}' -"
     sh  = "!sh -c 'git stash show -p stash@{$1}' -"
