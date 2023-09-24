@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os
 import sys
 
-DOTFILES = os.environ['DOTFILES']
+DOTFILES = os.getenv('DOTFILES')
 if DOTFILES:
     sys.path.insert(0, DOTFILES)

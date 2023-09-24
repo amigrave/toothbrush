@@ -21,6 +21,7 @@ DEFAULT_USER="$USER"
 alias root='SUDO_SHELL=root $AMIGRAVE/bin/shell'
 # Put your custom sudo users here, eg:
 # alias foouser='SUDO_SHELL=foouser $AMIGRAVE/bin/shell'
+# alias foouser='SU_CWD=$(pwd) su - --whitelist-environment=SU_CWD foouser'
 # export SHELL=/bin/zsh
 
 export PYTHONPATH=$AMIGRAVE:$PYTHONPATH
