@@ -108,6 +108,8 @@ set wildmenu
 " colorscheme agr
 colorscheme wombat256.agr
 
+let skip_defaults_vim=1             " Avoid to load debian's defaults.vim
+
 let mapleader = ","
 set clipboard^=unnamed,unnamedplus  " Always use unnamed register (system clipboard)
 set fileencoding=utf8
@@ -263,6 +265,7 @@ nnoremap <silent> <S-Down> zO
 inoremap <silent> <S-Down> <C-O>zO
 noremap [a zc
 inoremap [a <C-O>zc
+noremap [1;2A zc
 noremap [1;5B zc
 inoremap [1;5B <C-O>zc
 nnoremap <silent> <F4> zR
