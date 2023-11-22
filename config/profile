@@ -39,6 +39,8 @@ export LESS_TERMCAP_ue=$'\E[0m'         # reset underline
 
 export LS_OPTIONS='--color=auto'
 
+export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
+
 # https://gist.github.com/cjbarnes18/4078704
 # enable this for non-reparenting window managers
 export _JAVA_AWT_WM_NONREPARENTING=1

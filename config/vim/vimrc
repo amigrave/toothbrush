@@ -384,7 +384,7 @@ vmap <S-Tab> <LT>
 nnoremap gp `[v`]
 
 " Ag
-let g:ag_prg = 'ag --nogroup --nocolor --column --ignore=node_modules --ignore=migrations --ignore="*min.js" --ignore="*.po" -S'
+let g:ag_prg = 'ag --hidden --ignore .git --nogroup --nocolor --column --ignore=node_modules --ignore=migrations --ignore="*min.js" --ignore="*.po" -S'
 noremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
 
@@ -426,7 +426,8 @@ if executable('fzf')
     nmap <C-p> :Files<cr>
 endif
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4"
+let $FZF_DEFAULT_OPTS="--ansi --preview-window 'bottom:50%' --layout reverse --margin=1,4"
+let $FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -g ''"
 
 " airline
 let g:airline_powerline_fonts=1
