@@ -51,7 +51,7 @@ Plug 'simeng/vim-imba'
 Plug 'zah/nim.vim'  " https://news.ycombinator.com/item?id=14433389
 
 " Navigation / Search
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
+Plug 'preservim/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim', { 'on': 'Files' }
 Plug 'jremmen/vim-ripgrep'
