@@ -18,7 +18,8 @@
 
 \set QUIET OFF
 
-\echo 'Administrative queries:\n'
+\echo 'Administrative queries:'
+\echo '-----------------------\n'
 -- Taken from http://opensourcedbms.com/dbms/psqlrc-psql-startup-file-for-postgres/
 
 \echo '\t:settings\t-- Server Settings'
@@ -143,6 +144,14 @@ $$ AS uselesscol \gset
 \echo '\t:menu\t\t-- Show this Menu'
 \set menu '\\i ~/amigrave/config/.xdg/postgresql/psqlrc'
 
+\echo '\nOdoo Stuff:'
+\echo '-----------\n'
+\echo '\t:odoo_icp\t-- Show IR config parameters'
+\set QUIET 1
+select
+$$
+    SELECT * FROM ir_config_parameter;
+$$ AS odoo_icp \gset
 
 \timing
 
