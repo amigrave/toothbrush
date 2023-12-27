@@ -74,6 +74,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'will133/vim-dirdiff'
 Plug 'AndrewRadev/linediff.vim'
 
+" Vim system
+Plug 'ciaranm/securemodelines'
+
 call plug#end()
 " }}}
 
@@ -85,7 +88,7 @@ set background=dark
 set backspace=indent,eol,start
 set belloff=all
 set nocompatible
-set modelines=1
+" set modelines=1         " using securemodelines
 set complete=.,w,b,u,t    " TODO: nvim removes the 'i', check why...\
 set cscopeverbose
 set encoding=utf8
@@ -220,6 +223,11 @@ if &term =~ "screen\\|rxvt"
     let &t_SI = "\<Esc>]12;orange\x9c"
     "We normally start in cmd-mode
     silent !echo -e "\e]12;white\x9c"
+
+    nnoremap <Esc>[1;5C <C-Right>
+    nnoremap <Esc>[1;5D <C-Left>
+    inoremap <Esc>[1;5C <C-Right>
+    inoremap <Esc>[1;5D <C-Left>
 elseif $TERM_PROGRAM =~ "iTerm"
     " Change cursor shape between insert and normal mode in iTerm2.app
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
@@ -244,8 +252,9 @@ nnoremap <Leader>tb ::execute "!iterm_cmd 'cd %:p:h;tig blame %:p:t +" . line('.
 " ## AUTOCMD & FILETYPES ################################################## {{{
 if has("autocmd")
     au FileType vim setlocal keywordprg=:help  " allow to use K on word in order to get vim :help
-    au FileType python setlocal nofoldenable
+    " au FileType python setlocal nofoldenable
     au Filetype xml call XmlQweb()
+    au Filetype xml syn spell toplevel
 
     if v:version >= 700
         " Save cursor position when switching buffers
@@ -346,6 +355,7 @@ nnoremap <silent> <S-F10> :bde!<CR>
 inoremap <silent> <S-F10> <C-O>:bde!<CR>
 nnoremap <silent> <S-F11> :only<CR>
 inoremap <silent> <S-F11> <C-O>:only<CR>
+nnoremap <silent> <leader>q :on<CR>
 
 " command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
 " cabbrev e <c-R>=(getcmdtype()==':' && getcmdpos()==1 ? 'E' : 'e')<cr>
@@ -353,15 +363,6 @@ inoremap <silent> <S-F11> <C-O>:only<CR>
 " Convert 2 space indentations to 4
 nnoremap <Leader>4 :set ts=2 sts=2 noet<CR>:retab!<CR>:set ts=4 sts=4 et<CR>:retab<CR>
 vnoremap <Leader>4 <esc>:set ts=2 sts=2 noet<CR>gv:retab!<CR>:set ts=4 sts=4 et<CR>gv:retab<CR>
-
-" Ctrl+L removes highlighting and triggers GitGutterAll
-" then calls normal C-L (redraw)
-" added :mode because of glitches when resizing a neovim terminal with airline
-if exists(":GitGutterAll")
-    nnoremap <C-l> :nohlsearch<CR>:GitGutterAll<CR><C-l>:mode<CR>
-else
-    nnoremap <C-l> :nohlsearch<CR><C-l>:mode<CR>
-endif
 
 " Skip quickfix buffers when bnext, bprevious
 " http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
@@ -385,12 +386,12 @@ nnoremap gp `[v`]
 
 " Ag
 let g:ag_prg = 'ag --hidden --ignore .git --nogroup --nocolor --column --ignore=node_modules --ignore=migrations --ignore="*min.js" --ignore="*.po" -S'
-noremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
-vnoremap <Leader>ag :Ag! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+noremap <Leader>ag "ay:Ag! "<c-r>=expand("<cword>")<cr>"
+vnoremap <Leader>ag "ay:Ag! "<C-r>a"
 
 " Rg
-noremap <Leader>rg :Rg! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
-vnoremap <Leader>rg :Rg! '<c-r>=expand("<cword>")<cr>'<Home><Right><Right><Right><Right><Right><Right>
+noremap <Leader>rg "ay:Rg "<c-r>=expand("<cword>")<cr>"
+vnoremap <Leader>rg "ay:Rg "<C-r>a"
 " }}}
 
 " ## PLUGIN CONFIG ######################################################## {{{
@@ -402,8 +403,8 @@ let g:localvimrc_persistence_file = $XDG_CACHE_HOME . '/vim/localvimrc_persisten
 " ALE
 let g:ale_python_flake8_options = ' --config=' . $DOTFILES . '/flake8'
 let g:ale_virtualtext_cursor = 'disabled'
-let g:ale_linters = { "python": ["flake8"] }
-" let g:ale_linters = { "python": ["ruff"] }
+" let g:ale_linters = { "python": ["flake8"] }
+let g:ale_linters = { "python": ["ruff"] }
 " let g:ale_fixers = {
 " \       "python": ["black", "ruff"],
 " \}
@@ -449,10 +450,24 @@ nnoremap <Leader>gy :.GBrowse!<CR>
 xnoremap <Leader>gy :'<'>GBrowse!<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Git blame<CR>
-nnoremap <Leader>gg <s-v>:GBrowse<CR>
-vnoremap <Leader>gg :GBrowse<CR>
+nnoremap <Leader>gf <s-v>:GBrowse<CR>
+vnoremap <Leader>gf :GBrowse<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+
+" Git gutter
+" Ctrl+L removes highlighting and triggers GitGutterAll
+" then calls normal C-L (redraw)
+" added :mode because of glitches when resizing a neovim terminal with airline
+if exists(":GitGutterAll")
+    nnoremap <C-l> :nohlsearch<CR>:GitGutterAll<CR><C-l>:mode<CR>
+else
+    nnoremap <C-l> :nohlsearch<CR><C-l>:mode<CR>
+endif
+nnoremap <leader>gg :let g:gitgutter_diff_base='HEAD~'<Left>
+nnoremap <leader>ggm :let g:gitgutter_diff_base='master'<CR>
+nnoremap <leader>ggh :let g:gitgutter_diff_base=''<CR>
+nnoremap <leader>ggd :GitGutterDiffOrig<CR>
 
 " SuperTab
 " let g:SuperTabDefaultCompletionType = "context"
@@ -505,8 +520,9 @@ let g:pymode_rope = 0
 " vim-dirdiff
 let g:DirDiffEnableMappings = 0  " could not find conflict on <leader>dg
 let g:DirDiffWindowSize = 10
-nnoremap <unique> <Leader><Tab> :DirDiffNext<CR>
-nnoremap <unique> <Leader><S-Tab> :DirDiffPrev<CR>
+nnoremap <unique> <Leader><Tab> :DirDiffNext<CR>3<c-w><c-w>
+nnoremap <unique> <Leader><S-Tab> :DirDiffPrev<CR>3<c-w><c-w>
+nnoremap <unique> <Leader>l 3<c-w><c-w>20<c-w>>
 
 " nim
 fun! JumpToDef()
@@ -570,7 +586,7 @@ endfunction
 " }}}
 " }}}
 
-"" ################################### ADDONS #################################### {{{
+"" ## ADDONS ############################################################## {{{
 " VIM Profiling {{{
 " Found out that GetPythonFold() was slowing down vim thanks to this profiling hint:
 " http://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
@@ -598,7 +614,7 @@ nmap <F9> :! clear; python %<cr>
 " }}}
 "" }}}
 
-"" ################################# POST CONFIG ################################# {{{
+"" ## POST CONFIG ######################################################### {{{
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/backup')
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/swap')
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/undo')

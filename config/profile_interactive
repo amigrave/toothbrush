@@ -173,7 +173,11 @@ function vag() {
     vim -c ":Ag '$search'"
 }
 
-function vrg() {
+function vg() {
+    if [ $# -eq 0 ]; then
+        >&2 echo "vim grep: No search query provided"
+        exit 1
+    fi
     search="$*"
     vim -c ":Rg '$search'"
 }
