@@ -323,6 +323,9 @@ EXEC      01;31    # file with executable attribute set
 .OGM  01;35;44
 .mkv  01;35;44
 .MKV  01;35;44
+.mp4  01;35;44
+.MP4  01;35;44
+.MV  01;35;44
 .wmv  01;35;44
 .WMV  01;35;44
 .rm   01;35;44
