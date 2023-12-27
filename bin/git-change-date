@@ -3,6 +3,7 @@
 from __future__ import absolute_import, division, print_function
 
 import argparse
+import os
 import subprocess
 import sys
 
@@ -32,9 +33,10 @@ if not newdate or date.strip() == newdate:
     print("Nothing to do.")
     sys.exit()
 
+os.environ['FILTER_BRANCH_SQUELCH_WARNING'] = '1'
+
 gitcmd = ['git', 'filter-branch', '-f', '--env-filter', """
     if test $GIT_COMMIT = "{commit}"; then
-        export FILTER_BRANCH_SQUELCH_WARNING=1;
         export GIT_COMMITTER_DATE="{newdate}";
         export GIT_AUTHOR_DATE="{newdate}";
     fi""".format(**locals()), '%s~1..HEAD' % commit]
