@@ -88,6 +88,8 @@ alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
 alias reverse_ip_lookup="dig +noall +answer -x"
 alias dig_reverse="dig +noall +answer -x"
 alias tunnel_github="tunnel-https.py ssh.github.com --target-port=443 --tunnel-port=2223"
+alias http="/usr/bin/http --style=monokai --timeout=3600 --session=default"
+alias hhttp="http --print=Hh"
 # }}}
 
 # Emulation {{{
