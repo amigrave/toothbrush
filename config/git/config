@@ -39,7 +39,7 @@
 
 # {{{ DELTA
 [core]
-    pager = delta --side-by-side
+    pager = delta
 
 [interactive]
     diffFilter = delta --color-only --features=interactive
@@ -96,6 +96,10 @@
     dr = "!f() { git --no-pager diff; }; f"
     vd = difftool --dir-diff -t vim-dirdiff
     vdl = difftool --dir-diff -t vim-dirdiff-local
+    vdc = "!vim -c \":let g:gitgutter_diff_base='$1'\" $(git diff --name-only $1)"
+    vdm = "!vim -c \":let g:gitgutter_diff_base='master'\" $(git diff --name-only master)"
+    vgs = "!sh -c 'vim -c ':Gstatus' .'"
+    vst = "!sh -c 'vim $(git diff --name-only)'"
     dnp = diff --no-prefix
     fa  = fetch --all -p
     h   = "!git hh -10"
@@ -127,8 +131,6 @@
     info  = "!for i in $(git remote); do git remote show $i -n; done"
     stats = shortlog -s -n --all
     subs  = submodule foreach git
-    vimgs = "!sh -c 'vim -c ':Gstatus' .'"
-    vimst = "!sh -c 'vim $(git ls-files --modified)'"
 
     force-ignore = update-index --assume-unchanged  # eg: when added to .git/info/exclude but was changed before
     undo-ignore = update-index --no-assume-unchanged
