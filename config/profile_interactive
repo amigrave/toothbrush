@@ -71,7 +71,8 @@ function sshmc() {
 
 # Ssh to host and resume tmux or screen if found
 function s() {
-    ssh -t $1 "tmux attach || screen -rx || tmux || screen -RdU"
+    # tmx: optional local tmux configuration launcher
+    ssh -t $1 "tmx > /dev/null 2>&1 || tmux attach || tmux"
 }
 
 # }}}
