@@ -14,6 +14,11 @@ shopt -s histappend                      # append to history, don't overwrite it
 # Zshify bash
 alias ..="cd .."
 
+if [ "$USER" == "" ]; then
+    # Not passing by `login`
+    export USER=`whoami`
+fi
+
 usercolor="32"
 if [ "$USER" == "agr" ]; then
     usercolor="34"
