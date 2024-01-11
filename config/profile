@@ -21,6 +21,7 @@ export LC_CTYPE=$LANG
 export LC_COLLATE=C
 
 # Applicatons
+export VIEWER=bat-mc
 export EDITOR=vim
 export VISUAL=$EDITOR
 export TERMINAL=terminator
@@ -28,7 +29,7 @@ export BROWSER=google-chrome
 
 export VIMINIT='let $MYVIMRC="$DOTFILES/vim/vimrc" | source $MYVIMRC'
 
-export LESS="--quit-if-one-screen --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4"
+export LESS="--ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4"
 export LESS_TERMCAP_mb=$'\E[1;31m'      # begin bold
 export LESS_TERMCAP_md=$'\E[1;36m'      # begin blink
 export LESS_TERMCAP_me=$'\E[0m'         # reset bold/blink

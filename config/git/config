@@ -90,7 +90,10 @@
     cif = commit --fixup
     co  = checkout
     chp = cherry-pick
-    shd = "!f() { clear; git show \"$@\" | delta --side-by-side; }; f"
+    shd   = "!f() { clear; git show \"$@\" | delta; }; f"
+    shdp  = "!f() { clear; git show \"$@\" | delta --paging=always; }; f"  # for tig
+    shdd  = "!f() { clear; git show \"$@\" | delta --side-by-side; }; f"
+    shddp = "!f() { clear; git show \"$@\" | delta --side-by-side --paging=always; }; f"  # for tig
     d   = diff
     dd  = "!f() { git diff \"$@\" | delta --side-by-side; }; f"
     dr = "!f() { git --no-pager diff; }; f"

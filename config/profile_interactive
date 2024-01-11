@@ -22,9 +22,19 @@ function ssl_https() {
     curl --insecure -v https://"$1" 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }'
 }
 
+# Git stuff {{{
 function ddiff() {
     diff -u "$@" | delta -s
 }
+function gtig() {
+    # open tig and filter the commits whose commit message contains provided string
+    git log --grep "$@" --format="%h" | tig --no-walk --stdin
+}
+function Gtig() {
+    # open tig and filter the commits whose full patch contains provided string
+    tig -G"$1"
+}
+# }}}
 
 # Edit local profile (creates one if not exist) {{{
 function profile() {

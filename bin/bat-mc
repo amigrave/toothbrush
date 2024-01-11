@@ -1,0 +1,5 @@
+#!/bin/bash
+
+LESS_OPTIONS="--clear-screen --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4"
+
+exec env LESS="$LESS_OPTIONS" bat --paging=always --pager="less" "$@"

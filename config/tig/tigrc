@@ -2,12 +2,18 @@
 
 set main-view-id = yes  # show sha in main view
 
+#   !   Run the command in the foreground with output shown.
+#   @   Run the command in the background with no output.
+#   ?   Prompt the user before executing the command.
+#   <   Exit Tig after executing the command.
+#   >   Re-open Tig instantly in the last displayed view after executing the command.
+
 bind    generic     P           !tig --first-parent %(commit)
 bind    generic     O           !tig --first-parent %(commit)^2
-bind    generic     <F1>        !git dd %(commit)~1..%(commit)
 bind    generic     <F2>        !git change-date %(commit)
-bind    generic     <F3>        !git shd %(commit)
-bind    generic     <F4>        !git rebase -i %(commit)^
+bind    generic     <F3>        >git shdp %(commit)
+bind    generic     <Esc><F3>   >git shddp %(commit)
+bind    generic     <F4>        >git rebase -i %(commit)^
 bind    generic     V           !git vd --no-prompt %(commit)
 bind    generic     B           @sh -c "open 'https://'$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)'/commit/%(commit)'"
 
