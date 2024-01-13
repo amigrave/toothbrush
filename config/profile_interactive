@@ -61,8 +61,11 @@ function ccat() {
 }
 # }}}
 
-# Launch mc and `cd` to last visited directory {{{
+# Launch mc with simple mc.ini and `cd` to last visited directory on exit {{{
 function mc() {
+    # Copying mc.ini because mc always add default values to mc.ini although auto_save_setup=false
+    cp "$AMIGRAVE/config/mc/ini" "$XDG_CONFIG_HOME/mc/ini"
+
     cwd_file=/tmp/mc-$USER-$$-dir
     env mc --nosubshell -c --printwd=$cwd_file "$@"
     if [ -f $cwd_file ]; then
