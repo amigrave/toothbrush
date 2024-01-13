@@ -9,6 +9,10 @@ here do not hesitate to send me some feedback! Who knows, this could motivate
 me to bend all that mess carried from computers to computers since 20 years
 toward something a bit more impersonated.
 
+**Fun fact:** Since 2024, a subset of those dotfiles is available by default on all
+[Odoo.sh](https://www.odoo.sh) containers with a custom [Odoo](https://www.odoo.com)
+theme for midnight commander. Not bad for a personal tootbrush :)
+
 
 Self contained
 --------------
@@ -54,8 +58,8 @@ Platforms
 I try to maintain this environment for the following platforms:
 
 - Linux Debian, Kali, Ubuntu and derivates
-- OSX with Homebrew (assuming that the [GNU coreutils shadows the BSD versions]
-(http://apple.stackexchange.com/a/69332))
+- OSX with Homebrew (assuming that the [GNU coreutils]
+(http://apple.stackexchange.com/a/69332) shadows the BSD versions, including `less`)
 - Cygwin (I use it rarely so don't expect it to work thoroughly -- like the rest :-)
 
 with the following shells:
