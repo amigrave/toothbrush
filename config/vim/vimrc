@@ -60,8 +60,10 @@ Plug 'tpope/vim-unimpaired'
 
 " Edition
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'ervandew/supertab'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'alvan/vim-closetag'
 
 " Look
 Plug 'vim-airline/vim-airline'
@@ -256,11 +258,12 @@ if has("autocmd")
     au Filetype xml call XmlQweb()
     au Filetype xml syn spell toplevel
 
-    if v:version >= 700
-        " Save cursor position when switching buffers
-        au BufLeave * let b:winview = winsaveview()
-        au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
-    endif
+    " Save cursor position when switching buffers
+    au BufLeave * let b:winview = winsaveview()
+    au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+
+    " Jump to the last known position when reopening a file
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 "}}}
 
@@ -360,9 +363,11 @@ nnoremap <silent> <leader>q :on<CR>
 " command! -nargs=* -complete=file E if expand('%')=='' && line('$')==1 && getline(1)=='' | :edit <args> | else | :tabnew <args> | endif
 " cabbrev e <c-R>=(getcmdtype()==':' && getcmdpos()==1 ? 'E' : 'e')<cr>
 
-" Convert 2 space indentations to 4
+" Convert 2 space indentations to 4 (and vice versa)
 nnoremap <Leader>4 :set ts=2 sts=2 noet<CR>:retab!<CR>:set ts=4 sts=4 et<CR>:retab<CR>
 vnoremap <Leader>4 <esc>:set ts=2 sts=2 noet<CR>gv:retab!<CR>:set ts=4 sts=4 et<CR>gv:retab<CR>
+nnoremap <Leader>2 :set ts=4 sts=4 noet<CR>:retab!<CR>:set ts=2 sts=2 et<CR>:retab<CR>
+vnoremap <Leader>2 <esc>:set ts=4 sts=4 noet<CR>gv:retab!<CR>:set ts=2 sts=2 et<CR>gv:retab<CR>
 
 " Skip quickfix buffers when bnext, bprevious
 " http://stackoverflow.com/questions/28613190/exclude-quickfix-buffer-from-bnext-bprevious
@@ -390,8 +395,8 @@ noremap <Leader>ag "ay:Ag! "<c-r>=expand("<cword>")<cr>"
 vnoremap <Leader>ag "ay:Ag! "<C-r>a"
 
 " Rg
-noremap <Leader>rg "ay:Rg "<c-r>=expand("<cword>")<cr>"
-vnoremap <Leader>rg "ay:Rg "<C-r>a"
+noremap <Leader>vg "ay:Rg "<c-r>=expand("<cword>")<cr>"
+vnoremap <Leader>vg "ay:Rg "<C-r>a"
 " }}}
 
 " ## PLUGIN CONFIG ######################################################## {{{
@@ -444,6 +449,9 @@ nmap \<bs> vacgc
 nmap \| gcap
 vmap \\ gc
 autocmd FileType nim setlocal commentstring=#\ %s
+
+" closetag
+let g:closetag_filetypes = 'html,xhtml,phtml,xml'
 
 " Fugitive
 nnoremap <Leader>gy :.GBrowse!<CR>
@@ -586,7 +594,7 @@ endfunction
 " }}}
 " }}}
 
-"" ## ADDONS ############################################################## {{{
+" ## ADDONS ############################################################## {{{
 " VIM Profiling {{{
 " Found out that GetPythonFold() was slowing down vim thanks to this profiling hint:
 " http://stackoverflow.com/questions/12213597/how-to-see-which-plugins-are-making-vim-slow
@@ -614,7 +622,7 @@ nmap <F9> :! clear; python %<cr>
 " }}}
 "" }}}
 
-"" ## POST CONFIG ######################################################### {{{
+" ## POST CONFIG ######################################################### {{{
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/backup')
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/swap')
 call EnsureDirExists($XDG_CACHE_HOME . '/vim/undo')
