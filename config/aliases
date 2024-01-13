@@ -41,9 +41,9 @@ alias v='DISPLAY=:0 mpv -cache 4096 -fs'
 
 # Path navigation {{{
 alias ls="ls --color=yes"
-alias d="LC_ALL=C ls -lh"
-alias l="LC_ALL=C ls -lAh | less -r -E -X"
-alias ll=l
+alias d="ls -CF"
+alias l="LC_ALL=C ls -lAh"
+alias ll="LC_ALL=C ls -lA | less -r -E -X"
 alias cdr='cd $(git rev-parse --show-cdup)'
 # }}}
 
@@ -82,13 +82,16 @@ alias python_dependencies='sfood -fuq . | sfood-filter-stdlib | sfood-target-fil
 alias webserve='python3 -m http.server'
 alias vlc_stream='vlc -vvv --sout udp:239.0.0.1 --no-sout-display --sout-keep --ttl 4'
 alias termtest="echo -e \"\e[38;5;196mred\e[38;5;46mgreen\e[38;5;21mblue\e[0m\""
-alias termkey='tput smkx; cat; tput rmkx'
+
+# https://unix.stackexchange.com/questions/76566/where-do-i-find-a-list-of-terminal-key-codes-to-remap-shortcuts-in-bash/76591#76591
+alias termkey='sed -n l'
+
 alias termsize='echo "$(tput cols)x$(tput lines)"'
 alias euro="echo -e \\0342\\0202\\0254"   # Used to check UTF8 in term
 alias reverse_ip_lookup="dig +noall +answer -x"
 alias dig_reverse="dig +noall +answer -x"
 alias tunnel_github="tunnel-https.py ssh.github.com --target-port=443 --tunnel-port=2223"
-alias http="/usr/bin/http --style=monokai --timeout=3600 --session=default"
+alias http="http --style=monokai --timeout=3600 --session=default"
 alias hhttp="http --print=Hh"
 # }}}
 

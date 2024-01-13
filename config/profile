@@ -72,7 +72,7 @@ if [ -f "$python_site_package" ]; then
     export PYTHONPATH=$python_site_package:$PYTHONPATH
 fi
 # Stop writing pyc files in projects
-PYTHONPYCACHEPREFIX=/tmp
+export PYTHONPYCACHEPREFIX=/tmp
 
 export XDG_CONFIG_HOME=$DOTFILES
 export XDG_CACHE_HOME=$HOME/.cache

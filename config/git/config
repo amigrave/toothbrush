@@ -97,7 +97,8 @@
     d   = diff
     dd  = "!f() { git diff \"$@\" | delta --side-by-side; }; f"
     dr = "!f() { git --no-pager diff; }; f"
-    vd = difftool --dir-diff -t vim-dirdiff
+    e   = vst
+    vd  = difftool --dir-diff -t vim-dirdiff
     vdl = difftool --dir-diff -t vim-dirdiff-local
     vdc = "!vim -c \":let g:gitgutter_diff_base='$1'\" $(git diff --name-only $1)"
     vdm = "!vim -c \":let g:gitgutter_diff_base='master'\" $(git diff --name-only master)"
